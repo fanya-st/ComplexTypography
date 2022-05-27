@@ -128,12 +128,12 @@
             'dev_requirement' => true,
         ),
         'codeception/phpunit-wrapper' => array(
-            'pretty_version' => '7.8.2',
-            'version' => '7.8.2.0',
+            'pretty_version' => '7.8.4',
+            'version' => '7.8.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../codeception/phpunit-wrapper',
             'aliases' => array(),
-            'reference' => 'cafed18048826790c527843f9b85e8cc79b866f1',
+            'reference' => 'dd44fc152433d27d3de03d59b4945449b3407af0',
             'dev_requirement' => true,
         ),
         'codeception/specify' => array(
@@ -234,7 +234,7 @@
             'aliases' => array(
                 0 => '1.7.x-dev',
             ),
-            'reference' => '7d80d6e2598e252487fe1acf911b8cb43f45e3b1',
+            'reference' => '91e30ade424ee1735a0f87ef34a1b72faae8303a',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-krajee-base' => array(
@@ -595,12 +595,12 @@
             'dev_requirement' => true,
         ),
         'symfony/console' => array(
-            'pretty_version' => 'v4.4.41',
-            'version' => '4.4.41.0',
+            'pretty_version' => 'v4.4.42',
+            'version' => '4.4.42.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
-            'reference' => '0e1e62083b20ccb39c2431293de060f756af905c',
+            'reference' => 'cce7a9f99e22937a71a16b23afa762558808d587',
             'dev_requirement' => true,
         ),
         'symfony/css-selector' => array(
@@ -622,21 +622,21 @@
             'dev_requirement' => true,
         ),
         'symfony/dom-crawler' => array(
-            'pretty_version' => 'v4.4.39',
-            'version' => '4.4.39.0',
+            'pretty_version' => 'v4.4.42',
+            'version' => '4.4.42.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/dom-crawler',
             'aliases' => array(),
-            'reference' => '4e9215a8b533802ba84a3cc5bd3c43103e7a6dc3',
+            'reference' => 'be5a04618e5d44e71d013f177df80d3ec4b192a0',
             'dev_requirement' => true,
         ),
         'symfony/event-dispatcher' => array(
-            'pretty_version' => 'v4.4.37',
-            'version' => '4.4.37.0',
+            'pretty_version' => 'v4.4.42',
+            'version' => '4.4.42.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/event-dispatcher',
             'aliases' => array(),
-            'reference' => '3ccfcfb96ecce1217d7b0875a0736976bc6e63dc',
+            'reference' => '708e761740c16b02c86e3f0c932018a06b895d40',
             'dev_requirement' => true,
         ),
         'symfony/event-dispatcher-contracts' => array(

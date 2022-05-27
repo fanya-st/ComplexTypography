@@ -5,6 +5,7 @@ namespace app\models;
 
 
 use yii\db\ActiveRecord;
+use yii\bootstrap4\Html;
 
 class LabelForm extends ActiveRecord
 {
@@ -31,9 +32,10 @@ class LabelForm extends ActiveRecord
     }
     public function rules(){
         return[
-            [['name','customer_id','pants_id','laminate','stencil','variable','varnish_id','print_on_glue','background_id','orientation','embossing','manager_login'],'required'],
+            [['name','customer_id','pants_id','laminate','stencil','variable','varnish_id','print_on_glue','background_id','orientation','embossing','manager_login','output_label_id'],'required'],
             ['name','string','max'=>100],
             [['name','manager_note'],'trim']
         ];
     }
+
 }

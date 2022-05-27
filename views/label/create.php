@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\ActiveField;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap4\Html;
 use app\models\Customer;
@@ -26,17 +27,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 'allowClear' => true
             ],
         ])?>
-        <div class="form-check">
-            <p><?=$model->getAttributeLabel('output_label_id')?></p>
-            <input type="radio" class="form-check-input" value="1" name="output_label_id" id="option1" autocomplete="off" required>
-            <label class="form-check-label" for="option1"><?=Html::img(OutputLabel::findOne(1)->image, ['width'=>'100px'])?></label>
-            <input type="radio" class="form-check-input" value="2" name="output_label_id" id="option2" autocomplete="off">
-            <label class="form-check-label" for="option2"><?=Html::img(OutputLabel::findOne(2)->image, ['width'=>'100px'])?></label>
-            <input type="radio" class="form-check-input" value="3" name="output_label_id" id="option3" autocomplete="off">
-            <label class="form-check-label" for="option3"><?=Html::img(OutputLabel::findOne(3)->image, ['width'=>'100px'])?></label>
-            <input type="radio" class="form-check-input" value="4" name="output_label_id" id="option4" autocomplete="off">
-            <label class="form-check-label" for="option4"><?=Html::img(OutputLabel::findOne(4)->image, ['width'=>'100px'])?></label>
-        </div>
+<!--        <div class="form-check">-->
+<!--            <p>--><?//=$model->getAttributeLabel('output_label_id')?><!--</p>-->
+<!--            <input type="radio" class="form-check-input" value="1" name="output_label_id" id="option1" autocomplete="off" required>-->
+<!--            <label class="form-check-label" for="option1">--><?//=Html::img(OutputLabel::findOne(1)->image, ['width'=>'100px'])?><!--</label>-->
+<!--            <input type="radio" class="form-check-input" value="2" name="output_label_id" id="option2" autocomplete="off">-->
+<!--            <label class="form-check-label" for="option2">--><?//=Html::img(OutputLabel::findOne(2)->image, ['width'=>'100px'])?><!--</label>-->
+<!--            <input type="radio" class="form-check-input" value="3" name="output_label_id" id="option3" autocomplete="off">-->
+<!--            <label class="form-check-label" for="option3">--><?//=Html::img(OutputLabel::findOne(3)->image, ['width'=>'100px'])?><!--</label>-->
+<!--            <input type="radio" class="form-check-input" value="4" name="output_label_id" id="option4" autocomplete="off">-->
+<!--            <label class="form-check-label" for="option4">--><?//=Html::img(OutputLabel::findOne(4)->image, ['width'=>'100px'])?><!--</label>-->
+<!--        </div>-->
+        <?=$form->field($model,'output_label_id')->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'),[
+            'item' => function ($index, $label, $name, $checked, $value) {
+                return '<label class="radio-inline">' . Html::radio($name, $checked, ['value'  => $value]) . Html::img(OutputLabel::findOne($value)->image, ['width'=>'100px']) . '</label>';
+            }
+        ])?>
+<!--        --><?//=$form->field($model,'output_label_id')
+//            ->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'))
+//        ?>
         <?=$form->field($model,'manager_note')->textarea()?>
         <?=$form->field($model, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>
         <?=Html::submitButton('Создать этикетку',['class'=>'btn btn-success'])?>

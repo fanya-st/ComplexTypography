@@ -20,12 +20,19 @@ class OrderForm extends ActiveRecord{
 		'label_price'=>'Цена этикетки',
 		'trial_circulation'=>'Это пробный тираж?',
 		'sending'=>'Отправка',
+		'sleeve_id'=>'Втулка D, мм',
+		'winding_id'=>'Схема намотки',
+		'diameter_roll'=>'Диаметр ролика, мм',
+		'label_on_roll'=>'Этикеток на ролике, шт',
+		'cut_edge'=>'Кромки',
+		'stretch'=>'Стретч лента',
+		'rewinder_note'=>'Примечание для перемотки',
 		];
 	}
 	public function rules(){
 		return[
-		[['name','date_of_sale','label_id','plan_circulation','material','label_price'],'required'],
-		[['name','label_id','manager_login','status_id','plan_circulation','material','label_price'],'trim']
+		[['name','date_of_sale','label_id','plan_circulation','material','label_price','sleeve_id','winding_id','diameter_roll','label_on_roll','stretch'],'required'],
+		[['name','label_id','manager_login','status_id','plan_circulation','material','label_price','rewinder_note'],'trim']
 		];
 	}
 	
