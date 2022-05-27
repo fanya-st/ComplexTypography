@@ -68,18 +68,31 @@ class LabelController extends Controller
     {
         return $this->render('note');
     }
-    public function actionCreate()
+    public function actionCreate($blank)
     {
-        $model=new LabelForm();
-        if($model->load(Yii::$app->request->post())){
-            if ($model->save()){
-                Yii::$app->session->setFlash('success','Этикетка создана');
-                return $this-> refresh();
-            }else{
-                Yii::$app->session->setFlash('error','Ошибка');
-               echo '<pre>'.print_r($model).'</pre>';
+        if(isset($blank) and $blank==0){
+            $model=new LabelForm();
+            if($model->load(Yii::$app->request->post())){
+                if ($model->save()){
+                    Yii::$app->session->setFlash('success','Этикетка создана');
+                    return $this-> refresh();
+                }else{
+                    Yii::$app->session->setFlash('error','Ошибка');
+                }
             }
+            return $this->render('create', compact('model'));
         }
-        return $this->render('create', compact('model'));
+        if(isset($blank) and $blank==1){
+            $label = new LabelForm();
+            if($label->load(Yii::$app->request->post())){
+                if ($label->save()){
+                    Yii::$app->session->setFlash('success','Этикетка создана');
+                    return $this-> refresh();
+                }else{
+                    Yii::$app->session->setFlash('error','Ошибка');
+                }
+            }
+            return $this->render('create_blank', compact('label'));
+        }
     }
 }

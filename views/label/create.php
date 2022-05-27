@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--        </div>-->
         <?=$form->field($model,'output_label_id')->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'),[
             'item' => function ($index, $label, $name, $checked, $value) {
-                return '<label class="radio-inline">' . Html::radio($name, $checked, ['value'  => $value]) . Html::img(OutputLabel::findOne($value)->image, ['width'=>'100px']) . '</label>';
+                return '<label class="radio-inline">' . Html::radio($name, $checked, ['value'  => $value])." $value ".Html::img(OutputLabel::findOne($value)->image, ['width'=>'100px']) . '</label>';
             }
         ])?>
 <!--        --><?//=$form->field($model,'output_label_id')

@@ -103,6 +103,9 @@ class Label extends ActiveRecord{
     public function getBackgroundName(){
         return $this->backgroundLabel->name;
     }
+    public function getNameSplitId(){
+        return "[$this->id] $this->name";
+    }
 
     public function attributeLabels()
     {

@@ -23,8 +23,9 @@ $this->title = 'Комплекс Типография';
                 <p>Просмотр, создание, удаление заказов</p>
 
                 <p><a class="btn btn-outline-secondary" href="?r=order%2Flist">Работа с заказами &raquo;</a></p>
-				<p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=1">Создание заказа c "готовой" этикеткой &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate">Создание этикетки &raquo;</a></p>
+				<p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate&blank=1">Создание этикетки пустышки &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate&blank=0">Создание этикетки &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=1">Создание заказа для пустышек &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Работа с материалами</h2>

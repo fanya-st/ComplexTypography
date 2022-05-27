@@ -7,7 +7,6 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use app\models\OrderForm;
-use app\models\LabelForm;
 use app\models\Order;
 
 class OrderController extends Controller
@@ -47,8 +46,7 @@ class OrderController extends Controller
     {
         if(isset($blank) and $blank==1){
             $order = new OrderForm();
-            $label = new LabelForm();
-            if($order->load(Yii::$app->request->post())){
+            if($order->load(Yii::$app->request->post()) ){
                 if ($order->save()){
                     Yii::$app->session->setFlash('success','Заказ создан');
                     return $this-> refresh();
@@ -56,7 +54,7 @@ class OrderController extends Controller
                     Yii::$app->session->setFlash('error','Ошибка');
                 }
             }
-            return $this->render('create_blank', compact('order','label'));
+            return $this->render('create_blank', compact('order'));
         }
     }
 
