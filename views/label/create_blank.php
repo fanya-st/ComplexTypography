@@ -16,9 +16,7 @@ use yii\web\View;
 $this->title = 'Создание заказа с "готовой" этикеткой';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
 $this->params['breadcrumbs'][] = $this->title;
-$this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 ?>
-<!--<pre>--><?//print_r($label)?><!--</pre>-->
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="alert alert-info">
         <strong>Внимание!</strong> Этикетка будет создана "на лету" со статусом - готовая</a>.
@@ -77,5 +75,6 @@ $this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     <?=$form->field($label, 'variable')->hiddenInput(['value' => 0])->label(false);?>
     <?=$form->field($label, 'stencil')->hiddenInput(['value' => 0])->label(false);?>
     <?=$form->field($label, 'laminate')->hiddenInput(['value' => 0])->label(false);?>
+    <?=$form->field($label, 'blank')->hiddenInput(['value' => 1])->label(false);?>
 	<?=Html::submitButton('Создать этикетку',['class'=>'btn btn-success'])?>
 	<?ActiveForm::end()?>

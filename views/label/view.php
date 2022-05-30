@@ -20,7 +20,7 @@ echo Nav::widget([
             ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
             ['label' => 'Изменить примечание менеджера', 'url' => ['label/note','manager'=>'']],
             ['label' => 'Создать подобную', 'url' => ['label/create']],
-            ['label' => 'Заказ в печать..', 'url' => ['order/create']],
+            ['label' => 'Заказ в печать..', 'url' => ['order/create','label_id'=>Html::encode($label->id),'blank'=>0]],
         ],
         ],
         ['label' => 'Prepress', 'items' => [

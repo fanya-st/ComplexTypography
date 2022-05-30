@@ -12,7 +12,7 @@ use app\models\Winding;
 use yii\web\View;
 use app\models\Label;
 
-$this->title = 'Создание заказа для пустышек';
+$this->title = 'Создание заказа';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
@@ -55,7 +55,7 @@ $this->registerJs(
         <div class="col">
             <?=$form->field($order,'name')->textInput()?>
             <?=$form->field($order,'label_id')->widget(Select2::classname(),
-                ['data' => ArrayHelper::map(Label::find()->where(['manager_login'=>Yii::$app->user->identity->username,'blank'=>1])->orderBy('date_of_create DESC')->limit(100)->all(),
+                ['data' => ArrayHelper::map(Label::find()->where(['manager_login'=>Yii::$app->user->identity->username,'blank'=>0])->orderBy('date_of_create DESC')->limit(100)->all(),
                     'id', 'nameSplitId'),
                 'options' => ['placeholder' => 'Выбрать этикетку ...'],
                 'pluginOptions' => [

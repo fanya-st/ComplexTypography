@@ -42,7 +42,7 @@ class OrderController extends Controller
         ]);
 		return $this->render('list',compact('orders'));           
     }
-	public function actionCreate($blank)
+	public function actionCreate($blank,$label_id=null)
     {
         if(isset($blank) and $blank==1){
             $order = new OrderForm();
@@ -55,6 +55,19 @@ class OrderController extends Controller
                 }
             }
             return $this->render('create_blank', compact('order'));
+        }
+        if(isset($blank) and $blank==0){
+            $order = new OrderForm();
+            if(isset($label_id)){$order->label_id=$label_id;}
+            if($order->load(Yii::$app->request->post()) ){
+                if ($order->save()){
+                    Yii::$app->session->setFlash('success','Заказ создан');
+                    return $this-> refresh();
+                }else{
+                    Yii::$app->session->setFlash('error','Ошибка');
+                }
+            }
+            return $this->render('create', compact('order'));
         }
     }
 

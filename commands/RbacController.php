@@ -3,6 +3,7 @@ namespace app\commands;
 
 use app\rbac\UpdateOwnLabel;
 use app\rbac\PrepressOwnLabel;
+use app\rbac\UseOwnLabelByManager;
 use Yii;
 use yii\console\Controller;
 
@@ -20,11 +21,18 @@ class RbacController extends Controller
         $auth->add($labelOwner);
         $labelPrepressOwner = new PrepressOwnLabel();
         $auth->add($labelPrepressOwner);
+        $labelManagerOwner = new UseOwnLabelByManager();
+        $auth->add($labelManagerOwner);
 
         $updateOwnLabel = $auth->createPermission('updateOwnLabel');
         $updateOwnLabel->description = 'Update own label';
         $updateOwnLabel->ruleName = $labelOwner->name;
         $auth->add($updateOwnLabel);
+
+        $useOwnLabelByManager = $auth->createPermission('useOwnLabelByManager');
+        $useOwnLabelByManager->description = 'useOwnLabelByManager';
+        $useOwnLabelByManager->ruleName = $labelManagerOwner->name;
+        $auth->add($useOwnLabelByManager);
 
         $prepressOwnLabel = $auth->createPermission('prepressOwnLabel');
         $prepressOwnLabel->description = 'prepress own label';
@@ -53,6 +61,7 @@ class RbacController extends Controller
         $auth->addChild($designer_admin,$designer);
         $auth->addChild($designer_admin,$prepress);
         $auth->addChild($manager_admin,$manager);
+        $auth->addChild($manager,$useOwnLabelByManager);
         $auth->addChild($admin, $designer_admin);
         $auth->addChild($admin, $manager_admin);
         $auth->addChild($admin, $manager);
