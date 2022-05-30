@@ -49,7 +49,8 @@ $this->registerJs(
 <!--        <strong>Внимание!</strong> Этикетка будет создана "на лету" со статусом - готовая</a>.-->
 <!--    </div>-->
 <!--<pre>--><?//print_r(date('Y-m-d', strtotime("+ 7 day")))?><!--</pre>-->
-<!--<pre>--><?//print_r($order)?><!--</pre>-->
+<!--<pre>--><?//print_r($id_last)?><!--</pre>-->
+<!--<pre>--><?//print_r($new_label)?><!--</pre>-->
 	<?$form = ActiveForm::begin()?>
     <div class="row">
         <div class="col">
@@ -62,6 +63,7 @@ $this->registerJs(
                     'allowClear' => true
                 ],
             ])?>
+            <?=$form->field($new_label,'parent_label')->checkbox()?>
             <div class="row">
                 <div class="col">
                     <?=$form->field($order,'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->all(), 'id', 'name'), [

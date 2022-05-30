@@ -3,11 +3,15 @@
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 
-$this->title = Html::encode("ID [$label->id] $label->name");
+$this->title = Html::encode("ID [$label->id] $label->name ");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с этикетками', 'url' => ['label/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3><?= Html::encode($this->title)?></h3>
+<h3><?= Html::encode($this->title);
+    if(isset($label->parent_label)){
+        echo Html::a('[Изменение этикетки №'.$label->parent_label.']', ['label/view', 'id' => $label->parent_label]);
+    }?></h3>
+
 <?
 echo Nav::widget([
     'items' => [

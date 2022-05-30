@@ -137,7 +137,13 @@ class Label extends ActiveRecord{
             'manager_note'=>'Примечание менеджера',
             'laminateName'=>'Ламинация',
             'backgroundName'=>'Фон',
-            'managerName'=>'Менеджер'
+            'managerName'=>'Менеджер',
+            'parent_label'=>'С внесением изменений в этикетку'
+        ];
+    }
+    public function rules(){
+        return[
+            [['parent_label'],'safe'],
         ];
     }
 }
