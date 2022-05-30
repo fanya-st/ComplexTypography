@@ -28,6 +28,7 @@ class OrderForm extends ActiveRecord{
 		'cut_edge'=>'Кромки',
 		'stretch'=>'Стретч лента',
 		'rewinder_note'=>'Примечание для перемотки',
+		'printer_note'=>'Примечание для печатников',
 		'order_price'=>'Сумма за заказ, руб',
 		'order_price_with_tax'=>'Сумма за заказ с НДС, руб',
 		];
@@ -37,7 +38,7 @@ class OrderForm extends ActiveRecord{
 		[['name','date_of_sale','label_id','trial_circulation','label_price','sleeve_id',
             'material_id','mashine_id','winding_id','diameter_roll','stretch','cut_edge','order_price','order_price_with_tax',
             'label_price_with_tax','material_id','manager_login','status_id'],'required'],
-		[['name','rewinder_note'],'trim'],
+		[['name','rewinder_note','printer_note'],'trim'],
             [['plan_circulation','sending','label_on_roll'],'integer'],
             [['order_price','order_price_with_tax',
                 'label_price_with_tax','label_price'],'double']

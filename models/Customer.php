@@ -19,6 +19,7 @@ class Customer extends ActiveRecord
     {
         return [
             'name'=>'Заказчик',
+            'id'=>'Заказчик',
             'customerStatusName'=>'Статус',
         ];
     }

@@ -109,7 +109,8 @@ $this->registerJs(
                         [
                             'prompt' => 'Выберите...'
                         ])?>
-                    <?=$form->field($order,'sleeve_id')->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'),
+                    <?=$form->field($order,'sleeve_id')
+                        ->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'),
                         [
                             'prompt' => 'Выберите...'
                         ])?>
@@ -136,6 +137,7 @@ $this->registerJs(
                 </div>
             </div>
             <?=$form->field($order,'rewinder_note')->textarea()?>
+            <?=$form->field($order,'printer_note')->textarea()?>
         </div>
     </div>
     <?=$form->field($order, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>

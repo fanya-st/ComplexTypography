@@ -120,15 +120,21 @@ class Label extends ActiveRecord{
             'date_of_design'=>'Дата дизайна',
             'date_of_prepress'=>'Дата Prepress',
             'foil'=>'Фольга',
+            'foil_id'=>'Фольга',
             'print_on_glue'=>'Печать по клею',
             'variable'=>'Переменная печать',
             'image'=>'Картинка этикетки',
             'image_crop'=>'Превью этикетки',
             'labelStatusName'=>'Статус этикетки',
+            'status_id'=>'Статус этикетки',
+            'pants_id'=>'Штанец',
+            'shaft_id'=>'Вал',
             'varnishStatusName'=>'Вид лака',
             'pantsName'=>'Штанец',
             'customerName'=>'Заказчик',
+            'customer_id'=>'Заказчик',
             'fullName'=>'Дизайнер',
+            'designer_login'=>'Дизайнер',
             'shaftName'=>'Вал',
             'fullCMYK'=>'CMYK',
             'designer_note'=>'Примечание дизайнера',
@@ -139,11 +145,6 @@ class Label extends ActiveRecord{
             'backgroundName'=>'Фон',
             'managerName'=>'Менеджер',
             'parent_label'=>'С внесением изменений в этикетку'
-        ];
-    }
-    public function rules(){
-        return[
-            [['parent_label'],'safe'],
         ];
     }
 }

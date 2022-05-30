@@ -5,13 +5,8 @@ use yii\bootstrap4\Html;
 use kartik\select2\Select2;
 use app\models\Customer;
 use yii\helpers\ArrayHelper;
-use app\models\Mashine;
+use app\models\Shaft;
 use app\models\Pants;
-use kartik\date\DatePicker;
-use app\models\Material;
-use app\models\Sleeve;
-use app\models\Winding;
-use yii\web\View;
 
 $this->title = 'Создание заказа с "готовой" этикеткой';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
@@ -49,6 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         '2'=>'Книжная'
                     ],
                         [
+                            'prompt' => 'Выберите...'
+                        ])?>
+                    <?=$form->field($label,'shaft_id')
+                        ->dropDownList(ArrayHelper::map(Shaft::find()->all(), 'id',
+                            'name'), [
                             'prompt' => 'Выберите...'
                         ])?>
                 </div>

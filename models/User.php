@@ -107,6 +107,14 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
         return null;
     }
+    public static function findUsersByGroup($group)
+    {
+        foreach(self::$users as $user){
+            if(strcasecmp($user['group'], $group))
+            $array[$user['username']]=$user['F'].' '.mb_substr($user['I'],0,1).'.';
+        }
+        return $array;
+    }
 
     /**
      * Finds user by username
