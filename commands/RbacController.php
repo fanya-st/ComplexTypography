@@ -21,18 +21,11 @@ class RbacController extends Controller
         $auth->add($labelOwner);
         $labelPrepressOwner = new PrepressOwnLabel();
         $auth->add($labelPrepressOwner);
-        $labelManagerOwner = new UseOwnLabelByManager();
-        $auth->add($labelManagerOwner);
 
         $updateOwnLabel = $auth->createPermission('updateOwnLabel');
         $updateOwnLabel->description = 'Update own label';
         $updateOwnLabel->ruleName = $labelOwner->name;
         $auth->add($updateOwnLabel);
-
-        $useOwnLabelByManager = $auth->createPermission('useOwnLabelByManager');
-        $useOwnLabelByManager->description = 'useOwnLabelByManager';
-        $useOwnLabelByManager->ruleName = $labelManagerOwner->name;
-        $auth->add($useOwnLabelByManager);
 
         $prepressOwnLabel = $auth->createPermission('prepressOwnLabel');
         $prepressOwnLabel->description = 'prepress own label';
@@ -57,11 +50,11 @@ class RbacController extends Controller
         //$auth->addChild($admin, $permit_to_manager);
 //        $auth->addChild($updateOwnLabel,$updateLabel);
         $auth->addChild($designer,$updateOwnLabel);
+        $auth->addChild($manager,$updateOwnLabel);
         $auth->addChild($prepress,$prepressOwnLabel);
         $auth->addChild($designer_admin,$designer);
         $auth->addChild($designer_admin,$prepress);
         $auth->addChild($manager_admin,$manager);
-        $auth->addChild($manager,$useOwnLabelByManager);
         $auth->addChild($admin, $designer_admin);
         $auth->addChild($admin, $manager_admin);
         $auth->addChild($admin, $manager);

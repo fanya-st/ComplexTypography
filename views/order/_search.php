@@ -17,7 +17,7 @@ use app\models\Mashine;
     'action' => ['order/list'],
     'method' => 'post',
 ])?>
-<div class="row">
+<div class="row border p-3 rounded-lg">
     <div class="col">
         <?=$form->field($model,'name',[])?>
         <?=$form->field($model,'id')?>

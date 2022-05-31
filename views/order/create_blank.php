@@ -51,7 +51,7 @@ $this->registerJs(
 <!--<pre>--><?//print_r(date('Y-m-d', strtotime("+ 7 day")))?><!--</pre>-->
 <!--<pre>--><?//print_r($order)?><!--</pre>-->
 	<?$form = ActiveForm::begin()?>
-    <div class="media border p-3">
+    <div class="media border p-3 rounded">
             <div class="media-body">
                 <div class="alert alert-info">
                     <strong>Внимание!</strong> Этикетка будет создана "на лету" со статусом - готовая</a>.
@@ -100,7 +100,7 @@ $this->registerJs(
                 </div>
             </div>
     </div>
-    <div class="media border p-3">
+    <div class="media border p-3 rounded">
         <div class="media-body">
             <h5 class="mt-0">Параметры заказа</h5>
             <div class="row">

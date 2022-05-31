@@ -14,26 +14,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?
 echo Nav::widget([
-    'items' => [
-        ['label' => 'Дизайнер', 'items' => [
-            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
-            ['label' => 'Изменить примечание дизайнера', 'url' => ['label/note','designer'=>'']],
-        ],
-        ],
-        ['label' => 'Менеджер', 'items' => [
-            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
-            ['label' => 'Изменить примечание менеджера', 'url' => ['label/note','manager'=>'']],
-            ['label' => 'Создать подобную', 'url' => ['label/create']],
-            ['label' => 'Заказ в печать..', 'url' => ['order/create','label_id'=>Html::encode($label->id),'blank'=>0]],
-        ],
-        ],
-        ['label' => 'Prepress', 'items' => [
-            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
-            ['label' => 'Изменить примечание Prepress', 'url' => ['label/note','prepress'=>'']],
-        ],
-        ],
-    ],
-//    'items' => $nav_items,
+//    'items' => [
+//        ['label' => 'Дизайнер', 'items' => [
+//            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
+//            ['label' => 'Изменить примечание дизайнера', 'url' => ['label/note','designer'=>'']],
+//        ],
+//        ],
+//        ['label' => 'Менеджер', 'items' => [
+//            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
+//            ['label' => 'Изменить примечание менеджера', 'url' => ['label/note','manager'=>'']],
+//            ['label' => 'Создать подобную', 'url' => ['label/create']],
+//            ['label' => 'Заказ в печать..', 'url' => ['order/create','label_id'=>Html::encode($label->id),'blank'=>0]],
+//        ],
+//        ],
+//        ['label' => 'Prepress', 'items' => [
+//            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
+//            ['label' => 'Изменить примечание Prepress', 'url' => ['label/note','prepress'=>'']],
+//        ],
+//        ],
+//    ],
+    'items' => $nav_items,
     'options' => ['class' => 'nav'],
 ]);?>
 <div class="d-flex flex-row">

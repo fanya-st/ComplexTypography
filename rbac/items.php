@@ -6,11 +6,6 @@ return [
         'description' => 'Update own label',
         'ruleName' => 'isOwnLabel',
     ],
-    'useOwnLabelByManager' => [
-        'type' => 2,
-        'description' => 'useOwnLabelByManager',
-        'ruleName' => 'isOwnLabel',
-    ],
     'prepressOwnLabel' => [
         'type' => 2,
         'description' => 'prepress own label',
@@ -38,7 +33,7 @@ return [
     'manager' => [
         'type' => 1,
         'children' => [
-            'useOwnLabelByManager',
+            'updateOwnLabel',
         ],
     ],
     'manager_admin' => [
