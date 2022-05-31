@@ -38,7 +38,7 @@ class LabelForm extends ActiveRecord
                 'manager_login','output_label_id','shaft_id'],'required'],
             ['name','string','max'=>100],
             [['name','manager_note'],'trim'],
-            [['parent_label','status_id','blank'],'safe']
+            [['parent_label','status_id'],'safe']
         ];
     }
 

@@ -110,7 +110,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public static function findUsersByGroup($group)
     {
         foreach(self::$users as $user){
-            if(strcasecmp($user['group'], $group))
+            if($user['group']== $group OR $user['group']== $group.'_admin')
             $array[$user['username']]=$user['F'].' '.mb_substr($user['I'],0,1).'.';
         }
         return $array;

@@ -19,38 +19,38 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?$form = ActiveForm::begin()?>
     <div class="row">
         <div class="col">
-            <?=$form->field($label,'name')->textInput()?>
-            <?=$form->field($label,'customer_id')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','manager_login'=>Yii::$app->user->identity->username])->all(), 'id', 'name'),
-                'options' => ['placeholder' => 'Выбрать заказчика ...'],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ])?>
+<!--            --><?//=$form->field($label,'name')->textInput()?>
+<!--            --><?//=$form->field($label,'customer_id')->widget(Select2::classname(), [
+//                'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','manager_login'=>Yii::$app->user->identity->username])->all(), 'id', 'name'),
+//                'options' => ['placeholder' => 'Выбрать заказчика ...'],
+//                'pluginOptions' => [
+//                    'allowClear' => true
+//                ],
+//            ])?>
             <div class="row">
                 <div class="col">
-                    <?=$form->field($label,'pants_id')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'name'),
-                        'options' => ['placeholder' => 'Выбрать штанец ...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ])?>
+<!--                    --><?//=$form->field($label,'pants_id')->widget(Select2::classname(), [
+//                        'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'name'),
+//                        'options' => ['placeholder' => 'Выбрать штанец ...'],
+//                        'pluginOptions' => [
+//                            'allowClear' => true
+//                        ],
+//                    ])?>
                 </div>
                 <div class="col">
-                    <?=$form->field($label,'orientation')->dropDownList([
-                        '0' => 'Не указана',
-                        '1' => 'Альбомная',
-                        '2'=>'Книжная'
-                    ],
-                        [
-                            'prompt' => 'Выберите...'
-                        ])?>
-                    <?=$form->field($label,'shaft_id')
-                        ->dropDownList(ArrayHelper::map(Shaft::find()->all(), 'id',
-                            'name'), [
-                            'prompt' => 'Выберите...'
-                        ])?>
+<!--                    --><?//=$form->field($label,'orientation')->dropDownList([
+//                        '0' => 'Не указана',
+//                        '1' => 'Альбомная',
+//                        '2'=>'Книжная'
+//                    ],
+//                        [
+//                            'prompt' => 'Выберите...'
+//                        ])?>
+<!--                    --><?//=$form->field($label,'shaft_id')
+//                        ->dropDownList(ArrayHelper::map(Shaft::find()->all(), 'id',
+//                            'name'), [
+//                            'prompt' => 'Выберите...'
+//                        ])?>
                 </div>
             </div>
         </div>
@@ -65,16 +65,16 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-    <?=$form->field($label, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>
-    <?=$form->field($label, 'status_id')->hiddenInput(['value' => 11])->label(false);?>
-    <?=$form->field($label, 'embossing')->hiddenInput(['value' => 0])->label(false);?>
-    <?=$form->field($label, 'output_label_id')->hiddenInput(['value' => 1])->label(false);?>
-    <?=$form->field($label, 'background_id')->hiddenInput(['value' => 1])->label(false);?>
-    <?=$form->field($label, 'print_on_glue')->hiddenInput(['value' => 0])->label(false);?>
-    <?=$form->field($label, 'varnish_id')->hiddenInput(['value' => 0])->label(false);?>
-    <?=$form->field($label, 'variable')->hiddenInput(['value' => 0])->label(false);?>
-    <?=$form->field($label, 'stencil')->hiddenInput(['value' => 0])->label(false);?>
-    <?=$form->field($label, 'laminate')->hiddenInput(['value' => 0])->label(false);?>
-    <?=$form->field($label, 'blank')->hiddenInput(['value' => 1])->label(false);?>
+<!--    --><?//=$form->field($label, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>
+<!--    --><?//=$form->field($label, 'status_id')->hiddenInput(['value' => 11])->label(false);?>
+<!--    --><?//=$form->field($label, 'embossing')->hiddenInput(['value' => 0])->label(false);?>
+<!--    --><?//=$form->field($label, 'output_label_id')->hiddenInput(['value' => 1])->label(false);?>
+<!--    --><?//=$form->field($label, 'background_id')->hiddenInput(['value' => 1])->label(false);?>
+<!--    --><?//=$form->field($label, 'print_on_glue')->hiddenInput(['value' => 0])->label(false);?>
+<!--    --><?//=$form->field($label, 'varnish_id')->hiddenInput(['value' => 0])->label(false);?>
+<!--    --><?//=$form->field($label, 'variable')->hiddenInput(['value' => 0])->label(false);?>
+<!--    --><?//=$form->field($label, 'stencil')->hiddenInput(['value' => 0])->label(false);?>
+<!--    --><?//=$form->field($label, 'laminate')->hiddenInput(['value' => 0])->label(false);?>
+<!--    --><?//=$form->field($label, 'blank')->hiddenInput(['value' => 1])->label(false);?>
 	<?=Html::submitButton('Создать этикетку',['class'=>'btn btn-success'])?>
 	<?ActiveForm::end()?>

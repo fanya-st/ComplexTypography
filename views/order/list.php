@@ -12,15 +12,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate">Создание заказа &raquo;</a></p>
 </div>
     <?
+    echo $this->render('_search', ['model' => $searchModel]);
     echo GridView::widget([
         'dataProvider' => $orders,
 
         'columns' => [
             'id',
             'name',
-            'label.name',
             'date_of_create',
-            'label.name',
+            'orderStatusName',
+            'mashineName',
             'fullName',
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{update}'

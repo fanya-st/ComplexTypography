@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use app\models\OrderForm;
 use app\models\Order;
+use app\models\OrderSearch;
 
 class OrderController extends Controller
 {
@@ -35,19 +36,26 @@ class OrderController extends Controller
 }
 	public function actionList()
     {
-        $orders = new ActiveDataProvider([
-            'query' => Order::find()->orderBy(['date_of_create'=>SORT_DESC])->with('label'),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
-		return $this->render('list',compact('orders'));           
+        $searchModel = new OrderSearch();
+        $orders = $searchModel->search(Yii::$app->request->post());
+        return $this->render('list',compact('orders','searchModel'));
+//        $orders = new ActiveDataProvider([
+//            'query' => Order::find()->orderBy(['date_of_create'=>SORT_DESC])->with('label'),
+//            'pagination' => [
+//                'pageSize' => 10,
+//            ],
+//        ]);
+//		return $this->render('list',compact('orders'));
     }
 	public function actionCreate($blank,$label_id=null)
     {
         if(isset($blank) and $blank==1){
             $order = new OrderForm();
-            if($order->load(Yii::$app->request->post()) ){
+            $label=new LabelForm();
+            if($order->load(Yii::$app->request->post())&&$label->load(Yii::$app->request->post())){
+                if ($label->save()){
+                    $order->label_id=$label->id;
+                }
                 if ($order->save()){
                     Yii::$app->session->setFlash('success','Заказ создан');
                     return $this-> refresh();
@@ -55,7 +63,7 @@ class OrderController extends Controller
                     Yii::$app->session->setFlash('error','Ошибка');
                 }
             }
-            return $this->render('create_blank', compact('order'));
+            return $this->render('create_blank', compact('order','label'));
         }
         if(isset($blank) and $blank==0){
             $order = new OrderForm();

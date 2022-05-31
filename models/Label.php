@@ -126,15 +126,18 @@ class Label extends ActiveRecord{
             'image'=>'Картинка этикетки',
             'image_crop'=>'Превью этикетки',
             'labelStatusName'=>'Статус этикетки',
+            'output_label_id'=>'Выход этикетки',
             'status_id'=>'Статус этикетки',
             'pants_id'=>'Штанец',
             'shaft_id'=>'Вал',
             'varnishStatusName'=>'Вид лака',
+            'varnish_id'=>'Вид лака',
             'pantsName'=>'Штанец',
             'customerName'=>'Заказчик',
             'customer_id'=>'Заказчик',
             'fullName'=>'Дизайнер',
             'designer_login'=>'Дизайнер',
+            'manager_login'=>'Менеджер',
             'shaftName'=>'Вал',
             'fullCMYK'=>'CMYK',
             'designer_note'=>'Примечание дизайнера',
@@ -142,9 +145,22 @@ class Label extends ActiveRecord{
             'stencil'=>'Трафарет',
             'manager_note'=>'Примечание менеджера',
             'laminateName'=>'Ламинация',
+            'laminate'=>'Ламинация',
             'backgroundName'=>'Фон',
+            'background_id'=>'Фон',
             'managerName'=>'Менеджер',
-            'parent_label'=>'С внесением изменений в этикетку'
+            'parent_label'=>'С внесением изменений в этикетку',
+            'embossing'=>'Тиснение',
+            'orientation'=>'Ориентация'
+        ];
+    }
+    public function rules(){
+        return[
+            ['name','string','max'=>100],
+            [['name','manager_note','prepress_note','designer_note'],'trim'],
+            [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
+                'print_on_glue','orientation','embossing',
+                'manager_login','output_label_id','shaft_id','background_id'],'safe']
         ];
     }
 }

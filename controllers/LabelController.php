@@ -50,7 +50,7 @@ class LabelController extends Controller
     {
 //        $this->layout = 'main_label_list';
         $searchModel = new LabelSearch();
-        $labels = $searchModel->search(Yii::$app->request->get());
+        $labels = $searchModel->search(Yii::$app->request->post());
         return $this->render('list',compact('labels','searchModel'));
     }
     public function actionView($id)
@@ -61,16 +61,18 @@ class LabelController extends Controller
     public function actionUpdate($id)
     {
         $label=Label::findOne($id);
+        if($label->load(Yii::$app->request->post())){
+            if ($label->save()){
+                Yii::$app->session->setFlash('success','Этикетка обновлена');
+                return $this-> refresh();
+            }else{
+                Yii::$app->session->setFlash('error','Ошибка');
+            }
+        }
         return $this->render('update',compact('label'));
-
     }
-    public function actionNote($designer=null,$manager=null, $prepress=null)
+    public function actionCreate()
     {
-        return $this->render('note');
-    }
-    public function actionCreate($blank)
-    {
-        if(isset($blank) and $blank==0){
             $model=new LabelForm();
             if($model->load(Yii::$app->request->post())){
                 if ($model->save()){
@@ -81,18 +83,6 @@ class LabelController extends Controller
                 }
             }
             return $this->render('create', compact('model'));
-        }
-        if(isset($blank) and $blank==1){
-            $label = new LabelForm();
-            if($label->load(Yii::$app->request->post())){
-                if ($label->save()){
-                    Yii::$app->session->setFlash('success','Этикетка создана');
-                    return $this-> refresh();
-                }else{
-                    Yii::$app->session->setFlash('error','Ошибка');
-                }
-            }
-            return $this->render('create_blank', compact('label'));
-        }
+
     }
 }

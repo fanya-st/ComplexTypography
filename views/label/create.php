@@ -131,5 +131,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-<?=$form->field($model, 'blank')->hiddenInput(['value' => 0])->label(false)?>
 <?ActiveForm::end()?>

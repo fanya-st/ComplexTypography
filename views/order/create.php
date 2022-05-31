@@ -56,7 +56,7 @@ $this->registerJs(
         <div class="col">
             <?=$form->field($order,'name')->textInput()?>
             <?=$form->field($order,'label_id')->widget(Select2::classname(),
-                ['data' => ArrayHelper::map(Label::find()->where(['manager_login'=>Yii::$app->user->identity->username,'blank'=>0])->orderBy('date_of_create DESC')->limit(100)->all(),
+                ['data' => ArrayHelper::map(Label::find()->where(['manager_login'=>Yii::$app->user->identity->username])->orderBy('date_of_create DESC')->limit(100)->all(),
                     'id', 'nameSplitId'),
                 'options' => ['placeholder' => 'Выбрать этикетку ...'],
                 'pluginOptions' => [

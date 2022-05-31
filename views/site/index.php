@@ -19,27 +19,20 @@ $this->title = 'Комплекс Типография';
         <div class="row">
             <div class="col-lg-4">
                 <h2>Работа с заказами</h2>
-
                 <p>Просмотр, создание, удаление заказов</p>
-
                 <p><a class="btn btn-outline-secondary" href="?r=order%2Flist">Работа с заказами &raquo;</a></p>
-				<p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate&blank=1">Создание этикетки пустышки &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate&blank=0">Создание этикетки &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=1">Создание заказа для пустышек &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate">Создание этикетки &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=1">Создание заказа с готовой этикеткой &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=0">Создание заказа &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Работа с материалами</h2>
-
                 <p>Просмотр, создание, удаление материалов</p>
-
                 <p><a class="btn btn-outline-secondary" href="">Работа с материалами &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Работа с этикетками</h2>
-
                 <p>Работа с этикетками</p>
-
                 <p><a class="btn btn-outline-secondary" href="?r=label/list">Работа с этикетками &raquo;</a></p>
             </div>
         </div>
