@@ -1,7 +1,7 @@
 <?php
 
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
+use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use app\models\Mashine;
@@ -10,7 +10,6 @@ use app\models\Material;
 use app\models\Sleeve;
 use app\models\Winding;
 use yii\web\View;
-use app\models\Label;
 use app\models\Customer;
 use app\models\Pants;
 use app\models\Shaft;

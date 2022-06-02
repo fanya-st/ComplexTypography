@@ -34,7 +34,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
-            'yii\\bootstrap\\' => 14,
+            'yii\\bootstrap5\\' => 15,
             'yii\\bootstrap4\\' => 15,
             'yii\\' => 4,
         ),
@@ -46,6 +46,8 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             'kartik\\sidenav\\' => 15,
             'kartik\\select2\\' => 15,
+            'kartik\\plugins\\fileinput\\' => 25,
+            'kartik\\file\\' => 12,
             'kartik\\daterange\\' => 17,
             'kartik\\date\\' => 12,
             'kartik\\base\\' => 12,
@@ -139,9 +141,9 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-composer',
         ),
-        'yii\\bootstrap\\' => 
+        'yii\\bootstrap5\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap/src',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap5/src',
         ),
         'yii\\bootstrap4\\' => 
         array (
@@ -164,6 +166,14 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\select2\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2/src',
+        ),
+        'kartik\\plugins\\fileinput\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
+        ),
+        'kartik\\file\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-fileinput/src',
         ),
         'kartik\\daterange\\' => 
         array (

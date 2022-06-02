@@ -160,7 +160,7 @@ class Label extends ActiveRecord{
             [['name','manager_note','prepress_note','designer_note'],'trim'],
             [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
                 'print_on_glue','orientation','embossing',
-                'manager_login','output_label_id','shaft_id','background_id'],'safe']
+                'manager_login','output_label_id','shaft_id','background_id','image','image_crop'],'safe']
         ];
     }
 }

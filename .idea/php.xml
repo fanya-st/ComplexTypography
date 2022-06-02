@@ -85,7 +85,6 @@
       <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-date-range" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-krajee-base" />
-      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-bootstrap" />
       <path value="$PROJECT_DIR$/vendor/bower-asset/bootstrap" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-sidenav" />
       <path value="$PROJECT_DIR$/vendor/imagine/imagine" />
@@ -93,6 +92,9 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-select2" />
       <path value="$PROJECT_DIR$/vendor/select2/select2" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-datepicker" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-bootstrap5" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/bootstrap-fileinput" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-fileinput" />
     </include_path>
   </component>
 </project>

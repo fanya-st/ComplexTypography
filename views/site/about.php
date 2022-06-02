@@ -2,7 +2,8 @@
 
 /** @var yii\web\View $this */
 
-use yii\helpers\Html;
+//use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 $this->title = 'О компании';
 $this->params['breadcrumbs'][] = $this->title;

@@ -20,12 +20,12 @@
             'dev_requirement' => true,
         ),
         'bower-asset/bootstrap' => array(
-            'pretty_version' => 'v3.4.1',
-            'version' => '3.4.1.0',
+            'pretty_version' => 'v5.1.3',
+            'version' => '5.1.3.0',
             'type' => 'bower-asset',
             'install_path' => __DIR__ . '/../bower-asset/bootstrap',
             'aliases' => array(),
-            'reference' => '68b0d231a13201eb14acd3dc84e51543d16e5f7e',
+            'reference' => '1a6fdfae6be09b09eaced8f0e442ca6f7680a61e',
             'dev_requirement' => false,
         ),
         'bower-asset/inputmask' => array(
@@ -226,6 +226,15 @@
             'reference' => 'ae864f26afbf8859ebd2e2b9df92d77ee175dc13',
             'dev_requirement' => false,
         ),
+        'kartik-v/bootstrap-fileinput' => array(
+            'pretty_version' => 'v5.2.8',
+            'version' => '5.2.8.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kartik-v/bootstrap-fileinput',
+            'aliases' => array(),
+            'reference' => '89be70dbb9470dd8a56ef27508e344fcfccdb5af',
+            'dev_requirement' => false,
+        ),
         'kartik-v/yii2-date-range' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
@@ -234,7 +243,7 @@
             'aliases' => array(
                 0 => '1.7.x-dev',
             ),
-            'reference' => '91e30ade424ee1735a0f87ef34a1b72faae8303a',
+            'reference' => 'ec63ee2e1f2b6846eb7142680cd3ab36eb0002fd',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-krajee-base' => array(
@@ -255,6 +264,17 @@
                 0 => '1.4.x-dev',
             ),
             'reference' => '04ee13be77790ee14d92c34f3181e521f6457639',
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-widget-fileinput' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-widget-fileinput',
+            'aliases' => array(
+                0 => '1.1.x-dev',
+            ),
+            'reference' => '61cfc4a9c856cd710a1125ac53d49f20efc40c94',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-widget-select2' => array(
@@ -789,15 +809,6 @@
             'reference' => NULL,
             'dev_requirement' => false,
         ),
-        'yiisoft/yii2-bootstrap' => array(
-            'pretty_version' => '2.0.11',
-            'version' => '2.0.11.0',
-            'type' => 'yii2-extension',
-            'install_path' => __DIR__ . '/../yiisoft/yii2-bootstrap',
-            'aliases' => array(),
-            'reference' => '83d144f4089adaa7064ad60dc4c1436daa2eb30e',
-            'dev_requirement' => false,
-        ),
         'yiisoft/yii2-bootstrap4' => array(
             'pretty_version' => '2.0.10',
             'version' => '2.0.10.0',
@@ -805,6 +816,15 @@
             'install_path' => __DIR__ . '/../yiisoft/yii2-bootstrap4',
             'aliases' => array(),
             'reference' => 'e6d0e58f43d3910129d554ac183aac17f65be639',
+            'dev_requirement' => false,
+        ),
+        'yiisoft/yii2-bootstrap5' => array(
+            'pretty_version' => '2.0.3',
+            'version' => '2.0.3.0',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../yiisoft/yii2-bootstrap5',
+            'aliases' => array(),
+            'reference' => '8cbb0f3a43c0067fda3838112d3d90805e17718b',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-composer' => array(

@@ -5,9 +5,15 @@ namespace app\models;
 
 
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 class LabelForm extends ActiveRecord
 {
+    public $design_file_file;
+    public $image_file;
+    public $image_crop_file;
+    public $image_extended_file;
+
     public static function tableName()
     {
         return 'label';
@@ -26,9 +32,15 @@ class LabelForm extends ActiveRecord
             'print_on_glue'=>'Печать по клею',
             'background_id'=>'Фон',
             'manager_note'=>'Примечание для дизайнеров и препрессников',
+            'prepress_note'=>'Примечание для печатников',
+            'designer_note'=>'Примечание для препрессников',
             'stencil'=>'Трафарет',
             'shaft_id'=>'Вал',
             'parent_label'=>'Внести изменения в этикетку',
+            'image_file'=>'Картинка этикетки',
+            'image_crop_file'=>'Картинка этикетки (кропнутая)',
+            'image_extended_file'=>'Доп картинка',
+            'design_file_file'=>'Файл дизайна',
         ];
     }
     public function rules(){
@@ -37,9 +49,39 @@ class LabelForm extends ActiveRecord
                 'print_on_glue','background_id','orientation','embossing',
                 'manager_login','output_label_id','shaft_id'],'required'],
             ['name','string','max'=>100],
-            [['name','manager_note'],'trim'],
-            [['parent_label','status_id'],'safe']
+            [['name','manager_note','designer_note'],'trim'],
+            [['parent_label','status_id','image','image_crop','image_extended','design_file'],'safe'],
+            [['image_file','image_crop_file','image_extended_file'], 'image','skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg','maxSize'=>10*1024*1024],
+            [['design_file_file'], 'file','skipOnEmpty' => true,'maxSize'=>500*1024*1024]
         ];
     }
+    public function upload()
+    {
+        if ($this->validate()) {
+            if ($this->image_file && $this->image_file->tempName) {
+                $this->image_file->saveAs('label/' . $this->id . '.' . $this->image_file->extension);
+                $this->image = 'label/' . $this->id . '.' . $this->image_file->extension;
+                $this->image_file = null;
+            }
+            if ($this->image_crop_file && $this->image_crop_file->tempName) {
+                $this->image_crop_file->saveAs('label/' . $this->id . '_crop.' . $this->image_crop_file->extension);
+                $this->image_crop = 'label/' . $this->id . '_crop.' . $this->image_crop_file->extension;
+                $this->image_crop_file = null;
+            }
+        if ($this->image_extended_file && $this->image_extended_file->tempName) {
+            $this->image_extended_file->saveAs('label/' . $this->id . '_extended.' . $this->image_extended_file->extension);
+            $this->image_extended = 'label/' . $this->id . '_extended.' . $this->image_extended_file->extension;
+            $this->image_extended_file = null;
+        }
 
+        if ($this->design_file_file && $this->design_file_file->tempName) {
+            $this->design_file_file->saveAs('label/' . $this->id . '_design.' . $this->design_file_file->extension);
+            $this->design_file = 'label/' . $this->id . '_design.' . $this->design_file_file->extension;
+            $this->design_file_file = null;
+        }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

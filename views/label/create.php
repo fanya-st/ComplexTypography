@@ -1,9 +1,9 @@
 <?php
 
-use yii\bootstrap4\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 use app\models\Shaft;
 use yii\helpers\ArrayHelper;
-use yii\bootstrap4\Html;
+use yii\bootstrap5\Html;
 use app\models\Customer;
 use kartik\select2\Select2;
 use app\models\Pants;

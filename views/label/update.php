@@ -1,6 +1,6 @@
 <?php
-use yii\bootstrap4\Html;
-use yii\bootstrap4\ActiveForm;
+use yii\bootstrap5\Html;
+use yii\bootstrap5\ActiveForm;
 use app\models\LabelStatus;
 use yii\helpers\ArrayHelper;
 use app\models\Customer;
@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="col">
                 <?=$form->field($label,'status_id')
-                    ->dropDownList(ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'))?>
+                    ->dropDownList(ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'),['disabled'=>true])?>
                 <?=$form->field($label,'manager_login')
                     ->dropDownList(User::findUsersByGroup('manager'))?>
             </div>
