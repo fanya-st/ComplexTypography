@@ -37,8 +37,9 @@ echo Nav::widget([
 <div class="row">
     <div class="col">
         <?= Html::a(Html::img($label->image_crop, ['alt' => $this->title,'width'=>'500px']),$label->image,['target'=>'_blank'])?>
-        <?= Html::a('Доп.файл картинка',$label->image_extended,['target'=>'_blank','class'=>'btn btn-info m-2'])?>
-        <?= Html::a('Файл дизайна',$label->design_file,['target'=>'_blank','class'=>'btn btn-info m-2'])?>
+        <?= Html::a('Доп.файл',$label->image_extended,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
+        <?= Html::a('Файл дизайна',$label->design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
+        <?= Html::a('Файл дизайна Prepress',$label->prepress_design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
 
     </div>
     <div class="col">
