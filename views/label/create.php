@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','manager_login'=>Yii::$app->user->identity->username])->all(), 'id', 'name'),
             'options' => ['placeholder' => 'Выбрать заказчика ...'],
             'pluginOptions' => [
-                'allowClear' => true
+//                'allowClear' => true
             ],
         ])?>
         <?=$form->field($model,'output_label_id')->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'),[
@@ -118,11 +118,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col">
                 <div class="col">
                     <?=$form->field($model,'background_id')->dropDownList(ArrayHelper::map(BackgroundLabel::find()->all(), 'id',
-                        'name'), [
-                        'prompt' => 'Выберите...'
-                    ])?>
-                    <?=$form->field($model,'shaft_id')
-                        ->dropDownList(ArrayHelper::map(Shaft::find()->all(), 'id',
                         'name'), [
                         'prompt' => 'Выберите...'
                     ])?>

@@ -5,7 +5,7 @@ namespace app\models;
 use yii\db\ActiveRecord;
 use Yii;
 
-class Label extends ActiveRecord{	
+class Label extends ActiveRecord{
 	public function getOrder(){
 		return $this->hasMany(Order::class,['label_id'=>'id']);
 	}
@@ -151,6 +151,7 @@ class Label extends ActiveRecord{
             'managerName'=>'Менеджер',
             'parent_label'=>'С внесением изменений в этикетку',
             'embossing'=>'Тиснение',
+            'photo_output_id'=>'Фотовывод',
             'orientation'=>'Ориентация'
         ];
     }

@@ -13,6 +13,15 @@ class LabelForm extends ActiveRecord
     public $image_file;
     public $image_crop_file;
     public $image_extended_file;
+    public $prepress_pantone_list;
+    public $subdpi;
+    public $varnish_check;
+    public $stencil_check;
+    public $prepress_file;
+    public $set_form_count;
+    public $form_width;
+    public $form_height;
+    public $lineature=154;
 
     public static function tableName()
     {
@@ -32,7 +41,7 @@ class LabelForm extends ActiveRecord
             'print_on_glue'=>'Печать по клею',
             'background_id'=>'Фон',
             'manager_note'=>'Примечание для дизайнеров и препрессников',
-            'prepress_note'=>'Примечание для печатников',
+            'prepress_note'=>'Примечание для лаборатории и печатников',
             'designer_note'=>'Примечание для препрессников',
             'stencil'=>'Трафарет',
             'shaft_id'=>'Вал',
@@ -41,18 +50,31 @@ class LabelForm extends ActiveRecord
             'image_crop_file'=>'Картинка этикетки (кропнутая)',
             'image_extended_file'=>'Доп картинка',
             'design_file_file'=>'Файл дизайна',
+            'prepress_file'=>'Файл Prepress',
+            'prepress_pantone_list'=>'CMYK и пантоны',
+            'photo_output_id'=>'Фотовывод',
+            'subdpi'=>'Разрешение фотовывода',
+            'varnish_check'=>'Лаковая форма',
+            'form_width'=>'Ширина формы, мм',
+            'form_height'=>'Высота формы, мм',
+            'set_form_count'=>'Количество комплектов форм',
+            'foil_id'=>'Фольга',
+            'lineature'=>'Линиатура',
+            'stencil_check'=>'Трафарет',
         ];
     }
     public function rules(){
         return[
             [['name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
                 'print_on_glue','background_id','orientation','embossing',
-                'manager_login','output_label_id','shaft_id'],'required'],
+                'manager_login','output_label_id'],'required'],
             ['name','string','max'=>100],
             [['name','manager_note','designer_note'],'trim'],
-            [['parent_label','status_id','image','image_crop','image_extended','design_file'],'safe'],
+            [['parent_label','status_id','image','image_crop','image_extended','design_file','date_of_design','prepress_pantone_list','varnish_check','subdpi',
+                'stencil_check','set_form_count','lineature','form_height','form_width','shaft_id'],'safe'],
             [['image_file','image_crop_file','image_extended_file'], 'image','skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg','maxSize'=>10*1024*1024],
-            [['design_file_file'], 'file','skipOnEmpty' => true,'maxSize'=>500*1024*1024]
+            [['design_file_file','prepress_file'], 'file','skipOnEmpty' => true,'maxSize'=>500*1024*1024],
+//            [['lineature'], 'default', 'value'=> 154]
         ];
     }
     public function upload()

@@ -115,6 +115,13 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         }
         return $array;
     }
+    public static function getFullNameByUsername($username)
+    {
+        foreach(self::$users as $user){
+            if($user['username']== $username)
+            return $user['F'].' '.mb_substr($user['I'],0,1).'.';
+        }
+    }
 
     /**
      * Finds user by username

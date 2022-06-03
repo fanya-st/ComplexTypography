@@ -235,6 +235,15 @@
             'reference' => '89be70dbb9470dd8a56ef27508e344fcfccdb5af',
             'dev_requirement' => false,
         ),
+        'kartik-v/dependent-dropdown' => array(
+            'pretty_version' => 'v1.4.9',
+            'version' => '1.4.9.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kartik-v/dependent-dropdown',
+            'aliases' => array(),
+            'reference' => '54a8806002ee21b744508a2edb95ed01d35c6cf9',
+            'dev_requirement' => false,
+        ),
         'kartik-v/yii2-date-range' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
@@ -264,6 +273,17 @@
                 0 => '1.4.x-dev',
             ),
             'reference' => '04ee13be77790ee14d92c34f3181e521f6457639',
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-widget-depdrop' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-widget-depdrop',
+            'aliases' => array(
+                0 => '1.0.x-dev',
+            ),
+            'reference' => '4dffe1fd0c9d9d5b7e6231f6cd059dfa36d22b3b',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-widget-fileinput' => array(

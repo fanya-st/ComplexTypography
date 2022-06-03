@@ -2,7 +2,7 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = Html::encode("Редактирование ID [$label->id] $label->name ");
+$this->title = Html::encode("Дизайн ID [$label->id] $label->name ");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с этикетками', 'url' => ['label/list']];
 $this->params['breadcrumbs'][] = ['label' => $label->name, 'url' => ['label/view','id'=>$label->id]];
 $this->params['breadcrumbs'][] = $this->title;

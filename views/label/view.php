@@ -14,33 +14,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--<pre>--><?//print_r($nav_items)?><!--</pre>-->
 <?
 echo Nav::widget([
-//    'items' => [
-//        ['label' => 'Дизайнер', 'items' => [
-//            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
-//            ['label' => 'Создать дизайн', 'url' => ['label/create-design','id'=>Html::encode($label->id)]],
-//        ],
-//        ],
-//        ['label' => 'Менеджер', 'items' => [
-//            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
-//            ['label' => 'Создать подобную', 'url' => ['label/create']],
-//            ['label' => 'Заказ в печать..', 'url' => ['order/create','label_id'=>Html::encode($label->id),'blank'=>0]],
-//        ],
-//        ],
-//        ['label' => 'Prepress', 'items' => [
-//            ['label' => 'Внести изменения', 'url' => ['label/update','id'=>Html::encode($label->id)]],
-//        ],
-//        ],
-//    ],
     'items' => $nav_items,
     'options' => ['class' => 'nav'],
 ]);?>
 <div class="row">
     <div class="col">
-        <?= Html::a(Html::img($label->image_crop, ['alt' => $this->title,'width'=>'500px']),$label->image,['target'=>'_blank'])?>
-        <?= Html::a('Доп.файл',$label->image_extended,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
-        <?= Html::a('Файл дизайна',$label->design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
-        <?= Html::a('Файл дизайна Prepress',$label->prepress_design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
-
+        <div class="row">
+            <?= Html::a(Html::img($label->image_crop, ['alt' => $this->title,'width'=>'500px','onerror'=>'label/alt.jpg']),$label->image,['target'=>'_blank'])?>
+        </div>
+            <?= Html::a('Доп.файл',$label->image_extended,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
+            <?= Html::a('Файл дизайна',$label->design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
+            <?= Html::a('Файл дизайна Prepress',$label->prepress_design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
     </div>
     <div class="col">
         <h6>Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatusName)?></small> </h6>
