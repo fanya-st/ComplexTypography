@@ -19,7 +19,7 @@ use app\models\Mashine;
 ])?>
 <div class="row border p-3 rounded-lg">
     <div class="col">
-        <?=$form->field($model,'name',[])?>
+        <?=$form->field($model,'labelName',[])?>
         <?=$form->field($model,'id')?>
         <?=$form->field($model,'label_id')?>
         <div class="form-group">

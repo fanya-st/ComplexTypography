@@ -13,6 +13,7 @@ class OrderSearch extends Order
         return 'order';
     }
     public $customerId;
+    public $labelName;
     public $pantsId;
     public $shaftId;
     public function rules()
@@ -20,7 +21,7 @@ class OrderSearch extends Order
         // только поля определенные в rules() будут доступны для поиска
         return [
             [[], 'integer'],
-            [['name'], 'trim'],
+            [['labelName'], 'trim'],
             [['customerId','name','label_id','id','manager_login','date_of_create','status_id','pantsId','shaftId','mashine_id'], 'safe'],
         ];
     }
@@ -57,7 +58,7 @@ class OrderSearch extends Order
         $query->andFilterWhere(['order.id' => $this->id]);
         $query->andFilterWhere(['order.mashine_id' => $this->mashine_id]);
         $query->andFilterWhere(['order.label_id' => $this->label_id]);
-        $query->andFilterWhere(['like', 'order.name', $this->name]);
+        $query->andFilterWhere(['like', 'label.name', $this->labelName]);
         $query->andFilterWhere(['order.manager_login'=> $this->manager_login]);
         $query->joinWith(['label' => function ($q) {
                 $q->andFilterWhere(['label.customer_id'=> $this->customerId]);

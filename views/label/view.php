@@ -33,7 +33,8 @@ echo Nav::widget([
         <h6>Дата Prepress: <small><?=Html::encode($label->date_of_prepress)?></small> </h6>
         <h6>Штанец: <small><?=Html::encode($label->pantsName)?></small> Вал: <small><?=Html::encode($label->shaftName)?></small></h6>
         <h6>Количество форм: <small><?=Html::encode($label->formCount)?></small></h6>
-        <h6>Пантоны: <? foreach ($label->pantone as $pantone) echo '<span class="badge bg-primary">'.$pantone->name.'</span>'?></h6>
+<!--        <pre>--><?//print_r($label->pantoneCombinated)?><!--</pre>-->
+        <h6>Пантоны: <? foreach ($label->pantoneName as $pantone) echo '<span class="badge rounded-pill bg-primary">'.$pantone->name.'</span>'?></h6>
         <h6>Фольга: <small><?=Html::encode($label->foilName)?></small> </h6>
         <h6>Вид лака: <small><?=Html::encode($label->varnishStatusName)?></small> </h6>
         <h6>Ламинация: <small class="badge bg-secondary"><?=Html::encode($label->laminateName)?></small> Трафарет: <small class="badge bg-secondary"><?=Html::encode($label->stencilName)?></small></h6>
@@ -48,6 +49,15 @@ echo Nav::widget([
         <h6>Выход этикетки: <?=Html::img($label->outputLabel->image, ['alt' => $label->outputLabel->name,'width'=>'100px'])?></h6>
         <h6>Ориентация: <small class="badge bg-secondary"><?=Html::encode($label->orientationName)?></small> </h6>
         <h6>Тиснение: <small class="badge bg-secondary"><?=Html::encode($label->embossingName)?></small> </h6>
+    </div>
+</div>
+<div class="row border p-2 rounded-lg">
+    <div class="col">
+        <h6>Параметры Prepress:</h6>
+        <h6>Совмещение (ID этикеток): <?foreach ($label->combinatedLabel as $label) echo '<span class="badge rounded-pill bg-primary">'.$label.'</span>'?> </h6>
+    </div>
+    <div class="col">
+
     </div>
 </div>
 <div class="row p-3">

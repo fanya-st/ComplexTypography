@@ -7,6 +7,9 @@ return [
     101 => [
         'prepress',
     ],
+    106 => [
+        'laboratory',
+    ],
     103 => [
         'manager',
     ],

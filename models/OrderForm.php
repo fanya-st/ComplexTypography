@@ -35,7 +35,7 @@ class OrderForm extends ActiveRecord{
 	}
 	public function rules(){
 		return[
-		[['name','date_of_sale','label_id','trial_circulation','label_price','sleeve_id',
+		[['date_of_sale','label_id','trial_circulation','label_price','sleeve_id',
             'material_id','mashine_id','winding_id','diameter_roll','stretch','cut_edge','order_price','order_price_with_tax',
             'label_price_with_tax','material_id','manager_login','status_id'],'required'],
 		[['name','rewinder_note','printer_note'],'trim'],

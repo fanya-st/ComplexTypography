@@ -23,6 +23,9 @@ return [
             'prepressOwnLabel',
         ],
     ],
+    'laboratory' => [
+        'type' => 1,
+    ],
     'designer_admin' => [
         'type' => 1,
         'children' => [
@@ -48,6 +51,7 @@ return [
             'designer_admin',
             'manager_admin',
             'manager',
+            'laboratory',
             'designer',
         ],
     ],

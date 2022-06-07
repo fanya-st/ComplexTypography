@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class Label extends ActiveRecord{
 	public function getOrder(){
@@ -13,10 +14,33 @@ class Label extends ActiveRecord{
 		return $this->hasMany(Form::class,['label_id'=>'id']);
 	}
     public function getFormCount(){
-	    print_r(count($this->form));
+	    if (count($this->form)==0) return count($this->combinatedForm);
+	    else
+	    return count($this->form);
     }
 	public function getPantone(){
-		return $this->hasMany(Pantone::class,['id'=>'pantone_id'])->viaTable('pantone_label',['label_id'=>'id']);
+		return $this->hasMany(Pantone::class,['id'=>'pantone_id'])->via('form');
+	}
+	public function getPantoneCombinated(){
+		return $this->hasMany(Pantone::class,['id'=>'pantone_id'])->via('combinatedForm');
+	}
+
+    public function getPantoneName(){
+        if (count($this->pantone)==0)
+            return $this->pantoneCombinated;
+        else
+            return $this->pantone;
+    }
+
+	public function getCombinatedForm(){
+		return $this->hasMany(Form::class,['combination_id'=>'combination_id'])->via('combination');
+	}
+	public function getCombination(){
+		return $this->hasOne(CombinationForm::class,['label_id'=>'id']);
+	}
+	public function getCombinatedLabel(){
+	    return ArrayHelper::map(CombinationForm::find()->where(['combination_id'=>$this->combination->combination_id])->all(),'label_id','label_id');
+//		return CombinationForm::find()->select('label_id')->where(['combination_id'=>$this->combination->combination_id])->asArray()->all();
 	}
     public function getVarnishStatus(){
         return $this->hasOne(VarnishStatus::class,['id'=>'varnish_id']);
@@ -152,7 +176,8 @@ class Label extends ActiveRecord{
             'parent_label'=>'С внесением изменений в этикетку',
             'embossing'=>'Тиснение',
             'photo_output_id'=>'Фотовывод',
-            'orientation'=>'Ориентация'
+            'color_count'=>'Цветность',
+            'orientation'=>'Ориентация',
         ];
     }
     public function rules(){
@@ -161,7 +186,7 @@ class Label extends ActiveRecord{
             [['name','manager_note','prepress_note','designer_note'],'trim'],
             [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
                 'print_on_glue','orientation','embossing',
-                'manager_login','output_label_id','shaft_id','background_id','image','image_crop'],'safe']
+                'manager_login','output_label_id','shaft_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id'],'safe']
         ];
     }
 }

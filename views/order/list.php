@@ -17,9 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'columns' => [
             'id',
-            'name',
+            'labelName',
             'date_of_create',
             'orderStatusName',
+            'labelStatusName',
             'mashineName',
             'fullName',
             ['class' => 'yii\grid\ActionColumn',

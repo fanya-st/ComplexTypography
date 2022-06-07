@@ -87,11 +87,6 @@ $this->registerJs(
                                 ])?>
                             </div>
                             <div class="col">
-                                <?=$form->field($label,'shaft_id')
-                                    ->dropDownList(ArrayHelper::map(Shaft::find()->all(), 'id',
-                                        'name'), [
-                                        'prompt' => 'Выберите...'
-                                    ])?>
                             </div>
                         </div>
                     </div>
@@ -104,7 +99,6 @@ $this->registerJs(
             <h5 class="mt-0">Параметры заказа</h5>
             <div class="row">
                 <div class="col">
-                    <?=$form->field($order,'name')->textInput()?>
                     <div class="row">
                         <div class="col">
                             <?=$form->field($order,'plan_circulation')->textInput(['onchange'=>'changeSending()'])?>
@@ -199,5 +193,7 @@ $this->registerJs(
         <?=$form->field($label, 'variable')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'stencil')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'laminate')->hiddenInput(['value' => 0])->label(false);?>
+        <?=$form->field($label, 'color_count')->hiddenInput(['value' => 0])->label(false);?>
+        <?=$form->field($label, 'foil_width')->hiddenInput(['value' => 0])->label(false);?>
     </div>
 	<?ActiveForm::end()?>

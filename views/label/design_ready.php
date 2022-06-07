@@ -13,16 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--<pre>--><?//print_r($label->image_crop_file)?><!--</pre>-->
 <!--<pre>--><?//print_r($label->image_extended_file)?><!--</pre>-->
 <!--<pre>--><?//print_r($label->design_file_file)?><!--</pre>-->
-<!--<pre>--><?//print_r($label)?><!--</pre>-->
+<!--<pre>--><?//print_r($design_file)?><!--</pre>-->
 <div class="row">
     <div class="col">
 
     </div>
     <?=$form->field($label,'designer_note')->textarea()?>
-    <?=$form->field($label,'image_file')->FileInput()?>
-    <?=$form->field($label,'image_crop_file')->FileInput()?>
-    <?=$form->field($label,'image_extended_file')->FileInput()?>
-    <?if ($change_image!=1)echo $form->field($label,'design_file_file')->FileInput()?>
+    <?=$form->field($design_file,'image_file')->FileInput()?>
+    <?=$form->field($design_file,'image_crop_file')->FileInput()?>
+    <?=$form->field($design_file,'image_extended_file')->FileInput()?>
+    <?=$form->field($design_file,'design_file_file')->FileInput()?>
 
 </div>
 <?=Html::submitButton('Сохранить',['class'=>'btn btn-success'])?>

@@ -46,9 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=$form->field($model,'pants_id')->widget(Select2::classname(), [
                     'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'name'),
                     'options' => ['placeholder' => 'Выбрать штанец ...'],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
+//                    'pluginOptions' => [
+//                        'allowClear' => true
+//                    ],
                 ])?>
             </div>
             <div class="col">
@@ -121,6 +121,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'name'), [
                         'prompt' => 'Выберите...'
                     ])?>
+
+                    <?=$form->field($model,'color_count')?>
+                    <?=$form->field($model, 'foil_width')->hiddenInput(['value' => 0])->label(false);?>
                 </div>
             </div>
         </div>

@@ -88,4 +88,23 @@ class CustomNav extends Model
         }
         return $nav_items;
     }
+    public static function getItemByStatusLaboratory($status,$id){
+        $nav_items=['laboratory'=>
+            ['label' => 'Лаборатория', 'items' => [
+            ]
+            ]
+        ];
+        switch ($status) {
+            //статус этикетки Prepress готов
+            case 7:
+                ArrayHelper::setValue($nav_items, 'laboratory.items.', ['label' => 'Изготовление форм', 'url' => ['label/create-flexform','id'=>$id]]);
+                break;
+            //статус этикетки Изготовление форм
+            case 9:
+                ArrayHelper::setValue($nav_items, 'laboratory.items.', ['label' => 'Формы готовы', 'url' => ['label/flexform-ready','id'=>$id]]);
+                break;
+
+        }
+        return $nav_items;
+    }
 }

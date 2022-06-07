@@ -34,6 +34,7 @@ class RbacController extends Controller
 
         // добавляем роль "manager" и даём роли разрешение "list"		
 		$manager = $auth->createRole('manager');
+		$laboratory = $auth->createRole('laboratory');
 		$prepress = $auth->createRole('prepress');
 		$designer_admin = $auth->createRole('designer_admin');
         //$auth->addChild($manager, $permit_to_manager);
@@ -42,6 +43,7 @@ class RbacController extends Controller
         $admin = $auth->createRole('admin');
         $auth->add($designer);
         $auth->add($prepress);
+        $auth->add($laboratory);
         $auth->add($designer_admin);
         $auth->add($manager);
         $auth->add($manager_admin);
@@ -58,6 +60,7 @@ class RbacController extends Controller
         $auth->addChild($admin, $designer_admin);
         $auth->addChild($admin, $manager_admin);
         $auth->addChild($admin, $manager);
+        $auth->addChild($admin, $laboratory);
         $auth->addChild($admin, $designer);
 
         // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
@@ -66,6 +69,7 @@ class RbacController extends Controller
 //		$auth->assign($designer, 104);
 		$auth->assign($designer, 105);
 		$auth->assign($prepress, 101);
+		$auth->assign($laboratory, 106);
         $auth->assign($manager, 103);
         $auth->assign($manager_admin, 102);
         $auth->assign($designer_admin, 104);

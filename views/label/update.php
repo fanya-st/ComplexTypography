@@ -73,16 +73,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ])?>
             </div>
             <div class="col">
-                <?=$form->field($label,'shaft_id')->widget(Select2::classname(), [
-                    'data' => ArrayHelper::map(Shaft::find()->all(), 'id', 'name'),
-                    'pluginOptions' => [
-                        'allowClear' =>false
-                    ],
-                ])?>
                 <?=$form->field($label,'varnish_id')
                     ->dropDownList(ArrayHelper::map(VarnishStatus::find()->all(), 'id', 'name'))?>
                 <?=$form->field($label,'background_id')->dropDownList(ArrayHelper::map(BackgroundLabel::find()->all(), 'id',
                     'name'))?>
+                <?=$form->field($label,'color_count')?>
             </div>
         </div>
         <?=$form->field($label,'output_label_id')->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'),[
