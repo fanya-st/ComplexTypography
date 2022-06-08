@@ -38,8 +38,16 @@ class LabelController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['update','create-design-ready','approve-design'],
-                        'roles' => ['updateOwnLabel','designer_admin','manager_admin'],
+                        'actions' => ['update','approve-design'],
+                        'roles' => ['updateOwnLabelManager','updateOwnLabelDesigner','designer_admin','manager_admin'],
+                        'roleParams' => function() {
+                            return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
+                        },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['design-ready'],
+                        'roles' => ['updateOwnLabelDesigner','designer_admin'],
                         'roleParams' => function() {
                             return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
                         },
@@ -148,37 +156,43 @@ class LabelController extends Controller
     public function actionCreateDesign($id)
     {
         $label=Label::findOne($id);
-        $label->status_id=2;
-        $label->designer_login=Yii::$app->user->identity->username;
-            if ($label->save()){
-                Yii::$app->session->setFlash('success','Дизайн создан');
-                return $this->redirect(['label/view','id'=>$id]);
+            if ($label->status_id==1){
+                if ($label->save()){
+                    $label->status_id=2;
+                    $label->designer_login=Yii::$app->user->identity->username;
+                    Yii::$app->session->setFlash('success','Дизайн создан');
+                }
             }else{
                 Yii::$app->session->setFlash('error','Ошибка');
             }
+        return $this->redirect(['label/view','id'=>$id]);
     }
     public function actionCreatePrepress($id)
     {
         $label=Label::findOne($id);
-        $label->status_id=6;
-        $label->prepress_login=Yii::$app->user->identity->username;
-            if ($label->save()){
-                Yii::$app->session->setFlash('success','Этикетка взята в Prepress');
-                return $this->redirect(['label/view','id'=>$id]);
+            if ($label->status_id==4 or $label->status_id==5){
+                $label->status_id=6;
+                $label->prepress_login=Yii::$app->user->identity->username;
+                if ($label->save()){
+                    Yii::$app->session->setFlash('success','Этикетка взята в Prepress');
+                }
             }else{
-                Yii::$app->session->setFlash('error','Ошибка');
+                Yii::$app->session->setFlash('error','Этикетка не может быть взята в препресс');
             }
+        return $this->redirect(['label/view','id'=>$id]);
     }
     public function actionApproveDesign($id)
     {
         $label=Label::findOne($id);
-        $label->status_id=4;
-            if ($label->save()){
-                Yii::$app->session->setFlash('success','Дизайн утвержден');
-                return $this->redirect(['label/view','id'=>$id]);
+            if ($label->status_id==3){
+                $label->status_id=4;
+                if ($label->save()){
+                    Yii::$app->session->setFlash('success','Дизайн утвержден');
+                }
             }else{
                 Yii::$app->session->setFlash('error','Ошибка');
             }
+        return $this->redirect(['label/view','id'=>$id]);
     }
     public function actionCreateFlexform($id)
     {
@@ -236,7 +250,7 @@ class LabelController extends Controller
 //        }
         return $this->render('flexform_ready', compact('label','flexform','forms'));
     }
-    public function actionCreateDesignReady($id,$change_image=null)
+    public function actionDesignReady($id,$change_image=null)
     {
         $design_file=DesignFileForm::findOne($id);
         $label = LabelForm::findOne($id);

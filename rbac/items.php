@@ -1,26 +1,39 @@
 <?php
 
 return [
-    'updateOwnLabel' => [
+    'updateOwnLabelDesigner' => [
         'type' => 2,
-        'description' => 'Update own label',
+        'description' => 'Update own label by designer',
+        'ruleName' => 'isOwnLabel',
+        'children' => [
+            'allowToDesignReadyRule',
+        ],
+    ],
+    'updateOwnLabelManager' => [
+        'type' => 2,
+        'description' => 'Update own label by manager',
         'ruleName' => 'isOwnLabel',
     ],
-    'prepressOwnLabel' => [
+    'allowToPrepressReadyRule' => [
         'type' => 2,
-        'description' => 'prepress own label',
-        'ruleName' => 'isPrepressLabel',
+        'description' => 'prepress ready if it in prepress',
+        'ruleName' => 'AllowToPrepressReadyRule',
+    ],
+    'allowToDesignReadyRule' => [
+        'type' => 2,
+        'description' => 'design ready if it in design',
+        'ruleName' => 'AllowToDesignReadyRule',
     ],
     'designer' => [
         'type' => 1,
         'children' => [
-            'updateOwnLabel',
+            'updateOwnLabelDesigner',
         ],
     ],
     'prepress' => [
         'type' => 1,
         'children' => [
-            'prepressOwnLabel',
+            'allowToPrepressReadyRule',
         ],
     ],
     'laboratory' => [
@@ -36,7 +49,7 @@ return [
     'manager' => [
         'type' => 1,
         'children' => [
-            'updateOwnLabel',
+            'updateOwnLabelManager',
         ],
     ],
     'manager_admin' => [

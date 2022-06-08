@@ -38,7 +38,7 @@ class CustomNav extends Model
                 break;
             //статус этикетки в дизайне
             case 2:
-                ArrayHelper::setValue($nav_items, 'designer.items.', ['label' => 'Дизайн готов', 'url' => ['label/create-design-ready','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'designer.items.', ['label' => 'Дизайн готов', 'url' => ['label/design-ready','id'=>$id]]);
                 break;
             //статус этикетки дизайн готов
             case 3:

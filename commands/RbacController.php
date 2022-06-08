@@ -1,9 +1,10 @@
 <?php
 namespace app\commands;
 
-use app\rbac\UpdateOwnLabel;
-use app\rbac\PrepressOwnLabel;
-use app\rbac\UseOwnLabelByManager;
+use app\rbac\UpdateOwnLabelDesigner;
+use app\rbac\UpdateOwnLabelManager;
+use app\rbac\AllowToPrepressReadyRule;
+use app\rbac\AllowToDesignReadyRule;
 use Yii;
 use yii\console\Controller;
 
@@ -17,20 +18,37 @@ class RbacController extends Controller
         /*$permit_to_manager = $auth->createPermission('permit_to_manager');
         $permit_to_manager->description = 'list of orders';
         $auth->add($permit_to_manager);*/
-        $labelOwner = new UpdateOwnLabel();
-        $auth->add($labelOwner);
-        $labelPrepressOwner = new PrepressOwnLabel();
-        $auth->add($labelPrepressOwner);
+        $labelOwnerDesigner = new UpdateOwnLabelDesigner();
+        $auth->add($labelOwnerDesigner);
 
-        $updateOwnLabel = $auth->createPermission('updateOwnLabel');
-        $updateOwnLabel->description = 'Update own label';
-        $updateOwnLabel->ruleName = $labelOwner->name;
-        $auth->add($updateOwnLabel);
+        $labelOwnerManager = new UpdateOwnLabelManager();
+        $auth->add($labelOwnerManager);
 
-        $prepressOwnLabel = $auth->createPermission('prepressOwnLabel');
-        $prepressOwnLabel->description = 'prepress own label';
-        $prepressOwnLabel->ruleName = $labelPrepressOwner->name;
-        $auth->add($prepressOwnLabel);
+        $labelinprepress = new AllowToPrepressReadyRule();
+        $auth->add($labelinprepress);
+
+        $labelindesign = new AllowToDesignReadyRule();
+        $auth->add($labelindesign);
+
+        $updateOwnLabelDesigner = $auth->createPermission('updateOwnLabelDesigner');
+        $updateOwnLabelDesigner->description = 'Update own label by designer';
+        $updateOwnLabelDesigner->ruleName = $labelOwnerDesigner->name;
+        $auth->add($updateOwnLabelDesigner);
+
+        $updateOwnLabelManager = $auth->createPermission('updateOwnLabelManager');
+        $updateOwnLabelManager->description = 'Update own label by manager';
+        $updateOwnLabelManager->ruleName = $labelOwnerManager->name;
+        $auth->add($updateOwnLabelManager);
+
+        $allowToPrepressReadyRule = $auth->createPermission('allowToPrepressReadyRule');
+        $allowToPrepressReadyRule->description = 'prepress ready if it in prepress';
+        $allowToPrepressReadyRule->ruleName = $labelinprepress->name;
+        $auth->add($allowToPrepressReadyRule);
+
+        $allowToDesignReadyRule = $auth->createPermission('allowToDesignReadyRule');
+        $allowToDesignReadyRule->description = 'design ready if it in design';
+        $allowToDesignReadyRule->ruleName = $labelindesign->name;
+        $auth->add($allowToDesignReadyRule);
 
         // добавляем роль "manager" и даём роли разрешение "list"		
 		$manager = $auth->createRole('manager');
@@ -51,9 +69,10 @@ class RbacController extends Controller
         // добавляем роль "admin" и даём роли разрешение "list"
         //$auth->addChild($admin, $permit_to_manager);
 //        $auth->addChild($updateOwnLabel,$updateLabel);
-        $auth->addChild($designer,$updateOwnLabel);
-        $auth->addChild($manager,$updateOwnLabel);
-        $auth->addChild($prepress,$prepressOwnLabel);
+        $auth->addChild($updateOwnLabelDesigner,$allowToDesignReadyRule);
+        $auth->addChild($designer,$updateOwnLabelDesigner);
+        $auth->addChild($manager,$updateOwnLabelManager);
+        $auth->addChild($prepress,$allowToPrepressReadyRule);
         $auth->addChild($designer_admin,$designer);
         $auth->addChild($designer_admin,$prepress);
         $auth->addChild($manager_admin,$manager);
