@@ -40,7 +40,6 @@ class Label extends ActiveRecord{
 	}
 	public function getCombinatedLabel(){
 	    return ArrayHelper::map(CombinationForm::find()->where(['combination_id'=>$this->combination->combination_id])->all(),'label_id','label_id');
-//		return CombinationForm::find()->select('label_id')->where(['combination_id'=>$this->combination->combination_id])->asArray()->all();
 	}
     public function getVarnishStatus(){
         return $this->hasOne(VarnishStatus::class,['id'=>'varnish_id']);
@@ -166,6 +165,7 @@ class Label extends ActiveRecord{
             'fullCMYK'=>'CMYK',
             'designer_note'=>'Примечание дизайнера',
             'prepress_note'=>'Примечание Prepress',
+            'laboratory_note'=>'Примечание Лаборатория',
             'stencil'=>'Трафарет',
             'manager_note'=>'Примечание менеджера',
             'laminateName'=>'Ламинация',

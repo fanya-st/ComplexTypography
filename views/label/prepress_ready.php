@@ -19,6 +19,9 @@ $this->params['breadcrumbs'][] = ['label' => $label->name, 'url' => ['label/view
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3><?= Html::encode($this->title)?></h3>
+<div class="alert alert-info">
+    <strong>Внимание!</strong> Если будет произведено совмещение, то будут созданы трафаретная форма, лаковая, для фольги, если в одном из выбранных этикеток в параметрах отмечено их наличие</a>.
+</div>
 <h6>Prepress выполнил: <?=User::getFullNameByUsername($label->prepress_login)?></h6>
 <h6>Штанец №: <?=Pants::findOne($label->pants_id)->name?></h6>
 <?$form = ActiveForm::begin()?>

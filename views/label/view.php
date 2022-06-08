@@ -34,7 +34,28 @@ echo Nav::widget([
         <h6>Штанец: <small><?=Html::encode($label->pantsName)?></small> Вал: <small><?=Html::encode($label->shaftName)?></small></h6>
         <h6>Количество форм: <small><?=Html::encode($label->formCount)?></small></h6>
 <!--        <pre>--><?//print_r($label->pantoneCombinated)?><!--</pre>-->
-        <h6>Пантоны: <? foreach ($label->pantoneName as $pantone) echo '<span class="badge rounded-pill bg-primary">'.$pantone->name.'</span>'?></h6>
+        <h6>Пантоны: <? foreach ($label->pantoneName as $pantone) {
+            switch($pantone->name){
+                case 'cyan':
+                    echo '<span class="badge rounded-pill bg-info">'.$pantone->name.'</span>';
+                    break;
+                case 'magenta':
+                    echo '<span class="badge rounded-pill bg-magenta">'.$pantone->name.'</span>';
+                    break;
+                case 'yellow':
+                    echo '<span class="badge rounded-pill bg-warning">'.$pantone->name.'</span>';
+                    break;
+                case 'black':
+                    echo '<span class="badge rounded-pill bg-black">'.$pantone->name.'</span>';
+                    break;
+                default:
+                    echo '<span class="badge rounded-pill bg-primary">'.$pantone->name.'</span>';
+                    break;
+            }
+
+            }
+            ?>
+        </h6>
         <h6>Фольга: <small><?=Html::encode($label->foilName)?></small> </h6>
         <h6>Вид лака: <small><?=Html::encode($label->varnishStatusName)?></small> </h6>
         <h6>Ламинация: <small class="badge bg-secondary"><?=Html::encode($label->laminateName)?></small> Трафарет: <small class="badge bg-secondary"><?=Html::encode($label->stencilName)?></small></h6>

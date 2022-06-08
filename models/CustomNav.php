@@ -83,7 +83,7 @@ class CustomNav extends Model
                 ArrayHelper::setValue($nav_items, 'prepress.items.', ['label' => 'В Prepress', 'url' => ['label/create-prepress','id'=>$id]]);
                 break;
             case 6:
-                ArrayHelper::setValue($nav_items, 'prepress.items.', ['label' => 'Prepress готов', 'url' => ['label/create-prepress-ready','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'prepress.items.', ['label' => 'Prepress готов', 'url' => ['label/prepress-ready','id'=>$id]]);
                 break;
         }
         return $nav_items;
