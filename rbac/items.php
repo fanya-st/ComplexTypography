@@ -5,9 +5,11 @@ return [
         'type' => 2,
         'description' => 'Update own label by designer',
         'ruleName' => 'isOwnLabel',
-        'children' => [
-            'allowToDesignReadyRule',
-        ],
+    ],
+    'allowToFlexformReadyRule' => [
+        'type' => 2,
+        'description' => 'Update own label by designer',
+        'ruleName' => 'AllowToFlexformReadyRule',
     ],
     'updateOwnLabelManager' => [
         'type' => 2,
@@ -28,6 +30,7 @@ return [
         'type' => 1,
         'children' => [
             'updateOwnLabelDesigner',
+            'allowToDesignReadyRule',
         ],
     ],
     'prepress' => [
@@ -38,6 +41,9 @@ return [
     ],
     'laboratory' => [
         'type' => 1,
+        'children' => [
+            'allowToFlexformReadyRule',
+        ],
     ],
     'designer_admin' => [
         'type' => 1,

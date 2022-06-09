@@ -13,11 +13,13 @@ use yii\web\View;
 use app\models\Customer;
 use app\models\Pants;
 use app\models\Shaft;
+use kartik\icons\FontAwesomeAsset;
+FontAwesomeAsset::register($this);
 
 $this->title = 'Создание заказа для пустышек';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
 $this->params['breadcrumbs'][] = $this->title;
-$this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
+//$this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 $this->registerJs(
     "
     function changeSending(){
@@ -34,16 +36,6 @@ $this->registerJs(
     View::POS_HEAD,
     'change_sending'
 );
-//$this->registerJs(
-//    "
-//    $('#orderform-label_id').on('select2:select', function (e) {
-//    var data = document.getElementById('orderform-label_id').value;
-//    console.log(data);
-//    });
-//    ",
-//    View::POS_LOAD,
-//    'changeOrderName'
-//);
 ?>
 
     <h1><?= Html::encode($this->title) ?></h1>

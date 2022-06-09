@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 
 class LabelSearch extends Label
 {
+    public $shaft_id;
     public static function tableName()
     {
         return 'label';
@@ -19,7 +20,7 @@ class LabelSearch extends Label
         return [
             [[], 'integer'],
             [['name'], 'trim'],
-            [['id','name','manager_login','designer_login','customer_id','pants_id','shaft_id','status_id','date_of_create'], 'safe'],
+            [['id','name','manager_login','designer_login','customer_id','pants_id','status_id','date_of_create','shaft_id'], 'safe'],
         ];
     }
     public function scenarios()
@@ -56,7 +57,9 @@ class LabelSearch extends Label
         $query->andFilterWhere(['designer_login'=> $this->designer_login]);
         $query->andFilterWhere(['manager_login'=> $this->manager_login]);
         $query->andFilterWhere(['customer_id'=> $this->customer_id]);
-        $query->andFilterWhere(['shaft_id'=> $this->shaft_id]);
+        $query->joinWith(['pants' => function ($q) {
+            $q->andFilterWhere(['pants.shaft_id'=> $this->shaft_id]);
+        }]);
         $query->andFilterWhere(['pants_id'=> $this->pants_id]);
         $query->andFilterWhere(['status_id'=> $this->status_id]);
             if(isset ($this->date_of_create)&&$this->date_of_create!=''){

@@ -8,11 +8,15 @@ use yii\db\ActiveRecord;
 
 class Form extends ActiveRecord
 {
+
     public function getPhotoOutput(){
         return $this->hasOne(PhotoOutput::class,['id'=>'photo_output_id']);
     }
     public function getPantone(){
         return $this->hasOne(Pantone::class,['id'=>'pantone_id']);
+    }
+    public function getEnvelope(){
+        return $this->hasOne(Envelope::class,['id'=>'envelope_id']);
     }
 
     public function getPantoneName(){
@@ -28,6 +32,7 @@ class Form extends ActiveRecord
         return [
             'id'=>'ID',
             'polymer_id'=>'Полимер',
+            'envelope_id'=>'Конверт',
             'width'=>'Ширина, мм',
             'height'=>'Высота, мм',
             'lpi'=>'Линиатура',
@@ -37,6 +42,12 @@ class Form extends ActiveRecord
             'stencil_form'=>'Трафарет',
             'foil_form'=>'Фольга',
             'varnish_form'=>'Лаковая форма',
+        ];
+    }
+
+    public function rules(){
+        return[
+            [['polymer_id','envelope_id'],'safe']
         ];
     }
 

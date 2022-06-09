@@ -4,6 +4,9 @@ return [
     105 => [
         'designer',
     ],
+    107 => [
+        'designer',
+    ],
     101 => [
         'prepress',
     ],

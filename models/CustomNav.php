@@ -97,6 +97,7 @@ class CustomNav extends Model
         switch ($status) {
             //статус этикетки Prepress готов
             case 7:
+            case 8:
                 ArrayHelper::setValue($nav_items, 'laboratory.items.', ['label' => 'Изготовление форм', 'url' => ['label/create-flexform','id'=>$id]]);
                 break;
             //статус этикетки Изготовление форм

@@ -17,7 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions'=>['class' => 'text-center'],
                     'headerOptions' => ['class' => 'text-center','style' => 'min-width:70px']
                 ],
-                'name',
+                ['attribute'=>'name',
+                    'headerOptions' => ['class' => 'text-center','style' => 'min-width:70px'],
+//                    'value' => function($data)
+//                    {
+//                        return
+//                            Html::a($data->name, ['label/view','id'=>$data->id], ['title' => $data->name]);
+//                    }
+                ],
                 ['attribute'=>'date_of_create',
                     'contentOptions'=>['class' => 'text-center'],
                     'headerOptions' => ['class' => 'text-center']
@@ -25,7 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['attribute'=>'customerName',
                     'headerOptions'=>['class' => 'text-center']
                 ],
-                ['attribute'=>'labelStatusName'
+                ['attribute'=>'labelStatusName',
+                    'headerOptions'=>['class' => 'text-center']
                 ],
                 ['attribute'=>'pantsName',
                     'headerOptions'=>['class' => 'text-center']

@@ -2,6 +2,7 @@
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
+use app\models\Form;
 
 $this->title = Html::encode("ID [$label->id] $label->name ");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с этикетками', 'url' => ['label/list']];
@@ -11,7 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
     if(isset($label->parent_label)){
         echo Html::a('[Изменение этикетки №'.$label->parent_label.']', ['label/view', 'id' => $label->parent_label]);
     }?></h3>
-<!--<pre>--><?//print_r($nav_items)?><!--</pre>-->
 <?
 echo Nav::widget([
     'items' => $nav_items,
@@ -29,18 +29,23 @@ echo Nav::widget([
     <div class="col">
         <h6>Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatusName)?></small> </h6>
         <h6>Заказчик: <small><?=Html::encode($label->customerName)?></small> </h6>
+        <h6>Менеджер: <small><?=Html::encode($label->managerName)?></small> </h6>
         <h6>Дата создания: <small><?=Html::encode($label->date_of_create)?></small> </h6>
+        <h6>Дизайнер: <small><?=Html::encode($label->fullName)?></small> </h6>
+        <h6>Дата дизайна: <small><?=Html::encode($label->date_of_design)?></small> </h6>
+        <h6>Препрессник: <small><?=Html::encode($label->prepressName)?></small> </h6>
         <h6>Дата Prepress: <small><?=Html::encode($label->date_of_prepress)?></small> </h6>
-        <h6>Штанец: <small><?=Html::encode($label->pantsName)?></small> Вал: <small><?=Html::encode($label->shaftName)?></small></h6>
-        <h6>Количество форм: <small><?=Html::encode($label->formCount)?></small></h6>
-<!--        <pre>--><?//print_r($label->pantoneCombinated)?><!--</pre>-->
+        <h6>Штанец: <small class="badge bg-secondary"><?=Html::encode($label->pantsName)?></small>
+            Вал: <small class="badge bg-secondary"><?=Html::encode($label->shaftName)?></small>
+            Кол-во форм: <small class="badge bg-secondary"><?=Html::encode($label->formCount)?></small></h6>
+        <h6></h6>
         <h6>Пантоны: <? foreach ($label->pantoneName as $pantone) {
             switch($pantone->name){
                 case 'cyan':
                     echo '<span class="badge rounded-pill bg-info">'.$pantone->name.'</span>';
                     break;
                 case 'magenta':
-                    echo '<span class="badge rounded-pill bg-magenta">'.$pantone->name.'</span>';
+                    echo '<span class="badge rounded-pill bg-danger">'.$pantone->name.'</span>';
                     break;
                 case 'yellow':
                     echo '<span class="badge rounded-pill bg-warning">'.$pantone->name.'</span>';
@@ -55,49 +60,55 @@ echo Nav::widget([
 
             }
             ?>
-        </h6>
-        <h6>Фольга: <small><?=Html::encode($label->foilName)?></small> </h6>
-        <h6>Вид лака: <small><?=Html::encode($label->varnishStatusName)?></small> </h6>
+            Фольга: <small class="badge bg-secondary"><?=Html::encode($label->foilName)?></small> </h6>
+        <h6>Вид лака: <small class="badge bg-secondary"><?=Html::encode($label->varnishStatusName)?></small> Тиснение: <small class="badge bg-secondary"><?=Html::encode($label->embossingName)?></small></h6>
         <h6>Ламинация: <small class="badge bg-secondary"><?=Html::encode($label->laminateName)?></small> Трафарет: <small class="badge bg-secondary"><?=Html::encode($label->stencilName)?></small></h6>
         <h6>Перем.печать: <small class="badge bg-secondary"><?=Html::encode($label->variableName)?></small> Печать по клею: <small class="badge bg-secondary"><?=Html::encode($label->printOnGlueName)?></small> </h6>
-        <h6 class="badge badge-primary"><?=Html::encode($label->fullCMYK)?></h6>
-    </div>
-    <div class="col">
-        <h6>Дизайнер: <small><?=Html::encode($label->fullName)?></small> </h6>
-        <h6>Менеджер: <small><?=Html::encode($label->managerName)?></small> </h6>
-        <h6>Препрессник: <small><?=Html::encode($label->prepressName)?></small> </h6>
-        <h6>Дата дизайна: <small><?=Html::encode($label->date_of_design)?></small> </h6>
         <h6>Выход этикетки: <?=Html::img($label->outputLabel->image, ['alt' => $label->outputLabel->name,'width'=>'100px'])?></h6>
         <h6>Ориентация: <small class="badge bg-secondary"><?=Html::encode($label->orientationName)?></small> </h6>
-        <h6>Тиснение: <small class="badge bg-secondary"><?=Html::encode($label->embossingName)?></small> </h6>
-    </div>
-</div>
-<div class="row border p-2 rounded-lg">
-    <div class="col">
-        <h6>Параметры Prepress:</h6>
-        <h6>Совмещение (ID этикеток): <?foreach ($label->combinatedLabel as $label) echo '<span class="badge rounded-pill bg-primary">'.$label.'</span>'?> </h6>
     </div>
     <div class="col">
+        <div class="row border p-2 rounded-lg">
+            <div class="col">
+                <blockquote class="blockquote">
+                    <p class="small"><?=Html::encode($label->manager_note)?></p>
+                    <footer class="blockquote-footer">Примечание менеджера</footer>
+                </blockquote>
+            </div>
+        </div>
+        <div class="row border p-2 rounded-lg">
+            <div class="col">
+                <blockquote class="blockquote">
+                    <p class="small"><?=Html::encode($label->designer_note)?></p>
+                    <footer class="blockquote-footer">Примечание дизайнера</footer>
+                </blockquote>
+            </div>
+        </div>
+        <div class="row border p-2 rounded-lg">
+            <div class="col">
+                <h6>Параметры Prepress:</h6>
+                <h6>Совмещение (ID этикеток): <?foreach ($label->combinatedLabel as $label_id) echo '<span class="badge rounded-pill bg-primary">'.$label_id.'</span>'?> </h6>
+                <blockquote class="blockquote">
+                    <p class="small"><?=Html::encode($label->prepress_note)?></p>
+                    <footer class="blockquote-footer">Примечание Prepress</footer>
+                </blockquote>
+            </div>
+        </div>
+        <div class="row border p-2 rounded-lg">
+            <div class="col">
+                <h6>Параметры Лаборатория:</h6>
+                <h6>Конверт: <? if (!empty($label->combination->combination_id)):?>
+                    <? echo '<span class="badge rounded-pill bg-primary">'.Form::find()->where(['combination_id'=>$label->combination])->one()->envelope->fullLocationName.'</span>'?>
+                    <? else: ?>
+                    <? echo '<span class="badge rounded-pill bg-primary">'.Form::find()->where(['label_id'=>$label->id])->one()->envelope->fullLocationName.'</span>'?>
 
-    </div>
-</div>
-<div class="row p-3">
-    <div class="media border col">
-        <blockquote class="blockquote">
-            <p><?=Html::encode($label->designer_note)?></p>
-            <footer class="blockquote-footer">Примечание дизайнера</footer>
-        </blockquote>
-    </div>
-    <div class="media border col">
-        <blockquote class="blockquote">
-            <p><?=Html::encode($label->manager_note)?></p>
-            <footer class="blockquote-footer">Примечание менеджера</footer>
-        </blockquote>
-    </div>
-    <div class="media border col">
-        <blockquote class="blockquote">
-            <p><?=Html::encode($label->prepress_note)?></p>
-            <footer class="blockquote-footer">Примечание Prepress</footer>
-        </blockquote>
+                <? endif; ?>
+                </h6>
+                <blockquote class="blockquote">
+                    <p class="small"><?=Html::encode($label->laboratory_note)?></p>
+                    <footer class="blockquote-footer">Примечание Лаборатория</footer>
+                </blockquote>
+            </div>
+        </div>
     </div>
 </div>

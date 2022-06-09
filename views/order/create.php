@@ -11,11 +11,13 @@ use app\models\Sleeve;
 use app\models\Winding;
 use yii\web\View;
 use app\models\Label;
+use kartik\icons\FontAwesomeAsset;
+FontAwesomeAsset::register($this);
 
 $this->title = 'Создание заказа';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
 $this->params['breadcrumbs'][] = $this->title;
-$this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
+//$this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 $this->registerJs(
     "
     function changeSending(){

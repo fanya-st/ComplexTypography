@@ -12,6 +12,7 @@ use yii\helpers\Url;
 use app\models\Foil;
 use app\models\Label;
 use app\models\VarnishStatus;
+use app\models\CombinationForm;
 
 $this->title = Html::encode("Prepress готов ID [$label->id] $label->name ");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с этикетками', 'url' => ['label/list']];
@@ -35,8 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]
                     ])?>
                     <?=$form->field($prepress,'combination_label')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(Label::find()->where(['status_id'=>6,'prepress_login'=>Yii::$app->user->identity->username])
-                            ->andWhere(['!=', 'id',$label->id])->orderBy('date_of_design DESC')->all(), 'id', 'nameSplitId'),
+                        'data' => ArrayHelper::map(Label::find()
+                            ->joinWith('combination')
+                            ->where(['status_id'=>6,'prepress_login'=>Yii::$app->user->identity->username])
+                            ->andWhere(['!=', 'label.id',$label->id])
+                            ->andWhere(['not in', 'label.id',CombinationForm::find()->select('label_id')->column()])
+                            ->orderBy('date_of_design DESC')
+                            ->all(), 'id', 'nameSplitId'),
                         'options'=>[
                             'placeholder' => 'Выберите этикетки для совмещения ...',
                             'multiple' => true,

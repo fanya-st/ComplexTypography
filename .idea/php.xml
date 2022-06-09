@@ -16,7 +16,6 @@
       <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-composer" />
-      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-bootstrap4" />
       <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
       <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
       <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
@@ -77,7 +76,6 @@
       <path value="$PROJECT_DIR$/vendor/bower-asset/inputmask" />
       <path value="$PROJECT_DIR$/vendor/behat/gherkin" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
-      <path value="$PROJECT_DIR$/vendor/npm-asset/bootstrap" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
@@ -97,6 +95,10 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-fileinput" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-depdrop" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/dependent-dropdown" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-icons" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-jui" />
+      <path value="$PROJECT_DIR$/vendor/components/flag-icon-css" />
+      <path value="$PROJECT_DIR$/vendor/bower-asset/jquery-ui" />
     </include_path>
   </component>
 </project>

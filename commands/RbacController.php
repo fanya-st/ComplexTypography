@@ -5,6 +5,7 @@ use app\rbac\UpdateOwnLabelDesigner;
 use app\rbac\UpdateOwnLabelManager;
 use app\rbac\AllowToPrepressReadyRule;
 use app\rbac\AllowToDesignReadyRule;
+use app\rbac\AllowToFlexformReadyRule;
 use Yii;
 use yii\console\Controller;
 
@@ -30,10 +31,18 @@ class RbacController extends Controller
         $labelindesign = new AllowToDesignReadyRule();
         $auth->add($labelindesign);
 
+        $labelinlaboratory = new AllowToFlexformReadyRule();
+        $auth->add($labelinlaboratory);
+
         $updateOwnLabelDesigner = $auth->createPermission('updateOwnLabelDesigner');
         $updateOwnLabelDesigner->description = 'Update own label by designer';
         $updateOwnLabelDesigner->ruleName = $labelOwnerDesigner->name;
         $auth->add($updateOwnLabelDesigner);
+
+        $allowToFlexformReadyRule = $auth->createPermission('allowToFlexformReadyRule');
+        $allowToFlexformReadyRule->description = 'Update own label by designer';
+        $allowToFlexformReadyRule->ruleName = $labelinlaboratory->name;
+        $auth->add($allowToFlexformReadyRule);
 
         $updateOwnLabelManager = $auth->createPermission('updateOwnLabelManager');
         $updateOwnLabelManager->description = 'Update own label by manager';
@@ -69,8 +78,10 @@ class RbacController extends Controller
         // добавляем роль "admin" и даём роли разрешение "list"
         //$auth->addChild($admin, $permit_to_manager);
 //        $auth->addChild($updateOwnLabel,$updateLabel);
-        $auth->addChild($updateOwnLabelDesigner,$allowToDesignReadyRule);
+//        $auth->addChild($updateOwnLabelDesigner,$);
         $auth->addChild($designer,$updateOwnLabelDesigner);
+        $auth->addChild($designer,$allowToDesignReadyRule);
+        $auth->addChild($laboratory,$allowToFlexformReadyRule);
         $auth->addChild($manager,$updateOwnLabelManager);
         $auth->addChild($prepress,$allowToPrepressReadyRule);
         $auth->addChild($designer_admin,$designer);
@@ -87,6 +98,7 @@ class RbacController extends Controller
 //		$auth->assign($manager, 102);
 //		$auth->assign($designer, 104);
 		$auth->assign($designer, 105);
+		$auth->assign($designer, 107);
 		$auth->assign($prepress, 101);
 		$auth->assign($laboratory, 106);
         $auth->assign($manager, 103);

@@ -18,7 +18,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/egulias/email-validator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yiisoft/yii2-composer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/yiisoft/yii2-bootstrap4" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/recursion-context" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/diff" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/resource-operations" />
@@ -79,7 +78,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/inputmask" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/gherkin" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/npm-asset/bootstrap" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/tokenizer" />
@@ -99,6 +97,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-widget-fileinput" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-widget-depdrop" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/dependent-dropdown" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-icons" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/yiisoft/yii2-jui" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/components/flag-icon-css" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/jquery-ui" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

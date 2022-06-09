@@ -16,16 +16,16 @@
     "require": {
         "php": ">=5.6.0",
         "yiisoft/yii2": "~2.0.14",
-        "yiisoft/yii2-bootstrap4": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "kartik-v/yii2-date-range": "dev-master",
         "kartik-v/yii2-widget-sidenav": "@dev",
         "yiisoft/yii2-imagine": "^2.3",
         "kartik-v/yii2-widget-select2": "dev-master",
         "kartik-v/yii2-widget-datepicker": "dev-master",
-        "yiisoft/yii2-bootstrap5": "^2.0",
+        "yiisoft/yii2-bootstrap5": "dev-master",
         "kartik-v/yii2-widget-fileinput": "dev-master",
-        "kartik-v/yii2-widget-depdrop": "dev-master"
+        "kartik-v/yii2-widget-depdrop": "dev-master",
+        "kartik-v/yii2-icons": "^1.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

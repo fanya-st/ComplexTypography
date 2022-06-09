@@ -9,13 +9,14 @@ use app\models\Customer;
 use app\models\LabelStatus;
 use app\models\User;
 use kartik\daterange\DateRangePicker;
-
+use kartik\icons\FontAwesomeAsset;
+FontAwesomeAsset::register($this);
 ?>
     <div class="label-search">
 <?php $form = ActiveForm::begin([
     'action' => ['label/list'],
     'method' => 'post',
-])?>
+]) ?>
 
 <div class="row border p-3 rounded-lg">
     <div class="col">
@@ -34,9 +35,9 @@ use kartik\daterange\DateRangePicker;
         ])?>
         <?=$form->field($model,'customer_id')->widget(Select2::classname(), [
             'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1'])->all(), 'id', 'name'),
-            'options' => ['placeholder' => 'Выбрать заказчика ...'],
+            'options' => ['placeholder' => 'Выбрать заказчика'],
             'pluginOptions' => [
-                'allowClear' => true
+                'allowClear' => true,
             ],
         ])?>
         <?=$form->field($model,'status_id')->dropdownList(ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'), [

@@ -12,8 +12,8 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'e3b2795a8a512b6083af088fb53afe6c' => __DIR__ . '/..' . '/codeception/codeception/functions.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
@@ -29,13 +29,13 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'y' => 
         array (
             'yii\\swiftmailer\\' => 16,
+            'yii\\jui\\' => 8,
             'yii\\imagine\\' => 12,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
             'yii\\bootstrap5\\' => 15,
-            'yii\\bootstrap4\\' => 15,
             'yii\\' => 4,
         ),
         'p' => 
@@ -48,6 +48,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\select2\\' => 15,
             'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\plugins\\depdrop\\' => 23,
+            'kartik\\icons\\' => 13,
             'kartik\\file\\' => 12,
             'kartik\\depdrop\\' => 15,
             'kartik\\daterange\\' => 17,
@@ -123,6 +124,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer/src',
         ),
+        'yii\\jui\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
+        ),
         'yii\\imagine\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-imagine/src',
@@ -146,10 +151,6 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'yii\\bootstrap5\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap5/src',
-        ),
-        'yii\\bootstrap4\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap4/src',
         ),
         'yii\\' => 
         array (
@@ -176,6 +177,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\plugins\\depdrop\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/dependent-dropdown',
+        ),
+        'kartik\\icons\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-icons/src',
         ),
         'kartik\\file\\' => 
         array (

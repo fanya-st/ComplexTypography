@@ -15,14 +15,15 @@ class OrderSearch extends Order
     public $customerId;
     public $labelName;
     public $pantsId;
-    public $shaftId;
+    public $shaft_id;
+    public $label_status_id;
     public function rules()
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
             [[], 'integer'],
             [['labelName'], 'trim'],
-            [['customerId','name','label_id','id','manager_login','date_of_create','status_id','pantsId','shaftId','mashine_id'], 'safe'],
+            [['customerId','name','label_id','id','manager_login','shaft_id','date_of_create','status_id','pantsId','mashine_id','label_status_id'], 'safe'],
         ];
     }
     public function scenarios()
@@ -50,7 +51,6 @@ class OrderSearch extends Order
 
         // загружаем данные формы поиска и производим валидацию
         if (!($this->load($params) && $this->validate())) {
-            $query->joinWith(['label']);
             return $dataProvider;
         }
 
@@ -64,13 +64,14 @@ class OrderSearch extends Order
                 $q->andFilterWhere(['label.customer_id'=> $this->customerId]);
             }]);
         $query->joinWith(['label' => function ($q) {
-                $q->andFilterWhere(['label.pants_id'=> $this->pantsId]);
+                $q->andFilterWhere(['label.status_id'=> $this->label_status_id]);
             }]);
         $query->joinWith(['label' => function ($q) {
-                $q->andFilterWhere(['label.shaft_id'=> $this->shaftId]);
+                $q->andFilterWhere(['label.pants_id'=> $this->pantsId]);
             }]);
-//        $query->andFilterWhere(['shaft_id'=> $this->shaft_id]);
-//        $query->andFilterWhere(['pants_id'=> $this->pants_id]);
+        $query->joinWith(['shaft' => function ($q) {
+                $q->andFilterWhere(['shaft.id'=> $this->shaft_id]);
+            }]);
         $query->andFilterWhere(['order.status_id'=> $this->status_id]);
             if(isset ($this->date_of_create) && $this->date_of_create!=''){
                 $date_explode=explode(" - ",$this->date_of_create);

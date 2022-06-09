@@ -50,9 +50,6 @@ class Label extends ActiveRecord{
     public function getOutputLabel(){
         return $this->hasOne(OutputLabel::class,['id'=>'output_label_id']);
     }
-    public function getShaft(){
-        return $this->hasOne(Shaft::class,['id'=>'shaft_id']);
-    }
     public function getFoil(){
         return $this->hasOne(Foil::class,['id'=>'foil_id']);
     }
@@ -69,7 +66,10 @@ class Label extends ActiveRecord{
         return $this->pants->name;
     }
     public function getShaftName(){
-        return $this->shaft->name;
+        return $this->pants->shaft->name;
+    }
+    public function getShaft_id(){
+        return $this->pants->shaft_id;
     }
     public function getFullCMYK(){
 	    if($this->c==1) $c=$this->getAttributeLabel('c');
@@ -152,10 +152,10 @@ class Label extends ActiveRecord{
             'output_label_id'=>'Выход этикетки',
             'status_id'=>'Статус этикетки',
             'pants_id'=>'Штанец',
-            'shaft_id'=>'Вал',
             'varnishStatusName'=>'Вид лака',
             'varnish_id'=>'Вид лака',
             'pantsName'=>'Штанец',
+            'shaft_id'=>'Вал',
             'customerName'=>'Заказчик',
             'customer_id'=>'Заказчик',
             'fullName'=>'Дизайнер',
@@ -183,10 +183,10 @@ class Label extends ActiveRecord{
     public function rules(){
         return[
             ['name','string','max'=>100],
-            [['name','manager_note','prepress_note','designer_note'],'trim'],
+            [['name','manager_note','prepress_note','designer_note','laboratory_note'],'trim'],
             [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
                 'print_on_glue','orientation','embossing',
-                'manager_login','output_label_id','shaft_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id'],'safe']
+                'manager_login','output_label_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id'],'safe']
         ];
     }
 }

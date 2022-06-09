@@ -4,7 +4,8 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
-class Order extends ActiveRecord{	
+class Order extends ActiveRecord{
+    public $label_status_id;
 	public function getLabel(){
 		return $this->hasOne(Label::class,['id'=>'label_id']);
 	}
@@ -31,12 +32,15 @@ class Order extends ActiveRecord{
     public function getCustomerId(){
         return $this->label->customer_id;
     }
-    public function getPantsId(){
-        return $this->label->pants_id;
+
+    public function getPants(){
+        return $this->hasOne(Pants::class,['id'=>'pants_id'])->via('label');
     }
-    public function getShaftId(){
-        return $this->label->shaft_id;
+
+    public function getShaft(){
+        return $this->hasOne(Shaft::class,['id'=>'shaft_id'])->via('pants');
     }
+
     public function getMashineName(){
         return $this->mashine->name;
     }
@@ -49,6 +53,7 @@ class Order extends ActiveRecord{
             'status_id'=>'Статус заказа',
             'orderStatusName'=>'Статус заказа',
             'labelStatusName'=>'Статус этикетки',
+            'label_status_id'=>'Статус этикетки',
             'labelName'=>'Наименование',
             'label_id'=>'ID Этикетки',
             'label.name'=>'Наименование этикетки',
@@ -65,7 +70,7 @@ class Order extends ActiveRecord{
             'manager_login'=>'Менеджер',
             'customerId'=>'Заказчик',
             'pantsId'=>'Штанец',
-            'shaftId'=>'Вал',
+            'shaft_id'=>'Вал',
         ];
     }
 }
