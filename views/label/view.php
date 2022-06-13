@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3><?= Html::encode($this->title);
     if(isset($label->parent_label)){
-        echo Html::a('[Изменение этикетки №'.$label->parent_label.']', ['label/view', 'id' => $label->parent_label]);
+        echo Html::a('[Изменение этикетки №'.Html::encode($label->parent_label).']', ['label/view', 'id' => $label->parent_label]);
     }?></h3>
 <?
 echo Nav::widget([
@@ -42,19 +42,19 @@ echo Nav::widget([
         <h6>Пантоны: <? foreach ($label->pantoneName as $pantone) {
             switch($pantone->name){
                 case 'cyan':
-                    echo '<span class="badge rounded-pill bg-info">'.$pantone->name.'</span>';
+                    echo '<span class="badge rounded-pill bg-info">'.Html::encode($pantone->name).'</span>';
                     break;
                 case 'magenta':
-                    echo '<span class="badge rounded-pill bg-danger">'.$pantone->name.'</span>';
+                    echo '<span class="badge rounded-pill bg-danger">'.Html::encode($pantone->name).'</span>';
                     break;
                 case 'yellow':
-                    echo '<span class="badge rounded-pill bg-warning">'.$pantone->name.'</span>';
+                    echo '<span class="badge rounded-pill bg-warning">'.Html::encode($pantone->name).'</span>';
                     break;
                 case 'black':
-                    echo '<span class="badge rounded-pill bg-black">'.$pantone->name.'</span>';
+                    echo '<span class="badge rounded-pill bg-black">'.Html::encode($pantone->name).'</span>';
                     break;
                 default:
-                    echo '<span class="badge rounded-pill bg-primary">'.$pantone->name.'</span>';
+                    echo '<span class="badge rounded-pill bg-primary">'.Html::encode($pantone->name).'</span>';
                     break;
             }
 
@@ -87,7 +87,15 @@ echo Nav::widget([
         <div class="row border p-2 rounded-lg">
             <div class="col">
                 <h6>Параметры Prepress:</h6>
-                <h6>Совмещение (ID этикеток): <?foreach ($label->combinatedLabel as $label_id) echo '<span class="badge rounded-pill bg-primary">'.$label_id.'</span>'?> </h6>
+                <h6>Перевывод необходим:</h6>
+                <?foreach (Form::find()->where(['not',['form_defect_id'=>null]])
+                               ->andWhere(['or',
+                                   ['label_id'=>$label->id],
+                                   ['combination_id'=>$label->combination]
+                               ])
+                               ->all() as $defect_form)
+                    echo '<small class="badge rounded-pill bg-danger">'.Html::encode($defect_form->pantoneName.'-'.$defect_form->formDefect->name).'</small>'?>
+                <h6>Совмещение (ID этикеток): <?foreach ($label->combinatedLabel as $label_id) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($label_id).'</span>'?> </h6>
                 <blockquote class="blockquote">
                     <p class="small"><?=Html::encode($label->prepress_note)?></p>
                     <footer class="blockquote-footer">Примечание Prepress</footer>
@@ -98,9 +106,10 @@ echo Nav::widget([
             <div class="col">
                 <h6>Параметры Лаборатория:</h6>
                 <h6>Конверт: <? if (!empty($label->combination->combination_id)):?>
-                    <? echo '<span class="badge rounded-pill bg-primary">'.Form::find()->where(['combination_id'=>$label->combination])->one()->envelope->fullLocationName.'</span>'?>
+                    <? echo '<span class="badge rounded-pill bg-primary">'.Html::encode(Form::find()->where(['combination_id'=>$label->combination])
+                                    ->one()->envelope->fullLocationName).'</span>'?>
                     <? else: ?>
-                    <? echo '<span class="badge rounded-pill bg-primary">'.Form::find()->where(['label_id'=>$label->id])->one()->envelope->fullLocationName.'</span>'?>
+                    <? echo '<span class="badge rounded-pill bg-primary">'.Html::encode(Form::find()->where(['label_id'=>$label->id])->one()->envelope->fullLocationName).'</span>'?>
 
                 <? endif; ?>
                 </h6>

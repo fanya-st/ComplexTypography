@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 class LabelSearch extends Label
 {
     public $shaft_id;
+    public $manager_login;
     public static function tableName()
     {
         return 'label';
@@ -55,13 +56,15 @@ class LabelSearch extends Label
         $query->andFilterWhere(['id' => $this->id]);
         $query->andFilterWhere(['like', 'name', $this->name]);
         $query->andFilterWhere(['designer_login'=> $this->designer_login]);
-        $query->andFilterWhere(['manager_login'=> $this->manager_login]);
+        $query->joinWith(['customer' => function ($q) {
+            $q->andFilterWhere(['customer.manager_login'=> $this->manager_login]);
+        }]);
         $query->andFilterWhere(['customer_id'=> $this->customer_id]);
         $query->joinWith(['pants' => function ($q) {
             $q->andFilterWhere(['pants.shaft_id'=> $this->shaft_id]);
         }]);
         $query->andFilterWhere(['pants_id'=> $this->pants_id]);
-        $query->andFilterWhere(['status_id'=> $this->status_id]);
+        $query->andFilterWhere(['label.status_id'=> $this->status_id]);
             if(isset ($this->date_of_create)&&$this->date_of_create!=''){
                 $date_explode=explode(" - ",$this->date_of_create);
                 $date1=trim($date_explode[0]);

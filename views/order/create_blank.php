@@ -173,9 +173,7 @@ $this->registerJs(
             </div>
             <?=Html::submitButton('Создать заказ',['class'=>'btn btn-success'])?>
         </div>
-        <?=$form->field($order, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>
         <?=$form->field($order, 'status_id')->hiddenInput(['value' => 1])->label(false);?>
-        <?=$form->field($label, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>
         <?=$form->field($label, 'status_id')->hiddenInput(['value' => 11])->label(false);?>
         <?=$form->field($label, 'embossing')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'output_label_id')->hiddenInput(['value' => 1])->label(false);?>

@@ -9,6 +9,7 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use kartik\bs5dropdown\Dropdown;
 
 AppAsset::register($this);
 ?>
@@ -36,9 +37,21 @@ AppAsset::register($this);
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+            'dropdownClass' => Dropdown::class,
+            'options' => ['class' => 'navbar-nav mr-auto me-auto'],
         'items' => [
-            ['label' => 'Домашняя страница', 'url' => ['/site/index']],
+            ['label' => 'Меню', 'items' => [
+            ['label' => 'Работа с заказами', 'items' => [
+                ['label' => 'Просмотр заказов', 'url' => ['/order/list']],
+                ['label' => 'Создание заказа с готовой этикеткой', 'url' => ['/order/create','blank'=>1]],
+                ['label' => 'Создание заказа', 'url' => ['/order/create','blank'=>0]]
+            ]],
+            ['label' => 'Работа с этикетками', 'items' => [
+                ['label' => 'Просмотр этикеток', 'url' => ['/label/list']],
+                ['label' => 'Создание этикетки', 'url' => ['/label/create']]
+            ]],
+            ['label' => 'Работа с материалами', 'url' => ['/material/list']],
+        ]],
             ['label' => 'О компании', 'url' => ['/site/about']],
             ['label' => 'Обратная связь', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
@@ -54,7 +67,8 @@ AppAsset::register($this);
                 . '</li>'
             )
         ],
-    ]);
+    ]
+    );
     NavBar::end();
     ?>
 </header>

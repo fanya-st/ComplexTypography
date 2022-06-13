@@ -52,8 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col">
                 <?=$form->field($label,'status_id')
                     ->dropDownList(ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'),['disabled'=>true])?>
-                <?=$form->field($label,'manager_login')
-                    ->dropDownList(User::findUsersByGroup('manager'))?>
             </div>
         </div>
         <div class="row">

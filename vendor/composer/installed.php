@@ -262,6 +262,17 @@
             'reference' => '54a8806002ee21b744508a2edb95ed01d35c6cf9',
             'dev_requirement' => false,
         ),
+        'kartik-v/yii2-bootstrap5-dropdown' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-bootstrap5-dropdown',
+            'aliases' => array(
+                0 => '1.0.x-dev',
+            ),
+            'reference' => '459e4c06c64e49f89ac372ce7c2cabb961f56ec9',
+            'dev_requirement' => false,
+        ),
         'kartik-v/yii2-date-range' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
@@ -289,6 +300,28 @@
             'install_path' => __DIR__ . '/../kartik-v/yii2-krajee-base',
             'aliases' => array(),
             'reference' => 'b37e19a346e36cc0c612dcbab76bf771dc506f14',
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-label-inplace' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-label-inplace',
+            'aliases' => array(
+                0 => '1.2.x-dev',
+            ),
+            'reference' => '5e678362670856e21fe9539ffdab93f242d5e8c3',
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-widget-activeform' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-widget-activeform',
+            'aliases' => array(
+                0 => '1.6.x-dev',
+            ),
+            'reference' => '98dbf789c9f71a35c76a8c2b667e86815ae51ac1',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-widget-datepicker' => array(

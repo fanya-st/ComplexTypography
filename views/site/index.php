@@ -21,7 +21,6 @@ $this->title = 'Комплекс Типография';
                 <h2>Работа с заказами</h2>
                 <p>Просмотр, создание, удаление заказов</p>
                 <p><a class="btn btn-outline-secondary" href="?r=order%2Flist">Работа с заказами &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate">Создание этикетки &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=1">Создание заказа с готовой этикеткой &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=0">Создание заказа &raquo;</a></p>
             </div>
@@ -34,6 +33,7 @@ $this->title = 'Комплекс Типография';
                 <h2>Работа с этикетками</h2>
                 <p>Работа с этикетками</p>
                 <p><a class="btn btn-outline-secondary" href="?r=label/list">Работа с этикетками &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate">Создание этикетки &raquo;</a></p>
             </div>
         </div>
 

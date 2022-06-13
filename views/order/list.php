@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'mashineName',
             'fullName',
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{update}'
+                'template' => '{view}'
                 ],
         ],
     ]);

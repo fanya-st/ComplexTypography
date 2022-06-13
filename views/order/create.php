@@ -57,7 +57,7 @@ $this->registerJs(
     <div class="row">
         <div class="col">
             <?=$form->field($order,'label_id')->widget(Select2::classname(),
-                ['data' => ArrayHelper::map(Label::find()->where(['manager_login'=>Yii::$app->user->identity->username])->orderBy('date_of_create DESC')->limit(100)->all(),
+                ['data' => ArrayHelper::map(Label::find()->joinWith('customer')->where(['customer.manager_login'=>Yii::$app->user->identity->username])->orderBy('date_of_create DESC')->limit(100)->all(),
                     'id', 'nameSplitId'),
                 'options' => ['placeholder' => 'Выбрать этикетку ...'],
                 'pluginOptions' => [
@@ -141,7 +141,6 @@ $this->registerJs(
             <?=$form->field($order,'printer_note')->textarea()?>
         </div>
     </div>
-    <?=$form->field($order, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>
     <?=$form->field($order, 'status_id')->hiddenInput(['value' => 1])->label(false);?>
 	<?=Html::submitButton('Создать заказ',['class'=>'btn btn-success'])?>
 	<?ActiveForm::end()?>

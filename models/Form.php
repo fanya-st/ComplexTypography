@@ -12,6 +12,9 @@ class Form extends ActiveRecord
     public function getPhotoOutput(){
         return $this->hasOne(PhotoOutput::class,['id'=>'photo_output_id']);
     }
+    public function getFormDefect(){
+        return $this->hasOne(FormDefect::class,['id'=>'form_defect_id']);
+    }
     public function getPantone(){
         return $this->hasOne(Pantone::class,['id'=>'pantone_id']);
     }
@@ -22,9 +25,9 @@ class Form extends ActiveRecord
     public function getPantoneName(){
         if (isset($this->pantone))
             return $this->pantone->name;
-            elseif($this->stencil_form==1) return 'Трафаретная форма';
-            elseif($this->varnish_form==1) return 'Лаковая форма';
-            elseif($this->foil_form==1) return 'Форма фольги';
+            elseif($this->stencil_form!=0) return 'Трафаретная форма';
+            elseif($this->varnish_form!=0) return VarnishStatus::findOne($this->varnish_form)->name;
+            elseif($this->foil_form!=0) return Foil::findOne($this->foil_form)->name;
     }
 
     public function attributeLabels()
@@ -51,7 +54,7 @@ class Form extends ActiveRecord
         ];
     }
 
-    public static function createVarnishForm($prepress,$label_id,$set_count){
+    public static function createVarnishForm($prepress,$label_id,$set_count,$varnish_id){
         $i=$set_count;
         while ($i>0){
             $form= $prepress;
@@ -61,7 +64,7 @@ class Form extends ActiveRecord
             unset($form->stencil_form);
             $form->setisNewRecord(true);
             if($prepress->combination_id==Null)$form->label_id= $label_id;
-            $form->varnish_form= 1;
+            $form->varnish_form= $varnish_id;
             $form->save();
             $i--;
         }
@@ -80,7 +83,7 @@ class Form extends ActiveRecord
             }
         }
     }
-    public static function createFoilForm($prepress,$label_id,$set_count){
+    public static function createFoilForm($prepress,$label_id,$set_count,$foil_id){
         $i=$set_count;
         while ($i>0){
             $form= $prepress;
@@ -90,7 +93,7 @@ class Form extends ActiveRecord
             unset($form->stencil_form);
             $form->setisNewRecord(true);
             if($prepress->combination_id==Null)$form->label_id= $label_id;
-            $form->foil_form= 1;
+            $form->foil_form= $foil_id;
             $form->save();
             $i--;
         }

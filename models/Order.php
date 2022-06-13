@@ -9,6 +9,9 @@ class Order extends ActiveRecord{
 	public function getLabel(){
 		return $this->hasOne(Label::class,['id'=>'label_id']);
 	}
+	public function getCustomer(){
+		return $this->hasOne(Customer::class,['id'=>'customer_id'])->via('label');
+	}
 	public function getLabelStatusName(){
 		return $this->label->LabelStatusName;
 	}
@@ -26,7 +29,7 @@ class Order extends ActiveRecord{
         return $this->hasOne(Mashine::class,['id'=>'mashine_id']);
     }
     public function getFullName(){
-        $user=User::findByUserName($this->manager_login);
+        $user=User::findByUserName($this->label->customer->manager_login);
         return $user->F. ' '.mb_substr($user->I,0,1).'.';
     }
     public function getCustomerId(){

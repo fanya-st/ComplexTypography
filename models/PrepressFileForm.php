@@ -18,7 +18,7 @@ class PrepressFileForm extends ActiveRecord
 
     public function attributeLabels(){
         return[
-            'prepress_design_file_file'=>'Файл Prepress',
+            'prepress_design_file_file'=>'Файл Prepress (архив .zip,.rar)',
             'name'=>'Наименование этикетки',
             'customer_id'=>'Заказчик',
             'pants_id'=>'Штанец',
@@ -51,7 +51,7 @@ class PrepressFileForm extends ActiveRecord
         return[
 //            [[],'trim'],
 //            [[],'safe'],
-            [['prepress_design_file_file'], 'file','skipOnEmpty' => false,'maxSize'=>500*1024*1024],
+            [['prepress_design_file_file'], 'file','extensions' => ['zip', 'rar'],'skipOnEmpty' => false,'maxSize'=>500*1024*1024],
         ];
     }
 

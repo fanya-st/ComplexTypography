@@ -139,4 +139,31 @@ return array (
     ),
     'bootstrap' => 'yii\\bootstrap5\\i18n\\TranslationBootstrap',
   ),
+  'kartik-v/yii2-bootstrap5-dropdown' => 
+  array (
+    'name' => 'kartik-v/yii2-bootstrap5-dropdown',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/bs5dropdown' => $vendorDir . '/kartik-v/yii2-bootstrap5-dropdown/src',
+    ),
+  ),
+  'kartik-v/yii2-label-inplace' => 
+  array (
+    'name' => 'kartik-v/yii2-label-inplace',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/label' => $vendorDir . '/kartik-v/yii2-label-inplace/src',
+    ),
+  ),
+  'kartik-v/yii2-widget-activeform' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-activeform',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/form' => $vendorDir . '/kartik-v/yii2-widget-activeform/src',
+    ),
+  ),
 );

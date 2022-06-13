@@ -2,7 +2,7 @@
 
 return [
     'adminEmail' => 'tech@alprint.org',
-    'senderEmail' => 'noreply@example.com',
+    'senderEmail' => 'admin@alprint.org',
     'senderName' => 'Example.com mailer',
     'bsVersion' => '5.x',
 ];

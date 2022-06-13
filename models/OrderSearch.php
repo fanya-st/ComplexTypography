@@ -14,6 +14,7 @@ class OrderSearch extends Order
     }
     public $customerId;
     public $labelName;
+    public $manager_login;
     public $pantsId;
     public $shaft_id;
     public $label_status_id;
@@ -58,10 +59,13 @@ class OrderSearch extends Order
         $query->andFilterWhere(['order.id' => $this->id]);
         $query->andFilterWhere(['order.mashine_id' => $this->mashine_id]);
         $query->andFilterWhere(['order.label_id' => $this->label_id]);
+        $query->andFilterWhere(['customer.manager_login' => $this->manager_login]);
         $query->andFilterWhere(['like', 'label.name', $this->labelName]);
-        $query->andFilterWhere(['order.manager_login'=> $this->manager_login]);
         $query->joinWith(['label' => function ($q) {
                 $q->andFilterWhere(['label.customer_id'=> $this->customerId]);
+            }]);
+        $query->joinWith(['customer' => function ($q) {
+                $q->andFilterWhere(['customer.manager_login'=> $this->manager_login]);
             }]);
         $query->joinWith(['label' => function ($q) {
                 $q->andFilterWhere(['label.status_id'=> $this->label_status_id]);

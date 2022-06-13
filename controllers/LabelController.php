@@ -40,8 +40,16 @@ class LabelController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['update','approve-design'],
-                        'roles' => ['updateOwnLabelManager','updateOwnLabelDesigner','designer_admin','manager_admin'],
+                        'actions' => ['update'],
+                        'roles' => ['updateOwnLabelManager','designer_admin','manager_admin'],
+                        'roleParams' => function() {
+                            return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
+                        },
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['approve-design'],
+                        'roles' => ['updateOwnLabelManager','manager_admin'],
                         'roleParams' => function() {
                             return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
                         },
@@ -61,7 +69,12 @@ class LabelController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list','view','create-prepress'],
+                        'actions' => ['create-same'],
+                        'roles' => ['updateOwnLabelManager','manager_admin','designer_admin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['list','view','create-prepress','re-prepress'],
                         'roles' => ['prepress'],
                     ],
                     [
@@ -82,7 +95,7 @@ class LabelController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list','view','create-flexform'],
+                        'actions' => ['list','view','create-flexform','re-flexform-ready'],
                         'roles' => ['laboratory'],
                     ],
                     [
@@ -112,7 +125,8 @@ class LabelController extends Controller
             case 'designer_admin':
                 $nav_items=ArrayHelper::merge(
                     CustomNav::getItemByStatusDesigner($label->status_id,$label->id),
-                    CustomNav::getItemByStatusPrepress($label->status_id,$label->id)
+                    CustomNav::getItemByStatusPrepress($label->status_id,$label->id),
+                    CustomNav::getItemByStatusLaboratory($label->status_id,$label->id)
                 );
                 break;
             case 'manager':
@@ -154,12 +168,32 @@ class LabelController extends Controller
             $model=new LabelForm();
             if($model->load(Yii::$app->request->post())){
                 if ($model->save()){
+                    Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->username.' №'.$model->id);
                     Yii::$app->session->setFlash('success','Этикетка создана');
                     return $this->redirect(['label/view','id'=>$model->id]);
                 }else{
                     Yii::$app->session->setFlash('error','Ошибка');
                 }
             }
+            return $this->render('create', compact('model'));
+
+    }
+    public function actionCreateSame($id)
+    {
+            $model=LabelForm::findOne($id);
+            if($model->load(Yii::$app->request->post())){
+                $model->setIsNewRecord(true);
+                unset($model->id);
+                $model->parent_label=$id;
+                $model->status_id=1;
+            if ($model->save()){
+                Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->username.' №'.$model->id);
+                Yii::$app->session->setFlash('success','Этикетка создана');
+                return $this->redirect(['label/view','id'=>$model->id]);
+            }else{
+                Yii::$app->session->setFlash('error','Ошибка');
+            }
+        }
             return $this->render('create', compact('model'));
 
     }
@@ -347,13 +381,13 @@ class LabelController extends Controller
                         OR ArrayHelper::isIn(3,Label::find()->select('foil_id')->where(['id' => $prepress->combination_label])->column())
                         OR ArrayHelper::isIn(4,Label::find()->select('foil_id')->where(['id' => $prepress->combination_label])->column())
                     )
-                        Form::createFoilForm($prepress,$label->id,$prepress->set_form_count);
+                        Form::createFoilForm($prepress,$label->id,$prepress->set_form_count,$label->foil_id);
                     //создаем лаковую форму
                     if($label->varnish_id !=0 OR ArrayHelper::isIn(1,Label::find()->select('varnish_id')->where(['id' => $prepress->combination_label])->column())
                         OR ArrayHelper::isIn(2,Label::find()->select('varnish_id')->where(['id' => $prepress->combination_label])->column())
                         OR ArrayHelper::isIn(3,Label::find()->select('varnish_id')->where(['id' => $prepress->combination_label])->column())
                     )
-                        Form::createVarnishForm($prepress,$label->id,$prepress->set_form_count);
+                        Form::createVarnishForm($prepress,$label->id,$prepress->set_form_count,$label->varnish_id);
                     Yii::$app->session->setFlash('success', 'Prepress готов');
                     return $this->redirect(['label/view', 'id' => $id]);
                 }
@@ -364,6 +398,75 @@ class LabelController extends Controller
         }
         return $this->render('prepress_ready', compact('label','prepress','prepress_file'));
     }
+
+    public function actionRePrepress($id)
+    {
+        $prepress_file=PrepressFileForm::findOne($id);
+        $cur_label=Label::findOne($id);
+        if(isset($cur_label->combination))
+            $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination])->column();
+        else $forms_id=Form::find()->select('id')->where(['label_id'=>$cur_label->id])->column();
+        $forms = new ActiveDataProvider([
+            'query' => Form::find()->where(['id'=>$forms_id])->andWhere(['not',['form_defect_id'=>null]])
+        ]);
+        if ($prepress_file->load(Yii::$app->request->post())) {
+            $prepress_file->prepress_design_file_file=UploadedFile::getInstance($prepress_file, 'prepress_design_file_file');
+            if ($prepress_file->upload($cur_label)){
+                $cur_label->status_id=8;
+                if (!empty($cur_label->combinatedLabel)){
+                    foreach ($cur_label->combinatedLabel as $com_label){
+                        $l=Label::findOne($com_label);
+                        $l->status_id=8;
+                        $l->prepress_design_file=$cur_label->prepress_design_file;
+                        $l->save();
+                    }
+                }
+                if($cur_label->save()){
+                    Yii::$app->session->setFlash('success', 'Перевывод готов');
+                }else{
+                    Yii::$app->session->setFlash('error', 'Ошибка');
+                }
+            }
+            return $this->redirect(['label/view', 'id' => $id]);
+        }
+        return $this->render('re-prepress', compact('cur_label','forms','prepress_file'));
+    }
+
+    public function actionReFlexformReady($id)
+    {
+        $cur_label=Label::findOne($id);
+        if(isset($cur_label->combination))
+            $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination])->column();
+        else $forms_id=Form::find()->select('id')->where(['label_id'=>$cur_label->id])->column();
+        $forms = new ActiveDataProvider([
+            'query' => Form::find()->where(['id'=>$forms_id])->andWhere(['not',['form_defect_id'=>null]])
+        ]);
+        if ($cur_label->load(Yii::$app->request->post())) {
+            foreach (Form::find()->where(['id'=>$forms_id])->andWhere(['not',['form_defect_id'=>null]])->column() as $form_id){
+                $f=Form::findOne($form_id);
+                $f->form_defect_id=Null;
+                $f->ready=1;
+                $f->save();
+            }
+            if (!empty($cur_label->combinatedLabel)){
+                foreach ($cur_label->combinatedLabel as $com_label){
+                    $l=Label::findOne($com_label);
+                    $l->status_id=10;
+                    $l->laboratory_note=$cur_label->laboratory_note;
+                    $l->save();
+                }
+            }
+            $cur_label->status_id=10;
+            if($cur_label->save()){
+                Yii::$app->session->setFlash('success', 'Формы готовы');
+            }else{
+                Yii::$app->session->setFlash('error', 'Ошибка');
+            }
+            return $this->redirect(['label/view', 'id' => $id]);
+        }
+        return $this->render('re-flexform_ready', compact('cur_label','forms'));
+    }
+
     public function actionSubdpi() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $out = [];

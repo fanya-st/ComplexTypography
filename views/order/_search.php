@@ -12,6 +12,8 @@ use kartik\daterange\DateRangePicker;
 use app\models\Mashine;
 use app\models\LabelStatus;
 use kartik\icons\FontAwesomeAsset;
+use kartik\label\LabelInPlace;
+//use kartik\form\ActiveForm;
 FontAwesomeAsset::register($this);
 
 ?>
@@ -22,9 +24,21 @@ FontAwesomeAsset::register($this);
 ])?>
 <div class="row border p-3 rounded-lg">
     <div class="col">
-        <?=$form->field($model,'labelName',[])?>
-        <?=$form->field($model,'id')?>
-        <?=$form->field($model,'label_id')?>
+<!--        --><?//=$form->field($model,'labelName',[])?>
+        <?=$form->field($model,'labelName')
+            ->widget(LabelInPlace::classname(),[
+            'type' => LabelInPlace::TYPE_HTML5,
+            'options' => ['type' => 'text']
+        ])
+        ?>
+        <?=$form->field($model,'id')->widget(LabelInPlace::classname(),[
+            'type' => LabelInPlace::TYPE_HTML5,
+            'options' => ['type' => 'text']
+        ])?>
+        <?=$form->field($model,'label_id')->widget(LabelInPlace::classname(),[
+            'type' => LabelInPlace::TYPE_HTML5,
+            'options' => ['type' => 'text']
+        ])?>
         <div class="form-group">
             <?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?>
         </div>

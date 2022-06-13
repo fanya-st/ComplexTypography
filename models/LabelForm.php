@@ -45,8 +45,7 @@ class LabelForm extends ActiveRecord
     public function rules(){
         return[
             [['name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
-                'print_on_glue','background_id','orientation','embossing',
-                'manager_login','output_label_id','color_count'],'required'],
+                'print_on_glue','background_id','orientation','embossing', 'output_label_id','color_count'],'required'],
             ['name','string','max'=>100],
             [['name','manager_note','designer_note'],'trim'],
             [['parent_label','status_id','image','image_crop','image_extended','design_file','date_of_design','shaft_id','foil_width'],'safe'],

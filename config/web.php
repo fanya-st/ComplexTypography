@@ -7,6 +7,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'timeZone' => 'Europe/Moscow',
 	'language' =>'ru',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -41,13 +42,22 @@ $config = [
             // 'useFileTransport' to false and configure transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
+                'username' => 'admin@alprint.org',
+                'password' => 'password',
+                'port' => '465', // Port 25 is a very common port too
+                'encryption' => 'ssl', // It is often used, check your provider or mail server specs
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error','info'],
+                    'logVars' => ['_GET', '_POST'],
                 ],
             ],
         ],

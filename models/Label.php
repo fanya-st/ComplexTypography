@@ -11,6 +11,8 @@ class Label extends ActiveRecord{
 		return $this->hasMany(Order::class,['label_id'=>'id']);
 	}
 	public function getForm(){
+	    if (!empty($this->combination))
+            return $this->hasMany(Form::class,['label_id'=>'id'])->via('combination');
 		return $this->hasMany(Form::class,['label_id'=>'id']);
 	}
     public function getFormCount(){
@@ -97,7 +99,7 @@ class Label extends ActiveRecord{
         return $user->F. ' '.mb_substr($user->I,0,1).'.';
     }
     public function getManagerName(){
-        $user=User::findByUserName($this->manager_login);
+        $user=User::findByUserName($this->customer->manager_login);
         return $user->F. ' '.mb_substr($user->I,0,1).'.';
     }
     public function getFoilName(){
@@ -185,8 +187,7 @@ class Label extends ActiveRecord{
             ['name','string','max'=>100],
             [['name','manager_note','prepress_note','designer_note','laboratory_note'],'trim'],
             [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
-                'print_on_glue','orientation','embossing',
-                'manager_login','output_label_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id'],'safe']
+                'print_on_glue','orientation','embossing', 'output_label_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id'],'safe']
         ];
     }
 }

@@ -11,7 +11,6 @@ class OrderForm extends ActiveRecord{
 	}
 	public function attributeLabels(){
 		return[
-		'name'=>'Наименование заказа',
 		'date_of_sale'=>'Дата сдачи заказа',
 		'label_id'=>'Этикетка',
 		'plan_circulation'=>'Плановый тираж',
@@ -37,8 +36,8 @@ class OrderForm extends ActiveRecord{
 		return[
 		[['date_of_sale','label_id','trial_circulation','label_price','sleeve_id',
             'material_id','mashine_id','winding_id','diameter_roll','stretch','cut_edge','order_price','order_price_with_tax',
-            'label_price_with_tax','material_id','manager_login','status_id'],'required'],
-		[['name','rewinder_note','printer_note'],'trim'],
+            'label_price_with_tax','material_id','status_id'],'required'],
+		[['rewinder_note','printer_note'],'trim'],
             [['plan_circulation','sending','label_on_roll'],'integer'],
             [['order_price','order_price_with_tax',
                 'label_price_with_tax','label_price'],'double']

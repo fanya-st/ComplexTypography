@@ -99,6 +99,9 @@
       <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-jui" />
       <path value="$PROJECT_DIR$/vendor/components/flag-icon-css" />
       <path value="$PROJECT_DIR$/vendor/bower-asset/jquery-ui" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-bootstrap5-dropdown" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-label-inplace" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-activeform" />
     </include_path>
   </component>
 </project>

@@ -48,11 +48,14 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\select2\\' => 15,
             'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\plugins\\depdrop\\' => 23,
+            'kartik\\label\\' => 13,
             'kartik\\icons\\' => 13,
+            'kartik\\form\\' => 12,
             'kartik\\file\\' => 12,
             'kartik\\depdrop\\' => 15,
             'kartik\\daterange\\' => 17,
             'kartik\\date\\' => 12,
+            'kartik\\bs5dropdown\\' => 19,
             'kartik\\base\\' => 12,
         ),
         'c' => 
@@ -178,9 +181,17 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/kartik-v/dependent-dropdown',
         ),
+        'kartik\\label\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-label-inplace/src',
+        ),
         'kartik\\icons\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-icons/src',
+        ),
+        'kartik\\form\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-activeform/src',
         ),
         'kartik\\file\\' => 
         array (
@@ -197,6 +208,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\date\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datepicker/src',
+        ),
+        'kartik\\bs5dropdown\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-bootstrap5-dropdown/src',
         ),
         'kartik\\base\\' => 
         array (

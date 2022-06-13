@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            ->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'))
 //        ?>
         <?=$form->field($model,'manager_note')->textarea()?>
-        <?=$form->field($model, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>
+<!--        --><?//=$form->field($model, 'manager_login')->hiddenInput(['value' => Yii::$app->user->identity->username])->label(false);?>
         <?=Html::submitButton('Создать этикетку',['class'=>'btn btn-success'])?>
     </div>
     <div class="col">

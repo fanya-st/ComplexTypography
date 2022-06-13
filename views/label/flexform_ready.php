@@ -74,6 +74,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 <?=Html::submitButton('Сохранить',['class'=>'btn btn-success'])?>
 <?ActiveForm::end()?>
-<pre><?print_r($flexform)?></pre>
+<!--<pre>--><?//print_r($flexform)?><!--</pre>-->
 <!--<pre>--><?//print_r($envelope)?><!--</pre>-->
 <!--<pre>--><?//print_r($cur_label)?><!--</pre>-->

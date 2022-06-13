@@ -101,6 +101,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/yiisoft/yii2-jui" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/components/flag-icon-css" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/jquery-ui" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-bootstrap5-dropdown" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-label-inplace" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-widget-activeform" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

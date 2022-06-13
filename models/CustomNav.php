@@ -9,40 +9,21 @@ use yii\helpers\ArrayHelper;
 
 class CustomNav extends Model
 {
-//    public static function getItemByGroupStatusId($group,$status,$id){
-//        switch ($group) {
-//            case 'designer':
-//            case 'designer_admin':
-//                $nav_items_d=CustomNav::getItemByStatusDesigner($label->status_id,$label->id);
-//                break;
-//            case 'manager':
-//            case 'manager_admin':
-//                $nav_items_m=CustomNav::getItemByStatusManager($label->status_id,$label->id);
-//                break;
-//            case 'prepress':
-//                $nav_items_pr=CustomNav::getItemByStatusPrepress($label->status_id,$label->id);
-//                break;
-//        }
-//    }
     public static function getItemByStatusDesigner($status,$id){
         $nav_items=['designer'=>
-            ['label' => 'Дизайнер', 'items' => [
-                ['label' => 'Внести изменения', 'url' => ['label/update','id'=>$id]]
-            ]
+            ['label' => 'Дизайнер', 'items' => []
             ]
         ];
         switch ($status) {
             //статус этикетки новая этикетка
             case 1:
-                ArrayHelper::setValue($nav_items, 'designer.items.', ['label' => 'Создать дизайн', 'url' => ['label/create-design','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'designer.items.create-design', ['label' => 'Создать дизайн', 'url' => ['label/create-design','id'=>$id]]);
                 break;
             //статус этикетки в дизайне
-            case 2:
-                ArrayHelper::setValue($nav_items, 'designer.items.', ['label' => 'Дизайн готов', 'url' => ['label/design-ready','id'=>$id]]);
-                break;
             //статус этикетки дизайн готов
+            case 2:
             case 3:
-                ArrayHelper::setValue($nav_items, 'designer.items.', ['label' => 'Изменить картинки и примечания', 'url' => ['label/create-design-ready','id'=>$id,'change_image'=>1]]);
+                ArrayHelper::setValue($nav_items, 'designer.items.design-ready', ['label' => 'Дизайн готов', 'url' => ['label/design-ready','id'=>$id]]);
                 break;
         }
         return $nav_items;
@@ -50,8 +31,7 @@ class CustomNav extends Model
     public static function getItemByStatusManager($status,$id){
         $nav_items=['manager'=>
             ['label' => 'Менеджер', 'items' => [
-                ['label' => 'Внести изменения', 'url' => ['label/update','id'=>$id]],
-                ['label' => 'Создать подобную', 'url' => ['label/create']],
+                ['label' => 'Создать подобную', 'url' => ['label/create-same','id'=>$id]],
                 ['label' => 'Заказ в печать', 'url' => ['order/create','label_id'=>$id,'blank'=>0]]
             ]
             ]
@@ -59,13 +39,11 @@ class CustomNav extends Model
         switch ($status) {
             //статус этикетки новая этикетка
             case 1:
-                break;
-            //статус этикетки в дизайне
-            case 2:
+                ArrayHelper::setValue($nav_items, 'manager.items.approve-design', ['label' => 'Внести изменения', 'url' => ['label/update','id'=>$id]]);
                 break;
             //статус этикетки дизайн готов
             case 3:
-                ArrayHelper::setValue($nav_items, 'manager.items.', ['label' => 'Утвердить дизайн', 'url' => ['label/approve-design','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'manager.items.approve-design', ['label' => 'Утвердить дизайн', 'url' => ['label/approve-design','id'=>$id]]);
                 break;
         }
         return $nav_items;
@@ -79,11 +57,13 @@ class CustomNav extends Model
         switch ($status) {
             //статус этикетки дизайн готов дизайн утвержден и ожидает перевывода
             case 4:
+                ArrayHelper::setValue($nav_items, 'prepress.items.create-prepress', ['label' => 'В Prepress', 'url' => ['label/create-prepress','id'=>$id]]);
+                break;
             case 5:
-                ArrayHelper::setValue($nav_items, 'prepress.items.', ['label' => 'В Prepress', 'url' => ['label/create-prepress','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'prepress.items.re-prepress', ['label' => 'Перевывод готов', 'url' => ['label/re-prepress','id'=>$id]]);
                 break;
             case 6:
-                ArrayHelper::setValue($nav_items, 'prepress.items.', ['label' => 'Prepress готов', 'url' => ['label/prepress-ready','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'prepress.items.prepress-ready', ['label' => 'Prepress готов', 'url' => ['label/prepress-ready','id'=>$id]]);
                 break;
         }
         return $nav_items;
@@ -97,12 +77,15 @@ class CustomNav extends Model
         switch ($status) {
             //статус этикетки Prepress готов
             case 7:
+                ArrayHelper::setValue($nav_items, 'laboratory.items.create-flexform', ['label' => 'Изготовление форм', 'url' => ['label/create-flexform','id'=>$id]]);
+                break;
             case 8:
-                ArrayHelper::setValue($nav_items, 'laboratory.items.', ['label' => 'Изготовление форм', 'url' => ['label/create-flexform','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'laboratory.items.create-flexform', ['label' => 'Изготовление форм (перевывод)', 'url' => ['label/create-flexform','id'=>$id]]);
                 break;
             //статус этикетки Изготовление форм
             case 9:
-                ArrayHelper::setValue($nav_items, 'laboratory.items.', ['label' => 'Формы готовы', 'url' => ['label/flexform-ready','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'laboratory.items.flexform-ready', ['label' => 'Формы готовы', 'url' => ['label/flexform-ready','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'laboratory.items.re-flexform-ready', ['label' => 'Формы готовы (перевывод)', 'url' => ['label/re-flexform-ready','id'=>$id]]);
                 break;
 
         }
