@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d181f5e9962c018a23512d6cc47d2bf6",
+    "content-hash": "c89fb3537970611a2032fe53f69dc8a8",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -47,7 +47,7 @@
             "version": "3.6.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
             },
             "dist": {
@@ -544,6 +544,59 @@
             "time": "2022-05-10T14:17:20+00:00"
         },
         {
+            "name": "kartik-v/bootstrap-tabs-x",
+            "version": "v1.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/bootstrap-tabs-x.git",
+                "reference": "12e5eeceda5ecbdf1bc7e429c4cea69c0e0b5267"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-tabs-x/zipball/12e5eeceda5ecbdf1bc7e429c4cea69c0e0b5267",
+                "reference": "12e5eeceda5ecbdf1bc7e429c4cea69c0e0b5267",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\plugins\\tabs\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Extended Bootstrap Tabs with ability to align tabs in multiple ways, add borders, rotated titles, and more.",
+            "homepage": "https://github.com/kartik-v/bootstrap-tabs-x",
+            "keywords": [
+                "bootstrap",
+                "extended",
+                "jquery",
+                "modal",
+                "modal-tabs",
+                "tabs",
+                "tabs-x"
+            ],
+            "support": {
+                "issues": "https://github.com/kartik-v/bootstrap-tabs-x/issues",
+                "source": "https://github.com/kartik-v/bootstrap-tabs-x/tree/v1.3.5"
+            },
+            "time": "2021-09-21T02:01:51+00:00"
+        },
+        {
             "name": "kartik-v/dependent-dropdown",
             "version": "v1.4.9",
             "source": {
@@ -882,6 +935,64 @@
                 "source": "https://github.com/kartik-v/yii2-label-inplace/tree/master"
             },
             "time": "2019-05-25T07:25:14+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-tabs-x",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-tabs-x.git",
+                "reference": "c968409e2820339b7084890cb018376687fed408"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-tabs-x/zipball/c968409e2820339b7084890cb018376687fed408",
+                "reference": "c968409e2820339b7084890cb018376687fed408",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/bootstrap-tabs-x": "~1.3",
+                "kartik-v/yii2-krajee-base": ">=3.0.0"
+            },
+            "default-branch": true,
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\tabs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A supercharged Bootstrap tabs widget with ability to align tabs in multiple ways, add borders, rotated titles, and more.",
+            "homepage": "https://github.com/kartik-v/yii2-tabs-x",
+            "keywords": [
+                "bootstrap",
+                "extended",
+                "jquery",
+                "modal",
+                "modal-tabs",
+                "tabs",
+                "tabs-x"
+            ],
+            "support": {
+                "issues": "https://github.com/kartik-v/yii2-tabs-x/issues",
+                "source": "https://github.com/kartik-v/yii2-tabs-x/tree/v1.2.8"
+            },
+            "time": "2021-09-20T06:56:42+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -6178,7 +6289,8 @@
         "kartik-v/yii2-widget-depdrop": 20,
         "kartik-v/yii2-bootstrap5-dropdown": 20,
         "kartik-v/yii2-label-inplace": 20,
-        "kartik-v/yii2-widget-activeform": 20
+        "kartik-v/yii2-widget-activeform": 20,
+        "kartik-v/yii2-tabs-x": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

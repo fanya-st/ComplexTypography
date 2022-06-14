@@ -28,6 +28,9 @@ class Order extends ActiveRecord{
     public function getMashine(){
         return $this->hasOne(Mashine::class,['id'=>'mashine_id']);
     }
+    public function getMaterial(){
+        return $this->hasOne(Material::class,['id'=>'material_id']);
+    }
     public function getFullName(){
         $user=User::findByUserName($this->label->customer->manager_login);
         return $user->F. ' '.mb_substr($user->I,0,1).'.';
@@ -61,8 +64,6 @@ class Order extends ActiveRecord{
             'label_id'=>'ID Этикетки',
             'label.name'=>'Наименование этикетки',
             'date_of_sale'=>'Дата продажи',
-            'date_of_packing'=>'Дата упаковки',
-            'date_of_rewind'=>'Дата перемотки',
             'mashine_id'=>'Станок',
             'mashineName'=>'Станок',
             'plan_circulation'=>'Плановый тираж',

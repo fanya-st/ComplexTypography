@@ -9,6 +9,7 @@ use app\models\Customer;
 use app\models\LabelStatus;
 use app\models\User;
 use kartik\daterange\DateRangePicker;
+use kartik\label\LabelInPlace;
 use kartik\icons\FontAwesomeAsset;
 FontAwesomeAsset::register($this);
 ?>
@@ -20,46 +21,74 @@ FontAwesomeAsset::register($this);
 
 <div class="row border p-3 rounded-lg">
     <div class="col">
-        <?=$form->field($model,'name',[])?>
-        <?=$form->field($model,'id')?>
-        <?=$form->field($model,'manager_login')->dropDownList(User::findUsersByGroup('manager'), [
-            'prompt' => ''
+        <?=$form->field($model,'name',[])->widget(LabelInPlace::classname(),[
+            'type' => LabelInPlace::TYPE_HTML5,
+            'options' => ['type' => 'text']
         ])?>
+        <?=$form->field($model,'id')->widget(LabelInPlace::classname(),[
+            'type' => LabelInPlace::TYPE_HTML5,
+            'options' => ['type' => 'text']
+        ])?>
+        <?=$form->field($model,'manager_login')->widget(Select2::classname(), [
+            'data' => (User::findUsersByGroup('manager')),
+            'options' => ['placeholder' => 'Выбрать менеджера'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ])->label(false)?>
         <div class="form-group">
             <?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
     <div class="col">
-        <?=$form->field($model,'designer_login')->dropDownList(User::findUsersByGroup('designer'), [
-            'prompt' => ''
-        ])?>
+        <?=$form->field($model,'designer_login')->widget(Select2::classname(), [
+            'data' => (User::findUsersByGroup('designer')),
+            'options' => ['placeholder' => 'Выбрать дизайнера'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ])->label(false)?>
         <?=$form->field($model,'customer_id')->widget(Select2::classname(), [
             'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1'])->all(), 'id', 'name'),
             'options' => ['placeholder' => 'Выбрать заказчика'],
             'pluginOptions' => [
                 'allowClear' => true,
             ],
-        ])?>
-        <?=$form->field($model,'status_id')->dropdownList(ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'), [
-            'prompt' => ''
-        ])?>
+        ])->label(false)?>
+<!--        --><?//=$form->field($model,'status_id')->dropdownList(ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'), [
+//            'prompt' => ''
+//        ])?>
+        <?=$form->field($model,'status_id')->widget(Select2::classname(), [
+            'data' => ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'),
+            'options' => ['placeholder' => 'Статус этикетки'],
+            'pluginOptions' => [
+                'allowClear' => true,
+            ],
+        ])->label(false)?>
     </div>
     <div class="col">
-        <?=$form->field($model,'shaft_id')
-            ->dropDownList(ArrayHelper::map(Shaft::find()->all(), 'id',
-                'name'), [
-                'prompt' => ''
-            ])?>
+<!--        --><?//=$form->field($model,'shaft_id')
+//            ->dropDownList(ArrayHelper::map(Shaft::find()->all(), 'id',
+//                'name'), [
+//                'prompt' => ''
+//            ])?>
+        <?=$form->field($model,'shaft_id')->widget(Select2::classname(), [
+            'data' => ArrayHelper::map(Shaft::find()->all(), 'id', 'name'),
+            'options' => ['placeholder' => 'Выбрать вал'],
+            'pluginOptions' => [
+                'allowClear' => true,
+            ],
+        ])->label(false)?>
         <?= $form->field($model, 'pants_id')->widget(Select2::classname(), [
             'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'name'),
-            'options' => ['placeholder' => 'Выбрать штанец ...'],
+            'options' => ['placeholder' => 'Выбрать штанец'],
             'pluginOptions' => [
                 'allowClear' => true
             ],
-        ])?>
-        <?=$form->field($model,'date_of_create')->widget(DateRangePicker::classname(),['presetDropdown' => true,'pluginOptions' => [
+        ])->label(false)?>
+        <?=$form->field($model,'date_of_create')->widget(DateRangePicker::classname(),['options' => ['placeholder' => 'Дата создания'],'presetDropdown' => true,'pluginOptions' => [
                 'opens'=>'left'
-            ]])?>
+            ]])->label(false)?>
     </div>
 </div>
 <?php ActiveForm::end() ?>

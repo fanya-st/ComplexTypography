@@ -166,4 +166,13 @@ return array (
       '@kartik/form' => $vendorDir . '/kartik-v/yii2-widget-activeform/src',
     ),
   ),
+  'kartik-v/yii2-tabs-x' => 
+  array (
+    'name' => 'kartik-v/yii2-tabs-x',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/tabs' => $vendorDir . '/kartik-v/yii2-tabs-x/src',
+    ),
+  ),
 );

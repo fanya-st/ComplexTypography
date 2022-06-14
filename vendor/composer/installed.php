@@ -253,6 +253,15 @@
             'reference' => '89be70dbb9470dd8a56ef27508e344fcfccdb5af',
             'dev_requirement' => false,
         ),
+        'kartik-v/bootstrap-tabs-x' => array(
+            'pretty_version' => 'v1.3.5',
+            'version' => '1.3.5.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kartik-v/bootstrap-tabs-x',
+            'aliases' => array(),
+            'reference' => '12e5eeceda5ecbdf1bc7e429c4cea69c0e0b5267',
+            'dev_requirement' => false,
+        ),
         'kartik-v/dependent-dropdown' => array(
             'pretty_version' => 'v1.4.9',
             'version' => '1.4.9.0',
@@ -311,6 +320,17 @@
                 0 => '1.2.x-dev',
             ),
             'reference' => '5e678362670856e21fe9539ffdab93f242d5e8c3',
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-tabs-x' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-tabs-x',
+            'aliases' => array(
+                0 => '1.2.x-dev',
+            ),
+            'reference' => 'c968409e2820339b7084890cb018376687fed408',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-widget-activeform' => array(

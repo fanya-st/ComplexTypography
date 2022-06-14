@@ -2,13 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\Label;
 use app\models\LabelForm;
+use app\models\Order;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\data\ActiveDataProvider;
 use app\models\OrderForm;
-use app\models\Order;
 use app\models\OrderSearch;
 
 class OrderController extends Controller
@@ -26,8 +26,8 @@ class OrderController extends Controller
                 ],
                 [
                     'allow' => true,
-                    'actions' => ['list','view'],
-                    'roles' => ['designer','prepress'],
+                    'actions' => ['view'],
+                    'roles' => ['manager'],
                 ],
 				
             ],
@@ -46,6 +46,12 @@ class OrderController extends Controller
 //            ],
 //        ]);
 //		return $this->render('list',compact('orders'));
+    }
+    public function actionView($id)
+    {
+        $order = Order::findOne($id);
+        $label = Label::findOne($order->label_id);
+        return $this->render('view',compact('order','label'));
     }
 	public function actionCreate($blank,$label_id=null)
     {

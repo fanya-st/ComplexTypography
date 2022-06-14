@@ -23,7 +23,8 @@ class CustomNav extends Model
             //статус этикетки дизайн готов
             case 2:
             case 3:
-                ArrayHelper::setValue($nav_items, 'designer.items.design-ready', ['label' => 'Дизайн готов', 'url' => ['label/design-ready','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'designer.items.design-ready',
+                    ['label' => 'Дизайн готов', 'url' => ['label/design-ready','id'=>$id]]);
                 break;
         }
         return $nav_items;
@@ -90,5 +91,12 @@ class CustomNav extends Model
 
         }
         return $nav_items;
+    }
+
+    public static function getOrderItemsManager($order){
+        ArrayHelper::setValue($items, 'label','Менеджер');
+        ArrayHelper::setValue($items, 'items.update',
+            ['label' => 'Внести изменения', 'url' => ['order/update','id'=>$order->id]]);
+        return $items;
     }
 }

@@ -28,7 +28,8 @@
         "kartik-v/yii2-icons": "^1.4",
         "kartik-v/yii2-bootstrap5-dropdown": "dev-master",
         "kartik-v/yii2-label-inplace": "dev-master",
-        "kartik-v/yii2-widget-activeform": "dev-master"
+        "kartik-v/yii2-widget-activeform": "dev-master",
+        "kartik-v/yii2-tabs-x": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -3,7 +3,6 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
-use Yii;
 
 class OrderForm extends ActiveRecord{
 	public static function tableName(){
