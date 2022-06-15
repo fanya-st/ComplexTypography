@@ -6,6 +6,11 @@ return [
         'description' => 'Update own label by designer',
         'ruleName' => 'isOwnLabel',
     ],
+    'updateOwnOrderManager' => [
+        'type' => 2,
+        'description' => 'Update own order by manager',
+        'ruleName' => 'AllowToEditOrder',
+    ],
     'allowToFlexformReadyRule' => [
         'type' => 2,
         'description' => 'Update own label by designer',
@@ -33,6 +38,9 @@ return [
             'allowToDesignReadyRule',
         ],
     ],
+    'printer' => [
+        'type' => 1,
+    ],
     'prepress' => [
         'type' => 1,
         'children' => [
@@ -56,6 +64,7 @@ return [
         'type' => 1,
         'children' => [
             'updateOwnLabelManager',
+            'updateOwnOrderManager',
         ],
     ],
     'manager_admin' => [
@@ -72,6 +81,7 @@ return [
             'manager',
             'laboratory',
             'designer',
+            'printer',
         ],
     ],
 ];

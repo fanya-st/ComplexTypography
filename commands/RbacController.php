@@ -6,6 +6,7 @@ use app\rbac\UpdateOwnLabelManager;
 use app\rbac\AllowToPrepressReadyRule;
 use app\rbac\AllowToDesignReadyRule;
 use app\rbac\AllowToFlexformReadyRule;
+use app\rbac\AllowToEditOrder;
 use Yii;
 use yii\console\Controller;
 
@@ -21,6 +22,9 @@ class RbacController extends Controller
         $auth->add($permit_to_manager);*/
         $labelOwnerDesigner = new UpdateOwnLabelDesigner();
         $auth->add($labelOwnerDesigner);
+
+        $allowToEditOrder = new AllowToEditOrder();
+        $auth->add($allowToEditOrder);
 
         $labelOwnerManager = new UpdateOwnLabelManager();
         $auth->add($labelOwnerManager);
@@ -38,6 +42,11 @@ class RbacController extends Controller
         $updateOwnLabelDesigner->description = 'Update own label by designer';
         $updateOwnLabelDesigner->ruleName = $labelOwnerDesigner->name;
         $auth->add($updateOwnLabelDesigner);
+
+        $updateOwnOrderManager = $auth->createPermission('updateOwnOrderManager');
+        $updateOwnOrderManager->description = 'Update own order by manager';
+        $updateOwnOrderManager->ruleName = $allowToEditOrder->name;
+        $auth->add($updateOwnOrderManager);
 
         $allowToFlexformReadyRule = $auth->createPermission('allowToFlexformReadyRule');
         $allowToFlexformReadyRule->description = 'Update own label by designer';
@@ -66,9 +75,11 @@ class RbacController extends Controller
 		$designer_admin = $auth->createRole('designer_admin');
         //$auth->addChild($manager, $permit_to_manager);
         $designer = $auth->createRole('designer');
+        $printer = $auth->createRole('printer');
         $manager_admin = $auth->createRole('manager_admin');
         $admin = $auth->createRole('admin');
         $auth->add($designer);
+        $auth->add($printer);
         $auth->add($prepress);
         $auth->add($laboratory);
         $auth->add($designer_admin);
@@ -83,6 +94,7 @@ class RbacController extends Controller
         $auth->addChild($designer,$allowToDesignReadyRule);
         $auth->addChild($laboratory,$allowToFlexformReadyRule);
         $auth->addChild($manager,$updateOwnLabelManager);
+        $auth->addChild($manager,$updateOwnOrderManager);
         $auth->addChild($prepress,$allowToPrepressReadyRule);
         $auth->addChild($designer_admin,$designer);
         $auth->addChild($designer_admin,$prepress);
@@ -92,11 +104,13 @@ class RbacController extends Controller
         $auth->addChild($admin, $manager);
         $auth->addChild($admin, $laboratory);
         $auth->addChild($admin, $designer);
+        $auth->addChild($admin, $printer);
 
         // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
         // обычно реализуемый в модели User.
 //		$auth->assign($manager, 102);
 //		$auth->assign($designer, 104);
+		$auth->assign($printer, 108);
 		$auth->assign($designer, 105);
 		$auth->assign($designer, 107);
 		$auth->assign($prepress, 101);

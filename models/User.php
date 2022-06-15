@@ -101,6 +101,17 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'I' => 'Светлана',
             'O' => '',
         ],
+        '108' => [
+            'id' => '108',
+            'username' => 'Maksim',
+            'password' => 'Maksim',
+            'authKey' => 'test108key',
+            'accessToken' => '108-token',
+            'group' => 'printer',
+            'F' => 'Прокаев',
+            'I' => 'Максим',
+            'O' => '',
+        ],
     ];
 
 

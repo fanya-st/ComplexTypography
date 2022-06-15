@@ -3,23 +3,40 @@
 
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
-use app\models\Order;
+use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Работа с заказами';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-list">
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1><?= Html::encode($this->title) ?></h1>
+    <?echo $this->render('_search', ['model' => $searchModel])?>
+    <? $form = ActiveForm::begin(['action'=>['order/selected-order-process']])?>
+<div class="col p-2">
+    <?=Html::submitButton('Совместная печать',['name'=>'combinated-print', 'value' => 'combinated-print','class'=>'btn btn-info'])?>
+    <?=Html::submitButton('Отменить совместную печать',['name'=>'combinated-print-unset', 'value' => 'combinated-print-unset','class'=>'btn btn-info'])?>
 </div>
-<!--<pre>--><?//print_r(Order::findOne(1)->shaft)?><!--</pre>-->
-    <?
-    echo $this->render('_search', ['model' => $searchModel]);
-    echo GridView::widget([
+    <? echo GridView::widget([
         'dataProvider' => $orders,
-
+        'id'=>'order-list',
         'columns' => [
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+            ],
             'id',
-            'labelName',
+            [
+                'label' => 'ID Эт-ки',
+                'attribute' => 'label.id',
+            ],
+            [
+                'label' => 'Наименование',
+                'attribute' => 'labelName',
+                'contentOptions'=>function($model, $key, $index, $column) {
+                    if(isset($model->combinationOrder))
+                        return ['class' => 'bg-info','title'=>$model->combinatedPrintOrderName];
+                    else
+                        return ['style' => ''];
+                 }
+                ],
             'date_of_create',
             'orderStatusName',
             'labelStatusName',
@@ -30,4 +47,5 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
         ],
     ]);
+    ActiveForm::end()
     ?>

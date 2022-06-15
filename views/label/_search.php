@@ -55,9 +55,6 @@ FontAwesomeAsset::register($this);
                 'allowClear' => true,
             ],
         ])->label(false)?>
-<!--        --><?//=$form->field($model,'status_id')->dropdownList(ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'), [
-//            'prompt' => ''
-//        ])?>
         <?=$form->field($model,'status_id')->widget(Select2::classname(), [
             'data' => ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'),
             'options' => ['placeholder' => 'Статус этикетки'],
@@ -67,11 +64,6 @@ FontAwesomeAsset::register($this);
         ])->label(false)?>
     </div>
     <div class="col">
-<!--        --><?//=$form->field($model,'shaft_id')
-//            ->dropDownList(ArrayHelper::map(Shaft::find()->all(), 'id',
-//                'name'), [
-//                'prompt' => ''
-//            ])?>
         <?=$form->field($model,'shaft_id')->widget(Select2::classname(), [
             'data' => ArrayHelper::map(Shaft::find()->all(), 'id', 'name'),
             'options' => ['placeholder' => 'Выбрать вал'],

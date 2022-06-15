@@ -1,6 +1,9 @@
 <?php
 
 return [
+    108 => [
+        'printer',
+    ],
     105 => [
         'designer',
     ],

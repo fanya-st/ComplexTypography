@@ -18,11 +18,38 @@ class Order extends ActiveRecord{
 	public function getLabelName(){
 		return $this->label->name;
 	}
+    public function getLabelNameSplitOrderId(){
+        return "[$this->id] $this->labelName";
+    }
+
+    public function getCombinationOrder(){
+        return $this->hasOne(CombinationOrder::class,['order_id'=>'id']);
+    }
+
+	public function getCombinatedPrintOrder(){
+        return $this->hasMany(CombinationOrder::class,['combination_id'=>'combination_id'])->via('combinationOrder');
+	}
+	public function getCombinatedPrintOrderName(){
+	    $name='совместная печать: ';
+        foreach ($this->combinatedPrintOrder as $com_ord) $name.='['.$com_ord->order_id.'],';
+        return $name;
+	}
 
     public function getOrderStatus(){
         return $this->hasOne(OrderStatus::class,['id'=>'status_id']);
     }
     public function getOrderStatusName(){
+        return $this->orderStatus->name;
+    }
+    public function getTrialCirculationName(){
+	    switch($this->trial_circulation){
+            case 0:
+                return 'Нет';
+                break;
+            case 1:
+                return 'Да';
+                break;
+        }
         return $this->orderStatus->name;
     }
     public function getMashine(){
@@ -33,6 +60,22 @@ class Order extends ActiveRecord{
     }
     public function getFullName(){
         $user=User::findByUserName($this->label->customer->manager_login);
+        return $user->F. ' '.mb_substr($user->I,0,1).'.';
+    }
+    public function getPrinterName(){
+        $user=User::findByUserName($this->printer_login);
+        return $user->F. ' '.mb_substr($user->I,0,1).'.';
+    }
+    public function getCutterName(){
+        $user=User::findByUserName($this->cutter_login);
+        return $user->F. ' '.mb_substr($user->I,0,1).'.';
+    }
+    public function getRewinderName(){
+        $user=User::findByUserName($this->rewinder_login);
+        return $user->F. ' '.mb_substr($user->I,0,1).'.';
+    }
+    public function getPackerName(){
+        $user=User::findByUserName($this->packer_login);
         return $user->F. ' '.mb_substr($user->I,0,1).'.';
     }
     public function getCustomerId(){

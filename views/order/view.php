@@ -21,17 +21,19 @@ echo TabsX::widget([
             [
                 'label' => 'Параметры заказа',
                 'content'=>$this->render('_order_tab',compact('order')),
+                'active'=>true
             ],
         'label_params'=>
             [
                 'label' => 'Параметры этикетки',
                 'content'=>$this->render('//label/_label_tab',compact('label')),
             ],
-        'technological_map'=>
-            [
-                'label' => 'Технокарта',
-            ],
+//        'technological_map'=>
+//            [
+//                'label' => 'Технокарта',
+//            ],
             CustomNav::getOrderItemsManager($order),
+            CustomNav::getOrderItemsPrinter($order),
     ],
 ]);
 ?>
