@@ -3,21 +3,21 @@
 use yii\bootstrap5\Html;
 
 ?>
-<div class="row g-3 row-cols-3">
+<div class="row g-2 row-cols-2">
     <div class="col">
-        <div class="border p-3 rounded">
-            <div class="row g-1 row-cols-2">
+        <div class="border p-3 rounded" style="background-color:#dee2e6;">
+            <div class="row">
                 <div class="col">
                     <? echo Html::tag('h6','Статус заказа: ' .Html::tag('small',Html::encode($order->orderStatusName), ['class' => 'badge bg-primary']));
                     echo Html::tag('h6','Машина: ' .Html::encode($order->mashine->name));
                     echo Html::tag('h6','Менеджер: ' .Html::encode($order->fullName));
                     echo Html::tag('h6','Заказчик: ' .Html::encode('ID ['.$order->label->customer->id.
                     '] '.$order->label->customer->name));
-                    echo Html::tag('h6','Адрес заказчика: ' .Html::encode($order->label->customer->address_id));?>
+                    echo Html::tag('h6','Адрес заказчика: ' .Html::encode($order->label->customer->address_id));
+                    echo Html::tag('h6','Дата сдачи: ' . Yii::$app->formatter->asDate(Html::encode($order->date_of_sale), 'yyyy-MM-dd'));?>
                 </div>
                 <div class="col">
                     <?
-                    echo Html::tag('h6','Дата сдачи: ' .Html::encode($order->date_of_sale));
                     echo Html::tag('h6','Материал: ' .Html::encode($order->material->name));
                     echo Html::tag('h6','План. тираж, шт: ' .Html::encode($order->plan_circulation));
                     echo Html::tag('h6','Отправка, шт: ' .Html::encode($order->sending));

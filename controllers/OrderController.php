@@ -119,6 +119,32 @@ public function actionCombinateOrder($id)
 
         return $this->render('combinate_order', compact('order','com_temp'));
     }
+    public function actionStartPrint($id)
+    {
+        $order=Order::findOne($id);
+        if($order->label->status_id==10){
+            $order->status_id=2;
+            $order->printer_login=Yii::$app->user->identity->username;
+            $order->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $order->save();
+            if (!empty($order->combinatedPrintOrder)){
+                foreach ($order->combinatedPrintOrder as $com_ord){
+                    if($com_ord->order_id!=$id){
+                        $order=Order::findOne($com_ord->order_id);
+                        $order->printer_login=Yii::$app->user->identity->username;
+                        $order->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+                        $order->status_id=2;
+                        $order->save();
+                    }
+                }
+            }
+            Yii::$app->session->setFlash('success','Заказ в печати');
+        }else{
+            Yii::$app->session->setFlash('error','Этикетка не готова к печати');
+        }
+
+        return $this->redirect(['order/view','id'=>$id]);
+    }
 	public function actionCreate($blank,$label_id=null)
     {
         if(isset($blank) and $blank==1){

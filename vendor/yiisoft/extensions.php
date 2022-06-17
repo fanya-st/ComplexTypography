@@ -120,15 +120,6 @@ return array (
       '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
     ),
   ),
-  'kartik-v/yii2-icons' => 
-  array (
-    'name' => 'kartik-v/yii2-icons',
-    'version' => '1.4.8.0',
-    'alias' => 
-    array (
-      '@kartik/icons' => $vendorDir . '/kartik-v/yii2-icons/src',
-    ),
-  ),
   'yiisoft/yii2-bootstrap5' => 
   array (
     'name' => 'yiisoft/yii2-bootstrap5',
@@ -173,6 +164,24 @@ return array (
     'alias' => 
     array (
       '@kartik/tabs' => $vendorDir . '/kartik-v/yii2-tabs-x/src',
+    ),
+  ),
+  'vilochane/yii2-barcode-generator' => 
+  array (
+    'name' => 'vilochane/yii2-barcode-generator',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@barcode/barcode' => $vendorDir . '/vilochane/yii2-barcode-generator',
+    ),
+  ),
+  'kartik-v/yii2-icons' => 
+  array (
+    'name' => 'kartik-v/yii2-icons',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/icons' => $vendorDir . '/kartik-v/yii2-icons/src',
     ),
   ),
 );

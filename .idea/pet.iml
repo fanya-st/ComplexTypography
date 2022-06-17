@@ -106,6 +106,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-widget-activeform" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/bootstrap-tabs-x" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-tabs-x" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vilochane/yii2-barcode-generator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/picqer/php-barcode-generator" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

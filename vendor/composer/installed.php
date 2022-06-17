@@ -83,12 +83,12 @@
             'dev_requirement' => false,
         ),
         'codeception/codeception' => array(
-            'pretty_version' => '4.1.31',
-            'version' => '4.1.31.0',
+            'pretty_version' => '4.2.0',
+            'version' => '4.2.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../codeception/codeception',
             'aliases' => array(),
-            'reference' => '15524571ae0686a7facc2eb1f40f600e5bbce9e5',
+            'reference' => 'e646d160bf1223d3595b227b69d903777fbcfb5f',
             'dev_requirement' => true,
         ),
         'codeception/lib-asserts' => array(
@@ -294,11 +294,13 @@
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-icons' => array(
-            'pretty_version' => 'v1.4.8',
-            'version' => '1.4.8.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'yii2-extension',
             'install_path' => __DIR__ . '/../kartik-v/yii2-icons',
-            'aliases' => array(),
+            'aliases' => array(
+                0 => '1.4.x-dev',
+            ),
             'reference' => '81334b3d888d4baaeb6ac458475258130474237e',
             'dev_requirement' => false,
         ),
@@ -533,6 +535,15 @@
             'aliases' => array(),
             'reference' => '9467db479d1b0487c99733bb1e7944d32deded2c',
             'dev_requirement' => true,
+        ),
+        'picqer/php-barcode-generator' => array(
+            'pretty_version' => 'v0.3',
+            'version' => '0.3.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../picqer/php-barcode-generator',
+            'aliases' => array(),
+            'reference' => '2e4d5b1f7f04fdb348d0721ada65963dac6f0c0c',
+            'dev_requirement' => false,
         ),
         'psr/container' => array(
             'pretty_version' => '1.0.0',
@@ -872,6 +883,17 @@
             'aliases' => array(),
             'reference' => '11336f6f84e16a720dae9d8e6ed5019efa85a0f9',
             'dev_requirement' => true,
+        ),
+        'vilochane/yii2-barcode-generator' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../vilochane/yii2-barcode-generator',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'reference' => 'b900ad0c26f6895deaa3d8ce88060d07c0d77fe6',
+            'dev_requirement' => false,
         ),
         'webmozart/assert' => array(
             'pretty_version' => '1.9.1',

@@ -64,6 +64,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             'cebe\\markdown\\' => 14,
         ),
+        'b' => 
+        array (
+            'barcode\\barcode\\' => 16,
+        ),
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
@@ -93,6 +97,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Prophecy\\' => 9,
+            'Picqer\\Barcode\\' => 15,
         ),
         'I' => 
         array (
@@ -231,6 +236,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
         ),
+        'barcode\\barcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vilochane/yii2-barcode-generator',
+        ),
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
@@ -314,6 +323,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'Prophecy\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
+        ),
+        'Picqer\\Barcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/picqer/php-barcode-generator/src',
         ),
         'Imagine\\' => 
         array (

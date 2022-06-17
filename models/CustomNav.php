@@ -111,8 +111,11 @@ class CustomNav extends Model
             case 2:
                 ArrayHelper::setValue($items, 'items.pause-print', ['label' => 'Приостановить печать', 'url' => ['order/pause-print','id'=>$order->id]]);
                 ArrayHelper::setValue($items, 'items.finish-print', ['label' => 'Закончить печать', 'url' => ['order/finish-print','id'=>$order->id]]);
+                ArrayHelper::setValue($items, 'items.paper-consumption', ['label' => 'Расход материала', 'url' => ['material/paper-consumption','id'=>$order->id]]);
                 break;
             case 3:
+                ArrayHelper::setValue($items, 'items.continue-print', ['label' => 'Продолжить печать', 'url' => ['order/continue-print','id'=>$order->id]]);
+                ArrayHelper::setValue($items, 'items.finish-print', ['label' => 'Закончить печать', 'url' => ['order/finish-print','id'=>$order->id]]);
                 break;
             case 4:
                 break;
