@@ -112,6 +112,28 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'I' => 'Максим',
             'O' => '',
         ],
+        '109' => [
+            'id' => '109',
+            'username' => 'Ilnur',
+            'password' => 'Ilnur',
+            'authKey' => 'test109key',
+            'accessToken' => '109-token',
+            'group' => 'rewinder',
+            'F' => 'Мугинов',
+            'I' => 'Ильнур',
+            'O' => '',
+        ],
+        '110' => [
+            'id' => '110',
+            'username' => 'Albert',
+            'password' => 'Albert',
+            'authKey' => 'test110key',
+            'accessToken' => '110-token',
+            'group' => 'packer',
+            'F' => 'Миннеханов',
+            'I' => 'Альберт',
+            'O' => '',
+        ],
     ];
 
 

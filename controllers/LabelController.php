@@ -9,7 +9,9 @@ use app\models\CombinationForm;
 use app\models\CustomNav;
 use app\models\DesignFileForm;
 use app\models\Form;
+use app\models\FormOrderHistory;
 use app\models\LabelForm;
+use app\models\Order;
 use app\models\PhotoOutput;
 use app\models\PrepressForm;
 use Yii;
@@ -24,6 +26,7 @@ use yii\web\Response;
 use app\models\PrepressFileForm;
 use yii\data\ActiveDataProvider;
 use app\models\Envelope;
+use yii\db\Query;
 
 class LabelController extends Controller
 {
@@ -79,7 +82,12 @@ class LabelController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['prepress-ready'],
+                        'actions' => ['prepress-delete-form'],
+                        'roles' => ['prepress'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['prepress-ready','combinate-label'],
                         'roles' => ['allowToPrepressReadyRule'],
                         'roleParams' => function() {
                             return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
@@ -166,7 +174,7 @@ class LabelController extends Controller
     public function actionCreate()
     {
             $model=new LabelForm();
-            if($model->load(Yii::$app->request->post())){
+            if($model->load(Yii::$app->request->post()) && $model->validate(Yii::$app->request->post())){
                 if ($model->save()){
                     Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->username.' №'.$model->id);
                     Yii::$app->session->setFlash('success','Этикетка создана');
@@ -271,7 +279,7 @@ class LabelController extends Controller
         $flexform=new Form();
         $envelope=new Envelope();
         if(isset($cur_label->combination))
-        $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination])->column();
+        $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination->combination_id])->column();
         else $forms_id=Form::find()->select('id')->where(['label_id'=>$cur_label->id])->column();
         $forms = new ActiveDataProvider([
             'query' => Form::find()->where(['id'=>$forms_id])
@@ -290,6 +298,17 @@ class LabelController extends Controller
                 $ready_form->envelope_id=$envelope->id;
                 $ready_form->polymer_id=$flexform->polymer_id;
                 $ready_form->save();
+                //записываем исзготовленные новые формы к заказу
+                $form_history=new FormOrderHistory();
+                $order=Order::findOne(['label_id'=>$cur_label->id]);
+                if(!empty($order->combinationOrder)){
+                    $form_history->combination_print_order_id=$order->combinationOrder->combination_id;
+                }else {
+                    $form_history->order_id=$order->id;
+                }
+                $form_history->form_id=$id;
+                $form_history->save();
+                //записываем исзготовленные новые формы к заказу
             }
             if(!empty($cur_label->combinatedLabel)){
                 foreach ($cur_label->combinatedLabel as $label_id){
@@ -305,6 +324,7 @@ class LabelController extends Controller
                 $cur_label->date_of_flexformready=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
                 $cur_label->save();
             }
+
             Yii::$app->session->setFlash('success','Готов к печати');
             return $this->redirect(['label/view','id'=>$cur_label->id]);
         }
@@ -335,68 +355,121 @@ class LabelController extends Controller
     }
     public function actionPrepressReady($id)
     {
-        $prepress=new PrepressForm;
-        $prepress_file=PrepressFileForm::findOne($id); //отдельная модель для загрузки файла препресса
         $label=Label::findOne($id);
-        $prepress->lpi=154;//по умолчанию линиатура равна 154
-        if ($label->load(Yii::$app->request->post())&&$prepress->load(Yii::$app->request->post())&&$prepress_file->load(Yii::$app->request->post())) {
-            $prepress_file->prepress_design_file_file=UploadedFile::getInstance($prepress_file, 'prepress_design_file_file'); // загружаем файл препресса
+        $new_form=new Form();
+        $new_form->lpi=154;
+        $new_form->foil_stencil_varnish=0;
+        $prepress_file=PrepressFileForm::findOne($id);
+        if(isset($label->combination)){
+            $new_form->combination_id=$label->combination->combination_id;
+            $forms_id=Form::find()->select('id')->where(['combination_id'=>$label->combination->combination_id])->column();
+        }
+            else {
+                $new_form->label_id=$label->id;
+                $forms_id=Form::find()->select('id')->where(['label_id'=>$id])->column();
+            }
+        $forms = new ActiveDataProvider([
+            'query' => Form::find()->where(['id'=>$forms_id])
+        ]);
+        if ($label->load(Yii::$app->request->post())&&$prepress_file->load(Yii::$app->request->post())) {
+            $prepress_file->prepress_design_file_file=UploadedFile::getInstance($prepress_file, 'prepress_design_file_file');
             if ($prepress_file->upload($label)){ //загружаем файл препресса на сервер
-                $label->date_of_prepress=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s'); //меняем дату препресса
-                $label->status_id=7;
-                if($label->save()){
-                    //если формы совмещены
-                    if (!empty($prepress->combination_label)){
-                        //создаем новое совмещение
-                        $combination=new Combination;
-                        $combination->save();
-                        //
-                        //присваиваем текущую этикетку к созданному совмещению
-                        $combination_label=new CombinationForm();
-                        $combination_label->label_id=$label->id;
-                        $combination_label->combination_id=$combination->id;
-                        $combination_label->save();
-                        //
-                        foreach ($prepress->combination_label as $label_id){
-                            $combination_label=Label::findOne($label_id);
-                            $combination_label->status_id=7;
-                            $combination_label->prepress_design_file=$label->prepress_design_file; //присваиваем файл препресс к совмещенным этикткам
-                            $combination_label->date_of_prepress=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
-                            $combination_label->save();
-                            $combination_label=new CombinationForm();
-                            $combination_label->label_id=$label_id;
-                            $combination_label->combination_id=$combination->id;
-                            $combination_label->save();
-                        }
-                        $prepress->combination_id=$combination->id;
-                    }//если формы совмещены
-
-                    //создаем формы для выбранных пантонов
-                    Form::createPantoneForm($prepress,$label->id,$prepress->set_form_count,$prepress->prepress_pantone_list);
-                    //создаем форму для трафарета
-                    if($label->stencil ==1 OR ArrayHelper::isIn(1,Label::find()->select('stencil')->where(['id' => $prepress->combination_label])->column()))
-                        Form::createStencilForm($prepress,$label->id,$prepress->set_form_count);
-                    //создаем форму для фольги
-                    if($label->foil_id !=1 OR ArrayHelper::isIn(2,Label::find()->select('foil_id')->where(['id' => $prepress->combination_label])->column())
-                        OR ArrayHelper::isIn(3,Label::find()->select('foil_id')->where(['id' => $prepress->combination_label])->column())
-                        OR ArrayHelper::isIn(4,Label::find()->select('foil_id')->where(['id' => $prepress->combination_label])->column())
-                    )
-                        Form::createFoilForm($prepress,$label->id,$prepress->set_form_count,$label->foil_id);
-                    //создаем лаковую форму
-                    if($label->varnish_id !=0 OR ArrayHelper::isIn(1,Label::find()->select('varnish_id')->where(['id' => $prepress->combination_label])->column())
-                        OR ArrayHelper::isIn(2,Label::find()->select('varnish_id')->where(['id' => $prepress->combination_label])->column())
-                        OR ArrayHelper::isIn(3,Label::find()->select('varnish_id')->where(['id' => $prepress->combination_label])->column())
-                    )
-                        Form::createVarnishForm($prepress,$label->id,$prepress->set_form_count,$label->varnish_id);
-                    Yii::$app->session->setFlash('success', 'Prepress готов');
-                    return $this->redirect(['label/view', 'id' => $id]);
-                }
-                else {
-                    Yii::$app->session->setFlash('error', 'Ошибка');
+                if(isset($label->combination)){
+                    foreach ($label->combinatedLabel->label_id as $label_id){
+                        $l=Label::findOne($label_id);
+                        $l->status_id=7;
+                        $l->prepress_design_file=$label->prepress_design_file;
+                        $l->date_of_prepress=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s'); //меняем дату препресса
+                        $l->save();
+                    }
+                }else {
+                    $label->date_of_prepress=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s'); //меняем дату препресса
+                    $label->status_id=7;
+                    $label->save();
                 }
             }
+            return $this->redirect(['label/view', 'id' => $id]);
         }
-        return $this->render('prepress_ready', compact('label','prepress','prepress_file'));
+        if ($new_form->load(Yii::$app->request->post()) && $new_form->validate(Yii::$app->request->post())) {
+            $count=$new_form->set_form_count;
+            $foil_stencil_varnish=$new_form->foil_stencil_varnish;
+            if ($foil_stencil_varnish=='0') {
+                $i = $count;
+                while ($i > 0) {
+                    unset($new_form->id);
+                    unset($new_form->varnish_form);
+                    unset($new_form->foil_form);
+                    unset($new_form->stencil_form);
+                    $new_form->setisNewRecord(true);
+                        $new_form->save();
+                    $i--;
+                }
+            }
+            if ($foil_stencil_varnish=='varnish_form'){
+                $i=$count;
+                while ($i>0){
+                    unset($new_form->id);
+                    unset($new_form->foil_form);
+                    unset($new_form->pantone_id);
+                    unset($new_form->stencil_form);
+                    $new_form->setisNewRecord(true);
+                    $new_form->varnish_form=1;
+                        $new_form->save();
+                    $i--;
+                }
+            }
+            if ($foil_stencil_varnish=='stencil_form'){
+                $i=$count;
+                while ($i>0){
+                    unset($new_form->id);
+                    unset($new_form->varnish_form);
+                    unset($new_form->pantone_id);
+                    unset($new_form->foil_form);
+                    $new_form->setisNewRecord(true);
+                    $new_form->stencil_form=1;
+                        $new_form->save();
+                    $i--;
+                }
+            }
+            if ($foil_stencil_varnish=='foil_form'){
+                $i=$count;
+                while ($i>0){
+                    unset($new_form->id);
+                    unset($new_form->varnish_form);
+                    unset($new_form->pantone_id);
+                    unset($new_form->stencil_form);
+                    $new_form->setisNewRecord(true);
+                    $new_form->foil_form=1;
+                        $new_form->save();
+                    $i--;
+                }
+            }
+            $this->refresh();
+        }
+        return $this->render('prepress_ready', compact('label','new_form','forms','prepress_file'));
+    }
+    public function actionCombinateLabel($id)
+    {
+        $label=Label::findOne($id);
+        $new_combination_form=new CombinationForm();
+        if ($new_combination_form->load(Yii::$app->request->post())) {
+            $new_combination=new Combination();
+            $new_combination->save();
+            foreach($new_combination_form->label_id as $label_id){
+                $temp=new CombinationForm();
+                $temp->combination_id=$new_combination->id;
+                $temp->label_id=$label_id;
+                $temp->save();
+            }
+            return $this->redirect(['label/view', 'id' => $id]);
+        }
+        return $this->render('combinate-label', compact('label','new_combination_form'));
+    }
+    public function actionPrepressDeleteForm($form_id)
+    {
+        $form=Form::findOne($form_id);
+        $form->delete();
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     public function actionRePrepress($id)
@@ -404,7 +477,7 @@ class LabelController extends Controller
         $prepress_file=PrepressFileForm::findOne($id);
         $cur_label=Label::findOne($id);
         if(isset($cur_label->combination))
-            $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination])->column();
+            $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination->combination_id])->column();
         else $forms_id=Form::find()->select('id')->where(['label_id'=>$cur_label->id])->column();
         $forms = new ActiveDataProvider([
             'query' => Form::find()->where(['id'=>$forms_id])->andWhere(['not',['form_defect_id'=>null]])
@@ -436,7 +509,7 @@ class LabelController extends Controller
     {
         $cur_label=Label::findOne($id);
         if(isset($cur_label->combination))
-            $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination])->column();
+            $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination->combination_id])->column();
         else $forms_id=Form::find()->select('id')->where(['label_id'=>$cur_label->id])->column();
         $forms = new ActiveDataProvider([
             'query' => Form::find()->where(['id'=>$forms_id])->andWhere(['not',['form_defect_id'=>null]])
@@ -447,6 +520,17 @@ class LabelController extends Controller
                 $f->form_defect_id=Null;
                 $f->ready=1;
                 $f->save();
+                //записываем исзготовленные новые формы к заказу
+                $form_history=new FormOrderHistory();
+                $order=Order::findOne(['label_id'=>$cur_label->id,'status_id'=>3]);
+                if(!empty($order->combinationOrder)){
+                    $form_history->combination_print_order_id=$order->combinationOrder->combination_id;
+                }else {
+                    $form_history->order_id=$order->id;
+                }
+                $form_history->form_id=$form_id;
+                $form_history->save();
+                //записываем исзготовленные новые формы к заказу
             }
             if (!empty($cur_label->combinatedLabel)){
                 foreach ($cur_label->combinatedLabel as $com_label){

@@ -8,7 +8,9 @@ use yii\db\ActiveRecord;
 
 class Form extends ActiveRecord
 {
-
+    public $form_defect_id_temp;
+    public $set_form_count;
+    public $foil_stencil_varnish;
     public function getPhotoOutput(){
         return $this->hasOne(PhotoOutput::class,['id'=>'photo_output_id']);
     }
@@ -26,8 +28,8 @@ class Form extends ActiveRecord
         if (isset($this->pantone))
             return $this->pantone->name;
             elseif($this->stencil_form!=0) return 'Трафаретная форма';
-            elseif($this->varnish_form!=0) return VarnishStatus::findOne($this->varnish_form)->name;
-            elseif($this->foil_form!=0) return Foil::findOne($this->foil_form)->name;
+            elseif($this->varnish_form!=0) return 'Лаковая форма';
+            elseif($this->foil_form!=0) return 'Фольга';
     }
 
     public function attributeLabels()
@@ -50,7 +52,10 @@ class Form extends ActiveRecord
 
     public function rules(){
         return[
-            [['polymer_id','envelope_id'],'safe']
+            [['width','height','dpi','lpi','foil_form','foil_stencil_varnish',
+                'stencil_form','varnish_form','set_form_count',
+                'pantone_id','photo_output_id','combination_id',
+                'polymer_id','envelope_id','form_defect_id_temp'],'safe'],
         ];
     }
 

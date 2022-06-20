@@ -38,6 +38,12 @@ return [
             'allowToDesignReadyRule',
         ],
     ],
+    'packer' => [
+        'type' => 1,
+    ],
+    'rewinder' => [
+        'type' => 1,
+    ],
     'printer' => [
         'type' => 1,
     ],
@@ -77,6 +83,8 @@ return [
         'type' => 1,
         'children' => [
             'designer_admin',
+            'rewinder',
+            'packer',
             'manager_admin',
             'manager',
             'laboratory',

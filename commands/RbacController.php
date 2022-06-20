@@ -70,6 +70,8 @@ class RbacController extends Controller
 
         // добавляем роль "manager" и даём роли разрешение "list"		
 		$manager = $auth->createRole('manager');
+		$rewinder = $auth->createRole('rewinder');
+        $packer = $auth->createRole('packer');
 		$laboratory = $auth->createRole('laboratory');
 		$prepress = $auth->createRole('prepress');
 		$designer_admin = $auth->createRole('designer_admin');
@@ -79,6 +81,8 @@ class RbacController extends Controller
         $manager_admin = $auth->createRole('manager_admin');
         $admin = $auth->createRole('admin');
         $auth->add($designer);
+        $auth->add($packer);
+        $auth->add($rewinder);
         $auth->add($printer);
         $auth->add($prepress);
         $auth->add($laboratory);
@@ -100,6 +104,8 @@ class RbacController extends Controller
         $auth->addChild($designer_admin,$prepress);
         $auth->addChild($manager_admin,$manager);
         $auth->addChild($admin, $designer_admin);
+        $auth->addChild($admin, $rewinder);
+        $auth->addChild($admin, $packer);
         $auth->addChild($admin, $manager_admin);
         $auth->addChild($admin, $manager);
         $auth->addChild($admin, $laboratory);
@@ -111,6 +117,8 @@ class RbacController extends Controller
 //		$auth->assign($manager, 102);
 //		$auth->assign($designer, 104);
 		$auth->assign($printer, 108);
+		$auth->assign($packer, 110);
+		$auth->assign($rewinder, 109);
 		$auth->assign($designer, 105);
 		$auth->assign($designer, 107);
 		$auth->assign($prepress, 101);

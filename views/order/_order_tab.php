@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap5\Html;
+use yii\bootstrap5\Modal;
 
 ?>
 <div class="row g-2 row-cols-2">
@@ -30,39 +31,100 @@ use yii\bootstrap5\Html;
     <div class="col">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-info p-1 rounded">Параметры печати</h6>
-            <h6>Совместная печать: <?foreach ($order->combinatedPrintOrder as $com_ord) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($com_ord->order_id).'</span>'?>
+<!--            --><?//if ($order->status_id==3) echo Html::tag('h6','Печать приостановлена',['class'=>'bg-warning p-1 rounded'])?>
+            <h6>Совместная печать: <?foreach ($order->combinatedPrintOrder as $com_ord) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($com_ord->order_id).'</span></h6>'?>
                 <? echo Html::tag('h6','Печатник: ' .Html::encode($order->printerName));
                 echo Html::tag('h6','Дата начала печати: ' .Html::encode($order->date_of_print_begin));
                 echo Html::tag('h6','Дата конца печати: ' .Html::encode($order->date_of_print_end));?>
                 <h6>Факт. тираж, шт: <?=Html::encode($order->actual_circulation)?>
+                    <h6>
+                    <?
+                    Modal::begin([
+                        'title' => 'Расход материала',
+                        'toggleButton' => ['label' => 'Расход материала', 'class' => 'btn btn-info'],
+                        'centerVertical'=>true,
+                    ]);
+                    echo Html::ul($order->orderMaterialList, ['item' => function ($item, $index) {
+                        return Html::tag(
+                            'li',Html::encode($item->materialName.' Ширина: '.$item->paperWarehouse->width.'см Длина:'.$item->length.'м')
+                        );
+                    }]);
+                    Modal::end()
+                    ?></h6>
                 </h6>
         </div>
     </div>
+<!--    <div class="col">-->
+<!--        <div class="border p-3 rounded" style="background-color:#dee2e6;">-->
+<!--            <h6 class="bg-primary p-1 rounded">Параметры нарезки</h6>-->
+<!--            --><?// echo Html::tag('h6','Нарезчик: ' .Html::encode($order->cutterName));
+//            echo Html::tag('h6','Дата начала нарезки: ' .Html::encode($order->date_of_cut_begin));
+//            echo Html::tag('h6','Дата конца нарезки: ' .Html::encode($order->date_of_cut_end));?>
+<!--            </h6>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="col">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
-            <h6 class="bg-info p-1 rounded">Параметры нарезки</h6>
-            <? echo Html::tag('h6','Нарезчик: ' .Html::encode($order->cutterName));
-            echo Html::tag('h6','Дата начала нарезки: ' .Html::encode($order->date_of_cut_begin));
-            echo Html::tag('h6','Дата конца нарезки: ' .Html::encode($order->date_of_cut_end));?>
-            </h6>
-        </div>
-    </div>
-    <div class="col">
-        <div class="border p-3 rounded" style="background-color:#dee2e6;">
-            <h6 class="bg-info p-1 rounded">Параметры перемотки</h6>
+            <h6 class="bg-success p-1 rounded">Параметры нарезки и перемотки</h6>
             <? echo Html::tag('h6','Перемотчик: ' .Html::encode($order->rewinderName));
             echo Html::tag('h6','Дата начала перемотки: ' .Html::encode($order->date_of_rewind_begin));
             echo Html::tag('h6','Дата конца перемотки: ' .Html::encode($order->date_of_rewind_end));?>
             </h6>
+            <h6>Перемотанный тираж, шт:
+                <? $rewinded_circulation=null;
+                foreach ($order->finishedProductsWarehouse as $rewinded_roll)
+                    $rewinded_circulation+=$rewinded_roll->label_in_roll*$rewinded_roll->count;
+                echo Html::encode($rewinded_circulation);
+                ?>
+            </h6>
+            <h6>
+                <?
+                Modal::begin([
+                    'title' => 'Перемотанные ролики',
+                    'toggleButton' => ['label' => 'Перемотанные ролики', 'class' => 'btn btn-success'],
+                    'centerVertical'=>true,
+                ]);
+                echo Html::ul($order->finishedProductsWarehouse, ['item' => function ($item, $index) {
+                    if ($item->count!=null OR $item->count!=0)
+                    return Html::tag(
+                        'li',Html::encode(' Этикеток на ролике: '.$item->label_in_roll.'шт Кол-во роликов:'.$item->count.' шт')
+                    );
+                }]);
+                Modal::end()
+                ?></h6>
         </div>
     </div>
     <div class="col">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
-            <h6 class="bg-info p-1 rounded">Параметры упаковки</h6>
+            <h6 class="bg-warning p-1 rounded">Параметры упаковки</h6>
             <? echo Html::tag('h6','Упаковчик: ' .Html::encode($order->packerName));
             echo Html::tag('h6','Дата начала упаковки: ' .Html::encode($order->date_of_packing_begin));
             echo Html::tag('h6','Дата конца упаковки: ' .Html::encode($order->date_of_packing_end));?>
             </h6>
+            <h6> Упакованный тираж, шт:
+                <? $packed_circulation=null;
+                foreach ($order->finishedProductsWarehouse as $packed_roll)
+                    $packed_circulation+=$packed_roll->label_in_roll*$packed_roll->packed_count;
+                echo Html::encode($packed_circulation);
+                ?>
+            Излишки, шт: <?=Html::encode($rewinded_circulation-$packed_circulation)?>
+            </h6>
+            <h6>
+                <?
+                Modal::begin([
+                    'title' => 'Упакованные ролики',
+                    'toggleButton' => ['label' => 'Упакованные ролики', 'class' => 'btn btn-warning'],
+                    'centerVertical'=>true,
+                ]);
+                echo Html::ul($order->finishedProductsWarehouse, ['item' => function ($item, $index) {
+                    if ($item->packed_count!=null OR $item->packed_count!=0)
+                    return Html::tag(
+                        'li',Html::encode(' Этикеток на ролике: '.$item->label_in_roll.'шт Кол-во роликов:'.$item->packed_count.' шт')
+                    );
+                }]);
+                echo 'Коробки:'.Html::encode($order->box_count).' Тюки:'.Html::encode($order->bale_count);
+                Modal::end()
+                ?></h6>
         </div>
     </div>
 </div>

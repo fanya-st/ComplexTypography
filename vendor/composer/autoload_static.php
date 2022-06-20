@@ -52,11 +52,15 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\plugins\\depdrop\\' => 23,
             'kartik\\label\\' => 13,
             'kartik\\icons\\' => 13,
+            'kartik\\helpers\\' => 15,
+            'kartik\\grid\\' => 12,
             'kartik\\form\\' => 12,
             'kartik\\file\\' => 12,
+            'kartik\\dialog\\' => 14,
             'kartik\\depdrop\\' => 15,
             'kartik\\daterange\\' => 17,
             'kartik\\date\\' => 12,
+            'kartik\\builder\\' => 15,
             'kartik\\bs5dropdown\\' => 19,
             'kartik\\base\\' => 12,
         ),
@@ -204,6 +208,14 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-icons/src',
         ),
+        'kartik\\helpers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-helpers/src',
+        ),
+        'kartik\\grid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-grid/src',
+        ),
         'kartik\\form\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-activeform/src',
@@ -211,6 +223,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\file\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-fileinput/src',
+        ),
+        'kartik\\dialog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-dialog/src',
         ),
         'kartik\\depdrop\\' => 
         array (
@@ -223,6 +239,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\date\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datepicker/src',
+        ),
+        'kartik\\builder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-builder/src',
         ),
         'kartik\\bs5dropdown\\' => 
         array (

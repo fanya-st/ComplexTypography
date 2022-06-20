@@ -47,11 +47,12 @@ use app\models\Form;
             }
             ?>
             Фольга: <small class="badge bg-secondary"><?=Html::encode($label->foilName)?></small> </h6>
-        <h6>Вид лака: <small class="badge bg-secondary"><?=Html::encode($label->varnishStatusName)?></small> Тиснение: <small class="badge bg-secondary"><?=Html::encode($label->embossingName)?></small></h6>
+        <h6>Вид лака: <small class="badge bg-secondary"><?=Html::encode($label->varnishStatusName)?></small></h6>
         <h6>Ламинация: <small class="badge bg-secondary"><?=Html::encode($label->laminateName)?></small> Трафарет: <small class="badge bg-secondary"><?=Html::encode($label->stencilName)?></small></h6>
         <h6>Перем.печать: <small class="badge bg-secondary"><?=Html::encode($label->variableName)?></small> Печать по клею: <small class="badge bg-secondary"><?=Html::encode($label->printOnGlueName)?></small> </h6>
         <h6>Выход этикетки: <?=Html::img($label->outputLabel->image, ['alt' => $label->outputLabel->name,'width'=>'100px'])?></h6>
-        <h6>Ориентация: <small class="badge bg-secondary"><?=Html::encode($label->orientationName)?></small> </h6>
+        <h6>Ориентация: <small class="badge bg-secondary"><?=Html::encode($label->orientationName)?></small> Облои снимать: <small class="badge bg-secondary">
+                <?if ($label->takeoff_flash==0) echo 'Нет'; else 'Да'; ?></small> </h6>
     </div>
     <div class="col">
         <div class="row border p-2 rounded-lg">
@@ -74,14 +75,21 @@ use app\models\Form;
             <div class="col">
                 <h6>Параметры Prepress:</h6>
                 <h6>Перевывод необходим:</h6>
-                <?foreach (Form::find()->where(['not',['form_defect_id'=>null]])
-                               ->andWhere(['or',
-                                   ['label_id'=>$label->id],
-                                   ['combination_id'=>$label->combination]
-                               ])
-                               ->all() as $defect_form)
-                    echo '<small class="badge rounded-pill bg-danger">'.Html::encode($defect_form->pantoneName.'-'.$defect_form->formDefect->name).'</small>'?>
-                <h6>Совмещение (ID этикеток): <?foreach ($label->combinatedLabel as $label_id) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($label_id).'</span>'?> </h6>
+                <? if (!empty($label->combination))
+                    $defect_forms=Form::find()->where(['not',['form_defect_id'=>null]])
+                    ->andWhere(['combination_id'=>$label->combination->combination_id])
+                    ->all();
+                else
+                    $defect_forms=Form::find()->where(['not',['form_defect_id'=>null]])
+                    ->andWhere(['label_id'=>$label->id])
+                    ->all();
+                ?>
+                <?foreach ($defect_forms as $f)
+                    echo '<small class="badge rounded-pill bg-danger">'
+                        .Html::encode($f->pantoneName.'-'.$f->formDefect->name)
+                        .'</small>';
+                ?>
+                    <h6>Совмещение (ID этикеток): <?foreach ($label->combinatedLabel as $label_id) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($label_id).'</span>'?> </h6>
                 <blockquote class="blockquote">
                     <p class="small"><?=Html::encode($label->prepress_note)?></p>
                     <footer class="blockquote-footer">Примечание Prepress</footer>
@@ -103,6 +111,7 @@ use app\models\Form;
                     <p class="small"><?=Html::encode($label->laboratory_note)?></p>
                     <footer class="blockquote-footer">Примечание Лаборатория</footer>
                 </blockquote>
+<!--                <pre>--><?//print_r($label->combination->combination_id)?><!--</pre>-->
             </div>
         </div>
     </div>

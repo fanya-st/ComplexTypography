@@ -42,5 +42,4 @@ class OrderForm extends ActiveRecord{
                 'label_price_with_tax','label_price'],'double']
 		];
 	}
-	
 }

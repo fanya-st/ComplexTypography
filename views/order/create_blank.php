@@ -174,14 +174,14 @@ $this->registerJs(
             <?=Html::submitButton('Создать заказ',['class'=>'btn btn-success'])?>
         </div>
         <?=$form->field($order, 'status_id')->hiddenInput(['value' => 1])->label(false);?>
-        <?=$form->field($label, 'status_id')->hiddenInput(['value' => 11])->label(false);?>
-        <?=$form->field($label, 'embossing')->hiddenInput(['value' => 0])->label(false);?>
+        <?=$form->field($label, 'status_id')->hiddenInput(['value' => 10])->label(false);?>
         <?=$form->field($label, 'output_label_id')->hiddenInput(['value' => 1])->label(false);?>
         <?=$form->field($label, 'background_id')->hiddenInput(['value' => 1])->label(false);?>
         <?=$form->field($label, 'print_on_glue')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'varnish_id')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'variable')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'stencil')->hiddenInput(['value' => 0])->label(false);?>
+        <?=$form->field($label, 'takeoff_flash')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'laminate')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'color_count')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'foil_width')->hiddenInput(['value' => 0])->label(false);?>

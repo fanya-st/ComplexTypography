@@ -4,6 +4,12 @@ return [
     108 => [
         'printer',
     ],
+    110 => [
+        'packer',
+    ],
+    109 => [
+        'rewinder',
+    ],
     105 => [
         'designer',
     ],

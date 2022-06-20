@@ -111,9 +111,6 @@ class Label extends ActiveRecord{
     public function getVariableName(){
         if($this->variable==0) return 'Нет'; else return 'Да';
     }
-    public function getEmbossingName(){
-        if($this->embossing==0) return 'Нет'; else return 'Да';
-    }
     public function getOrientationName(){
         if($this->orientation==0) return 'Не указана';
         elseif($this->orientation==1) return 'Альбомная';
@@ -176,7 +173,6 @@ class Label extends ActiveRecord{
             'background_id'=>'Фон',
             'managerName'=>'Менеджер',
             'parent_label'=>'С внесением изменений в этикетку',
-            'embossing'=>'Тиснение',
             'photo_output_id'=>'Фотовывод',
             'color_count'=>'Цветность',
             'orientation'=>'Ориентация',
@@ -187,7 +183,7 @@ class Label extends ActiveRecord{
             ['name','string','max'=>100],
             [['name','manager_note','prepress_note','designer_note','laboratory_note'],'trim'],
             [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
-                'print_on_glue','orientation','embossing', 'output_label_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id'],'safe']
+                'print_on_glue','orientation', 'output_label_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id','takeoff_flash'],'safe']
         ];
     }
 }

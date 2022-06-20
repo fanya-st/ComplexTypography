@@ -34,6 +34,8 @@ echo TabsX::widget([
 //            ],
             CustomNav::getOrderItemsManager($order),
             CustomNav::getOrderItemsPrinter($order),
+            CustomNav::getOrderItemsRewinder($order),
+            CustomNav::getOrderItemsPacker($order),
     ],
 ]);
 ?>

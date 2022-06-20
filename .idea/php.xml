@@ -106,6 +106,10 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-tabs-x" />
       <path value="$PROJECT_DIR$/vendor/vilochane/yii2-barcode-generator" />
       <path value="$PROJECT_DIR$/vendor/picqer/php-barcode-generator" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-builder" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-helpers" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-dialog" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-grid" />
     </include_path>
   </component>
 </project>

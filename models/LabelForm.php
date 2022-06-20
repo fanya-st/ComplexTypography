@@ -23,7 +23,6 @@ class LabelForm extends ActiveRecord
             'output_label_id'=>'Выход этикетки',
             'laminate'=>'Ламинация',
             'variable'=>'Переменная печать',
-            'embossing'=>'Тиснение',
             'varnish_id'=>'Вид лака',
             'print_on_glue'=>'Печать по клею',
             'background_id'=>'Фон',
@@ -45,7 +44,7 @@ class LabelForm extends ActiveRecord
     public function rules(){
         return[
             [['name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
-                'print_on_glue','background_id','orientation','embossing', 'output_label_id','color_count'],'required'],
+                'print_on_glue','background_id','orientation', 'output_label_id','color_count','takeoff_flash'],'required'],
             ['name','string','max'=>100],
             [['name','manager_note','designer_note'],'trim'],
             [['parent_label','status_id','image','image_crop','image_extended','design_file','date_of_design','shaft_id','foil_width'],'safe'],

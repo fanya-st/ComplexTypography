@@ -65,6 +65,7 @@ class CustomNav extends Model
                 break;
             case 6:
                 ArrayHelper::setValue($nav_items, 'prepress.items.prepress-ready', ['label' => 'Prepress готов', 'url' => ['label/prepress-ready','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'prepress.items.combinate-label', ['label' => 'В совмещение', 'url' => ['label/combinate-label','id'=>$id]]);
                 break;
         }
         return $nav_items;
@@ -103,25 +104,54 @@ class CustomNav extends Model
     }
     public static function getOrderItemsPrinter($order){
         ArrayHelper::setValue($items, 'label','Печатник');
-        switch ($order->status_id) {
-            //статус заказа Новый
-            case 1:
-                ArrayHelper::setValue($items, 'items.start-print', ['label' => 'Начать печать', 'url' => ['order/start-print','id'=>$order->id]]);
-                break;
-            case 2:
-                ArrayHelper::setValue($items, 'items.pause-print', ['label' => 'Приостановить печать', 'url' => ['order/pause-print','id'=>$order->id]]);
-                ArrayHelper::setValue($items, 'items.finish-print', ['label' => 'Закончить печать', 'url' => ['order/finish-print','id'=>$order->id]]);
-                ArrayHelper::setValue($items, 'items.paper-consumption', ['label' => 'Расход материала', 'url' => ['material/paper-consumption','id'=>$order->id]]);
-                break;
-            case 3:
-                ArrayHelper::setValue($items, 'items.continue-print', ['label' => 'Продолжить печать', 'url' => ['order/continue-print','id'=>$order->id]]);
-                ArrayHelper::setValue($items, 'items.finish-print', ['label' => 'Закончить печать', 'url' => ['order/finish-print','id'=>$order->id]]);
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-        }
+        if (ArrayHelper::isIn($order->status_id, ['1']))
+            ArrayHelper::setValue($items, 'items.start-print', ['label' => 'Начать печать', 'url' => ['order/start-print','id'=>$order->id]]);
+//        if (ArrayHelper::isIn($order->status_id, ['2']))
+//            ArrayHelper::setValue($items, 'items.pause-print', ['label' => 'Приостановить печать', 'url' => ['order/pause-print','id'=>$order->id]]);
+        if (ArrayHelper::isIn($order->status_id, ['2','3']))
+            ArrayHelper::setValue($items, 'items.finish-print', ['label' => 'Закончить печать', 'url' => ['order/finish-print','id'=>$order->id]]);
+        if (ArrayHelper::isIn($order->status_id, ['3']))
+            ArrayHelper::setValue($items, 'items.continue-print', ['label' => 'Продолжить печать', 'url' => ['order/continue-print','id'=>$order->id]]);
+        if (ArrayHelper::isIn($order->status_id, ['2']))
+            ArrayHelper::setValue($items, 'items.paper-consumption', ['label' => 'Расход материала', 'url' => ['material/paper-consumption','id'=>$order->id]]);
+        if (ArrayHelper::isIn($order->status_id, ['2','3']))
+            ArrayHelper::setValue($items, 'items.form-defect', ['label' => 'Брак форм', 'url' => ['order/form-defect','id'=>$order->id]]);
+//        switch ($order->status_id) {
+//            //статус заказа Новый
+//            case 1:
+//                ArrayHelper::setValue($items, 'items.start-print', ['label' => 'Начать печать', 'url' => ['order/start-print','id'=>$order->id]]);
+//                break;
+//            case 2:
+//                ArrayHelper::setValue($items, 'items.pause-print', ['label' => 'Приостановить печать', 'url' => ['order/pause-print','id'=>$order->id]]);
+//                ArrayHelper::setValue($items, 'items.finish-print', ['label' => 'Закончить печать', 'url' => ['order/finish-print','id'=>$order->id]]);
+//                ArrayHelper::setValue($items, 'items.paper-consumption', ['label' => 'Расход материала', 'url' => ['material/paper-consumption','id'=>$order->id]]);
+//                break;
+//            case 3:
+//                ArrayHelper::setValue($items, 'items.continue-print', ['label' => 'Продолжить печать', 'url' => ['order/continue-print','id'=>$order->id]]);
+//                ArrayHelper::setValue($items, 'items.finish-print', ['label' => 'Закончить печать', 'url' => ['order/finish-print','id'=>$order->id]]);
+//                break;
+//            case 4:
+//                break;
+//            case 5:
+//                break;
+//        }
+        return $items;
+    }
+    public static function getOrderItemsRewinder($order){
+        ArrayHelper::setValue($items, 'label','Нарезчик и Перемотчик');
+        if (ArrayHelper::isIn($order->status_id, ['4']))
+            ArrayHelper::setValue($items, 'items.start-rewind', ['label' => 'Начать нарезку/перемотку', 'url' => ['order/start-rewind','id'=>$order->id]]);
+        if (ArrayHelper::isIn($order->status_id, ['5']))
+            ArrayHelper::setValue($items, 'items.rewind', ['label' => 'Нарезка/перемотка', 'url' => ['order/rewind','id'=>$order->id]]);
+
+        return $items;
+    }
+    public static function getOrderItemsPacker($order){
+        ArrayHelper::setValue($items, 'label','Упаковчик');
+        if (ArrayHelper::isIn($order->status_id, ['6']))
+            ArrayHelper::setValue($items, 'items.start-pack', ['label' => 'Начать упаковку', 'url' => ['order/start-pack','id'=>$order->id]]);
+        if (ArrayHelper::isIn($order->status_id, ['7']))
+            ArrayHelper::setValue($items, 'items.pack', ['label' => 'Упаковка', 'url' => ['order/pack','id'=>$order->id]]);
         return $items;
     }
 }

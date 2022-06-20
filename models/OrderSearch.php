@@ -44,9 +44,13 @@ class OrderSearch extends Order
         ]);
         $dataProvider->setSort([
             'attributes' => [
-//                'id',
+//                'order.id'
 //                'name',
-//                'date_of_create'
+//                'date_of_create'=>[
+//                    'asc' => ['date_of_create' => SORT_ASC],
+//                    'desc' => ['date_of_create' => SORT_DESC],
+//                    'default' => SORT_DESC
+//                ],
             ]
         ]);
 

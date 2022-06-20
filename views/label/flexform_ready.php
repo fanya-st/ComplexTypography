@@ -76,4 +76,5 @@ $this->params['breadcrumbs'][] = $this->title;
 <?ActiveForm::end()?>
 <!--<pre>--><?//print_r($flexform)?><!--</pre>-->
 <!--<pre>--><?//print_r($envelope)?><!--</pre>-->
-<!--<pre>--><?//print_r($cur_label)?><!--</pre>-->
+<!--<pre>--><?//print_r($cur_label->combination)?><!--</pre>-->
+<!--<pre>--><?//print_r($order->id)?><!--</pre>-->

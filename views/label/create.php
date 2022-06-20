@@ -70,6 +70,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ], [
                     'prompt' => 'Выберите...'
                 ])?>
+
+                <?=$form->field($model,'takeoff_flash')->dropDownList([
+                    '0' => 'Нет',
+                    '1' => 'Да',
+                ], [
+                    'prompt' => 'Выберите...'
+                ])?>
             </div>
             <div class="col">
                 <div class="col">
@@ -83,14 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <?=$form->field($model,'embossing')->dropDownList([
-                    '0' => 'Нет',
-                    '1' => 'Да',
-                ], [
-                    'prompt' => 'Выберите...'
-                ])?>
-            </div>
             <div class="col">
                 <div class="col">
                     <?=$form->field($model,'varnish_id')->dropDownList(ArrayHelper::map(VarnishStatus::find()->all(), 'id',

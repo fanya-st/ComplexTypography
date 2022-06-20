@@ -4,7 +4,6 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\web\View;
 use yii\bootstrap5\Modal;
-use yii\grid\GridView;
 use kartik\icons\Icon;;
 Icon::map($this, Icon::FA);
 
@@ -28,6 +27,7 @@ function printDiv(divName){
 );
 ?>
 <h3><?= Html::encode($this->title)?></h3>
+    <h6>Используемый материал: <?=Html::encode($order->material->name)?></h6>
 <?php $form = ActiveForm::begin()?>
     <div class="alert alert-info">
         <strong>Внимание!</strong> Не забудьте распечатать и наклеить новый штрих-код на использованный ролик</a>.
@@ -71,8 +71,6 @@ function printDiv(divName){
                             echo "<div id='modalContent-".$paper->paper_warehouse_id."'>";
                             echo Html::tag('p', Html::encode($paper->paperWarehouse->material->name.' Ширина: '.$paper->paperWarehouse->width.
                                 'см Длина: '.$paper->paperWarehouse->length.' м'),['class'=>'small text-center','style'=>'font-size:10px']);
-//                            echo Html::tag('p', Html::encode(),
-//                                ['class'=>'small text-center']);
                             $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
                             echo Html::tag('div',Html::img('data:image/png;base64,' . base64_encode($generator->
                                 getBarcode(str_pad($paper->paper_warehouse_id, 12, '0', STR_PAD_LEFT),
@@ -91,32 +89,6 @@ function printDiv(divName){
                 <?endforeach;?>
                 </tbody>
             </table>
-
-<!--            --><?// echo GridView::widget([
-//                'dataProvider' => $used_paper,
-//                'columns' => [
-//                    [
-//                            'label'=>'ID ролика',
-//                            'attribute'=>'paper_warehouse_id',
-//                    ],
-//                    [
-//                            'label'=>'Материал',
-//                            'attribute'=>'materialName',
-//                    ],
-//                    'length',
-//                    [
-//                        'class' => 'yii\grid\ActionColumn',
-//                        'template' => '{barcode-print}',
-//                        'buttons' => [
-//                            'barcode-print' => function($url, $model, $key) {     // render your custom button
-//                                return Html::a('Штрихкод', ['/material/barcode-print','paper_warehouse_id'=>$model->paper_warehouse_id],
-//                                    ['class'=>'btn btn-primary',
-//                                'target'=>'_blank']);
-//                }
-//                        ]
-//                    ]
-//            ],
-//            ])?>
         </div>
     </div>
 </div>

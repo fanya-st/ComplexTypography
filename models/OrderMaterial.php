@@ -19,7 +19,7 @@ class OrderMaterial extends ActiveRecord
     public function rules(){
         return[
             [['length','paper_warehouse_id'], 'integer'],
-            [['order_id'], 'required'],
+            [['order_id','length','paper_warehouse_id'], 'required'],
         ];
     }
 

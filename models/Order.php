@@ -9,6 +9,12 @@ class Order extends ActiveRecord{
 	public function getLabel(){
 		return $this->hasOne(Label::class,['id'=>'label_id']);
 	}
+	public function getSleeve(){
+		return $this->hasOne(Sleeve::class,['id'=>'sleeve_id']);
+	}
+	public function getWinding(){
+		return $this->hasOne(Winding::class,['id'=>'winding_id']);
+	}
 	public function getCustomer(){
 		return $this->hasOne(Customer::class,['id'=>'customer_id'])->via('label');
 	}
@@ -28,6 +34,12 @@ class Order extends ActiveRecord{
 
 	public function getCombinatedPrintOrder(){
         return $this->hasMany(CombinationOrder::class,['combination_id'=>'combination_id'])->via('combinationOrder');
+	}
+	public function getFinishedProductsWarehouse(){
+        return $this->hasMany(FinishedProductsWarehouse::class,['order_id'=>'id']);
+	}
+	public function getOrderMaterialList(){
+        return $this->hasMany(OrderMaterial::class,['order_id'=>'id']);
 	}
 	public function getCombinatedPrintOrderName(){
 	    $name='совместная печать: ';
@@ -118,6 +130,14 @@ class Order extends ActiveRecord{
             'customerId'=>'Заказчик',
             'pantsId'=>'Штанец',
             'shaft_id'=>'Вал',
+            'bale_count'=>'Количество тюков',
+            'box_count'=>'Количество коробок',
+        ];
+    }
+    public function rules(){
+        return[
+            [['actual_circulation'],'required'],
+            [['box_count','bale_count'],'safe']
         ];
     }
 }
