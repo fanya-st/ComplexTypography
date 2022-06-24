@@ -83,12 +83,12 @@
             'dev_requirement' => false,
         ),
         'codeception/codeception' => array(
-            'pretty_version' => '4.2.0',
-            'version' => '4.2.0.0',
+            'pretty_version' => '4.2.1',
+            'version' => '4.2.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../codeception/codeception',
             'aliases' => array(),
-            'reference' => 'e646d160bf1223d3595b227b69d903777fbcfb5f',
+            'reference' => '77b3e2003fd4446b35826cb9dc397129c521c888',
             'dev_requirement' => true,
         ),
         'codeception/lib-asserts' => array(
@@ -227,12 +227,12 @@
             'dev_requirement' => true,
         ),
         'guzzlehttp/psr7' => array(
-            'pretty_version' => '1.8.5',
-            'version' => '1.8.5.0',
+            'pretty_version' => '1.9.0',
+            'version' => '1.9.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
-            'reference' => '337e3ad8e5716c15f9657bd214d16cc5e69df268',
+            'reference' => 'e98e3e6d4f86621a9b75f623996e6bbdeb4b9318',
             'dev_requirement' => true,
         ),
         'imagine/imagine' => array(
