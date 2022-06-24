@@ -5,9 +5,29 @@ namespace app\models;
 
 
 use yii\db\ActiveRecord;
+use yii\data\ActiveDataProvider;
 
 class FinishedProductsWarehouse extends ActiveRecord
 {
+    public function getOrder(){
+        return $this->hasOne(Order::class,['id'=>'order_id']);
+    }
+
+    public function getLabel(){
+        return $this->hasOne(Label::class,['id'=>'label_id']);
+    }
+
+//    public function search($params)
+//    {
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => FinishedProductsWarehouse::find(),
+//        ]);
+//
+//        $this->load($params);
+//
+//        return $dataProvider;
+//    }
+
     public function attributeLabels()
     {
         return [
@@ -20,7 +40,9 @@ class FinishedProductsWarehouse extends ActiveRecord
 
     public function rules(){
         return[
-            [['order_id','label_in_roll','roll_count'],'required'],
+            [['label_id','label_in_roll','roll_count'],'required'],
+            [['id','defect_roll_count','previous_order_id','defect_note'],'safe'],
+            [['defect_note'],'trim'],
             [['packed_roll_count','packed_box_count','packed_bale_count','sended_roll_count','sended_box_count','sended_bale_count'], 'default', 'value' => 0],
 
         ];

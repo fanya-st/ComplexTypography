@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузкам
 $this->params['breadcrumbs'][] = ['label' => 'Отгрузка ID['.$shipment->id.'] ', 'url' => ['shipment/view','id'=>$shipment->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 <?php
 $form=ActiveForm::begin(['method'=>'post']);
 echo Html::submitButton('Добавить',['class'=>'btn btn-primary']);
@@ -23,7 +23,6 @@ echo GridView::widget([
     'columns' => [
         [
             'class' => 'yii\grid\CheckboxColumn',
-            // you may configure additional properties here
         ],
         [
             'attribute'=>'id',

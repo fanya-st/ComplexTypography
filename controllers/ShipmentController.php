@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\FinishedProductsWarehouse;
 use app\models\Order;
 use app\models\Shipment;
 use app\models\ShipmentOrder;
@@ -30,7 +31,7 @@ class ShipmentController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['delete','order-add'],
+                        'actions' => ['delete','order-add','mark-defect-roll'],
                         'roles' => ['updateOwnShipmentManager','manager_admin'],
                         'roleParams' => function() {
                             return ['customer' => Shipment::findOne(['id' => Yii::$app->request->get('id')])];
@@ -38,7 +39,7 @@ class ShipmentController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list','view','send-shipment'],
+                        'actions' => ['list','view','send-shipment','mark-defect-roll'],
                         'roles' => ['logistician'],
                     ],
 
@@ -69,13 +70,16 @@ class ShipmentController extends Controller
             ],
         ]);
 
-//        $add_order=new ActiveDataProvider([
-//            'query' => Order::find()->where(['not',['order.id'=>ShipmentOrder::find()->select('order_id')->column()]])
-//                ->joinWith('customer')->andWhere(['customer.manager_login'=>Yii::$app->user->identity->username]),
+//        $shipment_roll=new ActiveDataProvider([
+//            'query' => FinishedProductsWarehouse::find()
+//                ->indexBy('id')
+//                ->where(['order_id'=>ShipmentOrder::find()->select('order_id')->where(['shipment_id'=>$id])->column()])
+//            ,
 //            'pagination' => [
 //                'pageSize' => 20,
 //            ],
 //        ]);
+        $shipment_roll=FinishedProductsWarehouse::find()->where(['order_id'=>ShipmentOrder::find()->select('order_id')->where(['shipment_id'=>$id])->column()])->all();
 
         $route_customers = new ActiveDataProvider([
             'query' => Customer::find()->where(['id'=>$shipment->customer]),
@@ -83,8 +87,21 @@ class ShipmentController extends Controller
                 'pageSize' => 20,
             ],
         ]);
-
-        return $this->render('view',compact('shipment','orders','add_order','route_customers','searchModel'));
+        if(Yii::$app->request->post()){
+            return Yii::$app->runAction('shipment/mark-defect-roll',compact('shipment_roll'));
+//            if (FinishedProductsWarehouse::loadMultiple($shipment_roll, $this->request->post()) && FinishedProductsWarehouse::validateMultiple($shipment_roll)) {
+//                foreach ($shipment_roll as $roll) {
+//                    if ($roll->defect_roll_count <= $roll->sended_roll_count) {
+//                        $roll->save(false);
+//                    }
+//                    else {
+//                        Yii::$app->session->setFlash('error', 'Ошибка');
+//                        return $this->refresh();
+//                    }
+//                }
+//            }
+        }
+        return $this->render('view',compact('shipment','orders','shipment_roll','route_customers'));
     }
 
     public function actionDelete($id)
@@ -92,6 +109,21 @@ class ShipmentController extends Controller
         $shipmentorder = ShipmentOrder::findOne(['order_id'=>$id]);
         if($shipmentorder->delete()) Yii::$app->session->setFlash('success', 'Успешно');
             else Yii::$app->session->setFlash('error', 'Ошибка');
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionMarkDefectRoll(array $shipment_roll)
+    {
+        if (FinishedProductsWarehouse::loadMultiple($shipment_roll, $this->request->post()) && FinishedProductsWarehouse::validateMultiple($shipment_roll)) {
+                foreach ($shipment_roll as $roll) {
+                    if ($roll->defect_roll_count <= $roll->sended_roll_count) {
+                        $roll->save(false);
+                    }
+                    else {
+                        Yii::$app->session->setFlash('error', 'Ошибка');
+                    }
+                }
+            }
         return $this->redirect(Yii::$app->request->referrer);
     }
 
@@ -134,9 +166,25 @@ class ShipmentController extends Controller
     public function actionSendShipment($id)
     {
         $shipment = Shipment::findOne($id);
-        $shipment->status_id=1;
         if ($shipment->readyToSend!=true)Yii::$app->session->setFlash('error', 'Заказы должны быть на складе готовой продукции');
-        else Yii::$app->session->setFlash('success', 'Отправлено');
+        else {
+            foreach($shipment->finishedProductsWarehouse as $roll){
+                if($roll->roll_count>$roll->sended_roll_count) { //проверяем кол-во отправленных роликов и если меньше количества всего роликов, то создаем строку с остаточными роликами
+                    $new_roll=new FinishedProductsWarehouse();
+                    $new_roll->roll_count=$roll->roll_count-$roll->sended_roll_count; //остаточные ролики от разницы
+                    $new_roll->label_id=$roll->label_id;
+                    $new_roll->previous_order_id=$roll->order_id;
+                    $new_roll->label_in_roll=$roll->label_in_roll;
+                    $new_roll->save();
+                    $roll->roll_count=$roll->roll_count-$new_roll->roll_count;
+                    $roll->packed_roll_count=$roll->packed_roll_count-$new_roll->roll_count;
+                    $roll->save();
+                }
+            }
+            $shipment->status_id=1;
+            $shipment->save();
+            Yii::$app->session->setFlash('success', 'Отправлено');
+        }
 //        foreach ($shipment->order as $o){
 //            if ($o->status_id !=8) {
 //

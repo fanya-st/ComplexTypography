@@ -1,7 +1,8 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 ?>
 <div class="row g-2 row-cols-2">
     <div class="col">
@@ -19,9 +20,15 @@ use yii\grid\GridView;
         }?>
         <?=Html::tag('h6','Дата отправки: ' .Html::encode($shipment->date_of_send))?>
         <?=Html::tag('h6','Вес, кг: ' .Html::encode($shipment->shipmentWeight))?>
-<!--        <pre>--><?//print_r('')?><!--</pre>-->
         <?= Html::a('Добавить заказы', ['shipment/order-add','id'=>$shipment->id], ['class'=>'btn btn-primary']) ?>
-        <?= Html::a('Отправить', ['shipment/send-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']) ?>
+        <?switch ($shipment->status_id){
+            case 0:
+                echo Html::a('Отправить', ['shipment/send-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']);
+                break;
+            case 1:
+                echo Html::a('Закрыть', ['shipment/close-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']);
+                break;
+        }?>
     </div>
 </div>
 <?php

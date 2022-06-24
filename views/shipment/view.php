@@ -10,6 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузкам
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3><?= Html::encode($this->title)?></h3>
+<!--<pre>--><?//print_r($shipment->finishedProductsWarehouse)?><!--</pre>-->
 <div class="row">
     <?
     echo TabsX::widget([
@@ -30,11 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Документы',
                     'content'=>$this->render('_document_tab',compact('shipment','orders')),
                 ],
-//            [
-//                    'label' => 'Добавить заказы',
-//                    'content'=>$this->render('_order_add_tab',compact('add_order','searchModel')),
-//                'active'=>false
-//                ],
+            [
+                    'label' => 'Брак',
+                    'content'=>$this->render('_defect_tab',compact('shipment','shipment_roll')),
+                ],
         ],
     ]);
     ?>
