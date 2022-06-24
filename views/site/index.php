@@ -29,13 +29,33 @@ $this->title = 'Комплекс Типография';
                 <p>Просмотр, создание, удаление материалов</p>
                 <p><a class="btn btn-outline-secondary" href="">Работа с материалами &raquo;</a></p>
             </div>
+<!--            <div class="col-lg-4">-->
+<!--                <div class="card">-->
+<!--                    <img class="card-img-top" src="" alt="Card image">-->
+<!--                    <div class="card-body">-->
+<!--                        <h4 class="card-title">John Doe</h4>-->
+<!--                        <p class="card-text">Some example text.</p>-->
+<!--                        <a href="#" class="btn btn-primary">See Profile</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="col-lg-4">
                 <h2>Работа с этикетками</h2>
                 <p>Работа с этикетками</p>
                 <p><a class="btn btn-outline-secondary" href="?r=label/list">Работа с этикетками &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate">Создание этикетки &raquo;</a></p>
             </div>
+            <div class="col-lg-4">
+                <h2>Работа с отгрузками</h2>
+                <p>Работа с отгрузками</p>
+                <p><a class="btn btn-outline-secondary" href="?r=shipment/list">Работа с отгрузками &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Работа с заказчиками</h2>
+                <p>Работа с заказчиками</p>
+                <p><a class="btn btn-outline-secondary" href="?r=customer/create">Добавить заказчика &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=customer/list">Работа с заказчиками &raquo;</a></p>
+            </div>
         </div>
-
     </div>
 </div>

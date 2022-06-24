@@ -6,14 +6,14 @@ use app\models\Form;
 <div class="row">
     <div class="col">
         <div class="row">
-            <?= Html::a(Html::img($label->image_crop, ['alt' => $this->title,'width'=>'500px','onerror'=>'label/alt.jpg']),$label->image,['target'=>'_blank'])?>
+            <?= Html::a(Html::img($label->image_crop, ['alt' => $this->title,'width'=>'400px','onerror'=>'label/alt.jpg']),$label->image,['target'=>'_blank'])?>
         </div>
         <?= Html::a('Доп.файл',$label->image_extended,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
         <?= Html::a('Файл дизайна',$label->design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
         <?= Html::a('Файл дизайна Prepress',$label->prepress_design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
     </div>
     <div class="col">
-        <h6>Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatusName)?></small> </h6>
+        <h6>№: <small class="badge bg-primary"><?=Html::encode($label->id)?></small> Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatusName)?></small> </h6>
         <h6>Заказчик: <small><?=Html::encode($label->customerName)?></small> </h6>
         <h6>Менеджер: <small><?=Html::encode($label->managerName)?></small> </h6>
         <h6>Дата создания: <small><?=Html::encode($label->date_of_create)?></small> </h6>

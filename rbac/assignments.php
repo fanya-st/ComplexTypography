@@ -6,6 +6,7 @@ return [
     ],
     110 => [
         'packer',
+        'logistician',
     ],
     109 => [
         'rewinder',

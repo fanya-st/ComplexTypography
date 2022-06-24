@@ -23,16 +23,56 @@ $this->params['breadcrumbs'][] = $this->title;
                 <th scope="col">Этикеток на ролике</th>
                 <th scope="col">Кол-во перемотанных роликов</th>
                 <th scope="col">Кол-во упакованных роликов</th>
+                <th scope="col">Кол-во упакованных коробок</th>
+                <th scope="col">Кол-во упакованных тюков</th>
+                <th scope="col">Кол-во упакованных роликов на отправку</th>
+                <th scope="col">Кол-во упакованных коробок на отправку</th>
+                <th scope="col">Кол-во упакованных тюков на отправку</th>
             </tr>
             </thead>
             <tbody>
             <?foreach ($order_roll as $id => $roll):?>
                 <tr>
                     <td><?=Html::encode($roll->label_in_roll)?></td>
-                    <td><?=Html::encode($roll->count)?></td>
+                    <td><?=Html::encode($roll->roll_count)?></td>
                     <td>
                         <?
-                        echo $form->field($roll,"[$id]packed_count")->label(false);
+                        echo $form->field($roll,"[$id]packed_roll_count")->label(false);
+                        echo Html::submitButton('Упаковать',['class'=>'btn btn-primary']);
+
+                        ?>
+                    </td>
+                    <td>
+                        <?
+                        echo $form->field($roll,"[$id]packed_box_count")->label(false);
+                        echo Html::submitButton('Упаковать',['class'=>'btn btn-primary']);
+
+                        ?>
+                    </td>
+                    <td>
+                        <?
+                        echo $form->field($roll,"[$id]packed_bale_count")->label(false);
+                        echo Html::submitButton('Упаковать',['class'=>'btn btn-primary']);
+
+                        ?>
+                    </td>
+                    <td>
+                        <?
+                        echo $form->field($roll,"[$id]sended_roll_count")->label(false);
+                        echo Html::submitButton('Упаковать',['class'=>'btn btn-primary']);
+
+                        ?>
+                    </td>
+                    <td>
+                        <?
+                        echo $form->field($roll,"[$id]sended_box_count")->label(false);
+                        echo Html::submitButton('Упаковать',['class'=>'btn btn-primary']);
+
+                        ?>
+                    </td>
+                    <td>
+                        <?
+                        echo $form->field($roll,"[$id]sended_bale_count")->label(false);
                         echo Html::submitButton('Упаковать',['class'=>'btn btn-primary']);
 
                         ?>
@@ -44,19 +84,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <? ActiveForm::end()?>
     </div>
 </div>
-<?$form = ActiveForm::begin()?>
-<pre><?print_r($order)?></pre>
+<!--<pre>--><?//print_r($order)?><!--</pre>-->
 <div class=" d-flex col">
-    <div class="row">
-        <div class="col">
-            <?=$form->field($order,'bale_count')?>
-            <?=Html::submitButton('Завершить упаковку',['class'=>'btn btn-primary'])?>
-        </div>
-        <div class="col">
-            <?=$form->field($order,'box_count')?>
-        </div>
-    </div>
+<!--            --><?//=$form->field($order,'bale_count')?>
+    <?= Html::a('Завершить упаковку', ['/order/finish-pack','id'=>$order->id], ['class'=>'btn btn-primary']) ?>
+<!--            --><?//=$form->field($order,'box_count')?>
 </div>
-<?ActiveForm::end()?>
 
 

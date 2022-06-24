@@ -32,7 +32,9 @@
         "kartik-v/yii2-tabs-x": "dev-master",
 		"vilochane/yii2-barcode-generator": "dev-master",
         "picqer/php-barcode-generator": "^0.3.0",
-        "kartik-v/yii2-builder": "dev-master"
+        "kartik-v/yii2-builder": "dev-master",
+        "kartik-v/yii2-widget-timepicker": "dev-master",
+        "kartik-v/yii2-export": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -9,6 +9,9 @@ class Order extends ActiveRecord{
 	public function getLabel(){
 		return $this->hasOne(Label::class,['id'=>'label_id']);
 	}
+	public function getShipmentOrder(){
+		return $this->hasOne(ShipmentOrder::class,['order_id'=>'id']);
+	}
 	public function getSleeve(){
 		return $this->hasOne(Sleeve::class,['id'=>'sleeve_id']);
 	}
@@ -105,6 +108,11 @@ class Order extends ActiveRecord{
     public function getMashineName(){
         return $this->mashine->name;
     }
+    public function getCirculationCountSend(){
+	    foreach($this->finishedProductsWarehouse as $roll)
+	        $count+=$roll->sended_roll_count*$roll->label_in_roll;
+        return $count;
+    }
     public function attributeLabels()
     {
         return [
@@ -130,14 +138,11 @@ class Order extends ActiveRecord{
             'customerId'=>'Заказчик',
             'pantsId'=>'Штанец',
             'shaft_id'=>'Вал',
-            'bale_count'=>'Количество тюков',
-            'box_count'=>'Количество коробок',
         ];
     }
     public function rules(){
         return[
-            [['actual_circulation'],'required'],
-            [['box_count','bale_count'],'safe']
+            [['actual_circulation'],'safe'],
         ];
     }
 }

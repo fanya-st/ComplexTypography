@@ -1,6 +1,8 @@
 <?php
 
 namespace app\models;
+use yii;
+use yii\helpers\ArrayHelper;
 
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
@@ -23,6 +25,9 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'authKey' => 'test100key',
             'accessToken' => '100-token',
             'group' => 'admin',
+            'F' => 'Администратор',
+            'I' => 'Администратор',
+            'O' => '',
         ],
         '101' => [
             'id' => '101',
@@ -164,8 +169,13 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     }
     public static function findUsersByGroup($group)
     {
+//        foreach(self::$users as $user){
+//            if($user['group']== $group OR $user['group']== $group.'_admin')
+//            $array[$user['username']]=$user['F'].' '.mb_substr($user['I'],0,1).'.';
+//        }
         foreach(self::$users as $user){
-            if($user['group']== $group OR $user['group']== $group.'_admin')
+            if(ArrayHelper::keyExists($group, Yii::$app->authManager->getRolesByUser($user['id']), false)
+            OR ArrayHelper::keyExists($group.'_admin', Yii::$app->authManager->getRolesByUser($user['id']), false))
             $array[$user['username']]=$user['F'].' '.mb_substr($user['I'],0,1).'.';
         }
         return $array;

@@ -13,15 +13,15 @@ class FinishedProductsWarehouse extends ActiveRecord
         return [
             'id'=>'Номер ролика',
             'label_in_roll'=>'Кол-во этикеток в ролике',
-            'packed_count'=>'Упаковано',
-            'count'=>'Кол-во роликов',
+            'packed_roll_count'=>'Упаковано',
+            'roll_count'=>'Кол-во роликов',
         ];
     }
 
     public function rules(){
         return[
-            [['order_id','label_in_roll','count','packed_count'],'required'],
-            ['packed_count', 'default', 'value' => 0],
+            [['order_id','label_in_roll','roll_count'],'required'],
+            [['packed_roll_count','packed_box_count','packed_bale_count','sended_roll_count','sended_box_count','sended_bale_count'], 'default', 'value' => 0],
 
         ];
     }

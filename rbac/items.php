@@ -6,6 +6,16 @@ return [
         'description' => 'Update own label by designer',
         'ruleName' => 'isOwnLabel',
     ],
+    'updateOwnShipmentManager' => [
+        'type' => 2,
+        'description' => 'Update own shipment by manager',
+        'ruleName' => 'AllowToEditShipment',
+    ],
+    'updateOwnCustomerManager' => [
+        'type' => 2,
+        'description' => 'updateOwnCustomerManager',
+        'ruleName' => 'AllowToEditCustomer',
+    ],
     'updateOwnOrderManager' => [
         'type' => 2,
         'description' => 'Update own order by manager',
@@ -37,6 +47,9 @@ return [
             'updateOwnLabelDesigner',
             'allowToDesignReadyRule',
         ],
+    ],
+    'logistician' => [
+        'type' => 1,
     ],
     'packer' => [
         'type' => 1,
@@ -70,6 +83,8 @@ return [
         'type' => 1,
         'children' => [
             'updateOwnLabelManager',
+            'updateOwnShipmentManager',
+            'updateOwnCustomerManager',
             'updateOwnOrderManager',
         ],
     ],
@@ -83,6 +98,7 @@ return [
         'type' => 1,
         'children' => [
             'designer_admin',
+            'logistician',
             'rewinder',
             'packer',
             'manager_admin',

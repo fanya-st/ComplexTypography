@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\CombinationOrder;
 use app\models\FinishedProductsWarehouse;
 use app\models\Form;
+use app\models\OrderPrintEndForm;
 use yii\data\ActiveDataProvider;
 use app\models\CombinationPrintOrder;
 use app\models\Label;
@@ -140,6 +141,7 @@ public function actionCombinateOrder($id)
             $order->status_id=2;
             $order->printer_login=Yii::$app->user->identity->username;
             $order->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+//            print_r($order);
             $order->save();
             if (!empty($order->combinatedPrintOrder)){
                 foreach ($order->combinatedPrintOrder as $com_ord){
@@ -237,7 +239,7 @@ public function actionCombinateOrder($id)
     }
     public function actionFinishPrint($id)
     {
-        $order=Order::findOne($id);
+        $order=OrderPrintEndForm::findOne($id);
         if($order->load(Yii::$app->request->post()) && $order->validate(Yii::$app->request->post())){
             $order->status_id=4;
             $order->date_of_print_end=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
@@ -292,23 +294,28 @@ public function actionCombinateOrder($id)
         $order_roll = FinishedProductsWarehouse::find()->where(['order_id' => $id])->indexBy('id')->all();
             if (FinishedProductsWarehouse::loadMultiple($order_roll, $this->request->post()) && FinishedProductsWarehouse::validateMultiple($order_roll)) {
                 foreach ($order_roll as $roll) {
-                    if ($roll->packed_count<=$roll->count){
+                    if ($roll->packed_roll_count<=$roll->roll_count){
                         $roll->save(false);
-                        return $this->refresh();
                     }
                     else
                         Yii::$app->session->setFlash('error','Нет такого количества смотанных роликов');
                 }
+                return $this->refresh();
             }
-        if ($order->load(Yii::$app->request->post())) {
+        return $this->render('pack', compact('order','order_roll'));
+    }
+    public function actionFinishPack($id)
+    {
+            $order=Order::findOne($id);
             $order->status_id=8;
             $order->date_of_packing_end=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             if ($order->save()) {
                 Yii::$app->session->setFlash('success','Упаковка завершена');
                 return $this->redirect(['order/view','id'=>$id]);
+            }else {
+                Yii::$app->session->setFlash('error','Ошибка');
+                return $this->redirect(['order/pack','id'=>$id]);
             }
-        }
-        return $this->render('pack', compact('order','order_roll'));
     }
     public function actionRewindDelete($roll_id)
     {

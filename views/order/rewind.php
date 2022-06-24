@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'headerOptions' => ['width' => '20','class'=>'text-wrap']],
                 ['attribute'=>'label_in_roll',
                     'headerOptions' => ['width' => '35','class'=>'text-wrap']],
-                ['attribute'=>'count',
+                ['attribute'=>'roll_count',
                     'headerOptions' => ['width' => '35','class'=>'text-wrap']],
                 [
                     'class' => 'yii\grid\ActionColumn',
@@ -77,11 +77,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?=Html::submitButton('Добавить ролики',['class'=>'btn btn-success'])?>
                 </div>
                 <div class="col">
-                    <?=$form->field($new_roll,'count')?>
+                    <?=$form->field($new_roll,'roll_count')?>
                     <?= Html::a('Завершить', ['/order/finish-rewind','id'=>$order->id], ['class'=>'btn btn-success']) ?>
                 </div>
             </div>
             <?ActiveForm::end()?>
         </div>
+<!--    <pre>--><?//print_r($new_roll)?><!--</pre>-->
     </div>
 

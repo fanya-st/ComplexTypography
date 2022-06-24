@@ -14,8 +14,8 @@ use yii\bootstrap5\Modal;
                     echo Html::tag('h6','Менеджер: ' .Html::encode($order->fullName));
                     echo Html::tag('h6','Заказчик: ' .Html::encode('ID ['.$order->label->customer->id.
                     '] '.$order->label->customer->name));
-                    echo Html::tag('h6','Адрес заказчика: ' .Html::encode($order->label->customer->address_id));
-                    echo Html::tag('h6','Дата сдачи: ' . Yii::$app->formatter->asDate(Html::encode($order->date_of_sale), 'yyyy-MM-dd'));?>
+                    echo Html::tag('h6','Адрес заказчика: ' .Html::encode($order->label->customer->customerAddress));
+                    if (isset($order->date_of_sale))echo Html::tag('h6','Дата сдачи: ' . Yii::$app->formatter->asDate(Html::encode($order->date_of_sale), 'yyyy-MM-dd'));?>
                 </div>
                 <div class="col">
                     <?
@@ -32,7 +32,7 @@ use yii\bootstrap5\Modal;
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-info p-1 rounded">Параметры печати</h6>
 <!--            --><?//if ($order->status_id==3) echo Html::tag('h6','Печать приостановлена',['class'=>'bg-warning p-1 rounded'])?>
-            <h6>Совместная печать: <?foreach ($order->combinatedPrintOrder as $com_ord) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($com_ord->order_id).'</span></h6>'?>
+            <h6>Совместная печать: <?foreach ($order->combinatedPrintOrder as $com_ord) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($com_ord->order_id).'</span>'?></h6>
                 <? echo Html::tag('h6','Печатник: ' .Html::encode($order->printerName));
                 echo Html::tag('h6','Дата начала печати: ' .Html::encode($order->date_of_print_begin));
                 echo Html::tag('h6','Дата конца печати: ' .Html::encode($order->date_of_print_end));?>
@@ -73,7 +73,7 @@ use yii\bootstrap5\Modal;
             <h6>Перемотанный тираж, шт:
                 <? $rewinded_circulation=null;
                 foreach ($order->finishedProductsWarehouse as $rewinded_roll)
-                    $rewinded_circulation+=$rewinded_roll->label_in_roll*$rewinded_roll->count;
+                    $rewinded_circulation+=$rewinded_roll->label_in_roll*$rewinded_roll->roll_count;
                 echo Html::encode($rewinded_circulation);
                 ?>
             </h6>
@@ -85,9 +85,9 @@ use yii\bootstrap5\Modal;
                     'centerVertical'=>true,
                 ]);
                 echo Html::ul($order->finishedProductsWarehouse, ['item' => function ($item, $index) {
-                    if ($item->count!=null OR $item->count!=0)
+                    if ($item->roll_count!=null OR $item->roll_count!=0)
                     return Html::tag(
-                        'li',Html::encode(' Этикеток на ролике: '.$item->label_in_roll.'шт Кол-во роликов:'.$item->count.' шт')
+                        'li',Html::encode(' Этикеток на ролике: '.$item->label_in_roll.'шт Кол-во роликов:'.$item->roll_count.' шт')
                     );
                 }]);
                 Modal::end()
@@ -104,7 +104,7 @@ use yii\bootstrap5\Modal;
             <h6> Упакованный тираж, шт:
                 <? $packed_circulation=null;
                 foreach ($order->finishedProductsWarehouse as $packed_roll)
-                    $packed_circulation+=$packed_roll->label_in_roll*$packed_roll->packed_count;
+                    $packed_circulation+=$packed_roll->label_in_roll*$packed_roll->packed_roll_count;
                 echo Html::encode($packed_circulation);
                 ?>
             Излишки, шт: <?=Html::encode($rewinded_circulation-$packed_circulation)?>
@@ -117,12 +117,36 @@ use yii\bootstrap5\Modal;
                     'centerVertical'=>true,
                 ]);
                 echo Html::ul($order->finishedProductsWarehouse, ['item' => function ($item, $index) {
-                    if ($item->packed_count!=null OR $item->packed_count!=0)
+                    if ($item->packed_roll_count!=null OR $item->packed_roll_count!=0)
                     return Html::tag(
-                        'li',Html::encode(' Этикеток на ролике: '.$item->label_in_roll.'шт Кол-во роликов:'.$item->packed_count.' шт')
+                        'li',Html::encode(' Этикеток на ролике: '.$item->label_in_roll.'шт Кол-во роликов:'.$item->packed_roll_count.' шт')
                     );
                 }]);
-                echo 'Коробки:'.Html::encode($order->box_count).' Тюки:'.Html::encode($order->bale_count);
+                foreach ($order->finishedProductsWarehouse as $packed_roll){
+                    $packed_box += $packed_roll->packed_box_count;
+                    $packed_bale += $packed_roll->packed_bale_count;
+                }
+                echo 'Коробки:'.Html::encode($packed_box).' Тюки:'.Html::encode($packed_bale);
+                Modal::end()
+                ?>
+
+                <?
+                Modal::begin([
+                    'title' => 'Упакованные ролики на отправку',
+                    'toggleButton' => ['label' => 'Упакованные ролики на отправку', 'class' => 'btn btn-warning'],
+                    'centerVertical'=>true,
+                ]);
+                echo Html::ul($order->finishedProductsWarehouse, ['item' => function ($item, $index) {
+                    if ($item->sended_roll_count!=null OR $item->sended_roll_count!=0)
+                    return Html::tag(
+                        'li',Html::encode(' Этикеток на ролике: '.$item->label_in_roll.'шт Кол-во роликов:'.$item->sended_roll_count.' шт')
+                    );
+                }]);
+                foreach ($order->finishedProductsWarehouse as $sended_roll){
+                    $sended_box += $sended_roll->sended_box_count;
+                    $sended_bale += $sended_roll->sended_bale_count;
+                }
+                echo 'Коробки:'.Html::encode($sended_box).' Тюки:'.Html::encode($sended_bale);
                 Modal::end()
                 ?></h6>
         </div>

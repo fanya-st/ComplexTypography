@@ -37,6 +37,7 @@ class MaterialController extends Controller
             if ($new_used_paper->load(Yii::$app->request->post()) && $new_used_paper->validate()) {
                 $paper_from_warehouse=PaperWarehouse::findOne($new_used_paper->paper_warehouse_id);
                 if($new_used_paper->length<=$paper_from_warehouse->length){
+                    $new_used_paper->order_id=$id;
                     if ($new_used_paper->save()) {
                         $paper_from_warehouse->length=$paper_from_warehouse->length-$new_used_paper->length;
                         $paper_from_warehouse->save();

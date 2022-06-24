@@ -27,10 +27,12 @@ function printDiv(divName){
 );
 ?>
 <h3><?= Html::encode($this->title)?></h3>
-    <h6>Используемый материал: <?=Html::encode($order->material->name)?></h6>
 <?php $form = ActiveForm::begin()?>
     <div class="alert alert-info">
         <strong>Внимание!</strong> Не забудьте распечатать и наклеить новый штрих-код на использованный ролик</a>.
+    </div>
+    <div class="alert alert-info">
+        <strong>Внимание!</strong> Материал <?=Html::encode($order->material->name)?></a>.
     </div>
 <div class="row">
     <div class="col">

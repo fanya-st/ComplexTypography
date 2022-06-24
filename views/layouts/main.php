@@ -52,6 +52,7 @@ AppAsset::register($this);
             ]],
             ['label' => 'Работа с материалами', 'url' => ['/material/list']],
         ]],
+            ['label' => 'Статистика', 'url' => ['/site/statistic']],
             ['label' => 'О компании', 'url' => ['/site/about']],
             ['label' => 'Обратная связь', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (

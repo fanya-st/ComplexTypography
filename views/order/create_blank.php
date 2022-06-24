@@ -19,7 +19,6 @@ FontAwesomeAsset::register($this);
 $this->title = 'Создание заказа для пустышек';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
 $this->params['breadcrumbs'][] = $this->title;
-//$this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 $this->registerJs(
     "
     function changeSending(){
@@ -39,8 +38,6 @@ $this->registerJs(
 ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
-<!--<pre>--><?//print_r(date('Y-m-d', strtotime("+ 7 day")))?><!--</pre>-->
-<!--<pre>--><?//print_r($order)?><!--</pre>-->
 	<?$form = ActiveForm::begin()?>
     <div class="media border p-3 rounded">
             <div class="media-body">
@@ -184,6 +181,6 @@ $this->registerJs(
         <?=$form->field($label, 'takeoff_flash')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'laminate')->hiddenInput(['value' => 0])->label(false);?>
         <?=$form->field($label, 'color_count')->hiddenInput(['value' => 0])->label(false);?>
-        <?=$form->field($label, 'foil_width')->hiddenInput(['value' => 0])->label(false);?>
+        <?=$form->field($label, 'foil_id')->hiddenInput(['value' => 1])->label(false);?>
     </div>
 	<?ActiveForm::end()?>

@@ -39,15 +39,16 @@ class LabelForm extends ActiveRecord
             'design_file_file'=>'Файл дизайна',
             'foil_id'=>'Фольга',
             'color_count'=>'Цветность',
+            'takeoff_flash'=>'Снимать облои',
         ];
     }
     public function rules(){
         return[
             [['name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
-                'print_on_glue','background_id','orientation', 'output_label_id','color_count','takeoff_flash'],'required'],
+                'print_on_glue','background_id','orientation','foil_id','output_label_id','color_count','takeoff_flash'],'required'],
             ['name','string','max'=>100],
             [['name','manager_note','designer_note'],'trim'],
-            [['parent_label','status_id','image','image_crop','image_extended','design_file','date_of_design','shaft_id','foil_width'],'safe'],
+            [['parent_label','status_id','image','image_crop','image_extended','design_file','date_of_design','shaft_id'],'safe'],
         ];
     }
 }

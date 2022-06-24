@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?
 $form = ActiveForm::begin();
 ?>
-<div class="row g-2 row-cols-2">
+<div class="row g-2 row-cols-1">
     <div class="col">
         <div class="row">
             <div class="col">
