@@ -94,11 +94,15 @@ return [
             'manager',
         ],
     ],
+    'warehouse_manager' => [
+        'type' => 1,
+    ],
     'admin' => [
         'type' => 1,
         'children' => [
             'designer_admin',
             'logistician',
+            'warehouse_manager',
             'rewinder',
             'packer',
             'manager_admin',

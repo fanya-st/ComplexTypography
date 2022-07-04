@@ -28,6 +28,11 @@ echo TabsX::widget([
                 'label' => 'Параметры этикетки',
                 'content'=>$this->render('//label/_label_tab',compact('label')),
             ],
+        'finished_products_warehouse'=>
+            [
+                'label' => 'Склад ГП',
+                'content'=>$this->render('//finished-products-warehouse/_finished_products_warehouse_tab',compact('surplus')),
+            ],
 //        'technological_map'=>
 //            [
 //                'label' => 'Технокарта',

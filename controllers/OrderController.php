@@ -48,7 +48,7 @@ class OrderController extends Controller
                 ],
                 [
                     'allow' => true,
-                    'actions' => ['combinate-order'],
+                    'actions' => ['combinate-order','add-from-fpwarehouse'],
                     'roles' => ['updateOwnOrderManager','manager_admin'],
                     'roleParams' => function() {
                         return ['order' => Order::findOne(['id' => Yii::$app->request->get('id')])];
@@ -69,8 +69,25 @@ class OrderController extends Controller
     {
         $order = Order::findOne($id);
         $label = Label::findOne($order->label_id);
-        return $this->render('view',compact('order','label'));
+        $surplus = new ActiveDataProvider([
+            'query' => FinishedProductsWarehouse::find()->where(['order_id'=>null,'label_id'=>$order->label_id]),
+        ]);
+            if(Yii::$app->request->post('selection') && Yii::$app->request->post('add_from_fpwarehouse', 'start')){
+                    return $this->runAction('add-from-fpwarehouse', compact('id'));
+            }
+        return $this->render('view',compact('order','label','surplus'));
     }
+    public function actionAddFromFpwarehouse($id)
+    {
+                $rolls=FinishedProductsWarehouse::find()->where(['id'=>Yii::$app->request->post('selection')])->all();
+                foreach($rolls as $roll){
+                     $roll->order_id=$id;
+                     $roll->save();
+                }
+                Yii::$app->session->setFlash('success','Добавлено в заказ');
+        return $this->redirect(['order/view','id'=>$id]);
+    }
+
 //    public function actionSelectedOrderProcess()
 //    {
 //        if(Yii::$app->request->post('selection')){

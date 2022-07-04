@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'position' => TabsX::POS_ABOVE,
         'align' => TabsX::ALIGN_LEFT,
         'items' => [
-            'order_params'=>
+            'shipment_params'=>
                 [
                     'label' => 'Параметры отгрузки',
                     'content'=>$this->render('_shipment_tab',compact('shipment','orders')),

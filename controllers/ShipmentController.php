@@ -26,7 +26,7 @@ class ShipmentController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create','list','view','update'],
+                        'actions' => ['create','list','view'],
                         'roles' => ['manager'],
                     ],
                     [

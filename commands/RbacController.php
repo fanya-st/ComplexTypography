@@ -98,6 +98,7 @@ class RbacController extends Controller
         $designer = $auth->createRole('designer');
         $printer = $auth->createRole('printer');
         $manager_admin = $auth->createRole('manager_admin');
+        $warehouse_manager = $auth->createRole('warehouse_manager');
         $admin = $auth->createRole('admin');
         $auth->add($designer);
         $auth->add($logistician);
@@ -109,6 +110,7 @@ class RbacController extends Controller
         $auth->add($designer_admin);
         $auth->add($manager);
         $auth->add($manager_admin);
+        $auth->add($warehouse_manager);
         $auth->add($admin);
         // добавляем роль "admin" и даём роли разрешение "list"
         //$auth->addChild($admin, $permit_to_manager);
@@ -127,6 +129,7 @@ class RbacController extends Controller
         $auth->addChild($manager_admin,$manager);
         $auth->addChild($admin, $designer_admin);
         $auth->addChild($admin, $logistician);
+        $auth->addChild($admin, $warehouse_manager);
         $auth->addChild($admin, $rewinder);
         $auth->addChild($admin, $packer);
         $auth->addChild($admin, $manager_admin);
@@ -142,6 +145,7 @@ class RbacController extends Controller
 		$auth->assign($printer, 108);
 		$auth->assign($packer, 110);
 		$auth->assign($logistician, 110);
+		$auth->assign($warehouse_manager, 111);
 		$auth->assign($rewinder, 109);
 		$auth->assign($designer, 105);
 		$auth->assign($designer, 107);

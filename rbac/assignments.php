@@ -8,6 +8,9 @@ return [
         'packer',
         'logistician',
     ],
+    111 => [
+        'warehouse_manager',
+    ],
     109 => [
         'rewinder',
     ],

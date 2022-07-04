@@ -11,6 +11,7 @@ class AllowToEditShipment extends Rule
 
     public function execute($user, $item, $params)
     {
-        return isset($params['shipment']) ? $params['shipment']->manager_login == User::findIdentity($user)->username : false;
+        return isset($params['shipment']) ? ($params['shipment']->manager_login == User::findIdentity($user)->username
+            and $params['shipment']->status_id==0 ) : false;
     }
 }
