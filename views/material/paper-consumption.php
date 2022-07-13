@@ -4,7 +4,7 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\web\View;
 use yii\bootstrap5\Modal;
-use kartik\icons\Icon;;
+use kartik\icons\Icon;
 Icon::map($this, Icon::FA);
 
 $this->title = Html::encode("Ввод расхода материала для заказа ID [$order->id] $order->labelName");

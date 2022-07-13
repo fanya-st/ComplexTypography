@@ -124,6 +124,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\export\\' => 14,
             'kartik\\dynagrid\\' => 16,
             'kartik\\dialog\\' => 14,
+            'kartik\\detail\\' => 14,
             'kartik\\depdrop\\' => 15,
             'kartik\\daterange\\' => 17,
             'kartik\\date\\' => 12,
@@ -332,6 +333,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-dialog/src',
         ),
+        'kartik\\detail\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-detail-view/src',
+        ),
         'kartik\\depdrop\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-depdrop/src',
@@ -518,9 +523,9 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         ),
         'Codeception\\' => 
         array (
-            0 => __DIR__ . '/..' . '/codeception/stub/src',
-            1 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
-            2 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            0 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            1 => __DIR__ . '/..' . '/codeception/stub/src',
+            2 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
         ),
     );
 

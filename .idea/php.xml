@@ -123,6 +123,7 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-export" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-mpdf" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-dynagrid" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-detail-view" />
     </include_path>
   </component>
 </project>

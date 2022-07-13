@@ -131,6 +131,7 @@ class CustomNav extends Model
             ArrayHelper::setValue($items, 'items.start-pack', ['label' => 'Начать упаковку', 'url' => ['order/start-pack','id'=>$order->id]]);
         if (ArrayHelper::isIn($order->status_id, ['7']))
             ArrayHelper::setValue($items, 'items.pack', ['label' => 'Упаковка', 'url' => ['order/pack','id'=>$order->id]]);
+        ArrayHelper::setValue($items, 'items.print-box-label', ['label' => 'Печать ярлыков', 'url' => ['order/print-label-package','id'=>$order->id]]);
         return $items;
     }
 }

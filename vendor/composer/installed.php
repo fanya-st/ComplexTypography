@@ -245,12 +245,12 @@
             'dev_requirement' => false,
         ),
         'kartik-v/bootstrap-fileinput' => array(
-            'pretty_version' => 'v5.2.8',
-            'version' => '5.2.8.0',
+            'pretty_version' => 'v5.5.0',
+            'version' => '5.5.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../kartik-v/bootstrap-fileinput',
             'aliases' => array(),
-            'reference' => '89be70dbb9470dd8a56ef27508e344fcfccdb5af',
+            'reference' => 'c233160befa815aab3f00c3a88f1d9984567b886',
             'dev_requirement' => false,
         ),
         'kartik-v/bootstrap-tabs-x' => array(
@@ -302,6 +302,17 @@
                 0 => '1.7.x-dev',
             ),
             'reference' => 'ec63ee2e1f2b6846eb7142680cd3ab36eb0002fd',
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-detail-view' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-detail-view',
+            'aliases' => array(
+                0 => '1.8.x-dev',
+            ),
+            'reference' => '0b130581bce1ff26a98750433489cdc4816080a1',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-dialog' => array(
@@ -363,12 +374,12 @@
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-krajee-base' => array(
-            'pretty_version' => 'v3.0.4',
-            'version' => '3.0.4.0',
+            'pretty_version' => 'v3.0.5',
+            'version' => '3.0.5.0',
             'type' => 'yii2-extension',
             'install_path' => __DIR__ . '/../kartik-v/yii2-krajee-base',
             'aliases' => array(),
-            'reference' => 'b37e19a346e36cc0c612dcbab76bf771dc506f14',
+            'reference' => '5c095126d1be47e0bb1f92779b7dc099f6feae31',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-label-inplace' => array(
@@ -452,7 +463,7 @@
             'aliases' => array(
                 0 => '1.1.x-dev',
             ),
-            'reference' => '61cfc4a9c856cd710a1125ac53d49f20efc40c94',
+            'reference' => 'b5500b6855526837154694c2afab8dbc3afc8abd',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-widget-select2' => array(
@@ -876,12 +887,12 @@
             'dev_requirement' => true,
         ),
         'symfony/console' => array(
-            'pretty_version' => 'v4.4.42',
-            'version' => '4.4.42.0',
+            'pretty_version' => 'v4.4.43',
+            'version' => '4.4.43.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
-            'reference' => 'cce7a9f99e22937a71a16b23afa762558808d587',
+            'reference' => '8a2628d2d5639f35113dc1b833ecd91e1ed1cf46',
             'dev_requirement' => true,
         ),
         'symfony/css-selector' => array(
@@ -894,8 +905,8 @@
             'dev_requirement' => true,
         ),
         'symfony/deprecation-contracts' => array(
-            'pretty_version' => 'v2.5.1',
-            'version' => '2.5.1.0',
+            'pretty_version' => 'v2.5.2',
+            'version' => '2.5.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
             'aliases' => array(),
@@ -921,8 +932,8 @@
             'dev_requirement' => true,
         ),
         'symfony/event-dispatcher-contracts' => array(
-            'pretty_version' => 'v1.1.12',
-            'version' => '1.1.12.0',
+            'pretty_version' => 'v1.1.13',
+            'version' => '1.1.13.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/event-dispatcher-contracts',
             'aliases' => array(),
@@ -1017,21 +1028,21 @@
             'dev_requirement' => true,
         ),
         'symfony/service-contracts' => array(
-            'pretty_version' => 'v1.1.12',
-            'version' => '1.1.12.0',
+            'pretty_version' => 'v1.1.13',
+            'version' => '1.1.13.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/service-contracts',
             'aliases' => array(),
-            'reference' => 'eedb374f02031714a48848758a27812f3eca317a',
+            'reference' => 'afa00c500c2d6aea6e3b2f4862355f507bc5ebb4',
             'dev_requirement' => true,
         ),
         'symfony/yaml' => array(
-            'pretty_version' => 'v4.4.37',
-            'version' => '4.4.37.0',
+            'pretty_version' => 'v4.4.43',
+            'version' => '4.4.43.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/yaml',
             'aliases' => array(),
-            'reference' => 'd7f637cc0f0cc14beb0984f2bb50da560b271311',
+            'reference' => '07e392f0ef78376d080d5353c081a5e5704835bd',
             'dev_requirement' => true,
         ),
         'theseer/tokenizer' => array(
@@ -1089,7 +1100,7 @@
             'aliases' => array(
                 0 => '2.0.x-dev',
             ),
-            'reference' => '38903366818dece73d9b26118545fe87e48a7d0d',
+            'reference' => 'c943bc32e9b842d644389473f1716ba004784624',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-composer' => array(

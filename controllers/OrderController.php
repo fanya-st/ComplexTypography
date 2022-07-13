@@ -6,6 +6,7 @@ use app\models\CombinationOrder;
 use app\models\FinishedProductsWarehouse;
 use app\models\Form;
 use app\models\OrderPrintEndForm;
+use app\models\PrintLabelPackage;
 use yii\data\ActiveDataProvider;
 use app\models\CombinationPrintOrder;
 use app\models\Label;
@@ -16,6 +17,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\models\OrderForm;
 use app\models\OrderSearch;
+use barcode\barcode\BarcodeGenerator;
 use yii\base\Model;
 
 class OrderController extends Controller
@@ -43,7 +45,7 @@ class OrderController extends Controller
                 ],
                 [
                     'allow' => true,
-                    'actions' => ['list','view','start-pack','pack','pack-in','finish-pack'],
+                    'actions' => ['list','view','start-pack','pack','pack-in','finish-pack','print-label-package','print-box-label','print-sleeve-label'],
                     'roles' => ['packer'],
                 ],
                 [
@@ -254,6 +256,23 @@ public function actionCombinateOrder($id)
 
         return $this->redirect(['order/view','id'=>$id]);
     }
+
+    public function actionPrintLabelPackage($id)
+    {
+        $order=Order::findOne($id);
+        $finished_products=FinishedProductsWarehouse::find()->where(['order_id'=>$order->id])->indexBy('id')->all();
+//        if(Yii::$app->request->post('print_box_label')=='' && $model->load(Yii::$app->request->post())){
+//                return $this->render('print-box-label', compact('order','model'));
+//        }
+        if(Yii::$app->request->post('print_box_label')==''){
+            if (Model::loadMultiple($finished_products, Yii::$app->request->post())){
+                return $this->render('print-box-label', compact('order','model','finished_products'));
+            }
+        }
+        return $this->render('print-label-package-form', compact('order','model','finished_products'));
+    }
+
+
     public function actionFinishPrint($id)
     {
         $order=OrderPrintEndForm::findOne($id);
