@@ -32,6 +32,7 @@ return array(
     'kartik\\grid\\' => array($vendorDir . '/kartik-v/yii2-grid/src'),
     'kartik\\form\\' => array($vendorDir . '/kartik-v/yii2-widget-activeform/src'),
     'kartik\\file\\' => array($vendorDir . '/kartik-v/yii2-widget-fileinput/src'),
+    'kartik\\field\\' => array($vendorDir . '/kartik-v/yii2-field-range/src'),
     'kartik\\export\\' => array($vendorDir . '/kartik-v/yii2-export/src'),
     'kartik\\dynagrid\\' => array($vendorDir . '/kartik-v/yii2-dynagrid/src'),
     'kartik\\dialog\\' => array($vendorDir . '/kartik-v/yii2-dialog/src'),

@@ -344,6 +344,17 @@
             'reference' => 'e720dcdd7df85b5af836a58178a72fc8e0942927',
             'dev_requirement' => false,
         ),
+        'kartik-v/yii2-field-range' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-field-range',
+            'aliases' => array(
+                0 => '1.3.x-dev',
+            ),
+            'reference' => '8a18edb343b3beb96ddc86e4a06aee28be160787',
+            'dev_requirement' => false,
+        ),
         'kartik-v/yii2-grid' => array(
             'pretty_version' => 'v3.5.0',
             'version' => '3.5.0.0',

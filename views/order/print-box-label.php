@@ -50,11 +50,16 @@ function printDiv(divName){
                 </tr>
                 </thead>
                 <tbody>
+                <?$count=count($finished_products)?>
                 <?foreach($finished_products as $finished_product):?>
                 <?if($finished_product->packed_roll_count != 0):?>
                 <tr>
-                    <td>
-                    <?=$order->label->name?></td>
+                    <?if( $count > 1):?>
+                    <td rowspan="<?=$count?>">
+                        <?=$order->label->name?></td>
+                        <? $count=null?>
+                        <?endif;?>
+
                     <td><?=$finished_product->packed_roll_count?></td>
                     <td><?=$finished_product->label_in_roll?></td>
                     <td><?=$finished_product->packed_roll_count*$finished_product->label_in_roll?></td>

@@ -29,6 +29,11 @@ echo TabsX::widget([
                 'label' => 'Архивные данные',
                 'content'=>$this->render('_archive_tab',compact('material')),
             ],
+        'warehouse'=>
+            [
+                'label' => 'Складские запасы',
+                'content'=>$this->render('_warehouse_tab',compact('material_warehouse')),
+            ],
     ],
 ]);
 ?>

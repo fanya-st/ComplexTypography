@@ -28,6 +28,7 @@ $this->title = 'Комплекс Типография';
                 <h2>Работа с материалами</h2>
                 <p>Просмотр, создание, удаление материалов</p>
                 <p><a class="btn btn-outline-secondary" href="?r=material%2Flist">Работа с материалами &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse%2Flist">Склад бумаги, фольги, ламинации &raquo;</a></p>
             </div>
 <!--            <div class="col-lg-4">-->
 <!--                <div class="card">-->

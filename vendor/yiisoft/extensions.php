@@ -274,4 +274,13 @@ return array (
       '@kartik/detail' => $vendorDir . '/kartik-v/yii2-detail-view/src',
     ),
   ),
+  'kartik-v/yii2-field-range' => 
+  array (
+    'name' => 'kartik-v/yii2-field-range',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/field' => $vendorDir . '/kartik-v/yii2-field-range/src',
+    ),
+  ),
 );

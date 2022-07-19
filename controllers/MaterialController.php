@@ -8,6 +8,7 @@ use app\models\Material;
 use app\models\OrderMaterial;
 use app\models\PaperWarehouse;
 use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 use app\models\MaterialForm;
 use yii\filters\AccessControl;
 use app\models\Order;
@@ -70,7 +71,8 @@ class MaterialController extends Controller
     public function actionView($id)
     {
         $material=Material::findOne($id);
-        return $this->render('view',compact('material'));
+        $material_warehouse=PaperWarehouse::find()->select(['material_id','width',new Expression('SUM(length) as length')])->where(['>','length',0])->andWhere(['material_id'=>$id])->groupBy(['width','material_id'])->all();
+        return $this->render('view',compact('material','material_warehouse'));
     }
 
     public function actionUpdate($id)
