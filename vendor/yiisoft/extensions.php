@@ -283,4 +283,13 @@ return array (
       '@kartik/field' => $vendorDir . '/kartik-v/yii2-field-range/src',
     ),
   ),
+  'ruskid/yii2-csv-importer' => 
+  array (
+    'name' => 'ruskid/yii2-csv-importer',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@ruskid/csvimporter' => $vendorDir . '/ruskid/yii2-csv-importer',
+    ),
+  ),
 );

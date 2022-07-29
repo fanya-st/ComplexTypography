@@ -100,6 +100,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             'setasign\\Fpdi\\' => 14,
         ),
+        'r' => 
+        array (
+            'ruskid\\csvimporter\\' => 19,
+        ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
@@ -255,6 +259,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'setasign\\Fpdi\\' => 
         array (
             0 => __DIR__ . '/..' . '/setasign/fpdi/src',
+        ),
+        'ruskid\\csvimporter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ruskid/yii2-csv-importer',
         ),
         'phpDocumentor\\Reflection\\' => 
         array (

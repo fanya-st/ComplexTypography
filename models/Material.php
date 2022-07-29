@@ -43,6 +43,7 @@ class Material extends ActiveRecord
             'price_euro_discount'=>'Цена в евро за м2 со скидкой',
             'density'=>'Плотность г/м2',
             'status'=>'Статус',
+            'material_id_from_provider'=>'ID от поставщика',
         ];
     }
 

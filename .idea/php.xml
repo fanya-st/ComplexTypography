@@ -125,6 +125,7 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-dynagrid" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-detail-view" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-field-range" />
+      <path value="$PROJECT_DIR$/vendor/ruskid/yii2-csv-importer" />
     </include_path>
   </component>
 </project>

@@ -34,11 +34,11 @@ class PaperWarehouseSearch extends PaperWarehouse
     }
     public function search($params)
     {
-        $query=PaperWarehouse::find();
+        $query=PaperWarehouse::find()->where(['>','length',0]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 15,
             ]
         ]);
         $dataProvider->setSort([
@@ -65,7 +65,8 @@ class PaperWarehouseSearch extends PaperWarehouse
 
         // изменяем запрос добавляя в его фильтрацию
         $query->andFilterWhere(['paper_warehouse.id' => $this->id]);
-        $query->andFilterWhere(['like','material.name',$this->materialName]);
+//        $query->andFilterWhere(['like','material.name',$this->materialName]);
+        $query->andFilterWhere(['material_id'=>$this->material_id]);
         $query->joinWith(['material' => function ($q) {
             $q->andFilterWhere(['material.material_group_id' => $this->materialGroupId]);
         }]);

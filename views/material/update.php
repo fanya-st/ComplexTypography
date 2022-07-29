@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?=$form->field($material,'status')->dropDownList([0=>'В архиве',1=>'Активный'])?>
             <?=$form->field($material,'price_rub')->textInput()?>
             <?=$form->field($material,'price_rub_discount')->textInput()?>
+            <?=$form->field($material,'material_id_from_provider')->textInput()?>
         </div>
     </div>
         <?=Html::submitButton('Сохранить',['class'=>'btn btn-success'])?>

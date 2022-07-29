@@ -72,7 +72,7 @@ function printDiv(divName){
                             ]);
                             echo "<div id='modalContent-".$paper->paper_warehouse_id."'>";
                             echo Html::tag('p', Html::encode($paper->paperWarehouse->material->name.' Ширина: '.$paper->paperWarehouse->width.
-                                'см Длина: '.$paper->paperWarehouse->length.' м'),['class'=>'small text-center','style'=>'font-size:10px']);
+                                'мм Длина: '.$paper->paperWarehouse->length.' м'),['class'=>'small text-center','style'=>'font-size:10px']);
                             $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
                             echo Html::tag('div',Html::img('data:image/png;base64,' . base64_encode($generator->
                                 getBarcode(str_pad($paper->paper_warehouse_id, 12, '0', STR_PAD_LEFT),
@@ -84,7 +84,8 @@ function printDiv(divName){
                             ?>
                             </td>
                         <td>
-                            <?= Html::button( Icon::show('print', ['class'=>'fa-1.5x'], Icon::FA),['class' => 'btn btn-outline-primary','onclick'=>'printDiv("modalContent-'.$paper->paper_warehouse_id.'")']) ?>
+                            <?= Html::button( Icon::show('print', ['class'=>'fa-1.5x'], Icon::FA),
+                                ['class' => 'btn btn-outline-primary','onclick'=>'printDiv("modalContent-'.$paper->paper_warehouse_id.'")']) ?>
 
                         </td>
                     </tr>
