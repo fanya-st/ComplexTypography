@@ -297,7 +297,7 @@ class LabelController extends Controller
                 $ready_form->envelope_id=$envelope->id;
                 $ready_form->polymer_id=$flexform->polymer_id;
                 $ready_form->save();
-                //записываем исзготовленные новые формы к заказу
+                //записываем изготовленные новые формы к заказу
                 $form_history=new FormOrderHistory();
                 $order=Order::findOne(['label_id'=>$cur_label->id]);
                 if(!empty($order->combinationOrder)){
@@ -307,7 +307,7 @@ class LabelController extends Controller
                 }
                 $form_history->form_id=$id;
                 $form_history->save();
-                //записываем исзготовленные новые формы к заказу
+                //записываем изготовленные новые формы к заказу
             }
             if(!empty($cur_label->combinatedLabel)){
                 foreach ($cur_label->combinatedLabel as $label_id){

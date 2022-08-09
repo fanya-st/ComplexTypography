@@ -12,10 +12,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
-    public $group;
     public $F;
     public $I;
     public $O;
+    public $start_time;
+    public $end_time;
 
     private static $users = [
         '100' => [
@@ -24,7 +25,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'admin',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
-            'group' => 'admin',
             'F' => 'Администратор',
             'I' => 'Администратор',
             'O' => '',
@@ -35,10 +35,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Alex',
             'authKey' => 'test101key',
             'accessToken' => '101-token',
-            'group' => 'prepress',
             'F' => 'Агапов',
             'I' => 'Алексей',
             'O' => '',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
         ],
 		'102' => [
             'id' => '102',
@@ -46,10 +47,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Jura',
             'authKey' => 'test102key',
             'accessToken' => '102-token',
-            'group' => 'manager_admin',
             'F' => 'Фадеев',
             'I' => 'Юрий',
             'O' => 'Вячеславович',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
         ],
         '103' => [
             'id' => '103',
@@ -57,10 +59,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Hamida',
             'authKey' => 'test103key',
             'accessToken' => '103-token',
-            'group' => 'manager',
             'F' => 'Салахова',
             'I' => 'Хамида',
             'O' => 'Шавкатовна',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
         ],
         '104' => [
             'id' => '104',
@@ -68,10 +71,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Natasha',
             'authKey' => 'test104key',
             'accessToken' => '104-token',
-            'group' => 'designer_admin',
             'F' => 'Львова',
             'I' => 'Наталья',
             'O' => 'Петровна',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
         ],
         '105' => [
             'id' => '105',
@@ -83,6 +87,8 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'F' => 'Кожевникова',
             'I' => 'Мария',
             'O' => '',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
         ],
         '106' => [
             'id' => '106',
@@ -90,7 +96,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Ivan',
             'authKey' => 'test106key',
             'accessToken' => '106-token',
-            'group' => 'laboratory',
             'F' => 'Карпунин',
             'I' => 'Иван',
             'O' => '',
@@ -101,10 +106,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Svetlana',
             'authKey' => 'test107key',
             'accessToken' => '107-token',
-            'group' => 'designer',
             'F' => 'Герасимова',
             'I' => 'Светлана',
             'O' => '',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
         ],
         '108' => [
             'id' => '108',
@@ -112,7 +118,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Maksim',
             'authKey' => 'test108key',
             'accessToken' => '108-token',
-            'group' => 'printer',
             'F' => 'Прокаев',
             'I' => 'Максим',
             'O' => '',
@@ -123,7 +128,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Ilnur',
             'authKey' => 'test109key',
             'accessToken' => '109-token',
-            'group' => 'rewinder',
             'F' => 'Мугинов',
             'I' => 'Ильнур',
             'O' => '',
@@ -134,10 +138,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Albert',
             'authKey' => 'test110key',
             'accessToken' => '110-token',
-            'group' => 'packer',
-            'F' => 'Миннеханов',
+            'F' => 'Миннегалиев',
             'I' => 'Альберт',
             'O' => '',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
         ],
         '111' => [
             'id' => '111',
@@ -145,10 +150,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Rustam',
             'authKey' => 'test111key',
             'accessToken' => '111-token',
-            'group' => 'warehouse_manager',
             'F' => 'Сабирзянов',
             'I' => 'Рустам',
             'O' => '',
+            'start_time' => '8:00',
+            'end_time' => '19:00',
         ],
     ];
 
@@ -160,10 +166,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     {
         return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
     }
-//    public static function getFullName($username)
-//        {
-//            return self::$users[$id]) ? new static(self::$users[$id]) : null;
-//        }
 
     /**
      * {@inheritdoc}
@@ -178,12 +180,21 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
         return null;
     }
+
+    public static function findWorkingTimeByUserName($username)
+    {
+        foreach(self::$users as $user){
+            if($user['username']== $username){
+                $start=date_create($user['start_time']);
+                $end=date_create($user['end_time']);
+                return date_diff($start,$end)->h;
+            }
+        }
+
+        return null;
+    }
     public static function findUsersByGroup($group)
     {
-//        foreach(self::$users as $user){
-//            if($user['group']== $group OR $user['group']== $group.'_admin')
-//            $array[$user['username']]=$user['F'].' '.mb_substr($user['I'],0,1).'.';
-//        }
         foreach(self::$users as $user){
             if(ArrayHelper::keyExists($group, Yii::$app->authManager->getRolesByUser($user['id']), false)
             OR ArrayHelper::keyExists($group.'_admin', Yii::$app->authManager->getRolesByUser($user['id']), false))
@@ -197,6 +208,23 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             if($user['username']== $username)
             return $user['F'].' '.mb_substr($user['I'],0,1).'.';
         }
+    }
+
+    public static function getUserList()
+    {
+        $user_list=[];
+        foreach(self::$users as $user){
+            ArrayHelper::setValue($user_list,$user['id'].'.id',$user['id']);
+            ArrayHelper::setValue($user_list,$user['id'].'.username',$user['username']);
+            ArrayHelper::setValue($user_list,$user['id'].'.F',$user['F']);
+            ArrayHelper::setValue($user_list,$user['id'].'.I',$user['I']);
+            ArrayHelper::setValue($user_list,$user['id'].'.O',$user['O']);
+
+            ArrayHelper::setValue($user_list,$user['id'].'.start_time',$user['start_time']);
+            ArrayHelper::setValue($user_list,$user['id'].'.end_time',$user['end_time']);
+            ArrayHelper::setValue($user_list,$user['id'].'.group',Yii::$app->authManager->getAssignments($user['id']));
+        }
+        return $user_list;
     }
 
     /**

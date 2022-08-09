@@ -2,6 +2,7 @@
 
 /** @var yii\web\View $this */
 
+
 $this->title = 'Комплекс Типография';
 ?>
 <div class="site-index">
@@ -58,6 +59,12 @@ $this->title = 'Комплекс Типография';
                 <p>Работа с заказчиками</p>
                 <p><a class="btn btn-outline-secondary" href="?r=customer/create">Добавить заказчика &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=customer/list">Работа с заказчиками &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Учет рабочего времени</h2>
+                <p>Учет рабочего времени</p>
+                <p><a class="btn btn-outline-secondary" href="?r=time-tracker/kiosk">Учет рабочего времени &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=employee/list">Сотрудники &raquo;</a></p>
             </div>
         </div>
     </div>

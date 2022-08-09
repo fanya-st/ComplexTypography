@@ -10,6 +10,24 @@
         'dev' => true,
     ),
     'versions' => array(
+        '2amigos/qrcode-library' => array(
+            'pretty_version' => '1.1.2',
+            'version' => '1.1.2.0',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../2amigos/qrcode-library',
+            'aliases' => array(),
+            'reference' => '5356f2355c7ba9a9ced67753411c88c2c095deb0',
+            'dev_requirement' => false,
+        ),
+        'bacon/bacon-qr-code' => array(
+            'pretty_version' => '1.0.3',
+            'version' => '1.0.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bacon/bacon-qr-code',
+            'aliases' => array(),
+            'reference' => '5a91b62b9d37cee635bbf8d553f4546057250bee',
+            'dev_requirement' => false,
+        ),
         'behat/gherkin' => array(
             'pretty_version' => 'v4.7.3',
             'version' => '4.7.3.0',
@@ -508,6 +526,15 @@
                 0 => '1.0.x-dev',
             ),
             'reference' => '680aec2d79846e926c072da455cf6f33e1c3bb12',
+            'dev_requirement' => false,
+        ),
+        'khanamiryan/qrcode-detector-decoder' => array(
+            'pretty_version' => '1.0.5.2',
+            'version' => '1.0.5.2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../khanamiryan/qrcode-detector-decoder',
+            'aliases' => array(),
+            'reference' => '04fdd58d86a387065f707dc6d3cc304c719910c1',
             'dev_requirement' => false,
         ),
         'markbaker/complex' => array(

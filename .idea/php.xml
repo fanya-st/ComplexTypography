@@ -126,6 +126,9 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-detail-view" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-field-range" />
       <path value="$PROJECT_DIR$/vendor/ruskid/yii2-csv-importer" />
+      <path value="$PROJECT_DIR$/vendor/2amigos/qrcode-library" />
+      <path value="$PROJECT_DIR$/vendor/khanamiryan/qrcode-detector-decoder" />
+      <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
     </include_path>
   </component>
 </project>

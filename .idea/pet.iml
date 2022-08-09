@@ -128,6 +128,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-detail-view" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-field-range" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ruskid/yii2-csv-importer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/2amigos/qrcode-library" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/khanamiryan/qrcode-detector-decoder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bacon/bacon-qr-code" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

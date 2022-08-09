@@ -4,10 +4,8 @@
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
-//use kartik\form\ActiveForm;
 use app\models\Material;
-use kartik\select2\Select2;
-use yii\bootstrap5\Modal;
+use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use app\models\MaterialGroup;
 use kartik\field\FieldRange;
@@ -99,24 +97,25 @@ function printDiv(divName){
         ['label'=>'Штрихкод',
             'contentOptions'=>['class' => 'text-center'],
             'value'=>function($model) {
-                Modal::begin([
-                    'title'=>Html::tag('h4', 'Штрихкод'),
-                    'id'=>'modal-'.$model->id,
-                    'centerVertical'=>true,
-                ]);
-                echo html::beginTag('div',['id'=>'modalContent-'.$model->id]);
-                echo Html::tag('p', Html::encode($model->material->name.' Ширина: '.$model->width.
-                    'мм Длина: '.$model->length.' м'),['class'=>'small text-center','style'=>'font-size:10px']);
-                $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
-                echo Html::tag('div',Html::img('data:image/png;base64,' . base64_encode($generator->
-                    getBarcode(str_pad($model->id, 12, '0', STR_PAD_LEFT),
-                        $generator::TYPE_EAN_13,2, 70)) . '', ['alt' => 'barcode','class'=>'text-center']),
-                    ['class'=>'text-center']);
-                echo Html::tag('p', Html::encode($model->id),['class'=>'small text-center']);
-                echo html::endTag('div');
-                Modal::end();
-                return Html::button( Icon::show('print', ['class'=>'fa-1.5x'], Icon::FA),
-                    ['class' => 'btn btn-outline-primary','onclick'=>'printDiv("modalContent-'.$model->id.'")']);
+//                Modal::begin([
+//                    'title'=>Html::tag('h4', 'Штрихкод'),
+//                    'id'=>'modal-'.$model->id,
+//                    'centerVertical'=>true,
+//                ]);
+//                echo html::beginTag('div',['id'=>'modalContent-'.$model->id]);
+//                echo Html::tag('p', Html::encode($model->material->name.' Ширина: '.$model->width.
+//                    'мм Длина: '.$model->length.' м'),['class'=>'small text-center','style'=>'font-size:10px']);
+//                $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+//                echo Html::tag('div',Html::img('data:image/png;base64,' . base64_encode($generator->
+//                    getBarcode(str_pad($model->id, 12, '0', STR_PAD_LEFT),
+//                        $generator::TYPE_EAN_13,2, 70)) . '', ['alt' => 'barcode','class'=>'text-center']),
+//                    ['class'=>'text-center']);
+//                echo Html::tag('p', Html::encode($model->id),['class'=>'small text-center']);
+//                echo html::endTag('div');
+//                Modal::end();
+//                return Html::button( Icon::show('print', ['class'=>'fa-1.5x'], Icon::FA),
+//                    ['class' => 'btn btn-outline-primary','onclick'=>'printDiv("modalContent-'.$model->id.'")']);
+                return Html::a('Штрихкод', ['paper-warehouse/barcode-print','id'=>$model->id], ['class'=>'btn btn-primary','target' => '_blank']);
             },
             'headerOptions' => ['class' => 'text-center'],
             'format'=>'raw'
@@ -126,5 +125,7 @@ function printDiv(divName){
 //        ],
     ],
 ]);
-ActiveForm::end()
+
+
 ?>
+<? ActiveForm::end()?>

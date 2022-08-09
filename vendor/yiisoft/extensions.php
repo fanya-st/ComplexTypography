@@ -292,4 +292,13 @@ return array (
       '@ruskid/csvimporter' => $vendorDir . '/ruskid/yii2-csv-importer',
     ),
   ),
+  '2amigos/qrcode-library' => 
+  array (
+    'name' => '2amigos/qrcode-library',
+    'version' => '1.1.2.0',
+    'alias' => 
+    array (
+      '@Da/QrCode' => $vendorDir . '/2amigos/qrcode-library/src',
+    ),
+  ),
 );

@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'email',
         'number',
         ['class' => 'yii\grid\ActionColumn',
-            'template' => '{view},{update}'
+            'template' => '{view} {update}'
         ],
     ],
 ]);

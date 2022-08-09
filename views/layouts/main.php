@@ -10,6 +10,7 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 use kartik\bs5dropdown\Dropdown;
+use yii\helpers\ArrayHelper;
 
 AppAsset::register($this);
 ?>
@@ -29,18 +30,8 @@ AppAsset::register($this);
 
 <header>
     <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-            'dropdownClass' => Dropdown::class,
-            'options' => ['class' => 'navbar-nav mr-auto me-auto'],
-        'items' => [
-            ['label' => 'Меню', 'items' => [
+    $nav_items=[
+        ['label' => 'Меню', 'items' => [
             ['label' => 'Работа с заказами', 'items' => [
                 ['label' => 'Просмотр заказов', 'url' => ['/order/list']],
                 ['label' => 'Создание заказа с готовой этикеткой', 'url' => ['/order/create','blank'=>1]],
@@ -52,22 +43,35 @@ AppAsset::register($this);
             ]],
             ['label' => 'Работа с материалами', 'url' => ['/material/list']],
         ]],
-            ['label' => 'Статистика', 'url' => ['/site/statistic']],
-            ['label' => 'О компании', 'url' => ['/site/about']],
-            ['label' => 'Обратная связь', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Войти', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-                . Html::submitButton(
-                    'Нажмите чтобы выйти (' . Yii::$app->user->identity->username . ') ',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
+        ['label' => 'Статистика', 'url' => ['/site/statistic']],
+        ['label' => 'О компании', 'url' => ['/site/about']],
+        ['label' => 'Обратная связь', 'url' => ['/site/contact']],
+        Yii::$app->user->isGuest ? (
+        ['label' => 'Войти', 'url' => ['/site/login']]
+        ) : (
+            '<li>'
+            . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+            . Html::submitButton(
+                'Нажмите чтобы выйти (' . Yii::$app->user->identity->username . ') ',
+                ['class' => 'btn btn-link logout']
             )
+            . Html::endForm()
+            . '</li>'
+        )
+    ];
+    if(ArrayHelper::keyExists('admin', Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()), false))
+        ArrayHelper::setValue($nav_items,'',['label' => 'Администраторская панель', 'url' => ['/cms/cms-panel']]);
+    NavBar::begin([
+        'brandLabel' => Yii::$app->name,
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
+    ]);
+    echo Nav::widget([
+            'dropdownClass' => Dropdown::class,
+            'options' => ['class' => 'navbar-nav mr-auto me-auto'],
+        'items' => $nav_items,
     ]
     );
     NavBar::end();

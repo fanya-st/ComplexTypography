@@ -22,7 +22,7 @@ class OrderSearch extends Order
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [[], 'integer'],
+            [['id','label_id'], 'integer'],
             [['labelName'], 'trim'],
             [['customerId','name','label_id','id','manager_login','shaft_id','date_of_create','status_id','pantsId','mashine_id','label_status_id'], 'safe'],
         ];
@@ -43,6 +43,7 @@ class OrderSearch extends Order
             ]
         ]);
         $dataProvider->setSort([
+            'defaultOrder' => ['id'=>SORT_DESC],
             'attributes' => [
 //                'order.id'
 //                'name',

@@ -22,10 +22,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\CheckboxColumn',
             ],
-            'id',
             [
+                'attribute' => 'id',
+                'label' => 'ID',
+                'contentOptions'=>['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center','style' => 'width:5%'],
+            ],
+            [
+                'attribute' => 'label_id',
                 'label' => 'ID Эт-ки',
-                'attribute' => 'label.id',
+                'contentOptions'=>['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center','style' => 'width:5%'],
             ],
             [
                 'label' => 'Наименование',

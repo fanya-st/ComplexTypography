@@ -24,7 +24,7 @@ class PaperWarehouseController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list','upload-paper','upload-paper-to-warehouse'],
+                        'actions' => ['list','upload-paper','upload-paper-to-warehouse','barcode-print'],
                         'roles' => ['warehouse_manager'],
                     ],
                 ],
@@ -48,6 +48,11 @@ class PaperWarehouseController extends Controller
             }
         }
         return $this->render('upload_paper_from_provider',compact('upload_paper_form'));
+    }
+
+    public function actionBarcodePrint($id){
+        $paper_warehouse=PaperWarehouse::findOne($id);
+        return $this->renderAjax('barcode_print',compact('paper_warehouse'));
     }
 
     public function actionUploadPaperToWarehouse(){
