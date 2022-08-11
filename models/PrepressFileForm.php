@@ -6,6 +6,7 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
+use yii;
 
 class PrepressFileForm extends ActiveRecord
 {
@@ -64,6 +65,7 @@ class PrepressFileForm extends ActiveRecord
             }
             return true;
         } else {
+            Yii::$app->session->setFlash('error', 'Ошибка загрузки');
             return false;
         }
     }

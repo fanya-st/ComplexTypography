@@ -33,15 +33,25 @@ AppAsset::register($this);
     $nav_items=[
         ['label' => 'Меню', 'items' => [
             ['label' => 'Работа с заказами', 'items' => [
-                ['label' => 'Просмотр заказов', 'url' => ['/order/list']],
+                ['label' => 'Заказы', 'url' => ['/order/list']],
                 ['label' => 'Создание заказа с готовой этикеткой', 'url' => ['/order/create','blank'=>1]],
                 ['label' => 'Создание заказа', 'url' => ['/order/create','blank'=>0]]
             ]],
             ['label' => 'Работа с этикетками', 'items' => [
-                ['label' => 'Просмотр этикеток', 'url' => ['/label/list']],
+                ['label' => 'Этикетки', 'url' => ['/label/list']],
                 ['label' => 'Создание этикетки', 'url' => ['/label/create']]
             ]],
-            ['label' => 'Работа с материалами', 'url' => ['/material/list']],
+            ['label' => 'Работа с материалами', 'items' => [
+                ['label' => 'Материалы', 'url' => ['/material/list']],
+                ['label' => 'Склад бумаги, фольги и ламинации', 'url' => ['/paper-warehouse/list']],
+                ['label' => 'Загрузка пришедшей бумаги', 'url' => ['/paper-warehouse/upload-paper']]
+                ]
+            ],
+            ['label' => 'Работа с отгрузками', 'items' => [
+                ['label' => 'Отгрузки', 'url' => ['/shipment/list']],
+                ['label' => 'Излишки', 'url' => ['/finished-products-warehouse/surplus-list']],
+                ]
+            ],
         ]],
         ['label' => 'Статистика', 'url' => ['/site/statistic']],
         ['label' => 'О компании', 'url' => ['/site/about']],
@@ -59,6 +69,7 @@ AppAsset::register($this);
             . '</li>'
         )
     ];
+    if(!Yii::$app->user->isGuest)
     if(ArrayHelper::keyExists('admin', Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()), false))
         ArrayHelper::setValue($nav_items,'',['label' => 'Администраторская панель', 'url' => ['/cms/cms-panel']]);
     NavBar::begin([

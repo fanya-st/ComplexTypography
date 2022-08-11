@@ -34,8 +34,8 @@ echo GridView::widget([
         ],
         [
             'label'=>'Менеджер',
-            'attribute' => 'managerLogin',
-            'value' => 'label.managerName',
+            'attribute'=>'managerLogin',
+            'value' => function($model){return User::getFullNameByUsername($model->label->customer->manager_login);},
             'filter' => User::findUsersByGroup('manager'),
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center']
@@ -59,28 +59,6 @@ echo GridView::widget([
                  },
             'headerOptions' => ['class' => 'text-center']
         ],
-//        ['attribute'=>'customerName',
-//            'headerOptions'=>['class' => 'text-center']
-//        ],
-//        ['attribute'=>'labelStatusName',
-//            'headerOptions'=>['class' => 'text-center']
-//        ],
-//        ['attribute'=>'pantsName',
-//            'headerOptions'=>['class' => 'text-center']
-//        ],
-//        ['attribute'=>'shaftName',
-//            'contentOptions'=>['class' => 'text-center'],
-//            'headerOptions' => ['class' => 'text-center']
-//
-//        ],
-//        ['attribute'=>'fullName',
-//            'contentOptions'=>['class' => 'text-center'],
-//            'headerOptions' => ['class' => 'text-center']
-//
-//        ],
-//        ['class' => 'yii\grid\ActionColumn',
-//            'template' => '{view}'
-//        ],
     ],
 ]);
 ?>

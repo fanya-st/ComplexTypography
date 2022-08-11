@@ -33,10 +33,10 @@ function printDiv(divName){
 <!--<pre>--><?//print_r()?><!--</pre>-->
 <?//=$this->render('_search', ['model' => $searchModel])?>
 <div class="d-inline-flex">
-<div class="p-3">
+<div class="p-2">
     <?=Html::a('Загрузить пришедший материал', ['paper-warehouse/upload-paper'], ['class'=>'btn btn-primary'])?>
 </div>
-<div class="p-3">
+<div class="p-2">
     <?=Html::a('Загрузить пришедную бумагу на склад', ['paper-warehouse/upload-paper-to-warehouse'], ['class'=>'btn btn-primary'])?>
 </div>
 </div>
@@ -53,11 +53,11 @@ function printDiv(divName){
         ],
         [
             'attribute' => 'material_id',
-            'value'=>'materialName',
+            'value'=>'material.name',
             'label'=>'Наименование',
             'headerOptions' => ['class' => 'text-center','style' => 'width:30%'],
             'contentOptions'=>function($model) {
-                        return ['title'=>$model->material->prompt];
+                        return ['title'=>$model->material->prompt,'class' => 'text-center'];
                     },
 //            'filter'=>Select2::widget([
 //                'model' => $searchModel,
@@ -74,8 +74,9 @@ function printDiv(divName){
         [
                 'label'=>'Группа',
             'headerOptions' => ['class' => 'text-center'],
-            'attribute' => 'materialGroupId',
+            'contentOptions' => ['class' => 'text-center'],
             'value' => 'materialGroup.name',
+            'attribute' => 'materialGroupId',
             'filter'=>ArrayHelper::map(MaterialGroup::find()->asArray()->all(),'id','name')
         ],
         [
@@ -94,7 +95,7 @@ function printDiv(divName){
             'headerOptions' => ['class' => 'text-center'],
             'contentOptions'=>['class' => 'text-center'],
         ],
-        ['label'=>'Штрихкод',
+        ['label'=>'QR-код',
             'contentOptions'=>['class' => 'text-center'],
             'value'=>function($model) {
 //                Modal::begin([
@@ -115,9 +116,9 @@ function printDiv(divName){
 //                Modal::end();
 //                return Html::button( Icon::show('print', ['class'=>'fa-1.5x'], Icon::FA),
 //                    ['class' => 'btn btn-outline-primary','onclick'=>'printDiv("modalContent-'.$model->id.'")']);
-                return Html::a('Штрихкод', ['paper-warehouse/barcode-print','id'=>$model->id], ['class'=>'btn btn-primary','target' => '_blank']);
+                return Html::a('QR-код', ['paper-warehouse/barcode-print','id'=>$model->id], ['class'=>'btn btn-primary','target' => '_blank']);
             },
-            'headerOptions' => ['class' => 'text-center'],
+            'headerOptions' => ['class' => 'text-center','style' => 'width:10%'],
             'format'=>'raw'
         ],
 //        ['class' => 'yii\grid\ActionColumn',

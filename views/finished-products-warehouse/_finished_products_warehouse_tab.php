@@ -3,11 +3,10 @@
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
+use app\models\User;
 ?>
 <?php $form=ActiveForm::begin(['method' => 'post'])?>
-<!--<pre>--><?//print_r(Yii::$app->request->post())?><!--</pre>-->
 <?=Html::submitButton('Добавить в заказ',['name'=>'add_from_fpwarehouse','value'=>'start','class'=>'btn btn-primary'])?>
-<?//=Html::submitButton('test',['name'=>'test','class'=>'btn btn-primary'])?>
 <?
 echo GridView::widget([
     'dataProvider' => $surplus,
@@ -30,7 +29,10 @@ echo GridView::widget([
         ],
         [
             'label'=>'Менеджер',
-            'attribute' => 'label.managerName',
+            'attribute' => 'label.customer.manager_login',
+            'value'=>function($model){
+                return User::getFullNameByUsername($model->customer->manager_login);
+            },
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center']
         ],

@@ -30,10 +30,12 @@ echo GridView::widget([
         ],
         [
             'attribute' => 'manager_login',
-            'value' => 'fullName',
+            'value' => function($model){
+                return User::getFullNameByUsername($model->customer->manager_login);
+                },
             'filter' => User::findUsersByGroup('manager')
         ],
-        'labelName',
+        'label.name',
         'date_of_sale',
         [
             'attribute' => 'customerId',

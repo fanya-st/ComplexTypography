@@ -26,9 +26,10 @@ class LabelForm extends ActiveRecord
             'varnish_id'=>'Вид лака',
             'print_on_glue'=>'Печать по клею',
             'background_id'=>'Фон',
-            'manager_note'=>'Примечание для дизайнеров и препрессников',
-            'prepress_note'=>'Примечание для лаборатории и печатников',
-            'designer_note'=>'Примечание для препрессников',
+            'manager_note'=>'Примечание от менеджера',
+            'prepress_note'=>'Примечание от препрессника',
+            'designer_note'=>'Примечание от дизайнера',
+            'laboratory_note'=>'Примечание от лаборанта',
             'stencil'=>'Трафарет',
             'shaft_id'=>'Вал',
             'foil_width'=>'Ширина фольги, мм',
@@ -40,6 +41,7 @@ class LabelForm extends ActiveRecord
             'foil_id'=>'Фольга',
             'color_count'=>'Цветность',
             'takeoff_flash'=>'Снимать облои',
+            'variable_paint_count'=>'Краска переменной печати, мл',
         ];
     }
     public function rules(){
@@ -48,7 +50,8 @@ class LabelForm extends ActiveRecord
                 'print_on_glue','background_id','orientation','foil_id','output_label_id','color_count','takeoff_flash'],'required'],
             ['name','string','max'=>100],
             [['name','manager_note','designer_note'],'trim'],
-            [['parent_label','status_id','image','image_crop','image_extended','design_file','date_of_design','shaft_id'],'safe'],
+            [['variable_paint_count'],'double'],
+            [['parent_label','status_id','image','image_crop','image_extended','design_file','date_of_design','shaft_id','variable_paint_count'],'safe'],
         ];
     }
 }

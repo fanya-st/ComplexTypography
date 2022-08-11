@@ -2,6 +2,7 @@
 
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
+use app\models\User;
 
 $this->title = 'Работа с этикетками';
 $this->params['breadcrumbs'][] = $this->title;
@@ -29,21 +30,33 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions'=>['class' => 'text-center'],
                     'headerOptions' => ['class' => 'text-center']
                 ],
-                ['attribute'=>'customerName',
+                [
+                        'label'=>'Заказчик',
+                        'value'=>'customer.name',
                     'headerOptions'=>['class' => 'text-center']
                 ],
-                ['attribute'=>'labelStatusName',
+                [
+                        'label'=>'Статус этикетки',
+                        'value'=>'labelStatus.name',
                     'headerOptions'=>['class' => 'text-center']
                 ],
-                ['attribute'=>'pantsName',
-                    'headerOptions'=>['class' => 'text-center']
+                [
+                        'attribute'=>'pants.name',
+                    'label'=>'Штанец',
+                    'headerOptions'=>['class' => 'text-center'],
+                    'contentOptions'=>['class' => 'text-center'],
                 ],
-                ['attribute'=>'shaftName',
+                ['attribute'=>'pants.shaft.name',
+                    'label'=>'Вал',
                     'contentOptions'=>['class' => 'text-center'],
                     'headerOptions' => ['class' => 'text-center']
 
                 ],
-                ['attribute'=>'fullName',
+                [
+                    'label'=>'Менеджер',
+                    'value'=>function($model){
+                        return User::getFullNameByUsername($model->customer->manager_login);
+                    },
                     'contentOptions'=>['class' => 'text-center'],
                     'headerOptions' => ['class' => 'text-center']
 

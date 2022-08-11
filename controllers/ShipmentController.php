@@ -31,7 +31,7 @@ class ShipmentController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['delete','order-add','mark-defect-roll'],
+                        'actions' => ['delete','order-add','mark-defect-roll','close-shipment'],
                         'roles' => ['updateOwnShipmentManager','manager_admin'],
                         'roleParams' => function() {
                             return ['customer' => Shipment::findOne(['id' => Yii::$app->request->get('id')])];
@@ -39,7 +39,7 @@ class ShipmentController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list','view','send-shipment','mark-defect-roll'],
+                        'actions' => ['list','view','send-shipment','mark-defect-roll','close-shipment'],
                         'roles' => ['logistician'],
                     ],
 
@@ -194,6 +194,33 @@ class ShipmentController extends Controller
 //            if($new_shipment->save()){
 //                Yii::$app->session->setFlash('success', 'Создана отгрузка');
 //            }else
+        return $this->redirect(['shipment/view','id'=>$id]);
+    }
+
+    public function actionCloseShipment($id)
+    {
+        $shipment = Shipment::findOne($id);
+            foreach($shipment->finishedProductsWarehouse as $roll){
+                if(!empty($roll->defect_roll_count)) { //проверяем кол-во дефектных
+                    $new_roll=new FinishedProductsWarehouse();
+                    $new_roll->roll_count=$roll->defect_roll_count; //остаточные ролики от разницы
+                    $new_roll->label_id=$roll->label_id;
+                    $new_roll->previous_order_id=$roll->order_id;
+                    $new_roll->label_in_roll=$roll->label_in_roll;
+                    $new_roll->defect_roll_count=$roll->defect_roll_count;
+                    $new_roll->defect_note=$roll->defect_note;
+                    $new_roll->save();
+                    $roll->roll_count=$roll->roll_count-$new_roll->roll_count;
+                    $roll->packed_roll_count=$roll->packed_roll_count-$new_roll->roll_count;
+                    $roll->sended_roll_count=$roll->sended_roll_count-$new_roll->roll_count;
+                    $roll->defect_roll_count=null;
+                    $roll->defect_note=null;
+                    $roll->save();
+                }
+            }
+            $shipment->status_id=2;
+            $shipment->save();
+            Yii::$app->session->setFlash('success', 'Закрыт');
         return $this->redirect(['shipment/view','id'=>$id]);
     }
 

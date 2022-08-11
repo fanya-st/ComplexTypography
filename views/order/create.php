@@ -67,7 +67,7 @@ $this->registerJs(
             <?=$form->field($new_label,'parent_label')->checkbox()?>
             <div class="row">
                 <div class="col">
-                    <?=$form->field($order,'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->all(), 'id', 'name'), [
+                    <?=$form->field($order,'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>0])->asArray()->all(), 'id', 'name'), [
                         'prompt' => 'Выберите...'
                     ])?>
                     <?=$form->field($order,'label_price')->textInput(['onchange'=>'changeLabelPriceTax()'])?>
@@ -137,8 +137,9 @@ $this->registerJs(
                     <?=$form->field($order,'label_on_roll')?>
                 </div>
             </div>
-            <?=$form->field($order,'rewinder_note')->textarea()?>
-            <?=$form->field($order,'printer_note')->textarea()?>
+<!--            --><?//=$form->field($order,'rewinder_note')->textarea()?>
+<!--            --><?//=$form->field($order,'printer_note')->textarea()?>
+            <?=$form->field($order,'manager_note')->textarea()?>
         </div>
     </div>
     <?=$form->field($order, 'status_id')->hiddenInput(['value' => 1])->label(false);?>

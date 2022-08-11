@@ -83,7 +83,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'Masha',
             'authKey' => 'test105key',
             'accessToken' => '105-token',
-            'group' => 'designer',
             'F' => 'Кожевникова',
             'I' => 'Мария',
             'O' => '',

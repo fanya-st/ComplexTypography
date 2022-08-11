@@ -1,7 +1,5 @@
 <?php
 
-/** @var yii\web\View $this */
-
 
 $this->title = 'Комплекс Типография';
 ?>
@@ -21,16 +19,17 @@ $this->title = 'Комплекс Типография';
             <div class="col-lg-4">
                 <h2>Работа с заказами</h2>
                 <p>Просмотр, создание, удаление заказов</p>
-                <p><a class="btn btn-outline-secondary" href="?r=order%2Flist">Работа с заказами &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=order%2Flist">Заказы &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=1">Создание заказа с готовой этикеткой &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=order%2Fcreate&blank=0">Создание заказа &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Работа с материалами</h2>
                 <p>Просмотр, создание, удаление материалов</p>
-                <p><a class="btn btn-outline-secondary" href="?r=material%2Flist">Работа с материалами &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=material%2Flist">Материалы &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse%2Flist">Склад бумаги, фольги, ламинации &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse%2Fupload-paper">Загрузка пришедшей бумаги &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=pants%2Findex">Штанцы &raquo;</a></p>
             </div>
 <!--            <div class="col-lg-4">-->
 <!--                <div class="card">-->
@@ -45,26 +44,31 @@ $this->title = 'Комплекс Типография';
             <div class="col-lg-4">
                 <h2>Работа с этикетками</h2>
                 <p>Работа с этикетками</p>
-                <p><a class="btn btn-outline-secondary" href="?r=label/list">Работа с этикетками &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=label/list">Этикетки &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate">Создание этикетки &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Работа с отгрузками</h2>
                 <p>Работа с отгрузками</p>
-                <p><a class="btn btn-outline-secondary" href="?r=shipment/list">Работа с отгрузками &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=finished-products-warehouse/surplus-list">Работа с излишками &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=shipment/list">Отгрузки &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=finished-products-warehouse/surplus-list">Излишки &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Работа с заказчиками</h2>
                 <p>Работа с заказчиками</p>
                 <p><a class="btn btn-outline-secondary" href="?r=customer/create">Добавить заказчика &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=customer/list">Работа с заказчиками &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=customer/list">Заказчики &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Учет рабочего времени</h2>
                 <p>Учет рабочего времени</p>
                 <p><a class="btn btn-outline-secondary" href="?r=time-tracker/kiosk">Учет рабочего времени &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=employee/list">Сотрудники &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Калькуляторы</h2>
+                <p>Калькуляция цены этикетки и заказа</p>
+                <p><a class="btn btn-outline-secondary" href="?r=calculator/main">Калькулятор &raquo;</a></p>
             </div>
         </div>
     </div>

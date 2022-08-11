@@ -20,7 +20,7 @@ $this->title = 'Комплекс Типография CMS-Панель';
             </div>
             <div class="col-lg-4">
                 <h2>Редактирование этикеток</h2>
-                <p><a class="btn btn-outline-secondary" href="?r=label/list">Работа с этикетками &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=cms/label-index">Редактирование этикеток &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Редактирование отгрузок</h2>
@@ -37,6 +37,11 @@ $this->title = 'Комплекс Типография CMS-Панель';
             <div class="col-lg-4">
                 <h2>Редактирование сотрудников</h2>
                 <p><a class="btn btn-outline-secondary" href="?r=time-tracker/kiosk">Список сотрудников &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Редактирование парамтеров калькулятора</h2>
+                <p><a class="btn btn-outline-secondary" href="?r=cms/calc-common-params-index">Редактирование общих параметров &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=cms/calc-mashine-param-price-index">Редактирование параметров машин &raquo;</a></p>
             </div>
         </div>
     </div>

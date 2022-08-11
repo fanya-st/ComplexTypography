@@ -17,8 +17,13 @@ use app\models\TownSearch;
 use app\models\StreetSearch;
 use app\models\Subject;
 use app\models\CustomerForm;
+use app\models\Label;
+use app\models\LabelSearch;
 use app\models\CustomerSearch;
 use yii\data\ActiveDataProvider;
+use app\models\CalcCommonParam;
+use app\models\CalcMashineParamPrice;
+use app\models\CalcMashineParamPriceSearch;
 use yii;
 
 class CmsController extends Controller
@@ -37,7 +42,10 @@ class CmsController extends Controller
                             'region-index','region-update','region-create',
                             'town-index','town-update','town-create',
                             'street-index','street-update','street-create',
+                            'calc-mashine-param-price-view','calc-mashine-param-price-update','calc-mashine-param-price-create','calc-mashine-param-price-index',
+                            'calc-common-params-index','calc-common-params-update','calc-common-params-create',
                             'customer-index','customer-update',
+                            'label-index','label-update',
                             ],
                         'roles' => ['admin'],
                     ],
@@ -385,5 +393,163 @@ class CmsController extends Controller
 
         return $this->redirect(['customer-index']);
     }
+
+    /*Редактирование этикеток*/
+
+    public function actionLabelIndex()
+    {
+        $searchModel = new LabelSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->post());
+
+        return $this->render('label\index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionLabelUpdate($id)
+    {
+        $model=Label::findOne($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['label-index']);
+        }
+
+        return $this->render('label\update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLabelDelete($id)
+    {
+        Label::findOne($id)->delete();
+
+        return $this->redirect(['label-index']);
+    }
+
+    /*Редактирование общих параметров для калькулятора*/
+
+    public function actionCalcCommonParamsIndex()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => CalcCommonParam::find(),
+            /*
+            'pagination' => [
+                'pageSize' => 50
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+            */
+        ]);
+
+        return $this->render('calc-common-params\index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionCalcCommonParamsCreate()
+    {
+        $model = new CalcCommonParam();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) ) {
+                $model->date=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+                if($model->save()){
+                    return $this->redirect(['calc-common-params-index']);
+                }
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('calc-common-params\create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionCalcCommonParamsUpdate($id)
+    {
+        $model = CalcCommonParam::findOne($id);
+
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->date=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');;
+            if($model->save()){
+                return $this->redirect(['calc-common-params-index']);
+            }
+        }
+
+        return $this->render('calc-common-params\update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionCalcCommonParamsDelete($id)
+    {
+        CalcCommonParam::findOne($id)->delete();
+
+        return $this->redirect(['calc-common-params-index']);
+    }
+
+    /*Редактирование параметров машин*/
+
+    public function actionCalcMashineParamPriceIndex()
+    {
+        $searchModel = new CalcMashineParamPriceSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->post());
+
+        return $this->render('calc-mashine-param-price\index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionCalcMashineParamPriceView($id)
+    {
+        return $this->render('calc-mashine-param-price\view', [
+            'model' => CalcMashineParamPrice::findOne($id),
+        ]);
+    }
+
+    public function actionCalcMashineParamPriceCreate()
+    {
+        $model = new CalcMashineParamPrice();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['calc-mashine-param-price-view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('calc-mashine-param-price\create', [
+            'model' => $model,
+        ]);
+    }
+
+
+    public function actionCalcMashineParamPriceUpdate($id)
+    {
+        $model = CalcMashineParamPrice::findOne($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['calc-mashine-param-price-view', 'id' => $model->id]);
+        }
+
+        return $this->render('calc-mashine-param-price\update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionCalcMashineParamPriceDelete($id)
+    {
+        CalcMashineParamPrice::findOne($id)->delete();
+
+        return $this->redirect(['calc-mashine-param-price-index']);
+    }
+
 
 }

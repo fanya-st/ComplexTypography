@@ -9,10 +9,9 @@ use yii\helpers\ArrayHelper;
 Icon::map($this, Icon::FA);
 
 
-$this->title = Html::encode("Печать ярлыков ID [$order->id] $order->labelName");
+$this->title = Html::encode('Печать ярлыков ID ['.$order->id.'] '.$order->label->name);
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
-$this->params['breadcrumbs'][] = ['label' => 'ID['.$order->id.'] '.$order->labelName, 'url' => ['order/view','id'=>$order->id]];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'ID['.$order->id.'] '.$order->label->name, 'url' => ['order/view','id'=>$order->id]];
 
 $this->registerJs(
     "

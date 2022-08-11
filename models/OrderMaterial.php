@@ -12,9 +12,9 @@ class OrderMaterial extends ActiveRecord
         return $this->hasOne(PaperWarehouse::class,['id'=>'paper_warehouse_id']);
     }
 
-    public function getMaterialName(){
-        return $this->paperWarehouse->material->name;
-    }
+//    public function getMaterialName(){
+//        return $this->paperWarehouse->material->name;
+//    }
 
     public function rules(){
         return[
@@ -32,10 +32,12 @@ class OrderMaterial extends ActiveRecord
         ];
     }
 
-    public function beforeValidate()
-    {
-        $this->paper_warehouse_id = mb_substr("$this->paper_warehouse_id",0,12);
-        $this->paper_warehouse_id = (int)$this->paper_warehouse_id;
-        return true;
-    }
+//    public function beforeValidate()
+//    {
+////        $this->paper_warehouse_id = mb_substr("$this->paper_warehouse_id",0,12);
+//        $this->paper_warehouse_id = ltrim($this->paper_warehouse_id,'0');
+////        $this->paper_warehouse_id = mb_substr("$this->paper_warehouse_id",0,-1);
+//        $this->paper_warehouse_id = (int)$this->paper_warehouse_id;
+//        return true;
+//    }
 }

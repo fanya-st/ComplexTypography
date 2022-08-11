@@ -125,36 +125,39 @@ class LabelController extends Controller
     public function actionView($id)
     {
         $label=Label::findOne($id);
-        switch (Yii::$app->user->identity->group) {
-            case 'designer':
-                $nav_items=CustomNav::getItemByStatusDesigner($label->status_id,$label->id);
-                break;
-            case 'designer_admin':
-                $nav_items=ArrayHelper::merge(
-                    CustomNav::getItemByStatusDesigner($label->status_id,$label->id),
-                    CustomNav::getItemByStatusPrepress($label->status_id,$label->id),
-                    CustomNav::getItemByStatusLaboratory($label->status_id,$label->id)
-                );
-                break;
-            case 'manager':
-            case 'manager_admin':
-                $nav_items=CustomNav::getItemByStatusManager($label->status_id,$label->id);
-                break;
-            case 'laboratory':
-                $nav_items=CustomNav::getItemByStatusLaboratory($label->status_id,$label->id);
-                break;
-            case 'prepress':
-                $nav_items=CustomNav::getItemByStatusPrepress($label->status_id,$label->id);
-                break;
-            case 'admin':
-                $nav_items=ArrayHelper::merge(
-                    CustomNav::getItemByStatusDesigner($label->status_id,$label->id),
-                    CustomNav::getItemByStatusManager($label->status_id,$label->id),
-                    CustomNav::getItemByStatusPrepress($label->status_id,$label->id),
-                    CustomNav::getItemByStatusLaboratory($label->status_id,$label->id)
-                );
-                break;
+        foreach (Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()) as $key=>$value){
+            switch ($key) {
+                case 'designer':
+                    $nav_items=CustomNav::getItemByStatusDesigner($label->status_id,$label->id);
+                    break;
+                case 'designer_admin':
+                    $nav_items=ArrayHelper::merge(
+                        CustomNav::getItemByStatusDesigner($label->status_id,$label->id),
+                        CustomNav::getItemByStatusPrepress($label->status_id,$label->id),
+                        CustomNav::getItemByStatusLaboratory($label->status_id,$label->id)
+                    );
+                    break;
+                case 'manager':
+                case 'manager_admin':
+                    $nav_items=CustomNav::getItemByStatusManager($label->status_id,$label->id);
+                    break;
+                case 'laboratory':
+                    $nav_items=CustomNav::getItemByStatusLaboratory($label->status_id,$label->id);
+                    break;
+                case 'prepress':
+                    $nav_items=CustomNav::getItemByStatusPrepress($label->status_id,$label->id);
+                    break;
+                case 'admin':
+                    $nav_items=ArrayHelper::merge(
+                        CustomNav::getItemByStatusDesigner($label->status_id,$label->id),
+                        CustomNav::getItemByStatusManager($label->status_id,$label->id),
+                        CustomNav::getItemByStatusPrepress($label->status_id,$label->id),
+                        CustomNav::getItemByStatusLaboratory($label->status_id,$label->id)
+                    );
+                    break;
+            }
         }
+
         return $this->render('view',compact('label','nav_items'));
     }
     public function actionUpdate($id)
@@ -382,6 +385,7 @@ class LabelController extends Controller
                         $l->save();
                     }
                 }else {
+//                    Yii::$app->session->setFlash('success', 'test');
                     $label->date_of_prepress=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s'); //меняем дату препресса
                     $label->status_id=7;
                     $label->save();

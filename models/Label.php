@@ -64,15 +64,6 @@ class Label extends ActiveRecord{
     public function getPants(){
         return $this->hasOne(Pants::class,['id'=>'pants_id']);
     }
-    public function getPantsName(){
-        return $this->pants->name;
-    }
-    public function getShaftName(){
-        return $this->pants->shaft->name;
-    }
-    public function getShaft_id(){
-        return $this->pants->shaft_id;
-    }
     public function getFullCMYK(){
 	    if($this->c==1) $c=$this->getAttributeLabel('c');
 	    if($this->m==1) $m=$this->getAttributeLabel('m');
@@ -81,30 +72,7 @@ class Label extends ActiveRecord{
         return $c.$m.$y.$k;
 
     }
-    public function getLabelStatusName(){
-        return $this->labelStatus->name;
-    }
-    public function getCustomerName(){
-        return $this->customer->name;
-    }
-    public function getVarnishStatusName(){
-        return $this->varnishStatus->name;
-    }
-    public function getFullName(){
-	    $user=User::findByUserName($this->designer_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
-    public function getPrepressName(){
-        $user=User::findByUserName($this->prepress_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
-    public function getManagerName(){
-        $user=User::findByUserName($this->customer->manager_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
-    public function getFoilName(){
-        return $this->foil->name;
-    }
+
     public function getLaminateName(){
         if($this->laminate==0) return 'Нет'; else return 'Да';
     }
@@ -121,9 +89,6 @@ class Label extends ActiveRecord{
     }
     public function getPrintOnGlueName(){
         if($this->print_on_glue==0) return 'Нет'; else return 'Да';
-    }
-    public function getBackgroundName(){
-        return $this->backgroundLabel->name;
     }
     public function getNameSplitId(){
         return "[$this->id] $this->name";
@@ -162,11 +127,11 @@ class Label extends ActiveRecord{
             'manager_login'=>'Менеджер',
             'shaftName'=>'Вал',
             'fullCMYK'=>'CMYK',
-            'designer_note'=>'Примечание дизайнера',
-            'prepress_note'=>'Примечание Prepress',
-            'laboratory_note'=>'Примечание Лаборатория',
+            'manager_note'=>'Примечание от менеджера',
+            'prepress_note'=>'Примечание от препрессника',
+            'designer_note'=>'Примечание от дизайнера',
+            'laboratory_note'=>'Примечание от лаборанта',
             'stencil'=>'Трафарет',
-            'manager_note'=>'Примечание менеджера',
             'laminateName'=>'Ламинация',
             'laminate'=>'Ламинация',
             'backgroundName'=>'Фон',
@@ -176,14 +141,17 @@ class Label extends ActiveRecord{
             'photo_output_id'=>'Фотовывод',
             'color_count'=>'Цветность',
             'orientation'=>'Ориентация',
+            'takeoff_flash'=>'Снимать облои',
+            'variable_paint_count'=>'Краска переменной печати, мл',
         ];
     }
     public function rules(){
         return[
             ['name','string','max'=>100],
             [['name','manager_note','prepress_note','designer_note','laboratory_note'],'trim'],
-            [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
-                'print_on_glue','orientation', 'output_label_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id','takeoff_flash'],'safe']
+            [['variable_paint_count'],'double'],
+            [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id','parent_label',
+                'print_on_glue','orientation', 'output_label_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id','takeoff_flash','variable_paint_count'],'safe']
         ];
     }
 }

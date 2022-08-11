@@ -20,15 +20,17 @@ use kartik\grid\GridView;
         }?>
         <?=Html::tag('h6','Дата отправки: ' .Html::encode($shipment->date_of_send))?>
         <?=Html::tag('h6','Вес, кг: ' .Html::encode($shipment->shipmentWeight))?>
-        <?= Html::a('Добавить заказы', ['shipment/order-add','id'=>$shipment->id], ['class'=>'btn btn-primary']) ?>
+        <div class="d-inline-flex">
         <?switch ($shipment->status_id){
             case 0:
-                echo Html::a('Отправить', ['shipment/send-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']);
+                echo Html::tag('div',Html::a('Добавить заказы', ['shipment/order-add', 'id' => $shipment->id], ['class' => 'btn btn-primary']),['class'=>'p-1']);
+                echo Html::tag('div',Html::a('Отправить', ['shipment/send-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']),['class'=>'p-1']);
                 break;
             case 1:
-                echo Html::a('Закрыть', ['shipment/close-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']);
+                echo Html::tag('div',Html::a('Закрыть', ['shipment/close-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']),['class'=>'p-1']);
                 break;
         }?>
+            </div>
     </div>
 </div>
 <?php
@@ -39,7 +41,7 @@ echo GridView::widget([
                     'attribute'=>'id',
                 'label'=>'ID'
             ],
-            'labelName',
+            'label.name',
             'customer.name',
             'customer.customerAddress',
             'orderStatus.name',

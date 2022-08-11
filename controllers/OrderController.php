@@ -35,7 +35,7 @@ class OrderController extends Controller
                 ],
                 [
                     'allow' => true,
-                    'actions' => ['list','view','start-print','pause-print','finish-print','continue-print','form-defect'],
+                    'actions' => ['list','view','start-print','start-print-variable','pause-print','finish-print','finish-print-variable','continue-print','form-defect'],
                     'roles' => ['printer'],
                 ],
                 [
@@ -180,6 +180,21 @@ public function actionCombinateOrder($id)
 
         return $this->redirect(['order/view','id'=>$id]);
     }
+
+    public function actionStartPrintVariable($id)
+    {
+        $order=Order::findOne($id);
+        if($order->label->status_id==10){
+            $order->status_id=2;
+            $order->date_of_variable_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $order->save();
+            Yii::$app->session->setFlash('success','Заказ в печати');
+        }else{
+            Yii::$app->session->setFlash('error','Этикетка не готова к печати');
+        }
+
+        return $this->redirect(['order/view','id'=>$id]);
+    }
     public function actionStartRewind($id)
     {
         $order=Order::findOne($id);
@@ -295,6 +310,21 @@ public function actionCombinateOrder($id)
             return $this->redirect(['order/view','id'=>$id]);
         }
         return $this->render('finish-print', compact('order'));
+    }
+
+    public function actionFinishPrintVariable($id)
+    {
+        $order=Order::findOne($id);
+        $label=Label::findOne($order->label_id);
+        if($label->load(Yii::$app->request->post()) && $label->validate(Yii::$app->request->post())){
+            $order->status_id=4;
+            $order->date_of_variable_print_end=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+            $order->save();
+            $label->save();
+            Yii::$app->session->setFlash('success','Печать закончена');
+            return $this->redirect(['order/view','id'=>$id]);
+        }
+        return $this->render('finish-print-variable', compact('label','order'));
     }
     public function actionFinishRewind($id)
     {

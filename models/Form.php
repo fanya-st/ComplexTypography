@@ -38,15 +38,18 @@ class Form extends ActiveRecord
             'id'=>'ID',
             'polymer_id'=>'Полимер',
             'envelope_id'=>'Конверт',
+            'pantone_id'=>'Пантон',
             'width'=>'Ширина, мм',
             'height'=>'Высота, мм',
             'lpi'=>'Линиатура',
             'dpi'=>'Разрешение',
             'photoOutput.name'=>'Фотовывод',
+            'photo_output_id'=>'Фотовывод',
             'pantoneName'=>'Пантон',
             'stencil_form'=>'Трафарет',
             'foil_form'=>'Фольга',
             'varnish_form'=>'Лаковая форма',
+            'set_form_count'=>'Количество форм',
         ];
     }
 

@@ -25,8 +25,10 @@ class OrderForm extends ActiveRecord{
 		'label_on_roll'=>'Этикеток на ролике, шт',
 		'cut_edge'=>'Кромки',
 		'stretch'=>'Стретч лента',
-		'rewinder_note'=>'Примечание для перемотки',
-		'printer_note'=>'Примечание для печатников',
+		'rewinder_note'=>'Примечание перемотчика',
+		'printer_note'=>'Примечание печатника',
+		'manager_note'=>'Примечание менеджера',
+            'tech_note'=>'Примечание технолога',
 		'order_price'=>'Сумма за заказ, руб',
 		'order_price_with_tax'=>'Сумма за заказ с НДС, руб',
 		];
@@ -34,9 +36,9 @@ class OrderForm extends ActiveRecord{
 	public function rules(){
 		return[
 		[['date_of_sale','label_id','trial_circulation','label_price','sleeve_id',
-            'material_id','mashine_id','winding_id','diameter_roll','stretch','cut_edge','order_price','order_price_with_tax',
+            'material_id','mashine_id','winding_id','stretch','cut_edge','order_price','order_price_with_tax',
             'label_price_with_tax','material_id','status_id'],'required'],
-		[['rewinder_note','printer_note'],'trim'],
+		[['rewinder_note','printer_note','manager_note'],'trim'],
             [['plan_circulation','sending','label_on_roll'],'integer'],
             [['order_price','order_price_with_tax',
                 'label_price_with_tax','label_price'],'double']

@@ -2,6 +2,7 @@
 
 use yii\bootstrap5\Html;
 use app\models\Form;
+use app\models\User;
 ?>
 <div class="row">
     <div class="col">
@@ -13,16 +14,16 @@ use app\models\Form;
         <?= Html::a('Файл дизайна Prepress',$label->prepress_design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
     </div>
     <div class="col">
-        <h6>№: <small class="badge bg-primary"><?=Html::encode($label->id)?></small> Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatusName)?></small> </h6>
-        <h6>Заказчик: <small><?=Html::encode($label->customerName)?></small> </h6>
-        <h6>Менеджер: <small><?=Html::encode($label->managerName)?></small> </h6>
+        <h6>№: <small class="badge bg-primary"><?=Html::encode($label->id)?></small> Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatus->name)?></small> </h6>
+        <h6>Заказчик: <small><?=Html::encode($label->customer->name)?></small> </h6>
+        <h6>Менеджер: <small><?=Html::encode(User::getFullNameByUsername($label->customer->manager_login))?></small> </h6>
         <h6>Дата создания: <small><?=Html::encode($label->date_of_create)?></small> </h6>
-        <h6>Дизайнер: <small><?=Html::encode($label->fullName)?></small> </h6>
+        <h6>Дизайнер: <small><?=Html::encode(User::getFullNameByUsername($label->designer_login))?></small> </h6>
         <h6>Дата дизайна: <small><?=Html::encode($label->date_of_design)?></small> </h6>
-        <h6>Препрессник: <small><?=Html::encode($label->prepressName)?></small> </h6>
+        <h6>Препрессник: <small><?=Html::encode(User::getFullNameByUsername($label->prepress_login))?></small> </h6>
         <h6>Дата Prepress: <small><?=Html::encode($label->date_of_prepress)?></small> </h6>
-        <h6>Штанец: <small class="badge bg-secondary"><?=Html::encode($label->pantsName)?></small>
-            Вал: <small class="badge bg-secondary"><?=Html::encode($label->shaftName)?></small>
+        <h6>Штанец: <small class="badge bg-secondary"><?=Html::encode($label->pants->name)?></small>
+            Вал: <small class="badge bg-secondary"><?=Html::encode($label->pants->shaft->name)?></small>
             Кол-во форм: <small class="badge bg-secondary"><?=Html::encode($label->formCount)?></small></h6>
         <h6></h6>
         <h6>Пантоны: <? foreach ($label->pantoneName as $pantone) {
@@ -46,13 +47,13 @@ use app\models\Form;
 
             }
             ?>
-            Фольга: <small class="badge bg-secondary"><?=Html::encode($label->foilName)?></small> </h6>
-        <h6>Вид лака: <small class="badge bg-secondary"><?=Html::encode($label->varnishStatusName)?></small></h6>
+            Фольга: <small class="badge bg-secondary"><?=Html::encode($label->foil->name)?></small> </h6>
+        <h6>Вид лака: <small class="badge bg-secondary"><?=Html::encode($label->varnishStatus->name)?></small></h6>
         <h6>Ламинация: <small class="badge bg-secondary"><?=Html::encode($label->laminateName)?></small> Трафарет: <small class="badge bg-secondary"><?=Html::encode($label->stencilName)?></small></h6>
         <h6>Перем.печать: <small class="badge bg-secondary"><?=Html::encode($label->variableName)?></small> Печать по клею: <small class="badge bg-secondary"><?=Html::encode($label->printOnGlueName)?></small> </h6>
         <h6>Выход этикетки: <?=Html::img($label->outputLabel->image, ['alt' => $label->outputLabel->name,'width'=>'100px'])?></h6>
         <h6>Ориентация: <small class="badge bg-secondary"><?=Html::encode($label->orientationName)?></small> Облои снимать: <small class="badge bg-secondary">
-                <?if ($label->takeoff_flash==0) echo 'Нет'; else 'Да'; ?></small> </h6>
+                <?if ($label->takeoff_flash==0) echo 'Нет'; else echo 'Да'; ?></small> </h6>
     </div>
     <div class="col">
         <div class="row border p-2 rounded-lg">

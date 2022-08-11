@@ -53,7 +53,7 @@ class DesignFileForm extends ActiveRecord
             [[],'required'],
             [['designer_note'],'trim'],
             [['date_of_design'],'safe'],
-            [['image_file','image_crop_file','image_extended_file'], 'image','skipOnEmpty' => false, 'extensions' => 'png,jpg,jpeg','maxSize'=>10*1024*1024],
+            [['image_file','image_crop_file','image_extended_file'], 'image','skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg','maxSize'=>10*1024*1024],
             [['design_file_file'], 'file','skipOnEmpty' => false,'maxSize'=>500*1024*1024],
         ];
     }

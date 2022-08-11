@@ -5,7 +5,7 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 class Order extends ActiveRecord{
-    public $label_status_id;
+
 	public function getLabel(){
 		return $this->hasOne(Label::class,['id'=>'label_id']);
 	}
@@ -21,14 +21,8 @@ class Order extends ActiveRecord{
 	public function getCustomer(){
 		return $this->hasOne(Customer::class,['id'=>'customer_id'])->via('label');
 	}
-	public function getLabelStatusName(){
-		return $this->label->LabelStatusName;
-	}
-	public function getLabelName(){
-		return $this->label->name;
-	}
     public function getLabelNameSplitOrderId(){
-        return "[$this->id] $this->labelName";
+        return '['.$this->id.']'.$this->label->name;
     }
 
     public function getCombinationOrder(){
@@ -53,9 +47,7 @@ class Order extends ActiveRecord{
     public function getOrderStatus(){
         return $this->hasOne(OrderStatus::class,['id'=>'status_id']);
     }
-    public function getOrderStatusName(){
-        return $this->orderStatus->name;
-    }
+
     public function getTrialCirculationName(){
 	    switch($this->trial_circulation){
             case 0:
@@ -73,29 +65,6 @@ class Order extends ActiveRecord{
     public function getMaterial(){
         return $this->hasOne(Material::class,['id'=>'material_id']);
     }
-    public function getFullName(){
-        $user=User::findByUserName($this->label->customer->manager_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
-    public function getPrinterName(){
-        $user=User::findByUserName($this->printer_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
-    public function getCutterName(){
-        $user=User::findByUserName($this->cutter_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
-    public function getRewinderName(){
-        $user=User::findByUserName($this->rewinder_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
-    public function getPackerName(){
-        $user=User::findByUserName($this->packer_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
-    public function getCustomerId(){
-        return $this->label->customer_id;
-    }
 
     public function getPants(){
         return $this->hasOne(Pants::class,['id'=>'pants_id'])->via('label');
@@ -105,9 +74,6 @@ class Order extends ActiveRecord{
         return $this->hasOne(Shaft::class,['id'=>'shaft_id'])->via('pants');
     }
 
-    public function getMashineName(){
-        return $this->mashine->name;
-    }
     public function getCirculationCountSend(){
 	    foreach($this->finishedProductsWarehouse as $roll)
 	        $count+=$roll->sended_roll_count*$roll->label_in_roll;
@@ -128,7 +94,6 @@ class Order extends ActiveRecord{
             'status_id'=>'Статус заказа',
             'orderStatusName'=>'Статус заказа',
             'labelStatusName'=>'Статус этикетки',
-            'label_status_id'=>'Статус этикетки',
             'labelName'=>'Наименование',
             'label_id'=>'ID Этикетки',
             'label.name'=>'Наименование этикетки',
@@ -154,6 +119,7 @@ class Order extends ActiveRecord{
             'rewinder_note'=>'Примечание перемотчика',
             'printer_note'=>'Примечание печатника',
             'tech_note'=>'Примечание технолога',
+            'manager_note'=>'Примечание менеджера',
             'packer_login'=>'Упаковщик',
             'customerId'=>'Заказчик',
             'pantsId'=>'Штанец',
@@ -172,7 +138,7 @@ class Order extends ActiveRecord{
                 'sleeve_id','actual_circulation','trial_circulation','sending','material_id'],'integer'],
             [['tech_note','tech_note','printer_note','rewinder_note','packer_login','rewinder_login'],'trim'],
             [['label_price_with_tax','label_price'],'double'],
-            [['date_of_sale','date_of_create','date_of_print_begin','date_of_packing_begin','date_of_rewind_begin','date_of_print_end','date_of_rewind_end','date_of_packing_end'],'safe'],
+            [['date_of_sale','date_of_create','date_of_variable_print_begin','date_of_packing_begin','date_of_rewind_begin','date_of_print_end','date_of_variable_print_end','date_of_rewind_end','date_of_packing_end'],'safe'],
         ];
     }
 }

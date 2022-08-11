@@ -22,7 +22,6 @@ class CustomNav extends Model
             //статус этикетки в дизайне
             //статус этикетки дизайн готов
             case 2:
-            case 3:
                 ArrayHelper::setValue($nav_items, 'designer.items.design-ready',
                     ['label' => 'Дизайн готов', 'url' => ['label/design-ready','id'=>$id]]);
                 break;
@@ -114,6 +113,11 @@ class CustomNav extends Model
             ArrayHelper::setValue($items, 'items.paper-consumption', ['label' => 'Расход материала', 'url' => ['material/paper-consumption','id'=>$order->id]]);
         if (ArrayHelper::isIn($order->status_id, ['2','3']))
             ArrayHelper::setValue($items, 'items.form-defect', ['label' => 'Брак форм', 'url' => ['order/form-defect','id'=>$order->id]]);
+        if (ArrayHelper::isIn($order->status_id, ['1','2','3']) && $order->label->variable==1)
+            ArrayHelper::setValue($items, 'items.start-print-variable', ['label' => 'Начать печать переменной информации', 'url' => ['order/start-print-variable','id'=>$order->id]]);
+        if (ArrayHelper::isIn($order->status_id, ['2','3']) && $order->label->variable==1)
+            ArrayHelper::setValue($items, 'items.finish-print-variable', ['label' => 'Закончить печать переменной информации', 'url' => ['order/finish-print-variable','id'=>$order->id]]);
+
         return $items;
     }
     public static function getOrderItemsRewinder($order){

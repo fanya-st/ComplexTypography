@@ -4,6 +4,7 @@
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
+use app\models\User;
 
 $this->title = 'Работа с заказами';
 $this->params['breadcrumbs'][] = $this->title;
@@ -11,10 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= Html::encode($this->title) ?></h1>
     <?echo $this->render('_search', ['model' => $searchModel])?>
     <? $form = ActiveForm::begin(['action'=>['order/selected-order-process']])?>
-<div class="col p-2">
-    <?=Html::submitButton('Совместная печать',['name'=>'combinated-print', 'value' => 'combinated-print','class'=>'btn btn-info'])?>
-    <?=Html::submitButton('Отменить совместную печать',['name'=>'combinated-print-unset', 'value' => 'combinated-print-unset','class'=>'btn btn-info'])?>
-</div>
+<!--<div class="col p-2">-->
+<!--    --><?//=Html::submitButton('Совместная печать',['name'=>'combinated-print', 'value' => 'combinated-print','class'=>'btn btn-info'])?>
+<!--    --><?//=Html::submitButton('Отменить совместную печать',['name'=>'combinated-print-unset', 'value' => 'combinated-print-unset','class'=>'btn btn-info'])?>
+<!--</div>-->
     <? echo GridView::widget([
         'dataProvider' => $orders,
         'id'=>'order-list',
@@ -36,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Наименование',
-                'attribute' => 'labelName',
+                'attribute' => 'label.name',
                 'contentOptions'=>function($model, $key, $index, $column) {
                     if(isset($model->combinationOrder))
                         return ['class' => 'bg-info','title'=>$model->combinatedPrintOrderName];
@@ -45,10 +46,36 @@ $this->params['breadcrumbs'][] = $this->title;
                  }
                 ],
             'date_of_create',
-            'orderStatusName',
-            'labelStatusName',
-            'mashineName',
-            'fullName',
+            [
+                'attribute'=>'status_id',
+                'value'=>'orderStatus.name',
+                'contentOptions'=>['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center']
+
+            ],
+            [
+                'label'=>'Статус эт-ки',
+                'value'=>'label.labelStatus.name',
+                'contentOptions'=>['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center']
+
+            ],
+            [
+                'attribute'=>'mashine_id',
+                'value'=>'mashine.name',
+                'contentOptions'=>['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center']
+
+            ],
+            [
+                'label'=>'Менеджер',
+                'value'=>function($model){
+                    return User::getFullNameByUsername($model->label->customer->manager_login);
+                },
+                'contentOptions'=>['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center']
+
+            ],
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{view}'
                 ],

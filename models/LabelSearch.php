@@ -40,6 +40,7 @@ class LabelSearch extends Label
             ]
         ]);
         $dataProvider->setSort([
+            'defaultOrder' => ['id'=>SORT_DESC],
             'attributes' => [
 //                'id',
 //                'name',

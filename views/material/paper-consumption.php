@@ -5,12 +5,12 @@ use yii\bootstrap5\ActiveForm;
 use yii\web\View;
 use yii\bootstrap5\Modal;
 use kartik\icons\Icon;
+use Da\QrCode\QrCode;
 Icon::map($this, Icon::FA);
 
-$this->title = Html::encode("Ввод расхода материала для заказа ID [$order->id] $order->labelName");
+$this->title = Html::encode('Ввод расхода материала для заказа ID ['.$order->id.'] '.$order->label->name);
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
-$this->params['breadcrumbs'][] = ['label' => 'ID['.$order->id.'] '.$order->labelName, 'url' => ['order/view','id'=>$order->id]];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'ID['.$order->id.'] '.$order->label->name, 'url' => ['order/view','id'=>$order->id]];
 
 $this->registerJs(
     "
@@ -28,11 +28,12 @@ function printDiv(divName){
 ?>
 <h3><?= Html::encode($this->title)?></h3>
 <?php $form = ActiveForm::begin()?>
+<!--<pre>--><?//print_r(Yii::$app->request->post())?><!--</pre>-->
     <div class="alert alert-info">
-        <strong>Внимание!</strong> Не забудьте распечатать и наклеить новый штрих-код на использованный ролик</a>.
+        <strong>Внимание!</strong> Не забудьте распечатать и наклеить новый QR-код на использованный ролик</a>.
     </div>
     <div class="alert alert-info">
-        <strong>Внимание!</strong> Материал <?=Html::encode($order->material->name)?></a>.
+        <strong>Внимание!</strong> Материал <?=Html::encode($order->material->name)?>
     </div>
 <div class="row">
     <div class="col">
@@ -51,42 +52,44 @@ function printDiv(divName){
                     <th scope="col">ID</th>
                     <th scope="col">Материал</th>
                     <th scope="col">Длинна</th>
-                    <th scope="col">Штрикод</th>
+                    <th scope="col">QR-код</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?foreach ($used_paper as $paper):?>
                     <tr>
-                        <td><?=Html::encode($paper->paper_warehouse_id)?></td>
+                        <td><?=Html::encode($paper->paperWarehouse->id)?></td>
                         <td><?=Html::encode($paper->paperWarehouse->material->name)?></td>
                         <td><?=Html::encode($paper->length)?></td>
                         <td>
-
+                            <?$qrCode = (new QrCode($paper->paperWarehouse->id))
+                                ->setSize(300);?>
                             <?
                             Modal::begin([
-                                'title'=>'<h4>Штрихкод</h4>',
-                                'toggleButton' => ['label' => 'Штрихкод', 'class' => 'btn btn-primary'],
-                                'id'=>'modal-'.$paper->paper_warehouse_id,
+                                'title'=>'<h4>QR-код</h4>',
+                                'toggleButton' => ['label' => 'QR-код', 'class' => 'btn btn-primary'],
+                                'id'=>'modal-'.$paper->paperWarehouse->id,
                                 'centerVertical'=>true,
                             ]);
-                            echo "<div id='modalContent-".$paper->paper_warehouse_id."'>";
+                            echo "<div id='modalContent-".$paper->paperWarehouse->id."'>";
                             echo Html::tag('p', Html::encode($paper->paperWarehouse->material->name.' Ширина: '.$paper->paperWarehouse->width.
                                 'мм Длина: '.$paper->paperWarehouse->length.' м'),['class'=>'small text-center','style'=>'font-size:10px']);
-                            $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
-                            echo Html::tag('div',Html::img('data:image/png;base64,' . base64_encode($generator->
-                                getBarcode(str_pad($paper->paper_warehouse_id, 12, '0', STR_PAD_LEFT),
-                                    $generator::TYPE_EAN_13,2, 70)) . '', ['alt' => 'barcode','class'=>'text-center']),
-                                ['class'=>'text-center']);
-                            echo Html::tag('p', Html::encode($paper->paper_warehouse_id),['class'=>'small text-center']);
+//                            $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+//                            echo Html::tag('div',Html::img('data:image/png;base64,' . base64_encode($generator->
+//                                getBarcode(str_pad($paper->paper_warehouse_id, 12, '0', STR_PAD_LEFT),
+//                                    $generator::TYPE_EAN_13,2, 70)) . '', ['alt' => 'barcode','class'=>'text-center']),
+//                                ['class'=>'text-center']);
+                            echo Html::tag('div',Html::img($qrCode->writeDataUri(), ['alt' => 'qrcode','width'=>70,'height'=>70]),
+                                ['style'=>'text-align:center;']);
+                            echo Html::tag('p', Html::encode($paper->paperWarehouse->id),['class'=>'small text-center']);
                             echo "</div>";
                             Modal::end();
                             ?>
                             </td>
                         <td>
                             <?= Html::button( Icon::show('print', ['class'=>'fa-1.5x'], Icon::FA),
-                                ['class' => 'btn btn-outline-primary','onclick'=>'printDiv("modalContent-'.$paper->paper_warehouse_id.'")']) ?>
-
+                                ['class' => 'btn btn-outline-primary','onclick'=>'printDiv("modalContent-'.$paper->paperWarehouse->id.'")']) ?>
                         </td>
                     </tr>
                 <?endforeach;?>

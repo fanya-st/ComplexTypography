@@ -2,6 +2,7 @@
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Modal;
+use app\models\User;
 
 ?>
 <div class="row g-2 row-cols-2">
@@ -9,9 +10,9 @@ use yii\bootstrap5\Modal;
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <div class="row">
                 <div class="col">
-                    <? echo Html::tag('h6','Статус заказа: ' .Html::tag('small',Html::encode($order->orderStatusName), ['class' => 'badge bg-primary']));
+                    <? echo Html::tag('h6','Статус заказа: ' .Html::tag('small',Html::encode($order->orderStatus->name), ['class' => 'badge bg-primary']));
                     echo Html::tag('h6','Машина: ' .Html::encode($order->mashine->name));
-                    echo Html::tag('h6','Менеджер: ' .Html::encode($order->fullName));
+                    echo Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameByUsername($order->customer->manager_login)));
                     echo Html::tag('h6','Заказчик: ' .Html::encode('ID ['.$order->label->customer->id.
                     '] '.$order->label->customer->name));
                     echo Html::tag('h6','Адрес заказчика: ' .Html::encode($order->label->customer->customerAddress));
@@ -33,7 +34,7 @@ use yii\bootstrap5\Modal;
             <h6 class="bg-info p-1 rounded">Параметры печати</h6>
 <!--            --><?//if ($order->status_id==3) echo Html::tag('h6','Печать приостановлена',['class'=>'bg-warning p-1 rounded'])?>
             <h6>Совместная печать: <?foreach ($order->combinatedPrintOrder as $com_ord) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($com_ord->order_id).'</span>'?></h6>
-                <? echo Html::tag('h6','Печатник: ' .Html::encode($order->printerName));
+                <? echo Html::tag('h6','Печатник: ' .Html::encode(User::getFullNameByUsername($order->printer_login)));
                 echo Html::tag('h6','Дата начала печати: ' .Html::encode($order->date_of_print_begin));
                 echo Html::tag('h6','Дата конца печати: ' .Html::encode($order->date_of_print_end));?>
                 <h6>Факт. тираж, шт: <?=Html::encode($order->actual_circulation)?>
@@ -46,7 +47,7 @@ use yii\bootstrap5\Modal;
                     ]);
                     echo Html::ul($order->orderMaterialList, ['item' => function ($item, $index) {
                         return Html::tag(
-                            'li',Html::encode($item->materialName.' Ширина: '.$item->paperWarehouse->width.'см Длина:'.$item->length.'м')
+                            'li',Html::encode($item->paperWarehouse->material->name.' Ширина: '.$item->paperWarehouse->width.'мм Длина:'.$item->length.'м')
                         );
                     }]);
                     Modal::end()
@@ -66,7 +67,7 @@ use yii\bootstrap5\Modal;
     <div class="col">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-success p-1 rounded">Параметры нарезки и перемотки</h6>
-            <? echo Html::tag('h6','Перемотчик: ' .Html::encode($order->rewinderName));
+            <? echo Html::tag('h6','Перемотчик: ' .Html::encode(User::getFullNameByUsername($order->rewinder_login)));
             echo Html::tag('h6','Дата начала перемотки: ' .Html::encode($order->date_of_rewind_begin));
             echo Html::tag('h6','Дата конца перемотки: ' .Html::encode($order->date_of_rewind_end));?>
             </h6>
@@ -97,7 +98,7 @@ use yii\bootstrap5\Modal;
     <div class="col">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-warning p-1 rounded">Параметры упаковки</h6>
-            <? echo Html::tag('h6','Упаковчик: ' .Html::encode($order->packerName));
+            <? echo Html::tag('h6','Упаковчик: ' .Html::encode(User::getFullNameByUsername($order->packer_login)));
             echo Html::tag('h6','Дата начала упаковки: ' .Html::encode($order->date_of_packing_begin));
             echo Html::tag('h6','Дата конца упаковки: ' .Html::encode($order->date_of_packing_end));?>
             </h6>

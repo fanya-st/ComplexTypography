@@ -50,7 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'label' => 'Дата создания',
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center','style' => 'width:20%'],
-        ],[
+        ],
+        [
             'attribute' => 'status_id',
             'label' => 'Статус заказа',
             'value' => 'orderStatus.name',
