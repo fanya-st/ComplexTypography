@@ -41,15 +41,15 @@ class Pants extends ActiveRecord
             'name'=>'Наименование',
             'pants_kind_id'=>'Вид штанца',
             'knife_kind_id'=>'Тип ножа',
-            'knife_width'=>'Ширина ножа',
+            'knife_width'=>'Ширина ножа, мм',
             'picture'=>'Изображение',
-            'paper_width'=>'Ширина бумаги',
-            'width_label'=>'Ширина этикетки',
-            'height_label'=>'Высота этикетки',
-            'shaft_id'=>'Вал',
+            'paper_width'=>'Ширина бумаги, мм',
+            'width_label'=>'Ширина этикетки, мм',
+            'height_label'=>'Высота этикетки, мм',
+            'shaft_id'=>'Вал, мм',
             'cuts'=>'Высечки',
-            'radius'=>'Радиус',
-            'gap'=>'Зазор',
+            'radius'=>'Радиус, мм',
+            'gap'=>'Зазор, мм',
             'material_group_id'=>'Тип материала',
         ];
     }
@@ -57,10 +57,13 @@ class Pants extends ActiveRecord
     public function rules(){
         return[
             [['id','pants_kind_id','knife_kind_id','shaft_id','material_group_id','knife_width','paper_width','cuts'],'integer'],
+            ['cuts', 'compare', 'compareValue' => 0, 'operator' => '!=', 'type' => 'number'],
             [['name','picture'],'trim'],
             [['name'],'string','max'=>50],
+            [['picture'],'string','max'=>100],
             [['radius','gap','width_label','height_label'],'double'],
             [['picture'],'safe'],
+            [['pants_kind_id','knife_kind_id','shaft_id','material_group_id','knife_width','paper_width','cuts','radius','gap','name','width_label','height_label'],'required'],
         ];
     }
 }

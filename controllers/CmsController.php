@@ -22,8 +22,8 @@ use app\models\LabelSearch;
 use app\models\CustomerSearch;
 use yii\data\ActiveDataProvider;
 use app\models\CalcCommonParam;
-use app\models\CalcMashineParamPrice;
-use app\models\CalcMashineParamPriceSearch;
+use app\models\CalcMashineParamValue;
+use app\models\CalcMashineParamValueSearch;
 use yii;
 
 class CmsController extends Controller
@@ -497,7 +497,7 @@ class CmsController extends Controller
 
     public function actionCalcMashineParamPriceIndex()
     {
-        $searchModel = new CalcMashineParamPriceSearch();
+        $searchModel = new CalcMashineParamValueSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
         return $this->render('calc-mashine-param-price\index', [
@@ -509,13 +509,13 @@ class CmsController extends Controller
     public function actionCalcMashineParamPriceView($id)
     {
         return $this->render('calc-mashine-param-price\view', [
-            'model' => CalcMashineParamPrice::findOne($id),
+            'model' => CalcMashineParamValue::findOne($id),
         ]);
     }
 
     public function actionCalcMashineParamPriceCreate()
     {
-        $model = new CalcMashineParamPrice();
+        $model = new CalcMashineParamValue();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -533,7 +533,7 @@ class CmsController extends Controller
 
     public function actionCalcMashineParamPriceUpdate($id)
     {
-        $model = CalcMashineParamPrice::findOne($id);
+        $model = CalcMashineParamValue::findOne($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['calc-mashine-param-price-view', 'id' => $model->id]);
@@ -546,7 +546,7 @@ class CmsController extends Controller
 
     public function actionCalcMashineParamPriceDelete($id)
     {
-        CalcMashineParamPrice::findOne($id)->delete();
+        CalcMashineParamValue::findOne($id)->delete();
 
         return $this->redirect(['calc-mashine-param-price-index']);
     }

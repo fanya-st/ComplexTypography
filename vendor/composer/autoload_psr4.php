@@ -26,6 +26,7 @@ return array(
     'kartik\\plugins\\tabs\\' => array($vendorDir . '/kartik-v/bootstrap-tabs-x'),
     'kartik\\plugins\\fileinput\\' => array($vendorDir . '/kartik-v/bootstrap-fileinput'),
     'kartik\\plugins\\depdrop\\' => array($vendorDir . '/kartik-v/dependent-dropdown'),
+    'kartik\\plugins\\checkbox\\' => array($vendorDir . '/kartik-v/bootstrap-checkbox-x'),
     'kartik\\mpdf\\' => array($vendorDir . '/kartik-v/yii2-mpdf/src'),
     'kartik\\label\\' => array($vendorDir . '/kartik-v/yii2-label-inplace/src'),
     'kartik\\icons\\' => array($vendorDir . '/kartik-v/yii2-icons/src'),
@@ -41,6 +42,7 @@ return array(
     'kartik\\depdrop\\' => array($vendorDir . '/kartik-v/yii2-widget-depdrop/src'),
     'kartik\\daterange\\' => array($vendorDir . '/kartik-v/yii2-date-range/src'),
     'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker/src'),
+    'kartik\\checkbox\\' => array($vendorDir . '/kartik-v/yii2-checkbox-x/src'),
     'kartik\\builder\\' => array($vendorDir . '/kartik-v/yii2-builder/src'),
     'kartik\\bs5dropdown\\' => array($vendorDir . '/kartik-v/yii2-bootstrap5-dropdown/src'),
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base/src'),
@@ -86,5 +88,5 @@ return array(
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
     'Codeception\\PHPUnit\\' => array($vendorDir . '/codeception/phpunit-wrapper/src'),
     'Codeception\\Extension\\' => array($vendorDir . '/codeception/codeception/ext'),
-    'Codeception\\' => array($vendorDir . '/codeception/codeception/src/Codeception', $vendorDir . '/codeception/stub/src', $vendorDir . '/codeception/verify/src/Codeception'),
+    'Codeception\\' => array($vendorDir . '/codeception/stub/src', $vendorDir . '/codeception/verify/src/Codeception', $vendorDir . '/codeception/codeception/src/Codeception'),
 );

@@ -24,7 +24,7 @@ echo GridView::widget([
             // вы можете настроить дополнительные свойства здесь.
         ],
         'id',
-        'pantoneName',
+        'pantone.name',
         'formDefect.name',
         'width',
         'height',

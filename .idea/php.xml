@@ -129,6 +129,8 @@
       <path value="$PROJECT_DIR$/vendor/2amigos/qrcode-library" />
       <path value="$PROJECT_DIR$/vendor/khanamiryan/qrcode-detector-decoder" />
       <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/bootstrap-checkbox-x" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-checkbox-x" />
     </include_path>
   </component>
 </project>

@@ -101,12 +101,12 @@
             'dev_requirement' => false,
         ),
         'codeception/codeception' => array(
-            'pretty_version' => '4.2.1',
-            'version' => '4.2.1.0',
+            'pretty_version' => '4.2.2',
+            'version' => '4.2.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../codeception/codeception',
             'aliases' => array(),
-            'reference' => '77b3e2003fd4446b35826cb9dc397129c521c888',
+            'reference' => 'b88014f3348c93f3df99dc6d0967b0dbfa804474',
             'dev_requirement' => true,
         ),
         'codeception/lib-asserts' => array(
@@ -262,6 +262,15 @@
             'reference' => 'ae864f26afbf8859ebd2e2b9df92d77ee175dc13',
             'dev_requirement' => false,
         ),
+        'kartik-v/bootstrap-checkbox-x' => array(
+            'pretty_version' => 'v1.5.7',
+            'version' => '1.5.7.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kartik-v/bootstrap-checkbox-x',
+            'aliases' => array(),
+            'reference' => '1060db69ad2519a2b36cf5e0e28f542c21135672',
+            'dev_requirement' => false,
+        ),
         'kartik-v/bootstrap-fileinput' => array(
             'pretty_version' => 'v5.5.0',
             'version' => '5.5.0.0',
@@ -309,6 +318,17 @@
                 0 => '1.6.x-dev',
             ),
             'reference' => '616c2f8d322a45c037a4d32f0ee1eb1457865e73',
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-checkbox-x' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-checkbox-x',
+            'aliases' => array(
+                0 => '1.0.x-dev',
+            ),
+            'reference' => '0ac0c009d8f6ba2f9f31d0db12a02581c1e698b4',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-date-range' => array(
@@ -529,12 +549,12 @@
             'dev_requirement' => false,
         ),
         'khanamiryan/qrcode-detector-decoder' => array(
-            'pretty_version' => '1.0.5.2',
-            'version' => '1.0.5.2',
+            'pretty_version' => '1.0.6',
+            'version' => '1.0.6.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../khanamiryan/qrcode-detector-decoder',
             'aliases' => array(),
-            'reference' => '04fdd58d86a387065f707dc6d3cc304c719910c1',
+            'reference' => '45326fb83a2a375065dbb3a134b5b8a5872da569',
             'dev_requirement' => false,
         ),
         'markbaker/complex' => array(
@@ -556,12 +576,12 @@
             'dev_requirement' => false,
         ),
         'mpdf/mpdf' => array(
-            'pretty_version' => 'v8.1.1',
-            'version' => '8.1.1.0',
+            'pretty_version' => 'v8.1.2',
+            'version' => '8.1.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../mpdf/mpdf',
             'aliases' => array(),
-            'reference' => 'e511e89a66bdb066e3fbf352f00f4734d5064cbf',
+            'reference' => 'a8a22f4874157e490d41b486053a20bec42e182c',
             'dev_requirement' => false,
         ),
         'myclabs/deep-copy' => array(
@@ -1149,7 +1169,7 @@
             'aliases' => array(
                 0 => '2.0.x-dev',
             ),
-            'reference' => 'c943bc32e9b842d644389473f1716ba004784624',
+            'reference' => 'fe254a7d1f360ef8e5cea2a2bd5f32c95f423155',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-composer' => array(

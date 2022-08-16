@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Склад', 'url' => ['paper-ware
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h2><?= Html::encode($this->title) ?></h2>
-<pre><?print_r($upload_paper_list)?></pre>
+<!--<pre>--><?//print_r($upload_paper_list)?><!--</pre>-->
 <?php $form = ActiveForm::begin()?>
 <?=$form->field($upload_paper_form,'barcode',['inputOptions' =>
     ['autofocus' => 'autofocus']])->textInput()->label('Просканируйте штрихкод ролика или палета')?>

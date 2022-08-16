@@ -5,11 +5,21 @@ namespace app\models;
 use yii;
 
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 class CalcCommonParam extends ActiveRecord
 {
     public function getCalcCommonParamArchive(){
         return $this->hasMany(CalcCommonParamArchive::class,['calc_common_param_id'=>'id']);
+    }
+
+    public static function getCommonParam(){
+        $common_param=CalcCommonParam::find()->all();
+        foreach ($common_param as $param){
+            ArrayHelper::setValue($common_param_array, $param->name, $param->value);
+        }
+
+        return $common_param_array;
     }
 
     public function attributeLabels()

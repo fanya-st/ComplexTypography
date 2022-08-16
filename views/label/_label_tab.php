@@ -26,7 +26,7 @@ use app\models\User;
             Вал: <small class="badge bg-secondary"><?=Html::encode($label->pants->shaft->name)?></small>
             Кол-во форм: <small class="badge bg-secondary"><?=Html::encode($label->formCount)?></small></h6>
         <h6></h6>
-        <h6>Пантоны: <? foreach ($label->pantoneName as $pantone) {
+        <h6>Пантоны: <? foreach ($label->pantone as $pantone) {
                 switch($pantone->name){
                     case 'cyan':
                         echo '<span class="badge rounded-pill bg-info">'.Html::encode($pantone->name).'</span>';

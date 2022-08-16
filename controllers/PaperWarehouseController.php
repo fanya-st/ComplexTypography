@@ -5,6 +5,7 @@ namespace app\controllers;
 
 
 use app\models\PaperWarehouse;
+use app\models\PaperWarehouseRollCut;
 use app\models\PaperWarehouseSearch;
 use app\models\UploadPaper;
 use app\models\UploadPaperForm;
@@ -24,7 +25,7 @@ class PaperWarehouseController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list','upload-paper','upload-paper-to-warehouse','barcode-print'],
+                        'actions' => ['list','upload-paper','upload-paper-to-warehouse','barcode-print','roll-cut'],
                         'roles' => ['warehouse_manager'],
                     ],
                 ],
@@ -53,6 +54,17 @@ class PaperWarehouseController extends Controller
     public function actionBarcodePrint($id){
         $paper_warehouse=PaperWarehouse::findOne($id);
         return $this->renderAjax('barcode_print',compact('paper_warehouse'));
+    }
+
+    public function actionRollCut(){
+        $paper_warehouse=new PaperWarehouseRollCut();
+        if ($paper_warehouse->load(Yii::$app->request->post())) {
+            if ($paper_warehouse->rollcut()){
+                $roll1=PaperWarehouse::findOne($paper_warehouse->id1);
+                $roll2=PaperWarehouse::findOne($paper_warehouse->id2);
+            }
+        }
+        return $this->render('roll-cut',compact('paper_warehouse','roll1','roll2'));
     }
 
     public function actionUploadPaperToWarehouse(){

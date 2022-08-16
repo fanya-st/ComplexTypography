@@ -1,14 +1,12 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Pants */
 
-$this->title = 'Update Pants: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Pants', 'url' => ['index']];
+$this->title = 'Обновить штанец: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Штанцы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="pants-update">
 
@@ -16,6 +14,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'picture_form'=>$picture_form,
     ]) ?>
 
 </div>

@@ -119,6 +119,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\plugins\\tabs\\' => 20,
             'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\plugins\\depdrop\\' => 23,
+            'kartik\\plugins\\checkbox\\' => 24,
             'kartik\\mpdf\\' => 12,
             'kartik\\label\\' => 13,
             'kartik\\icons\\' => 13,
@@ -134,6 +135,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\depdrop\\' => 15,
             'kartik\\daterange\\' => 17,
             'kartik\\date\\' => 12,
+            'kartik\\checkbox\\' => 16,
             'kartik\\builder\\' => 15,
             'kartik\\bs5dropdown\\' => 19,
             'kartik\\base\\' => 12,
@@ -308,6 +310,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/kartik-v/dependent-dropdown',
         ),
+        'kartik\\plugins\\checkbox\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-checkbox-x',
+        ),
         'kartik\\mpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-mpdf/src',
@@ -367,6 +373,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\date\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datepicker/src',
+        ),
+        'kartik\\checkbox\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-checkbox-x/src',
         ),
         'kartik\\builder\\' => 
         array (
@@ -550,9 +560,9 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         ),
         'Codeception\\' => 
         array (
-            0 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
-            1 => __DIR__ . '/..' . '/codeception/stub/src',
-            2 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
+            0 => __DIR__ . '/..' . '/codeception/stub/src',
+            1 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
+            2 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
         ),
     );
 

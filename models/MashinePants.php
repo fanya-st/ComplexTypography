@@ -16,4 +16,18 @@ class MashinePants extends ActiveRecord
         return $this->hasOne(Pants::class,['id'=>'pants_id']);
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'id'=>'ID',
+            'mashine_id'=>'Станок',
+            'pants_id'=>'Штанец',
+        ];
+    }
+
+    public function rules(){
+        return[
+            [['id','mashine_id','pants_id'],'integer'],
+        ];
+    }
 }

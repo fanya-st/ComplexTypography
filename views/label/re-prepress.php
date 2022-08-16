@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'dataProvider' => $forms,
     'columns' => [
         'id',
-        'pantoneName',
+        'pantone.name',
         'formDefect.name',
         'width',
         'height',

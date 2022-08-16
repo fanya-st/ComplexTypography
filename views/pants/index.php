@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Создать штанец', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Совместимость штанцев со станками', ['mashine-pants/index'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?ActiveForm::begin(['method'=>'post'])?>

@@ -255,16 +255,6 @@ return array (
       '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base/src',
     ),
   ),
-  'yiisoft/yii2-bootstrap5' => 
-  array (
-    'name' => 'yiisoft/yii2-bootstrap5',
-    'version' => 'dev-master',
-    'alias' => 
-    array (
-      '@yii/bootstrap5' => $vendorDir . '/yiisoft/yii2-bootstrap5/src',
-    ),
-    'bootstrap' => 'yii\\bootstrap5\\i18n\\TranslationBootstrap',
-  ),
   'kartik-v/yii2-detail-view' => 
   array (
     'name' => 'kartik-v/yii2-detail-view',
@@ -300,5 +290,24 @@ return array (
     array (
       '@Da/QrCode' => $vendorDir . '/2amigos/qrcode-library/src',
     ),
+  ),
+  'kartik-v/yii2-checkbox-x' => 
+  array (
+    'name' => 'kartik-v/yii2-checkbox-x',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/checkbox' => $vendorDir . '/kartik-v/yii2-checkbox-x/src',
+    ),
+  ),
+  'yiisoft/yii2-bootstrap5' => 
+  array (
+    'name' => 'yiisoft/yii2-bootstrap5',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@yii/bootstrap5' => $vendorDir . '/yiisoft/yii2-bootstrap5/src',
+    ),
+    'bootstrap' => 'yii\\bootstrap5\\i18n\\TranslationBootstrap',
   ),
 );

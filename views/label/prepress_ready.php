@@ -68,7 +68,7 @@ $form = ActiveForm::begin();
             'dataProvider' => $forms,
             'columns' => [
                 'id',
-                'pantoneName',
+                'pantone.name',
                 'width',
                 'height',
                 'lpi',
