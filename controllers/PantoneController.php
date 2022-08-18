@@ -56,8 +56,8 @@ class PantoneController extends Controller
         $model = new Pantone();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) ) {
-                if($model->save()){
+            if ($model->load($this->request->post()) && $model->validate($this->request->post()) ) {
+                if( $model->save()){
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
@@ -78,7 +78,6 @@ class PantoneController extends Controller
         }
 
         if ($this->request->isPost) {
-//            $model->load($this->request->post());
             if ($this->request->post('update_pantone_param')=='' && $model->load($this->request->post()) && $model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }

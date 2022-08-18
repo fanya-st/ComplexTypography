@@ -39,6 +39,9 @@ function printDiv(divName){
 <div class="p-2">
     <?=Html::a('Загрузить пришедную бумагу на склад', ['paper-warehouse/upload-paper-to-warehouse'], ['class'=>'btn btn-primary'])?>
 </div>
+<div class="p-2">
+    <?=Html::a('Перемещение роликов', ['paper-warehouse/move-roll'], ['class'=>'btn btn-primary'])?>
+</div>
 </div>
 <? $form=ActiveForm::begin(['method' => 'post'])?>
 <? echo GridView::widget([
@@ -92,6 +95,15 @@ function printDiv(divName){
         ],
         [
             'attribute' => 'length',
+            'headerOptions' => ['class' => 'text-center'],
+            'contentOptions'=>['class' => 'text-center'],
+        ],
+        [
+            'label' => 'Местонахождение',
+            'value' => function($model){
+                if(!empty($model->shelf_id))
+                return $model->shelf->rack->warehouse->name.'->'.$model->shelf->rack->name.'->Полка '.$model->shelf_id;
+            },
             'headerOptions' => ['class' => 'text-center'],
             'contentOptions'=>['class' => 'text-center'],
         ],

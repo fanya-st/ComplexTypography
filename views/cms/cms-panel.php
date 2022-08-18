@@ -43,6 +43,13 @@ $this->title = 'Комплекс Типография CMS-Панель';
                 <p><a class="btn btn-outline-secondary" href="?r=cms/calc-common-params-index">Редактирование общих параметров &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/calc-mashine-param-price-index">Редактирование параметров машин &raquo;</a></p>
             </div>
+
+            <div class="col-lg-4">
+                <h2>Редактирование складов и стеллажей</h2>
+                <p><a class="btn btn-outline-secondary" href="?r=cms/warehouse-index">Редактирование складов &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=cms/rack-index">Редактирование стелажей &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=cms/shelf-index">Редактирование полок &raquo;</a></p>
+            </div>
         </div>
     </div>
 </div>

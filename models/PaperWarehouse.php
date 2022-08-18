@@ -17,13 +17,15 @@ class PaperWarehouse extends ActiveRecord
         return $this->hasOne(MaterialGroup::class,['id'=>'material_group_id'])->via('material');
     }
 
-//    public function getMaterialGroupId(){
-//        return $this->materialGroup->id;
-//    }
-//
-//    public function getMaterialName(){
-//        return $this->material->name;
-//    }
+    public function getShelf(){
+        return $this->hasOne(Shelf::class,['id'=>'shelf_id']);
+    }
+
+    public function getOrderMaterial(){
+        return $this->hasMany(OrderMaterial::class,['paper_warehouse_id'=>'id']);
+    }
+
+
 
     public function attributeLabels()
     {
@@ -31,8 +33,16 @@ class PaperWarehouse extends ActiveRecord
             'id'=>'ID ролика',
             'date_of_create'=>'Дата создания',
             'length'=>'Длина',
-            'materialName'=>'Наименование',
             'width'=>'Ширина',
+            'shelf_id'=>'Полка',
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            [['id','shelf_id','width','length'], 'integer'],
+            [['date_of_create'], 'safe'],
         ];
     }
 

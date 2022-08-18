@@ -12,14 +12,11 @@ class OrderMaterial extends ActiveRecord
         return $this->hasOne(PaperWarehouse::class,['id'=>'paper_warehouse_id']);
     }
 
-//    public function getMaterialName(){
-//        return $this->paperWarehouse->material->name;
-//    }
-
     public function rules(){
         return[
             [['length','paper_warehouse_id'], 'integer'],
             [['order_id','length','paper_warehouse_id'], 'required'],
+            [['date'], 'safe'],
         ];
     }
 

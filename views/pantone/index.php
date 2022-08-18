@@ -16,9 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Добавить PANTONE', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="d-inline-flex">
+        <div class="p-2">
+            <?= Html::a('Добавить PANTONE', ['create'], ['class' => 'btn btn-success']) ?>
+        </div>
+    </div>
     <? ActiveForm::begin(['method'=>'post'])?>
 
     <?= GridView::widget([

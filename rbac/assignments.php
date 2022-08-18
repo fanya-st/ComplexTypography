@@ -1,6 +1,9 @@
 <?php
 
 return [
+    112 => [
+        'accountant',
+    ],
     108 => [
         'printer',
     ],

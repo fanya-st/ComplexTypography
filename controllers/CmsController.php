@@ -4,9 +4,12 @@
 namespace app\controllers;
 
 
+use app\models\Rack;
 use app\models\Region;
 use app\models\RegionSearch;
+use app\models\Shelf;
 use app\models\Street;
+use app\models\Warehouse;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\models\OrderSearch;
@@ -24,6 +27,8 @@ use yii\data\ActiveDataProvider;
 use app\models\CalcCommonParam;
 use app\models\CalcMashineParamValue;
 use app\models\CalcMashineParamValueSearch;
+use app\models\RackSearch;
+use app\models\ShelfSearch;
 use yii;
 
 class CmsController extends Controller
@@ -42,6 +47,9 @@ class CmsController extends Controller
                             'region-index','region-update','region-create',
                             'town-index','town-update','town-create',
                             'street-index','street-update','street-create',
+                            'warehouse-index','warehouse-update','warehouse-create','warehouse-delete',
+                            'rack-index','rack-update','rack-create','rack-delete',
+                            'shelf-index','shelf-update','shelf-create','shelf-delete',
                             'calc-mashine-param-price-view','calc-mashine-param-price-update','calc-mashine-param-price-create','calc-mashine-param-price-index',
                             'calc-common-params-index','calc-common-params-update','calc-common-params-create',
                             'customer-index','customer-update',
@@ -551,5 +559,159 @@ class CmsController extends Controller
         return $this->redirect(['calc-mashine-param-price-index']);
     }
 
+    /*Редактирование списка складов*/
 
+    public function actionWarehouseIndex()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Warehouse::find(),
+        ]);
+
+        return $this->render('warehouse\index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    public function actionWarehouseCreate()
+    {
+        $model = new Warehouse();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['warehouse-index']);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('warehouse\create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionWarehouseUpdate($id)
+    {
+        $model = Warehouse::findOne($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['warehouse-index']);
+        }
+
+        return $this->render('warehouse\update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionWarehouseDelete($id)
+    {
+        Warehouse::findOne($id)->delete();
+
+        return $this->redirect(['warehouse-index']);
+    }
+
+
+    /*Редактирование стелажей*/
+
+    public function actionRackIndex()
+    {
+        $searchModel = new RackSearch();
+        $dataProvider = $searchModel->search($this->request->post());
+
+        return $this->render('rack\index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+
+    public function actionRackCreate()
+    {
+        $model = new Rack();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['rack-index']);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('rack\create', [
+            'model' => $model,
+        ]);
+    }
+
+
+    public function actionRackUpdate($id)
+    {
+        $model = Rack::findOne($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['rack-index']);
+        }
+
+        return $this->render('rack\update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionRackDelete($id)
+    {
+        Rack::findOne($id)->delete();
+
+        return $this->redirect(['rack-index']);
+    }
+
+    /*Редактирование полок*/
+
+    public function actionShelfIndex()
+    {
+        $searchModel = new ShelfSearch();
+        $dataProvider = $searchModel->search($this->request->post());
+
+        return $this->render('shelf\index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    public function actionShelfCreate()
+    {
+        $model = new Shelf();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['shelf-index']);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('shelf\create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionShelfUpdate($id)
+    {
+        $model = Shelf::findOne($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['shelf-index']);
+        }
+
+        return $this->render('shelf\update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionShelfDelete($id)
+    {
+        Shelf::findOne($id)->delete();
+
+        return $this->redirect(['shelf-index']);
+    }
 }

@@ -25,6 +25,9 @@ class Material extends ActiveRecord
         return $this->hasMany(PaperWarehouse::class,['material_id'=>'id']);
     }
 
+
+
+
     public function attributeLabels()
     {
         return [

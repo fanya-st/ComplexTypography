@@ -69,6 +69,16 @@ class Pantone extends ActiveRecord
                 }
             }
             Yii::$app->session->setFlash('success', 'PANTONE добавлен');
+            if(!empty($this->mashine_list)){
+                MashinePantone::deleteAll(['pantone_id'=>$this->id]);
+                foreach ($this->mashine_list as $mashine_id){
+                    $mashine_pantone=new MashinePantone();
+                    $mashine_pantone->pantone_id=$this->id;
+                    $mashine_pantone->mashine_id=$mashine_id;
+                    $mashine_pantone->save();
+                }
+                unset($this->mashine_list);
+            }
         } else {
             Yii::$app->session->setFlash('success', 'PANTONE обновлен');
         }
@@ -114,17 +124,18 @@ class Pantone extends ActiveRecord
                     $archive->old_value=$this->getOldAttribute('price_euro');
                     $archive->save();
                 }
-            }
-            if(!empty($this->mashine_list)){
-                MashinePantone::deleteAll(['pantone_id'=>$this->id]);
-                foreach ($this->mashine_list as $mashine_id){
-                    $mashine_pantone=new MashinePantone();
-                    $mashine_pantone->pantone_id=$this->id;
-                    $mashine_pantone->mashine_id=$mashine_id;
-                    $mashine_pantone->save();
+                if(!empty($this->mashine_list)){
+                    MashinePantone::deleteAll(['pantone_id'=>$this->id]);
+                    foreach ($this->mashine_list as $mashine_id){
+                        $mashine_pantone=new MashinePantone();
+                        $mashine_pantone->pantone_id=$this->id;
+                        $mashine_pantone->mashine_id=$mashine_id;
+                        $mashine_pantone->save();
+                    }
+                    unset($this->mashine_list);
                 }
-                unset($this->mashine_list);
             }
+
             return true;
         } else {
             return false;

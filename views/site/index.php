@@ -9,44 +9,56 @@ $this->title = 'Комплекс Типография';
 
         <div class="row">
             <div class="col-lg-4">
-                <h2>Работа с заказами</h2>
+                <h3>Работа с заказами</h3>
                 <p>Просмотр, создание, удаление заказов</p>
                 <p><a class="btn btn-outline-secondary" href="?r=order/list">Заказы &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=order/create&blank=1">Создание заказа с готовой этикеткой &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=order/create&blank=0">Создание заказа &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Работа с материалами</h2>
+                <h3>Работа с материалами</h3>
                 <p>Просмотр, создание, удаление материалов</p>
                 <p><a class="btn btn-outline-secondary" href="?r=material/list">Материалы &raquo;</a><a class="m-1 btn btn-outline-secondary" href="?r=pantone/index">Краски, лаки, химия &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse/list">Склад бумаги, фольги, ламинации &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=pantone-warehouse/index">Склад красок, лаков и химии &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse/roll-cut">Разрезать ролик &raquo;</a><a class="m-1 btn btn-outline-secondary" href="?r=pants/index">Штанцы &raquo;</a><a class=" btn btn-outline-secondary" href="?r=shaft/index">Валы &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Работа с этикетками</h2>
+                <h3>Работа с этикетками</h3>
                 <p>Работа с этикетками</p>
                 <p><a class="btn btn-outline-secondary" href="?r=label/list">Этикетки &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate">Создание этикетки &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=calculator/calculator">Калькулятор &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Работа с отгрузками</h2>
+                <h3>Работа с отгрузками</h3>
                 <p>Работа с отгрузками</p>
                 <p><a class="btn btn-outline-secondary" href="?r=shipment/list">Отгрузки &raquo;</a><a class="m-1 btn btn-outline-secondary" href="?r=finished-products-warehouse/surplus-list">Излишки &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Работа с заказчиками</h2>
+                <h3>Работа с заказчиками</h3>
                 <p>Работа с заказчиками</p>
                 <p><a class="btn btn-outline-secondary" href="?r=customer/list">Заказчики &raquo;</a><a class="m-1 btn btn-outline-secondary" href="?r=customer/create">Добавить заказчика &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Учет рабочего времени</h2>
-                <p>Учет рабочего времени</p>
+                <h3>Работа с сотрудниками</h3>
+                <p>Учет рабочего времени, сотрудники</p>
                 <p><a class="btn btn-outline-secondary" href="?r=employee/list">Сотрудники &raquo;</a><a class="m-1 btn btn-outline-secondary" href="?r=time-tracker/kiosk">Учет рабочего времени &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Калькуляторы</h2>
-                <p>Калькуляция цены этикетки и заказа</p>
-                <p><a class="btn btn-outline-secondary" href="?r=calculator/calculator">Калькулятор &raquo;</a></p>
+                <h3>Бухгалтерия</h3>
+                <p>Работа с финансами</p>
+                <p><a class="btn btn-outline-secondary" href="?r=enterprise-cost/index">Затраты предприятия &raquo;</a><a class="m-1 btn btn-outline-secondary" href="?r=bank-transfer/index">Банк &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse/paper-movement">Оборотная ведомость по материалу &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=material/stock-on-hand-paper">Наличные складские запасы бумаги &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=financial-report/index">Финансовый отчет &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h3>Транспорт и командировки</h3>
+                <p>Транспорт и командировки</p>
+                <p><a class="btn btn-outline-secondary" href="?r=transport/index">Транспорт &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=business-trip/index">Командировки сотрудников &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=business-trip/index">Командировки по доставке ГП &raquo;</a></p>
             </div>
         </div>
     </div>

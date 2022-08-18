@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 11 2022 г., 15:51
+-- Время создания: Авг 18 2022 г., 15:27
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.1.33
 
@@ -45,6 +45,29 @@ INSERT INTO `background_label` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `bank_transfer`
+--
+
+CREATE TABLE `bank_transfer` (
+  `id` int NOT NULL,
+  `date_of_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `customer_id` int NOT NULL,
+  `date` date NOT NULL,
+  `sum` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `bank_transfer`
+--
+
+INSERT INTO `bank_transfer` (`id`, `date_of_create`, `customer_id`, `date`, `sum`) VALUES
+(1, '2022-08-17 15:26:53', 1, '2022-08-01', 10000),
+(2, '2022-08-17 15:28:53', 2, '2022-08-01', 10000),
+(3, '2022-08-17 18:48:10', 4, '2022-08-17', 10000);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `calc_common_param`
 --
 
@@ -61,7 +84,7 @@ CREATE TABLE `calc_common_param` (
 --
 
 INSERT INTO `calc_common_param` (`id`, `name`, `subscribe`, `value`, `date`) VALUES
-(3, 'desired_profit', 'Желаемая прибыль (евро/час)', 41, '2022-08-11 11:06:28'),
+(3, 'desired_profit', 'Желаемая прибыль (евро/час)', 40, '2022-08-17 09:37:24'),
 (8, 'transport_cost', 'Затраты на транспорт', 2, '2022-08-11 11:09:29'),
 (9, 'layout_price', 'Стоимость вёрстки (руб)', 500, '2022-08-11 11:10:15'),
 (11, 'print_on_glue', 'Печать по клею (коэф.)', 0.11, '2022-08-11 11:11:26'),
@@ -72,7 +95,8 @@ INSERT INTO `calc_common_param` (`id`, `name`, `subscribe`, `value`, `date`) VAL
 (17, 'form_tolerance', 'Допуск формы (мм)', 18, '2022-08-11 11:17:11'),
 (18, 'tax', 'Процент НДС (%)', 20, '2022-08-11 11:17:46'),
 (19, 'form_change_time', 'Время на смену одной формы (мин)', 30, '2022-08-11 14:17:21'),
-(20, 'desired_profit_min', 'Мин. желаемая прибыль (евро/час)', 33, '2022-08-11 14:20:03');
+(20, 'desired_profit_min', 'Мин. желаемая прибыль (евро/час)', 33, '2022-08-11 14:20:03'),
+(21, 'price_increase', 'Повышение цены (коэф)', 1.04, '2022-08-15 10:22:49');
 
 -- --------------------------------------------------------
 
@@ -86,6 +110,13 @@ CREATE TABLE `calc_common_param_archive` (
   `value` float NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `calc_common_param_archive`
+--
+
+INSERT INTO `calc_common_param_archive` (`id`, `calc_common_param_id`, `value`, `date`) VALUES
+(3, 3, 41, '2022-08-11 11:06:28');
 
 -- --------------------------------------------------------
 
@@ -105,20 +136,16 @@ CREATE TABLE `calc_mashine_param` (
 
 INSERT INTO `calc_mashine_param` (`id`, `name`, `subscribe`) VALUES
 (1, 'desired_profit', 'Желаемая прибыль (евро/час)'),
-(2, 'avg_paint_price', 'Средняя цена краски (руб/кг)'),
-(3, 'avg_varnish_glossy_price', 'Средняя цена глянцевого лака (руб/кг)'),
-(4, 'design_layout_price', 'Дизайн макет (руб)'),
-(5, 'form_price', 'Стоимость формы (руб/см2)'),
-(6, 'avg_varnish_matte_price', 'Средняя цена матового лака (руб/кг)'),
-(7, 'paint_selection', 'Подбор краски (руб)'),
-(8, 'scotch_price', 'Стоимость скотча (руб/см2)'),
+(4, 'design_layout_price', 'Стоимость дизайн макета (руб)'),
+(5, 'form_price', 'Стоимость формы (евро/см2)'),
+(8, 'scotch_price', 'Стоимость скотча (евро/см2)'),
 (9, 'paper_cmyk_adjust', 'Бумага на настройку CMYK (м)'),
 (10, 'paper_common_adjust', 'Бумага на настройку - общее (м)'),
 (11, 'paper_varnish_adjust', 'Бумага на настройку ЛАК (м)'),
 (12, 'paper_pantone_adjust', 'Бумага на настройку Pantone (м)'),
 (13, 'roll_change_length', 'Длина смены ролика общее (м)'),
 (14, 'lost_paint_compensation', 'Компенсация потери красок (кг)'),
-(15, 'roll_change_length', 'Длина смены ролика общее (м)'),
+(15, 'paper_roll_change', 'Бумага на смену ролика (м)'),
 (16, 'varnish_usage', 'Кол-во лака на 1 кв.м (кг/м2)'),
 (17, 'paint_usage', 'Кол-во краски на 1 кв.м (кг/м2)'),
 (18, 'time_cmyk_adjust', 'Время CMYK настройка (ч)'),
@@ -129,15 +156,18 @@ INSERT INTO `calc_mashine_param` (`id`, `name`, `subscribe`) VALUES
 (23, 'one_roll_change_time', 'Время на смену 1-го ролика (мин)'),
 (24, 'print_speed', 'Скорость печати (м/мин)'),
 (25, 'stencil_mesh_price', 'Стоимость трафаретной сетки 1 шт (руб)'),
-(26, 'time_stencil_mesh_adjust', 'Время Трафарет настройка (ч)');
+(26, 'time_stencil_mesh_adjust', 'Время Трафарет настройка (ч)'),
+(27, 'paper_paint_selection_adjust', 'Бумага на подбор краски под оригинал (м)'),
+(29, 'stencil_paint_usage', 'Кол-во краски на трафарет (кг/м2)'),
+(31, 'paint_selection_price', 'Стоимость подбора краски (руб)');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `calc_mashine_param_price`
+-- Структура таблицы `calc_mashine_param_value`
 --
 
-CREATE TABLE `calc_mashine_param_price` (
+CREATE TABLE `calc_mashine_param_value` (
   `id` int NOT NULL,
   `mashine_id` int NOT NULL,
   `calc_mashine_param_id` int NOT NULL,
@@ -146,38 +176,51 @@ CREATE TABLE `calc_mashine_param_price` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Дамп данных таблицы `calc_mashine_param_price`
+-- Дамп данных таблицы `calc_mashine_param_value`
 --
 
-INSERT INTO `calc_mashine_param_price` (`id`, `mashine_id`, `calc_mashine_param_id`, `value`, `date`) VALUES
-(1, 1, 1, 20, '2022-08-11 15:16:56'),
-(2, 1, 2, 1333, '2022-08-11 15:28:06'),
-(3, 1, 3, 777, '2022-08-11 15:29:15'),
-(4, 1, 4, 500, '2022-08-11 15:29:35'),
-(5, 1, 7, 170, '2022-08-11 15:30:11'),
+INSERT INTO `calc_mashine_param_value` (`id`, `mashine_id`, `calc_mashine_param_id`, `value`, `date`) VALUES
+(1, 1, 1, 41, '2022-08-11 15:16:56'),
+(4, 1, 4, 2000, '2022-08-11 15:29:35'),
 (6, 1, 8, 0.32, '2022-08-11 15:30:35'),
 (7, 1, 9, 35, '2022-08-11 15:30:55'),
-(8, 1, 10, 50, '2022-08-11 15:31:11');
+(8, 1, 10, 50, '2022-08-11 15:31:11'),
+(10, 1, 12, 50, '2022-08-15 08:47:43'),
+(11, 1, 13, 40, '2022-08-15 12:31:46'),
+(12, 1, 5, 0.015, '2022-08-15 12:50:24'),
+(14, 1, 11, 10, '2022-08-15 13:22:20'),
+(15, 1, 14, 0.05, '2022-08-15 13:23:10'),
+(16, 1, 16, 0.003, '2022-08-15 13:23:32'),
+(17, 1, 17, 0.0007, '2022-08-15 13:23:49'),
+(18, 1, 24, 35, '2022-08-15 13:24:13'),
+(20, 1, 19, 0.3, '2022-08-16 08:24:51'),
+(21, 1, 18, 0.1, '2022-08-16 08:25:28'),
+(22, 1, 22, 0.5, '2022-08-16 08:25:59'),
+(23, 1, 23, 10, '2022-08-16 08:26:51');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `calc_mashine_param_price_archive`
+-- Структура таблицы `calc_mashine_param_value_archive`
 --
 
-CREATE TABLE `calc_mashine_param_price_archive` (
+CREATE TABLE `calc_mashine_param_value_archive` (
   `id` int NOT NULL,
-  `calc_mashine_param_price_id` int NOT NULL,
+  `calc_mashine_param_value_id` int NOT NULL,
   `value` float NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Дамп данных таблицы `calc_mashine_param_price_archive`
+-- Дамп данных таблицы `calc_mashine_param_value_archive`
 --
 
-INSERT INTO `calc_mashine_param_price_archive` (`id`, `calc_mashine_param_price_id`, `value`, `date`) VALUES
-(1, 1, 30, '2022-08-11 15:16:56');
+INSERT INTO `calc_mashine_param_value_archive` (`id`, `calc_mashine_param_value_id`, `value`, `date`) VALUES
+(1, 1, 30, '2022-08-11 15:16:56'),
+(3, 1, 20, '2022-08-11 15:16:56'),
+(5, 4, 500, '2022-08-11 15:29:35'),
+(6, 11, 2000, '2022-08-15 12:31:46'),
+(7, 12, 0.5, '2022-08-15 12:50:24');
 
 -- --------------------------------------------------------
 
@@ -334,6 +377,55 @@ INSERT INTO `customer_status` (`id`, `name`) VALUES
 (2, 'Потенциальный'),
 (3, 'Архивный'),
 (4, 'Хлам');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `enterprise_cost`
+--
+
+CREATE TABLE `enterprise_cost` (
+  `id` int NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `login` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `service_id` int NOT NULL,
+  `cost` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `enterprise_cost`
+--
+
+INSERT INTO `enterprise_cost` (`id`, `date`, `login`, `service_id`, `cost`) VALUES
+(1, '2022-08-17 13:49:48', '', 7, 1000),
+(2, '2022-08-17 13:51:29', 'Alex', 2, 1500);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `enterprise_cost_service`
+--
+
+CREATE TABLE `enterprise_cost_service` (
+  `id` int NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `enterprise_cost_service`
+--
+
+INSERT INTO `enterprise_cost_service` (`id`, `name`) VALUES
+(1, 'Новый штанец'),
+(2, 'Перезаказ штанца'),
+(3, 'Изготовление форм'),
+(4, 'Дизайн этикетки'),
+(5, 'Премия'),
+(6, 'З/п'),
+(7, 'Аренда'),
+(8, 'Налог'),
+(9, 'Командировка'),
+(10, 'Прочее');
 
 -- --------------------------------------------------------
 
@@ -557,6 +649,26 @@ INSERT INTO `form_order_history` (`id`, `order_id`, `combination_print_order_id`
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `knife_kind`
+--
+
+CREATE TABLE `knife_kind` (
+  `id` int NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `knife_kind`
+--
+
+INSERT INTO `knife_kind` (`id`, `name`) VALUES
+(1, 'Universal'),
+(2, '3L (Laser Long Life)'),
+(3, 'Black Top 3 in 1');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `label`
 --
 
@@ -698,6 +810,59 @@ INSERT INTO `mashine` (`id`, `name`, `mashine_type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `mashine_pantone`
+--
+
+CREATE TABLE `mashine_pantone` (
+  `id` int NOT NULL,
+  `pantone_id` int NOT NULL,
+  `mashine_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `mashine_pantone`
+--
+
+INSERT INTO `mashine_pantone` (`id`, `pantone_id`, `mashine_id`) VALUES
+(17, 8, 1),
+(18, 8, 2),
+(19, 9, 1),
+(20, 11, 6),
+(21, 12, 5),
+(22, 15, 3),
+(23, 16, 4),
+(24, 16, 5),
+(25, 16, 6),
+(26, 1, 1),
+(27, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `mashine_pants`
+--
+
+CREATE TABLE `mashine_pants` (
+  `id` int NOT NULL,
+  `mashine_id` int NOT NULL,
+  `pants_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `mashine_pants`
+--
+
+INSERT INTO `mashine_pants` (`id`, `mashine_id`, `pants_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 2, 1),
+(5, 5, 1),
+(6, 4, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `material`
 --
 
@@ -723,11 +888,12 @@ CREATE TABLE `material` (
 --
 
 INSERT INTO `material` (`id`, `date_of_create`, `material_group_id`, `name`, `material_provider_id`, `short_name`, `status`, `price_rub`, `price_rub_discount`, `price_euro`, `price_euro_discount`, `density`, `prompt`, `material_id_from_provider`) VALUES
-(1, '2022-07-06 06:34:39', 1, 'MC FSC S2045M-BG40BR (MC PRIMECOAT S2045N)', 1, 'полуглянец/акриловый клей', 0, 47.6, 40.2, 0.7, 0.45, 120, '', 103),
+(1, '2022-07-06 06:34:39', 1, 'MC FSC S2045M-BG40BR (MC PRIMECOAT S2045N)', 1, 'полуглянец/акриловый клей', 0, 47.6, 40.2, 0.69, 0.45, 120, '', 103),
 (2, '2022-07-06 06:34:39', 1, 'MC PRIMECOAT S2000N-BG40BR ', 2, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, '2022-06-01 06:34:39', 6, 'Фольга серебро', 3, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, '2022-06-01 06:34:39', 6, 'Фольга серебро', 3, NULL, 1, NULL, NULL, 0.5, NULL, NULL, NULL, NULL),
 (4, '2022-07-06 06:34:39', 2, 'Термобумага', 2, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, '2022-07-08 05:36:31', 1, '(1) MC PRIMECOAT S2045N-BG40BR', 1, 'пг 2045', 1, 42.3, 41.8, 0.4, 0.35, 141, 'ПОЛУГЛЯНЕЦ , КАУЧУКОВЫЙ КЛЕЙ , 2045 .', 584);
+(5, '2022-07-08 05:36:31', 1, '(1) MC PRIMECOAT S2045N-BG40BR', 1, 'пг 2045', 1, 42.3, 41.8, 0.4, 0.35, 141, 'ПОЛУГЛЯНЕЦ , КАУЧУКОВЫЙ КЛЕЙ , 2045 .', 584),
+(6, '2022-08-15 09:47:36', 8, 'Ламинация', 2, 'Ламинация', 1, NULL, NULL, 0.7, 0.5, NULL, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -778,7 +944,9 @@ INSERT INTO `material_price_archive` (`id`, `material_id`, `date_of_change`, `pr
 (6, 1, '2022-07-07 11:24:45', 'price_rub', 45.6),
 (7, 1, '2022-07-07 11:26:39', 'price_rub_discount', 40.6),
 (8, 1, '2022-07-07 11:26:39', 'price_euro_discount', 0.43),
-(9, 5, '2022-07-14 10:06:24', 'price_euro', 0.38);
+(9, 5, '2022-07-14 10:06:24', 'price_euro', 0.38),
+(10, 6, '2022-08-15 13:21:26', 'price_euro', 0.6),
+(11, 1, '2022-08-15 13:47:05', 'price_euro', 0.7);
 
 -- --------------------------------------------------------
 
@@ -799,6 +967,49 @@ INSERT INTO `material_provider` (`id`, `name`) VALUES
 (1, 'Fasson'),
 (2, 'Frimpeks'),
 (3, 'Raflatac');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `mixed_pantone`
+--
+
+CREATE TABLE `mixed_pantone` (
+  `id` int NOT NULL,
+  `pantone_id` int NOT NULL,
+  `component_pantone_id` int DEFAULT NULL,
+  `weight` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `mixed_pantone`
+--
+
+INSERT INTO `mixed_pantone` (`id`, `pantone_id`, `component_pantone_id`, `weight`) VALUES
+(1, 8, 4, 100),
+(2, 8, 1, 25),
+(3, 8, 2, 30),
+(4, 8, 5, 225),
+(5, 8, 3, 30),
+(6, 8, NULL, NULL),
+(7, 8, NULL, NULL),
+(8, 8, NULL, NULL),
+(9, 10, 1, 10),
+(10, 10, NULL, NULL),
+(11, 10, NULL, NULL),
+(12, 10, NULL, NULL),
+(13, 10, NULL, NULL),
+(14, 10, NULL, NULL),
+(15, 10, NULL, NULL),
+(16, 10, NULL, NULL),
+(17, 13, NULL, NULL),
+(18, 13, NULL, NULL),
+(19, 13, NULL, NULL),
+(20, 13, NULL, NULL),
+(21, 13, NULL, NULL),
+(22, 13, NULL, NULL),
+(23, 13, NULL, NULL),
+(24, 13, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -895,25 +1106,26 @@ CREATE TABLE `order_material` (
   `id` int NOT NULL,
   `order_id` int NOT NULL,
   `paper_warehouse_id` int NOT NULL,
-  `length` int NOT NULL
+  `length` int NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `order_material`
 --
 
-INSERT INTO `order_material` (`id`, `order_id`, `paper_warehouse_id`, `length`) VALUES
-(5, 31, 1, 1500),
-(16, 31, 2, 50),
-(17, 31, 1, 50),
-(18, 31, 3, 1500),
-(19, 3, 2, 50),
-(20, 3, 1, 100),
-(21, 1, 2, 400),
-(22, 1, 1, 100),
-(23, 3, 2, 1000),
-(24, 35, 106, 2000),
-(28, 35, 105, 900);
+INSERT INTO `order_material` (`id`, `order_id`, `paper_warehouse_id`, `length`, `date`) VALUES
+(5, 31, 1, 1500, '2022-08-18 09:53:22'),
+(16, 31, 2, 50, '2022-08-18 09:53:22'),
+(17, 31, 1, 50, '2022-08-18 09:53:22'),
+(18, 31, 3, 1500, '2022-07-18 09:53:22'),
+(19, 3, 2, 50, '2022-08-18 09:53:22'),
+(20, 3, 1, 100, '2022-08-18 09:53:22'),
+(21, 1, 2, 400, '2022-08-18 09:53:22'),
+(22, 1, 1, 100, '2022-08-18 09:53:22'),
+(23, 3, 2, 1000, '2022-08-18 09:53:22'),
+(24, 35, 106, 2000, '2022-08-18 09:53:22'),
+(28, 35, 105, 900, '2022-08-18 09:53:22');
 
 -- --------------------------------------------------------
 
@@ -972,18 +1184,56 @@ INSERT INTO `output_label` (`id`, `name`, `image`) VALUES
 
 CREATE TABLE `pantone` (
   `id` int NOT NULL,
-  `name` varchar(50) NOT NULL
+  `name` varchar(50) NOT NULL,
+  `pantone_kind_id` int NOT NULL,
+  `price_rub` double DEFAULT NULL,
+  `price_rub_discount` double DEFAULT NULL,
+  `price_euro` double DEFAULT NULL,
+  `price_euro_discount` double DEFAULT NULL,
+  `subscribe` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `pantone`
 --
 
-INSERT INTO `pantone` (`id`, `name`) VALUES
-(1, 'cyan'),
-(2, 'magenta'),
-(3, 'yellow'),
-(4, 'black');
+INSERT INTO `pantone` (`id`, `name`, `pantone_kind_id`, `price_rub`, `price_rub_discount`, `price_euro`, `price_euro_discount`, `subscribe`) VALUES
+(1, 'cyan', 1, 70, NULL, 2.5, NULL, ''),
+(2, 'magenta', 1, NULL, NULL, NULL, NULL, NULL),
+(3, 'yellow', 1, NULL, NULL, NULL, NULL, NULL),
+(4, 'black', 1, NULL, NULL, NULL, NULL, NULL),
+(5, '128 ARSOMA', 2, NULL, NULL, NULL, NULL, NULL),
+(8, '116 Gallus', 2, NULL, NULL, 5, NULL, ''),
+(9, 'new ENERGY (5012) матовый лак 25кг', 4, NULL, NULL, 5, NULL, NULL),
+(10, '120 Gallus', 2, 70, 60, 0.5, 0.4, ''),
+(11, 'Jetsci Black', 1, 10182, 10214, 165, 160, 'Краска для переменной печати'),
+(12, 'Gallus 340 456', 1, 3830, 3700, 60, 50, ''),
+(13, '130 ARSOMA', 2, 70, 50, 0.6, 0.4, ''),
+(14, '118 Gallus', 1, 70, 50, 0.5, 0.4, ''),
+(15, '118 ARSOMA2', 1, 70, 50, 0.5, 0.4, ''),
+(16, '116 Gallus', 1, 70, 50, 0.5, 0.4, 'dsfhdfg');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pantone_kind`
+--
+
+CREATE TABLE `pantone_kind` (
+  `id` int NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `pantone_kind`
+--
+
+INSERT INTO `pantone_kind` (`id`, `name`) VALUES
+(1, 'Чистый PANTONE'),
+(2, 'Смешанный PANTONE'),
+(3, 'Химия'),
+(4, 'Матовый лак'),
+(5, 'Глянцевый лак');
 
 -- --------------------------------------------------------
 
@@ -1008,26 +1258,100 @@ INSERT INTO `pantone_label` (`id`, `pantone_id`, `label_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `pantone_price_archive`
+--
+
+CREATE TABLE `pantone_price_archive` (
+  `id` int NOT NULL,
+  `pantone_id` int NOT NULL,
+  `date_of_change` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `price_attribute` varchar(50) NOT NULL,
+  `old_value` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `pantone_price_archive`
+--
+
+INSERT INTO `pantone_price_archive` (`id`, `pantone_id`, `date_of_change`, `price_attribute`, `old_value`) VALUES
+(1, 1, '2022-08-16 12:42:14', 'price_rub', 50),
+(2, 1, '2022-08-16 12:48:25', 'price_rub', 60),
+(3, 10, '2022-08-16 12:58:15', 'price_rub', 60),
+(4, 10, '2022-08-16 13:01:41', 'price_rub_discount', 50);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pantone_warehouse`
+--
+
+CREATE TABLE `pantone_warehouse` (
+  `id` int NOT NULL,
+  `pantone_id` int NOT NULL,
+  `weight` double NOT NULL DEFAULT '0',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `shelf_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `pantone_warehouse`
+--
+
+INSERT INTO `pantone_warehouse` (`id`, `pantone_id`, `weight`, `date`, `shelf_id`) VALUES
+(1, 1, 10, '2022-08-16 15:37:32', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `pants`
 --
 
 CREATE TABLE `pants` (
   `id` int NOT NULL,
   `name` varchar(50) NOT NULL,
-  `cut` int NOT NULL DEFAULT '0',
   `shaft_id` int DEFAULT NULL,
-  `paper_width` int DEFAULT NULL
+  `paper_width` int DEFAULT NULL COMMENT 'ширина бумаги',
+  `pants_kind_id` int DEFAULT NULL COMMENT 'вид штанца',
+  `cuts` int NOT NULL COMMENT 'высечки',
+  `width_label` float NOT NULL COMMENT 'ширина этикетки',
+  `height_label` float NOT NULL COMMENT 'высота этикетки',
+  `knife_kind_id` int NOT NULL COMMENT 'тип ножа',
+  `knife_width` int NOT NULL COMMENT 'ширина ножа',
+  `picture` varchar(100) NOT NULL,
+  `radius` float NOT NULL COMMENT 'радиус',
+  `gap` float NOT NULL COMMENT 'зазор',
+  `material_group_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `pants`
 --
 
-INSERT INTO `pants` (`id`, `name`, `cut`, `shaft_id`, `paper_width`) VALUES
-(1, '1754', 0, 1, 80),
-(2, '1948', 0, 2, NULL),
-(3, '1755', 0, 3, NULL),
-(4, '965', 0, 4, NULL);
+INSERT INTO `pants` (`id`, `name`, `shaft_id`, `paper_width`, `pants_kind_id`, `cuts`, `width_label`, `height_label`, `knife_kind_id`, `knife_width`, `picture`, `radius`, `gap`, `material_group_id`) VALUES
+(1, '1754', 1, 80, 1, 8, 20, 35, 1, 170, 'pants/1754.jpg', 0, 0, 1),
+(2, '1948', 2, 150, 2, 5, 160, 160, 3, 250, 'pants/1948.jpg', 0, 0, 2),
+(3, '1755', 3, 245, 3, 2, 85, 250, 3, 95, '0', 0, 0, 3),
+(5, '2775', 3, 225, 2, 8, 28, 50, 2, 125, 'pants/2775.jpg', 15, 2.5, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pants_kind`
+--
+
+CREATE TABLE `pants_kind` (
+  `id` int NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `pants_kind`
+--
+
+INSERT INTO `pants_kind` (`id`, `name`) VALUES
+(1, 'Прямоугольный'),
+(2, 'Окружность'),
+(3, 'Фигурный');
 
 -- --------------------------------------------------------
 
@@ -1040,120 +1364,131 @@ CREATE TABLE `paper_warehouse` (
   `date_of_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `material_id` int NOT NULL,
   `length` int NOT NULL,
-  `width` int NOT NULL
+  `width` int NOT NULL,
+  `shelf_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `paper_warehouse`
 --
 
-INSERT INTO `paper_warehouse` (`id`, `date_of_create`, `material_id`, `length`, `width`) VALUES
-(1, '2022-07-15 13:20:55', 1, 250, 200),
-(2, '2022-07-15 13:20:55', 2, 0, 100),
-(3, '2022-07-15 13:20:55', 3, 500, 300),
-(4, '2022-07-15 13:20:55', 3, 1000, 300),
-(5, '2022-07-15 13:20:55', 2, 1000, 100),
-(6, '2022-07-15 13:20:55', 1, 1000, 300),
-(7, '2022-07-29 15:39:25', 1, 1920, 160),
-(8, '2022-07-29 15:39:25', 1, 1930, 245),
-(9, '2022-07-29 15:39:25', 1, 1930, 245),
-(10, '2022-07-29 15:39:25', 1, 945, 160),
-(11, '2022-07-29 15:39:25', 1, 1950, 160),
-(12, '2022-07-29 15:39:25', 1, 1950, 160),
-(13, '2022-07-29 15:39:25', 1, 1950, 245),
-(14, '2022-07-29 15:39:25', 1, 1950, 245),
-(15, '2022-07-29 15:39:25', 1, 2000, 245),
-(16, '2022-07-29 15:39:25', 1, 2000, 245),
-(17, '2022-07-29 15:40:47', 1, 1920, 200),
-(18, '2022-07-29 15:40:47', 1, 1920, 200),
-(19, '2022-07-29 15:40:47', 1, 1945, 200),
-(20, '2022-07-29 15:40:47', 1, 1945, 200),
-(21, '2022-07-29 15:40:47', 1, 1950, 200),
-(22, '2022-07-29 15:40:47', 1, 1950, 200),
-(23, '2022-07-29 15:40:47', 1, 1950, 200),
-(24, '2022-07-29 15:40:47', 1, 1950, 200),
-(25, '2022-07-29 15:40:47', 1, 1950, 200),
-(26, '2022-07-29 15:40:47', 1, 1950, 200),
-(27, '2022-07-29 15:40:47', 1, 1980, 200),
-(28, '2022-07-29 15:41:54', 1, 1920, 255),
-(29, '2022-07-29 15:41:54', 1, 1920, 255),
-(30, '2022-07-29 15:41:54', 1, 1945, 255),
-(31, '2022-07-29 15:41:54', 1, 1945, 255),
-(32, '2022-07-29 15:41:54', 1, 1950, 255),
-(33, '2022-07-29 15:41:54', 1, 1950, 255),
-(34, '2022-07-29 15:41:54', 1, 1950, 255),
-(35, '2022-07-29 15:41:54', 1, 1950, 255),
-(36, '2022-07-29 15:42:07', 1, 1930, 180),
-(37, '2022-07-29 15:42:07', 1, 1930, 180),
-(38, '2022-07-29 15:42:07', 1, 1950, 180),
-(39, '2022-07-29 15:42:07', 1, 1950, 180),
-(40, '2022-07-29 15:42:07', 1, 1950, 180),
-(41, '2022-07-29 15:42:07', 1, 1950, 180),
-(42, '2022-07-29 15:42:07', 1, 1950, 180),
-(43, '2022-07-29 15:42:07', 1, 1980, 180),
-(44, '2022-07-29 15:42:07', 1, 2000, 180),
-(45, '2022-07-29 15:42:07', 1, 2000, 180),
-(46, '2022-07-29 15:42:07', 1, 2000, 180),
-(47, '2022-07-29 15:42:15', 1, 1930, 220),
-(48, '2022-07-29 15:42:15', 1, 1950, 220),
-(49, '2022-07-29 15:42:15', 1, 1950, 220),
-(50, '2022-07-29 15:42:15', 1, 1950, 220),
-(51, '2022-07-29 15:42:15', 1, 1950, 220),
-(52, '2022-07-29 15:42:15', 1, 1950, 230),
-(53, '2022-07-29 15:42:15', 1, 2000, 220),
-(54, '2022-07-29 15:42:15', 1, 2000, 220),
-(55, '2022-07-29 15:42:15', 1, 2000, 220),
-(56, '2022-07-29 15:42:15', 1, 2000, 220),
-(57, '2022-07-29 15:42:23', 1, 1950, 230),
-(58, '2022-07-29 15:42:23', 1, 1950, 230),
-(59, '2022-07-29 15:42:23', 1, 1950, 230),
-(60, '2022-07-29 15:42:23', 1, 1950, 230),
-(61, '2022-07-29 15:42:23', 1, 1950, 230),
-(62, '2022-07-29 15:42:23', 1, 1950, 230),
-(63, '2022-07-29 15:42:23', 1, 1980, 230),
-(64, '2022-07-29 15:42:23', 1, 1980, 230),
-(65, '2022-07-29 15:42:23', 1, 1980, 230),
-(66, '2022-07-29 15:42:23', 1, 2000, 230),
-(67, '2022-07-29 15:43:25', 2, 1950, 170),
-(68, '2022-07-29 15:59:11', 5, 1950, 180),
-(69, '2022-08-01 10:38:17', 5, 1950, 180),
-(70, '2022-08-01 10:38:17', 5, 1950, 180),
-(71, '2022-08-01 10:38:17', 5, 1950, 180),
-(72, '2022-08-01 10:38:17', 5, 1950, 180),
-(73, '2022-08-01 10:38:17', 5, 1950, 200),
-(74, '2022-08-01 10:38:17', 5, 1950, 260),
-(75, '2022-08-01 10:38:17', 5, 1980, 180),
-(76, '2022-08-01 10:38:17', 5, 2000, 180),
-(77, '2022-08-01 10:38:27', 5, 1966, 200),
-(78, '2022-08-01 10:38:27', 5, 1966, 200),
-(79, '2022-08-01 10:38:27', 5, 1966, 200),
-(80, '2022-08-01 10:38:27', 5, 1966, 200),
-(81, '2022-08-01 10:38:27', 5, 1966, 200),
-(82, '2022-08-01 10:38:27', 5, 1966, 200),
-(83, '2022-08-01 10:38:27', 5, 1980, 200),
-(84, '2022-08-01 10:38:27', 5, 1980, 200),
-(85, '2022-08-01 10:38:27', 5, 1980, 200),
-(86, '2022-08-01 10:38:27', 5, 2000, 200),
-(87, '2022-08-01 10:38:37', 5, 1966, 110),
-(88, '2022-08-01 10:38:37', 5, 1966, 220),
-(89, '2022-08-01 10:38:37', 5, 1980, 165),
-(90, '2022-08-01 10:38:37', 5, 1980, 165),
-(91, '2022-08-01 10:38:37', 5, 1980, 220),
-(92, '2022-08-01 10:38:37', 5, 2000, 110),
-(93, '2022-08-01 10:38:37', 5, 2000, 165),
-(94, '2022-08-01 10:38:37', 5, 2000, 165),
-(95, '2022-08-01 10:38:37', 5, 2000, 220),
-(96, '2022-08-01 10:38:37', 5, 2000, 220),
-(97, '2022-08-01 10:38:45', 5, 1980, 200),
-(98, '2022-08-01 10:38:46', 5, 2000, 200),
-(99, '2022-08-01 10:38:46', 5, 2000, 200),
-(100, '2022-08-01 10:38:46', 5, 2000, 200),
-(101, '2022-08-01 10:38:46', 5, 2000, 200),
-(102, '2022-08-01 10:38:46', 5, 2000, 200),
-(103, '2022-08-01 10:38:46', 5, 2000, 200),
-(104, '2022-08-01 10:38:46', 5, 2000, 200),
-(105, '2022-08-01 10:38:46', 5, 0, 200),
-(106, '2022-08-01 10:38:46', 5, 0, 200);
+INSERT INTO `paper_warehouse` (`id`, `date_of_create`, `material_id`, `length`, `width`, `shelf_id`) VALUES
+(1, '2022-07-15 13:20:55', 1, 250, 200, NULL),
+(2, '2022-07-15 13:20:55', 2, 0, 100, NULL),
+(3, '2022-07-15 13:20:55', 3, 500, 300, NULL),
+(4, '2022-07-15 13:20:55', 3, 1000, 300, NULL),
+(5, '2022-07-15 13:20:55', 2, 1000, 100, NULL),
+(6, '2022-07-15 13:20:55', 1, 1000, 300, NULL),
+(7, '2022-07-29 15:39:25', 1, 1920, 160, NULL),
+(8, '2022-07-29 15:39:25', 1, 1930, 245, NULL),
+(9, '2022-07-29 15:39:25', 1, 1930, 245, NULL),
+(10, '2022-07-29 15:39:25', 1, 945, 160, NULL),
+(11, '2022-07-29 15:39:25', 1, 1950, 160, NULL),
+(12, '2022-07-29 15:39:25', 1, 1950, 160, NULL),
+(13, '2022-07-29 15:39:25', 1, 1950, 245, NULL),
+(14, '2022-07-29 15:39:25', 1, 1950, 245, NULL),
+(15, '2022-07-29 15:39:25', 1, 2000, 245, NULL),
+(16, '2022-07-29 15:39:25', 1, 2000, 245, NULL),
+(17, '2022-07-29 15:40:47', 1, 1920, 200, NULL),
+(18, '2022-07-29 15:40:47', 1, 1920, 200, NULL),
+(19, '2022-07-29 15:40:47', 1, 1945, 200, NULL),
+(20, '2022-07-29 15:40:47', 1, 1945, 200, NULL),
+(21, '2022-07-29 15:40:47', 1, 1950, 200, NULL),
+(22, '2022-07-29 15:40:47', 1, 1950, 200, NULL),
+(23, '2022-07-29 15:40:47', 1, 1950, 200, NULL),
+(24, '2022-07-29 15:40:47', 1, 1950, 200, NULL),
+(25, '2022-07-29 15:40:47', 1, 1950, 200, NULL),
+(26, '2022-07-29 15:40:47', 1, 1950, 200, NULL),
+(27, '2022-07-29 15:40:47', 1, 1980, 200, NULL),
+(28, '2022-07-29 15:41:54', 1, 1920, 255, NULL),
+(29, '2022-07-29 15:41:54', 1, 1920, 255, NULL),
+(30, '2022-07-29 15:41:54', 1, 1945, 255, NULL),
+(31, '2022-07-29 15:41:54', 1, 1945, 255, NULL),
+(32, '2022-07-29 15:41:54', 1, 1950, 255, NULL),
+(33, '2022-07-29 15:41:54', 1, 1950, 255, NULL),
+(34, '2022-07-29 15:41:54', 1, 1950, 255, NULL),
+(35, '2022-07-29 15:41:54', 1, 1950, 255, NULL),
+(36, '2022-07-29 15:42:07', 1, 1930, 180, NULL),
+(37, '2022-07-29 15:42:07', 1, 1930, 180, NULL),
+(38, '2022-07-29 15:42:07', 1, 1950, 180, NULL),
+(39, '2022-07-29 15:42:07', 1, 1950, 180, NULL),
+(40, '2022-07-29 15:42:07', 1, 1950, 180, NULL),
+(41, '2022-07-29 15:42:07', 1, 1950, 180, NULL),
+(42, '2022-07-29 15:42:07', 1, 1950, 180, NULL),
+(43, '2022-07-29 15:42:07', 1, 1980, 180, NULL),
+(44, '2022-07-29 15:42:07', 1, 2000, 180, NULL),
+(45, '2022-07-29 15:42:07', 1, 2000, 180, NULL),
+(46, '2022-07-29 15:42:07', 1, 2000, 180, NULL),
+(47, '2022-07-29 15:42:15', 1, 1930, 220, NULL),
+(48, '2022-07-29 15:42:15', 1, 1950, 220, NULL),
+(49, '2022-07-29 15:42:15', 1, 1950, 220, NULL),
+(50, '2022-07-29 15:42:15', 1, 1950, 220, NULL),
+(51, '2022-07-29 15:42:15', 1, 1950, 220, NULL),
+(52, '2022-07-29 15:42:15', 1, 1950, 230, NULL),
+(53, '2022-07-29 15:42:15', 1, 2000, 220, NULL),
+(54, '2022-07-29 15:42:15', 1, 2000, 220, NULL),
+(55, '2022-07-29 15:42:15', 1, 2000, 220, NULL),
+(56, '2022-07-29 15:42:15', 1, 2000, 220, NULL),
+(57, '2022-07-29 15:42:23', 1, 1950, 230, NULL),
+(58, '2022-07-29 15:42:23', 1, 1950, 230, NULL),
+(59, '2022-07-29 15:42:23', 1, 1950, 230, NULL),
+(60, '2022-07-29 15:42:23', 1, 1950, 230, NULL),
+(61, '2022-07-29 15:42:23', 1, 1950, 230, NULL),
+(62, '2022-07-29 15:42:23', 1, 1950, 230, NULL),
+(63, '2022-07-29 15:42:23', 1, 1980, 230, NULL),
+(64, '2022-07-29 15:42:23', 1, 1980, 230, NULL),
+(65, '2022-07-29 15:42:23', 1, 1980, 230, NULL),
+(66, '2022-07-29 15:42:23', 1, 2000, 230, NULL),
+(67, '2022-07-29 15:43:25', 2, 1950, 170, NULL),
+(68, '2022-07-29 15:59:11', 5, 1950, 180, NULL),
+(69, '2022-08-01 10:38:17', 5, 1950, 180, NULL),
+(70, '2022-08-01 10:38:17', 5, 1950, 180, NULL),
+(71, '2022-08-01 10:38:17', 5, 1950, 180, NULL),
+(72, '2022-08-01 10:38:17', 5, 1950, 180, NULL),
+(73, '2022-08-01 10:38:17', 5, 1950, 200, NULL),
+(74, '2022-08-01 10:38:17', 5, 1950, 260, NULL),
+(75, '2022-08-01 10:38:17', 5, 1980, 180, NULL),
+(76, '2022-08-01 10:38:17', 5, 2000, 180, NULL),
+(77, '2022-08-01 10:38:27', 5, 1966, 200, NULL),
+(78, '2022-08-01 10:38:27', 5, 1966, 200, NULL),
+(79, '2022-08-01 10:38:27', 5, 1966, 200, NULL),
+(80, '2022-08-01 10:38:27', 5, 1966, 200, NULL),
+(81, '2022-08-01 10:38:27', 5, 1966, 200, NULL),
+(82, '2022-08-01 10:38:27', 5, 1966, 200, NULL),
+(83, '2022-08-01 10:38:27', 5, 1980, 200, NULL),
+(84, '2022-08-01 10:38:27', 5, 1980, 200, NULL),
+(85, '2022-08-01 10:38:27', 5, 1980, 200, NULL),
+(86, '2022-08-01 10:38:27', 5, 2000, 200, NULL),
+(87, '2022-08-01 10:38:37', 5, 1966, 110, NULL),
+(88, '2022-08-01 10:38:37', 5, 1966, 220, NULL),
+(89, '2022-08-01 10:38:37', 5, 1980, 165, NULL),
+(90, '2022-08-01 10:38:37', 5, 1980, 165, NULL),
+(91, '2022-08-01 10:38:37', 5, 1980, 220, NULL),
+(92, '2022-08-01 10:38:37', 5, 2000, 110, NULL),
+(93, '2022-08-01 10:38:37', 5, 2000, 165, NULL),
+(94, '2022-08-01 10:38:37', 5, 2000, 165, NULL),
+(95, '2022-08-01 10:38:37', 5, 2000, 220, NULL),
+(96, '2022-08-01 10:38:37', 5, 2000, 220, NULL),
+(97, '2022-08-01 10:38:45', 5, 1980, 200, NULL),
+(98, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
+(99, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
+(100, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
+(101, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
+(102, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
+(103, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
+(104, '2022-08-01 10:38:46', 5, -500, 200, NULL),
+(105, '2022-08-01 10:38:46', 5, 0, 200, NULL),
+(106, '2022-08-01 10:38:46', 5, 0, 200, 2),
+(107, '2022-08-15 15:36:37', 5, 500, 100, 1),
+(108, '2022-08-15 15:36:37', 5, 0, 100, NULL),
+(109, '2022-08-15 15:44:39', 5, 100, 60, NULL),
+(110, '2022-08-15 15:44:39', 5, 500, 60, NULL),
+(111, '2022-08-15 15:48:18', 5, -9900, 100, NULL),
+(112, '2022-08-15 15:48:18', 5, 2000, 100, NULL),
+(113, '2022-08-15 15:49:59', 5, 50, 50, NULL),
+(114, '2022-08-15 15:49:59', 5, -10000, 50, NULL),
+(115, '2022-08-15 15:52:04', 5, 20000, 25, NULL),
+(116, '2022-08-15 15:52:04', 5, 20000, 25, NULL);
 
 -- --------------------------------------------------------
 
@@ -1198,6 +1533,45 @@ INSERT INTO `polymer` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `polymer_kind`
+--
+
+CREATE TABLE `polymer_kind` (
+  `id` int NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `polymer_kind`
+--
+
+INSERT INTO `polymer_kind` (`id`, `name`) VALUES
+(1, '1,14'),
+(2, '1,7');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `rack`
+--
+
+CREATE TABLE `rack` (
+  `id` int NOT NULL COMMENT 'ID стеллажа',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Описание',
+  `warehouse_id` int DEFAULT NULL COMMENT 'Склад'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `rack`
+--
+
+INSERT INTO `rack` (`id`, `name`, `warehouse_id`) VALUES
+(1, 'Gallus', 1),
+(2, 'G340', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `region`
 --
 
@@ -1224,18 +1598,39 @@ INSERT INTO `region` (`id`, `subject_id`, `name`) VALUES
 
 CREATE TABLE `shaft` (
   `id` int NOT NULL,
-  `name` varchar(50) NOT NULL
+  `name` double NOT NULL COMMENT 'длина,мм',
+  `polymer_kind_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `shaft`
 --
 
-INSERT INTO `shaft` (`id`, `name`) VALUES
-(1, '430'),
-(2, '425.45'),
-(3, '403.225'),
-(4, '203.2');
+INSERT INTO `shaft` (`id`, `name`, `polymer_kind_id`) VALUES
+(1, 430, 2),
+(2, 425.45, 2),
+(3, 403.225, 1),
+(4, 203.2, 2),
+(5, 254, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `shelf`
+--
+
+CREATE TABLE `shelf` (
+  `id` int NOT NULL COMMENT 'ID',
+  `rack_id` int NOT NULL COMMENT 'Стеллаж'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `shelf`
+--
+
+INSERT INTO `shelf` (`id`, `rack_id`) VALUES
+(1, 2),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -1439,7 +1834,7 @@ INSERT INTO `subject` (`id`, `name`) VALUES
 CREATE TABLE `time_tracker` (
   `id` int NOT NULL,
   `employer_login` varchar(100) NOT NULL,
-  `action` int NOT NULL,
+  `action` int NOT NULL DEFAULT '0',
   `date_of_action` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -1457,7 +1852,8 @@ INSERT INTO `time_tracker` (`id`, `employer_login`, `action`, `date_of_action`) 
 (18, 'Alex', 1, '2022-08-09 16:00:03'),
 (19, 'Alex', 0, '2022-08-10 05:08:17'),
 (20, 'Alex', 1, '2022-08-10 14:01:38'),
-(21, 'Alex', 0, '2022-08-11 05:07:16');
+(21, 'Alex', 0, '2022-08-11 05:07:16'),
+(22, 'Alex', 0, '2022-08-12 04:58:55');
 
 -- --------------------------------------------------------
 
@@ -1480,6 +1876,28 @@ INSERT INTO `town` (`id`, `region_id`, `name`) VALUES
 (2, 2, 'пгт Джалиль'),
 (3, 1, 'Мактама'),
 (4, 2, 'пгт. Сарманово');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `transport`
+--
+
+CREATE TABLE `transport` (
+  `id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `car_number` varchar(50) NOT NULL,
+  `load_capacity` double NOT NULL,
+  `subscribe` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `transport`
+--
+
+INSERT INTO `transport` (`id`, `name`, `car_number`, `load_capacity`, `subscribe`) VALUES
+(1, 'Opel Vivaro', 'H200HE', 1200, ''),
+(2, 'Ситроен Jumper', 'н300нт', 2500, 'Динмухаметов Марат - 8-917-927-66-01');
 
 -- --------------------------------------------------------
 
@@ -1520,6 +1938,28 @@ INSERT INTO `varnish_status` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `warehouse`
+--
+
+CREATE TABLE `warehouse` (
+  `id` int NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Наименование'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `warehouse`
+--
+
+INSERT INTO `warehouse` (`id`, `name`) VALUES
+(1, 'Склад бумаги Gallus'),
+(2, 'Склад бумаги Gallus340'),
+(3, 'Теплый склад'),
+(4, 'Склад ЛКМ Gallus340'),
+(5, 'Склад ЛКМ Gallus');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `winding`
 --
 
@@ -1554,6 +1994,12 @@ ALTER TABLE `background_label`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `bank_transfer`
+--
+ALTER TABLE `bank_transfer`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `calc_common_param`
 --
 ALTER TABLE `calc_common_param`
@@ -1563,7 +2009,8 @@ ALTER TABLE `calc_common_param`
 -- Индексы таблицы `calc_common_param_archive`
 --
 ALTER TABLE `calc_common_param_archive`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `delete_calc_common_param` (`calc_common_param_id`);
 
 --
 -- Индексы таблицы `calc_mashine_param`
@@ -1572,16 +2019,19 @@ ALTER TABLE `calc_mashine_param`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `calc_mashine_param_price`
+-- Индексы таблицы `calc_mashine_param_value`
 --
-ALTER TABLE `calc_mashine_param_price`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `calc_mashine_param_value`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `delete_calc_mashine_param` (`calc_mashine_param_id`),
+  ADD KEY `delete_mashine` (`mashine_id`);
 
 --
--- Индексы таблицы `calc_mashine_param_price_archive`
+-- Индексы таблицы `calc_mashine_param_value_archive`
 --
-ALTER TABLE `calc_mashine_param_price_archive`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `calc_mashine_param_value_archive`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `delete_calc_mashine_param_value` (`calc_mashine_param_value_id`);
 
 --
 -- Индексы таблицы `combination`
@@ -1618,6 +2068,18 @@ ALTER TABLE `customer`
 -- Индексы таблицы `customer_status`
 --
 ALTER TABLE `customer_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `enterprise_cost`
+--
+ALTER TABLE `enterprise_cost`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `enterprise_cost_service`
+--
+ALTER TABLE `enterprise_cost_service`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1658,6 +2120,12 @@ ALTER TABLE `form_order_history`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `knife_kind`
+--
+ALTER TABLE `knife_kind`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `label`
 --
 ALTER TABLE `label`
@@ -1676,6 +2144,18 @@ ALTER TABLE `label_status`
 -- Индексы таблицы `mashine`
 --
 ALTER TABLE `mashine`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `mashine_pantone`
+--
+ALTER TABLE `mashine_pantone`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `mashine_pants`
+--
+ALTER TABLE `mashine_pants`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1700,6 +2180,12 @@ ALTER TABLE `material_price_archive`
 -- Индексы таблицы `material_provider`
 --
 ALTER TABLE `material_provider`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `mixed_pantone`
+--
+ALTER TABLE `mixed_pantone`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1734,15 +2220,39 @@ ALTER TABLE `pantone`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `pantone_kind`
+--
+ALTER TABLE `pantone_kind`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `pantone_label`
 --
 ALTER TABLE `pantone_label`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `pantone_price_archive`
+--
+ALTER TABLE `pantone_price_archive`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `pantone_warehouse`
+--
+ALTER TABLE `pantone_warehouse`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `pants`
 --
 ALTER TABLE `pants`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `pants_kind`
+--
+ALTER TABLE `pants_kind`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1765,6 +2275,18 @@ ALTER TABLE `polymer`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `polymer_kind`
+--
+ALTER TABLE `polymer_kind`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `rack`
+--
+ALTER TABLE `rack`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `region`
 --
 ALTER TABLE `region`
@@ -1775,6 +2297,12 @@ ALTER TABLE `region`
 -- Индексы таблицы `shaft`
 --
 ALTER TABLE `shaft`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `shelf`
+--
+ALTER TABLE `shelf`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1823,6 +2351,12 @@ ALTER TABLE `town`
   ADD KEY `region_id` (`region_id`);
 
 --
+-- Индексы таблицы `transport`
+--
+ALTER TABLE `transport`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `upload_paper`
 --
 ALTER TABLE `upload_paper`
@@ -1832,6 +2366,12 @@ ALTER TABLE `upload_paper`
 -- Индексы таблицы `varnish_status`
 --
 ALTER TABLE `varnish_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `warehouse`
+--
+ALTER TABLE `warehouse`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1851,34 +2391,40 @@ ALTER TABLE `background_label`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT для таблицы `bank_transfer`
+--
+ALTER TABLE `bank_transfer`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT для таблицы `calc_common_param`
 --
 ALTER TABLE `calc_common_param`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT для таблицы `calc_common_param_archive`
 --
 ALTER TABLE `calc_common_param_archive`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `calc_mashine_param`
 --
 ALTER TABLE `calc_mashine_param`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT для таблицы `calc_mashine_param_price`
+-- AUTO_INCREMENT для таблицы `calc_mashine_param_value`
 --
-ALTER TABLE `calc_mashine_param_price`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `calc_mashine_param_value`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT для таблицы `calc_mashine_param_price_archive`
+-- AUTO_INCREMENT для таблицы `calc_mashine_param_value_archive`
 --
-ALTER TABLE `calc_mashine_param_price_archive`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `calc_mashine_param_value_archive`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `combination`
@@ -1917,6 +2463,18 @@ ALTER TABLE `customer_status`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT для таблицы `enterprise_cost`
+--
+ALTER TABLE `enterprise_cost`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `enterprise_cost_service`
+--
+ALTER TABLE `enterprise_cost_service`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT для таблицы `envelope`
 --
 ALTER TABLE `envelope`
@@ -1953,16 +2511,34 @@ ALTER TABLE `form_order_history`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT для таблицы `knife_kind`
+--
+ALTER TABLE `knife_kind`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT для таблицы `label`
 --
 ALTER TABLE `label`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
+-- AUTO_INCREMENT для таблицы `mashine_pantone`
+--
+ALTER TABLE `mashine_pantone`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT для таблицы `mashine_pants`
+--
+ALTER TABLE `mashine_pants`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT для таблицы `material`
 --
 ALTER TABLE `material`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `material_group`
@@ -1974,13 +2550,19 @@ ALTER TABLE `material_group`
 -- AUTO_INCREMENT для таблицы `material_price_archive`
 --
 ALTER TABLE `material_price_archive`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `material_provider`
 --
 ALTER TABLE `material_provider`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT для таблицы `mixed_pantone`
+--
+ALTER TABLE `mixed_pantone`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT для таблицы `order`
@@ -2004,7 +2586,13 @@ ALTER TABLE `output_label`
 -- AUTO_INCREMENT для таблицы `pantone`
 --
 ALTER TABLE `pantone`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT для таблицы `pantone_kind`
+--
+ALTER TABLE `pantone_kind`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `pantone_label`
@@ -2013,16 +2601,34 @@ ALTER TABLE `pantone_label`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT для таблицы `pantone_price_archive`
+--
+ALTER TABLE `pantone_price_archive`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `pantone_warehouse`
+--
+ALTER TABLE `pantone_warehouse`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT для таблицы `pants`
 --
 ALTER TABLE `pants`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `pants_kind`
+--
+ALTER TABLE `pants_kind`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `paper_warehouse`
 --
 ALTER TABLE `paper_warehouse`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT для таблицы `photo_output`
@@ -2037,6 +2643,18 @@ ALTER TABLE `polymer`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT для таблицы `polymer_kind`
+--
+ALTER TABLE `polymer_kind`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `rack`
+--
+ALTER TABLE `rack`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID стеллажа', AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `region`
 --
 ALTER TABLE `region`
@@ -2046,7 +2664,13 @@ ALTER TABLE `region`
 -- AUTO_INCREMENT для таблицы `shaft`
 --
 ALTER TABLE `shaft`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `shelf`
+--
+ALTER TABLE `shelf`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `shipment`
@@ -2082,7 +2706,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT для таблицы `time_tracker`
 --
 ALTER TABLE `time_tracker`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT для таблицы `town`
@@ -2091,16 +2715,51 @@ ALTER TABLE `town`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT для таблицы `transport`
+--
+ALTER TABLE `transport`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `upload_paper`
 --
 ALTER TABLE `upload_paper`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
+-- AUTO_INCREMENT для таблицы `warehouse`
+--
+ALTER TABLE `warehouse`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT для таблицы `winding`
 --
 ALTER TABLE `winding`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `calc_common_param_archive`
+--
+ALTER TABLE `calc_common_param_archive`
+  ADD CONSTRAINT `delete_calc_common_param` FOREIGN KEY (`calc_common_param_id`) REFERENCES `calc_common_param` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Ограничения внешнего ключа таблицы `calc_mashine_param_value`
+--
+ALTER TABLE `calc_mashine_param_value`
+  ADD CONSTRAINT `delete_calc_mashine_param` FOREIGN KEY (`calc_mashine_param_id`) REFERENCES `calc_mashine_param` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `delete_mashine` FOREIGN KEY (`mashine_id`) REFERENCES `mashine` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Ограничения внешнего ключа таблицы `calc_mashine_param_value_archive`
+--
+ALTER TABLE `calc_mashine_param_value_archive`
+  ADD CONSTRAINT `delete_calc_mashine_param_value` FOREIGN KEY (`calc_mashine_param_value_id`) REFERENCES `calc_mashine_param_value` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

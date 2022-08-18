@@ -104,8 +104,6 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-activeform" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/bootstrap-tabs-x" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-tabs-x" />
-      <path value="$PROJECT_DIR$/vendor/vilochane/yii2-barcode-generator" />
-      <path value="$PROJECT_DIR$/vendor/picqer/php-barcode-generator" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-builder" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-helpers" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-dialog" />
@@ -131,6 +129,7 @@
       <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/bootstrap-checkbox-x" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-checkbox-x" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-datetimepicker" />
     </include_path>
   </component>
 </project>

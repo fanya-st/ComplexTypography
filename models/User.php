@@ -155,6 +155,18 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'start_time' => '8:00',
             'end_time' => '19:00',
         ],
+        '112' => [
+            'id' => '112',
+            'username' => 'Mariam',
+            'password' => 'Mariam',
+            'authKey' => 'test112key',
+            'accessToken' => '112-token',
+            'F' => 'Сафиуллина',
+            'I' => 'Марьям',
+            'O' => 'Максумовна',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
+        ],
     ];
 
 
@@ -197,6 +209,14 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         foreach(self::$users as $user){
             if(ArrayHelper::keyExists($group, Yii::$app->authManager->getRolesByUser($user['id']), false)
             OR ArrayHelper::keyExists($group.'_admin', Yii::$app->authManager->getRolesByUser($user['id']), false))
+            $array[$user['username']]=$user['F'].' '.mb_substr($user['I'],0,1).'.';
+        }
+        return $array;
+    }
+
+    public static function findUsersDropdown()
+    {
+        foreach(self::$users as $user){
             $array[$user['username']]=$user['F'].' '.mb_substr($user['I'],0,1).'.';
         }
         return $array;

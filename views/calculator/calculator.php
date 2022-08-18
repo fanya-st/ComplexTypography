@@ -42,6 +42,7 @@ $this->registerJs(
 );
 ?>
 <h3><?= Html::encode($this->title)?></h3>
+<?//print_r(\app\models\)?>
 <?$form=ActiveForm::begin(['method'=>'post'])?>
 <?if($calculator->calculated_label_price):?>
     <div class="border p-3 rounded">

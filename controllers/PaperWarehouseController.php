@@ -7,6 +7,7 @@ namespace app\controllers;
 use app\models\PaperWarehouse;
 use app\models\PaperWarehouseRollCut;
 use app\models\PaperWarehouseSearch;
+use app\models\StockOnHandPaper;
 use app\models\UploadPaper;
 use app\models\UploadPaperForm;
 use yii\filters\AccessControl;
@@ -25,7 +26,8 @@ class PaperWarehouseController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list','upload-paper','upload-paper-to-warehouse','barcode-print','roll-cut'],
+                        'actions' => ['list','upload-paper','upload-paper-to-warehouse',
+                            'barcode-print','roll-cut','move-roll'],
                         'roles' => ['warehouse_manager'],
                     ],
                 ],
@@ -89,5 +91,22 @@ class PaperWarehouseController extends Controller
         }
         return $this->render('upload_paper_to_warehouse',compact('paper','upload_paper_form','upload_paper_list'));
     }
+
+    public function actionMoveRoll(){
+        $roll=new PaperWarehouse();
+        if ($this->request->isPost && $roll->load($this->request->post()) && $roll->validate($this->request->post())) {
+                if(!empty($roll->shelf_id)){
+                    $moved_roll=PaperWarehouse::findOne($roll->id);
+                    $moved_roll->shelf_id=$roll->shelf_id;
+                    $moved_roll->save();
+                    Yii::$app->session->setFlash('success', 'Ролик перемещен');
+                    return $this->refresh();
+                }
+        }
+
+        return $this->render('move-roll',compact('roll'));
+    }
+
+
 
 }

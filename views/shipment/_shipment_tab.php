@@ -47,7 +47,10 @@ echo GridView::widget([
             'orderStatus.name',
             'mashine.name',
             'plan_circulation',
-            'circulationCountSend',
+        [
+            'attribute'=>'circulationCountSend',
+            'label'=>'Тираж на отправку',
+        ],
         ['class' => 'yii\grid\ActionColumn',
             'template' => '{delete}'
         ],

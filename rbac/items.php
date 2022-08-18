@@ -41,6 +41,9 @@ return [
         'description' => 'design ready if it in design',
         'ruleName' => 'AllowToDesignReadyRule',
     ],
+    'accountant' => [
+        'type' => 1,
+    ],
     'designer' => [
         'type' => 1,
         'children' => [
@@ -100,6 +103,7 @@ return [
     'admin' => [
         'type' => 1,
         'children' => [
+            'accountant',
             'designer_admin',
             'logistician',
             'warehouse_manager',

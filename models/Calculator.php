@@ -260,24 +260,33 @@ class Calculator extends Model
 
         //стоимость лака
         if($this->matte_varnish) {
-            $this->calculated_matte_varnish_price = $weight_matte_varnish * $mashine_param['avg_varnish_glossy_price'] * $common_param['euro_exchange'];
+            $this->calculated_matte_varnish_price = $weight_matte_varnish * Pantone::find()->select('price_euro')->where(['pantone_kind_id'=>4,'id'=>MashinePantone::find()
+                    ->select('pantone_id')->where(['mashine_id'=>$this->mashine_id])->column()])
+                    ->average('price_euro') /*средння цена существующих матовых лаков*/ * $common_param['euro_exchange'];
             $material_price += $this->calculated_matte_varnish_price;
         }
         if($this->glossy_varnish) {
-            $this->calculated_glossy_varnish_price = $weight_glossy_varnish * $mashine_param['avg_varnish_matte_price'] * $common_param['euro_exchange'] ;
+            $this->calculated_glossy_varnish_price = $weight_glossy_varnish * Pantone::find()->select('price_euro')->where(['pantone_kind_id'=>5,'id'=>MashinePantone::find()
+                    ->select('pantone_id')->where(['mashine_id'=>$this->mashine_id])->column()])
+                    ->average('price_euro') /*средння цена существующих глянцевых лаков*/ * $common_param['euro_exchange'] ;
             $material_price+= $this->calculated_glossy_varnish_price;
         }
 
         //стоимость краски
 
-        $this->calculated_paint_price = $weight_paint * $mashine_param['avg_paint_price'] * $common_param['euro_exchange'];
+        $this->calculated_paint_price = $weight_paint *
+            Pantone::find()->select('price_euro')->where(['pantone_kind_id'=>[1,2],'id'=>MashinePantone::find()
+                ->select('pantone_id')->where(['mashine_id'=>$this->mashine_id])->column()])
+                ->average('price_euro') /*средння цена существующих красок*/ * $common_param['euro_exchange'];
         $material_price += $this->calculated_paint_price;
 
 
         //стоимость краски переменки
         if($this->variable){
             $this->calculated_variable_paint_price = ( $pants->cuts * ($this->variable_paint_count * $common_param['euro_exchange']
-                        * $variable_mashine_param['avg_paint_price']) / 100)/
+                        * (Pantone::find()->select('price_euro')->where(['pantone_kind_id'=>[1,2],'id'=>MashinePantone::find()
+                            ->select('pantone_id')->where(['mashine_id'=>$this->variable_mashine_id])->column()])
+                            ->average('price_euro') /*средння цена существующих красок*/)) / 100)/
                 (($pants->paper_width * $shaft_param->name)/1000) * $square_paper_common*1000;
             $material_price +=$this->calculated_variable_paint_price;
         }

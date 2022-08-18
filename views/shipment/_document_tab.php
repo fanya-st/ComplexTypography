@@ -12,7 +12,11 @@ FontAwesomeAsset::register($this);
 $gridColumns = [
     'customer.name',
     'label.name',
-    'circulationCountSend',
+    [
+        'attribute'=>'circulationCountSend',
+        'label'=>'Тираж на отправку',
+    ],
+
     [
         'label'=>'Цена без НДС',
         'value'=>function($model){

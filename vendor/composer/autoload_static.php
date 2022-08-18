@@ -133,6 +133,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\dialog\\' => 14,
             'kartik\\detail\\' => 14,
             'kartik\\depdrop\\' => 15,
+            'kartik\\datetime\\' => 16,
             'kartik\\daterange\\' => 17,
             'kartik\\date\\' => 12,
             'kartik\\checkbox\\' => 16,
@@ -143,10 +144,6 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
-        ),
-        'b' => 
-        array (
-            'barcode\\barcode\\' => 16,
         ),
         'Z' => 
         array (
@@ -183,7 +180,6 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Prophecy\\' => 9,
-            'Picqer\\Barcode\\' => 15,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
         ),
         'M' => 
@@ -366,6 +362,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-depdrop/src',
         ),
+        'kartik\\datetime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datetimepicker/src',
+        ),
         'kartik\\daterange\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-date-range/src',
@@ -393,10 +393,6 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
-        ),
-        'barcode\\barcode\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/vilochane/yii2-barcode-generator',
         ),
         'Zxing\\' => 
         array (
@@ -494,10 +490,6 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
         ),
-        'Picqer\\Barcode\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/picqer/php-barcode-generator/src',
-        ),
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
@@ -560,9 +552,9 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         ),
         'Codeception\\' => 
         array (
-            0 => __DIR__ . '/..' . '/codeception/stub/src',
-            1 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
-            2 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            0 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
+            1 => __DIR__ . '/..' . '/codeception/stub/src',
+            2 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
         ),
     );
 

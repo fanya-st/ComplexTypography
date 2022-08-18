@@ -7,11 +7,15 @@ namespace app\controllers;
 use app\models\Material;
 use app\models\OrderMaterial;
 use app\models\PaperWarehouse;
+use app\models\StockOnHandPaperSearch;
+use yii\base\BaseObject;
 use yii\data\ActiveDataProvider;
+use app\models\StockOnHandPaper;
 use yii\db\Expression;
 use app\models\MaterialForm;
 use yii\filters\AccessControl;
 use app\models\Order;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii;
 use app\models\MaterialSearch;
@@ -31,7 +35,7 @@ class MaterialController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list','view','update','create'],
+                        'actions' => ['list','view','update','create','stock-on-hand-paper'],
                         'roles' => ['warehouse_manager'],
                     ],
 
@@ -101,5 +105,23 @@ class MaterialController extends Controller
             }
         }
         return $this->render('update',compact('material'));
+    }
+
+    public function actionStockOnHandPaper(){
+//        $roll=new StockOnHandPaper();
+        $searchModel = new StockOnHandPaperSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->post());
+//        if ($this->request->isPost && $roll->load($this->request->post()) && $roll->validate($this->request->post())) {
+//            $stock_on_hand=StockOnHandPaper::find()->andFilterWhere([
+//                'id'=>$roll->stock_material_id,
+//                'material_group_id'=>$roll->stock_material_group_id,
+//                ])->all();
+//            foreach ($stock_on_hand as $stock) {
+//                $stock->stock_date=$roll->stock_date;
+//                $stock->stockOnHand();
+//            }
+//        }
+
+        return $this->render('stock-on-hand-paper',compact('dataProvider','searchModel'));
     }
 }

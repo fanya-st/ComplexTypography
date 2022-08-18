@@ -8,14 +8,14 @@ use yii\db\ActiveRecord;
 
 class CalcMashineParamValueArchive extends ActiveRecord
 {
-    public function getCalcMashineParamPrice(){
-        return $this->hasOne(CalcMashineParamValue::class,['id'=>'calc_mashine_param_price_id']);
+    public function getCalcMashineParamValue(){
+        return $this->hasOne(CalcMashineParamValue::class,['id'=>'calc_mashine_param_value_id']);
     }
 
     public function attributeLabels()
     {
         return [
-            'calc_mashine_param_price_id'=>'Параметр',
+            'calc_mashine_param_value_id'=>'Параметр',
             'date'=>'Дата',
             'value'=>'Значение',
             'id'=>'ID',
@@ -26,8 +26,8 @@ class CalcMashineParamValueArchive extends ActiveRecord
         return[
             [['value'],'double'],
             [['date'],'safe'],
-            [['id','calc_mashine_param_price_id'],'integer'],
-            [['calc_mashine_param_price_id','value','date'],'required']
+            [['id','calc_mashine_param_value_id'],'integer'],
+            [['calc_mashine_param_value_id','value','date'],'required']
         ];
     }
 
