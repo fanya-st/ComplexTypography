@@ -1,29 +1,8 @@
 <?php
 use yii\bootstrap5\Html;
-use kartik\form\ActiveForm;
-use kartik\builder\TabularForm;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
-
 ?>
-<?php
-
-
-//$gridColumns = [
-//    [
-//        'class' => 'yii\grid\CheckboxColumn',
-//    ],
-//    'order_id',
-//    'label.name',
-//    'label_in_roll',
-//    'sended_roll_count',
-//    'sended_box_count',
-//    'sended_bale_count',
-//
-//];
-?>
-<?php $form = ActiveForm::begin(['method'=>'post'])?>
 <div class="d-flex col">
+        <div class="table-responsive">
         <table class="table border rounded">
             <thead>
             <tr>
@@ -36,28 +15,17 @@ FontAwesomeAsset::register($this);
             </tr>
             </thead>
             <tbody>
-            <?foreach ($shipment_roll as $id => $roll):?>
-                <tr <? if ($roll->defect_roll_count>0)echo 'class="table-danger"'?>>
-                    <td><?=Html::encode($roll->order_id)?></td>
-                    <td><?=Html::encode($roll->label->name)?></td>
-                    <td><?=Html::encode($roll->label_in_roll)?></td>
-                    <td><?=Html::encode($roll->sended_roll_count)?></td>
-                    <td>
-                        <?
-                        echo $form->field($roll,"[$id]defect_roll_count")->label(false);
-                        ?>
-                    </td>
-                    <td>
-                        <?
-                        echo $form->field($roll,"[$id]defect_note")->label(false);
-                        ?>
-                    </td>
+            <?foreach ($roll as $one_roll):?>
+                <tr <? if ($one_roll->defect_roll_count>0)echo 'class="table-danger"'?>>
+                    <td><?=Html::encode($one_roll->order_id)?></td>
+                    <td><?=Html::encode($one_roll->label->name)?></td>
+                    <td><?=Html::encode($one_roll->label_in_roll)?></td>
+                    <td><?=Html::encode($one_roll->sended_roll_count)?></td>
+                    <td><?=Html::encode($one_roll->defect_roll_count)?></td>
+                    <td><?=Html::encode($one_roll->defect_note)?></td>
                 </tr>
             <?endforeach;?>
             </tbody>
         </table>
+        </div>
     </div>
-<?=Html::submitButton('Пометить брак', ['name'=>'mark-defect-roll','class'=>'btn btn-primary'])?>
-<? ActiveForm::end()?>
-<!--<pre>--><?//print_r($models)?><!--</pre>-->
-<!--<pre>--><?//print_r(Yii::$app->request->post())?><!--</pre>-->

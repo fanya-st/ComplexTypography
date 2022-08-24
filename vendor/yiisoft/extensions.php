@@ -310,4 +310,13 @@ return array (
       '@kartik/datetime' => $vendorDir . '/kartik-v/yii2-widget-datetimepicker/src',
     ),
   ),
+  'skeeks/yii2-mobile-detect' => 
+  array (
+    'name' => 'skeeks/yii2-mobile-detect',
+    'version' => '1.0.2.0',
+    'alias' => 
+    array (
+      '@skeeks/yii2/mobiledetect' => $vendorDir . '/skeeks/yii2-mobile-detect/src',
+    ),
+  ),
 );

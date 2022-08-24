@@ -7,6 +7,7 @@ use app\models\Rack;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\models\Warehouse;
 
 
 $this->title = 'Полки';
@@ -33,6 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                     'label'=>'Склад',
+                    'attribute'=>'warehouse_id',
+                    'filter'=>ArrayHelper::map(Warehouse::find()->asArray()->all(),'id','name'),
                     'value'=>function($model){
                         return $model->rack->warehouse->name;
                     },

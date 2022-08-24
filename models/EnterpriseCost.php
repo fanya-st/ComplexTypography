@@ -25,7 +25,7 @@ class EnterpriseCost extends \yii\db\ActiveRecord
         return [
             [['date'], 'safe'],
             [[ 'service_id', 'cost'], 'required'],
-            [['service_id'], 'integer'],
+            [['service_id','order_id'], 'integer'],
             [['cost'], 'number'],
             [['login'], 'string', 'max' => 50],
         ];
@@ -39,6 +39,7 @@ class EnterpriseCost extends \yii\db\ActiveRecord
             'date' => 'Дата',
             'login' => 'Сотрудник',
             'service_id' => 'Услуга',
+            'order_id' => 'Для заказа',
             'cost' => 'Затрата, руб',
         ];
     }

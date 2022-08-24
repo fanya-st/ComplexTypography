@@ -147,11 +147,78 @@ class Label extends ActiveRecord{
     }
     public function rules(){
         return[
-            ['name','string','max'=>100],
-            [['name','manager_note','prepress_note','designer_note','laboratory_note'],'trim'],
-            [['variable_paint_count'],'double'],
-            [['status_id','name','customer_id','pants_id','laminate','stencil','variable','varnish_id','parent_label',
-                'print_on_glue','orientation', 'output_label_id','background_id','image','image_crop','color_count','prepress_design_file','foil_id','takeoff_flash','variable_paint_count'],'safe']
+            [['name','image','image_crop','image_extended','design_file','prepress_design_file'],'string','max'=>100],
+            [['designer_login','prepress_login','laboratory_login'],'string','max'=>50],
+            [['manager_note','prepress_note','designer_note','laboratory_note','name','image','image_crop','image_extended','design_file','prepress_design_file',
+                'designer_login','prepress_login','laboratory_login'],'trim'],
+            [['variable_paint_count'],'number'],
+            [['name','status_id','customer_id'],'required'],
+            [['date_of_create','date_of_design','date_of_prepress','date_of_flexformready','combinated_label_list'],'safe'],
+            [['status_id','customer_id','pants_id','laminate','stencil','variable','varnish_id','parent_label',
+                'print_on_glue','orientation', 'output_label_id','background_id','color_count','foil_id','takeoff_flash'],'integer'],
         ];
+    }
+
+    public function beforeValidate()
+    {
+        //Проверяем если нет статуса, то ставим статус "Новый"
+        if (empty($this->status_id)) {
+            $this->status_id = 1;
+        }
+        return parent::beforeValidate();
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+            if ($insert) {
+                Yii::$app->session->setFlash('success', 'Этикетка создана !');
+            } else {
+                Yii::$app->session->setFlash('success', 'Этикетка обновлена!');
+            }
+    }
+
+    public function createSubLabel() {
+	    $sub_label=$this;
+        $sub_label->parent_label=$this->id;
+        $sub_label->status_id=1;
+        unset($sub_label->id);
+        unset($sub_label->date_of_create);
+        unset($sub_label->date_of_prepress);
+        unset($sub_label->date_of_design);
+        unset($sub_label->prepress_login);
+        unset($sub_label->laboratory_login);
+        unset($sub_label->date_of_flexformready);
+        $sub_label->setisNewRecord(true);
+        $sub_label->save();
+        return $sub_label->id;
+    }
+
+    public function decombinateLabel() {
+        foreach (CombinationForm::find()->where(['label_id'=>$this->id])->all() as $combination){
+            $combination->delete();
+        }
+    }
+
+    public $combinated_label_list;
+
+    public function combinateLabel() {
+        $new_combination= new Combination();
+        if($new_combination->save()){
+            if(!empty($this->combinated_label_list)){
+                foreach($this->combinated_label_list as $label_id){
+                    $temp=new CombinationForm();
+                    $temp->combination_id=$new_combination->id;
+                    $temp->label_id=$label_id;
+                    $temp->save();
+                }
+                $temp=new CombinationForm();
+                $temp->combination_id=$new_combination->id;
+                $temp->label_id=$this->id;
+                if ($temp->save())
+                    return true;
+            } else{
+                return false;
+            }
+        }
     }
 }

@@ -23,7 +23,6 @@ use app\models\User;
                     echo Html::tag('h6','Материал: ' .Html::encode($order->material->name));
                     echo Html::tag('h6','План. тираж, шт: ' .Html::encode($order->plan_circulation));
                     echo Html::tag('h6','Отправка, шт: ' .Html::encode($order->sending));
-                    echo Html::tag('h6','Пробный тираж: ' .Html::encode($order->trialCirculationName));
                     ?>
                 </div>
             </div>
@@ -33,7 +32,7 @@ use app\models\User;
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-info p-1 rounded">Параметры печати</h6>
 <!--            --><?//if ($order->status_id==3) echo Html::tag('h6','Печать приостановлена',['class'=>'bg-warning p-1 rounded'])?>
-            <h6>Совместная печать: <?foreach ($order->combinatedPrintOrder as $com_ord) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($com_ord->order_id).'</span>'?></h6>
+            <h6>Совместная печать: </h6>
                 <? echo Html::tag('h6','Печатник: ' .Html::encode(User::getFullNameByUsername($order->printer_login)));
                 echo Html::tag('h6','Дата начала печати: ' .Html::encode($order->date_of_print_begin));
                 echo Html::tag('h6','Дата конца печати: ' .Html::encode($order->date_of_print_end));?>

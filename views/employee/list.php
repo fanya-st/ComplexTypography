@@ -7,6 +7,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= Html::encode($this->title) ?></h1>
 <!--<pre>--><?//print_r($employees)?><!--</pre>-->
 <div class="border p-2 rounded">
+    <div class="table-responsive">
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -39,4 +40,5 @@ $this->params['breadcrumbs'][] = $this->title;
         <?endforeach;?>
         </tbody>
     </table>
+    </div>
 </div>

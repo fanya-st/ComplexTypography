@@ -2,13 +2,12 @@
 
 
 use yii\bootstrap5\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\MaterialProvider;
 use app\models\MaterialGroup;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
+use kartik\icons\Icon;
 
 $this->title = 'Работа с материалами';
 $this->params['breadcrumbs'][] = $this->title;
@@ -75,7 +74,23 @@ echo GridView::widget([
             'headerOptions' => ['class' => 'text-center']
         ],
         ['class' => 'yii\grid\ActionColumn',
-            'template' => '{view},{update}'
+            'template' => '{view} {update} {delete}',
+            'buttons' => [
+                'update' => function($url, $model, $key) {     // render your custom button
+                    return Html::a(Html::button( Icon::show('edit'),
+                        ['class' => 'btn btn-outline-primary']), ['material/update', 'id' => $model->id]);
+                },
+                'delete' => function($url, $model, $key) {     // render your custom button
+                    return Html::a(Html::button( Icon::show('minus'),
+                        ['class' => 'btn btn-outline-danger']), ['material/delete', 'id' => $model->id]);
+                },
+                'view' => function($url, $model, $key) {     // render your custom button
+                    return Html::a(Html::button( Icon::show('eye'),
+                        ['class' => 'btn btn-outline-success']), ['material/view', 'id' => $model->id]);
+                }
+            ],
+            'contentOptions'=>['class' => 'text-center'],
+            'headerOptions' => ['class' => 'text-center'],
         ],
     ],
 ]);

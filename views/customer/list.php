@@ -2,7 +2,8 @@
 
 
 use yii\bootstrap5\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 
 $this->title = 'Работа с заказчиками';
 $this->params['breadcrumbs'][] = $this->title;

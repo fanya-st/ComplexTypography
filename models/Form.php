@@ -10,7 +10,6 @@ class Form extends ActiveRecord
 {
     public $form_defect_id_temp;
     public $set_form_count;
-    public $foil_stencil_varnish;
     public function getPhotoOutput(){
         return $this->hasOne(PhotoOutput::class,['id'=>'photo_output_id']);
     }
@@ -55,68 +54,27 @@ class Form extends ActiveRecord
 
     public function rules(){
         return[
-            [['width','height','dpi','lpi','foil_form','foil_stencil_varnish',
-                'stencil_form','varnish_form','set_form_count',
+            [['width','height','dpi','lpi','foil_stencil_varnish', 'set_form_count',
                 'pantone_id','photo_output_id','combination_id',
                 'polymer_id','envelope_id','form_defect_id_temp'],'safe'],
         ];
     }
 
-    public static function createVarnishForm($prepress,$label_id,$set_count,$varnish_id){
-        $i=$set_count;
-        while ($i>0){
-            $form= $prepress;
-            unset($form->id);
-            unset($form->pantone_id);
-            unset($form->foil_form);
-            unset($form->stencil_form);
-            $form->setisNewRecord(true);
-            if($prepress->combination_id==Null)$form->label_id= $label_id;
-            $form->varnish_form= $varnish_id;
-            $form->save();
-            $i--;
-        }
-    }
-    public static function createPantoneForm($prepress,$label_id,$set_count,$pantone_list){
-        foreach ($pantone_list as $pantone){
-            $i=$set_count;
-            while ($i>0){
-                $form=$prepress;
-                unset($form->id);
-                $form->setisNewRecord(true);
-                if($prepress->combination_id==Null)$form->label_id= $label_id;
-                $form->pantone_id= $pantone;
-                $form->save();
-                $i--;
-            }
-        }
-    }
-    public static function createFoilForm($prepress,$label_id,$set_count,$foil_id){
-        $i=$set_count;
-        while ($i>0){
-            $form= $prepress;
-            unset($form->id);
-            unset($form->pantone_id);
-            unset($form->varnish_form);
-            unset($form->stencil_form);
-            $form->setisNewRecord(true);
-            if($prepress->combination_id==Null)$form->label_id= $label_id;
-            $form->foil_form= $foil_id;
-            $form->save();
-            $i--;
-        }
-    }
-    public static function createStencilForm($prepress,$label_id,$set_count){
-        $i=$set_count;
-        while ($i>0){
-            $form= $prepress;
-            unset($form->id);
-            unset($form->pantone_id);
-            unset($form->foil_form);
-            unset($form->varnish_form);
-            $form->setisNewRecord(true);
-            if($prepress->combination_id==Null)$form->label_id= $label_id;
-            $form->stencil_form= 1;
+
+    public function createForm($label){
+        $i = $this->set_form_count;
+        while ($i > 0) {
+            $form=new Form();
+            $form->pantone_id=$this->pantone_id;
+            $form->width=$this->width;
+            $form->height=$this->height;
+            $form->lpi=$this->lpi;
+            $form->dpi=$this->dpi;
+            $form->photo_output_id=$this->photo_output_id;
+            if(!empty($label->combinated_label))
+                $form->combination_id=$label->combination->id;
+            else
+                $form->label_id=$label->id;
             $form->save();
             $i--;
         }

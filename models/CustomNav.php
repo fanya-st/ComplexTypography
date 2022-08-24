@@ -65,6 +65,7 @@ class CustomNav extends Model
             case 6:
                 ArrayHelper::setValue($nav_items, 'prepress.items.prepress-ready', ['label' => 'Prepress готов', 'url' => ['label/prepress-ready','id'=>$id]]);
                 ArrayHelper::setValue($nav_items, 'prepress.items.combinate-label', ['label' => 'В совмещение', 'url' => ['label/combinate-label','id'=>$id]]);
+                ArrayHelper::setValue($nav_items, 'prepress.items.decombinate-label', ['label' => 'Отменить совмещение', 'url' => ['label/decombinate-label','id'=>$id]]);
                 break;
         }
         return $nav_items;
@@ -97,8 +98,6 @@ class CustomNav extends Model
         ArrayHelper::setValue($items, 'label','Менеджер');
         if (ArrayHelper::isIn($order->status_id, ['1']))
             ArrayHelper::setValue($items, 'items.update', ['label' => 'Внести изменения', 'url' => ['order/update','id'=>$order->id]]);
-        if (ArrayHelper::isIn($order->status_id, ['1']))
-            ArrayHelper::setValue($items, 'items.combinate-order', ['label' => 'Совместная печать', 'url' => ['order/combinate-order','id'=>$order->id]]);
         return $items;
     }
     public static function getOrderItemsPrinter($order){

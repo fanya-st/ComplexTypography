@@ -1,13 +1,13 @@
 <?php
 
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Pantone;
 
 use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 
 $this->title = 'Склад ЛКМ';
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="d-inline-flex">
+    <div class="d-lg-inline-flex">
         <div class="p-2">
             <?= Html::a('Добавить ЛКМ', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'update' => function($url, $model) {
                         return Html::a(Html::button( Icon::show('edit', ['class'=>'fa-0.1x'], Icon::FA),
-                            ['class' => 'btn btn-outline-primary']), ['pantone_warehouse/update', 'id' => $model->id]);
+                            ['class' => 'btn btn-outline-primary']), ['pantone-warehouse/update', 'id' => $model->id]);
                     },
                     'barcode-print' => function($url, $model) {
                         return Html::a(Html::button( Icon::show('print', ['class'=>'fa-0.1x'], Icon::FA),

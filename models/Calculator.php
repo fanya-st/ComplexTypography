@@ -283,7 +283,7 @@ class Calculator extends Model
 
         //стоимость краски переменки
         if($this->variable){
-            $this->calculated_variable_paint_price = ( $pants->cuts * ($this->variable_paint_count * $common_param['euro_exchange']
+            $this->calculated_variable_paint_price = ( $pants->cuts * ($this->variable_paint_count * 1.0712/1000 * $common_param['euro_exchange']
                         * (Pantone::find()->select('price_euro')->where(['pantone_kind_id'=>[1,2],'id'=>MashinePantone::find()
                             ->select('pantone_id')->where(['mashine_id'=>$this->variable_mashine_id])->column()])
                             ->average('price_euro') /*средння цена существующих красок*/)) / 100)/

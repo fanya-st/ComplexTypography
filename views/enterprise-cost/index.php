@@ -3,7 +3,9 @@
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
-use yii\grid\GridView;
+use kartik\icons\Icon;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap5\ActiveForm;
 use app\models\EnterpriseCostService;
@@ -41,14 +43,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value'=>'enterpriseCostService.name',
                     'filter'=>ArrayHelper::map(EnterpriseCostService::find()->asArray()->all(),'id','name'),
             ],
+            [
+                    'attribute'=>'order_id',
+//                    'filter'=>ArrayHelper::map(EnterpriseCostService::find()->asArray()->all(),'id','name'),
+            ],
 
             'cost',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action,$model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 },
-                'template'=>'{update} {delete}'
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => function($url, $model, $key) {     // render your custom button
+                        return Html::a(Html::button( Icon::show('edit'),
+                            ['class' => 'btn btn-outline-success']), ['enterprise-cost/update', 'id' => $model->id]);
+                    },
+                    'delete' => function($url, $model, $key) {     // render your custom button
+                        return Html::a(Html::button( Icon::show('minus'),
+                            ['class' => 'btn btn-outline-danger']), ['enterprise-cost/delete', 'id' => $model->id]);
+                    }
+                ],
+                'contentOptions'=>['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center'],
             ],
         ],
     ]); ?>

@@ -12,8 +12,8 @@ $this->title = 'Комплекс Типография';
                 <h3>Работа с заказами</h3>
                 <p>Просмотр, создание, удаление заказов</p>
                 <p><a class="btn btn-outline-secondary" href="?r=order/list">Заказы &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=order/create&blank=1">Создание заказа с готовой этикеткой &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=order/create&blank=0">Создание заказа &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=order/create-blank">Создание заказа с готовой этикеткой &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=order/create">Создание заказа &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h3>Работа с материалами</h3>
@@ -29,6 +29,7 @@ $this->title = 'Комплекс Типография';
                 <p><a class="btn btn-outline-secondary" href="?r=label/list">Этикетки &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=label%2Fcreate">Создание этикетки &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=calculator/calculator">Калькулятор &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=envelope/index">Конверты &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h3>Работа с отгрузками</h3>
@@ -49,7 +50,7 @@ $this->title = 'Комплекс Типография';
                 <h3>Бухгалтерия</h3>
                 <p>Работа с финансами</p>
                 <p><a class="btn btn-outline-secondary" href="?r=enterprise-cost/index">Затраты предприятия &raquo;</a><a class="m-1 btn btn-outline-secondary" href="?r=bank-transfer/index">Банк &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse/paper-movement">Оборотная ведомость по материалу &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=material/material-movement">Оборотная ведомость по материалу &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=material/stock-on-hand-paper">Наличные складские запасы бумаги &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=financial-report/index">Финансовый отчет &raquo;</a></p>
             </div>
@@ -57,8 +58,8 @@ $this->title = 'Комплекс Типография';
                 <h3>Транспорт и командировки</h3>
                 <p>Транспорт и командировки</p>
                 <p><a class="btn btn-outline-secondary" href="?r=transport/index">Транспорт &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=business-trip/index">Командировки сотрудников &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=business-trip/index">Командировки по доставке ГП &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=business-trip-employee/index">Командировки сотрудников &raquo;</a></p>
+<!--                <p><a class="btn btn-outline-secondary" href="?r=business-trip-product-delivery/index">Командировки по доставке ГП &raquo;</a></p>-->
             </div>
         </div>
     </div>

@@ -13,13 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3><?= Html::encode($this->title)?></h3>
 <div class="alert alert-info">
-    <strong>Внимание!</strong> Если будет произведено совмещение, </a>.
+    <strong>Внимание!</strong> Будет произведено совмещение</a>.
 </div>
 <?$form = ActiveForm::begin()?>
 <div class="row">
-<!--    <pre>--><?//print_r($new_combination_form)?><!--</pre>-->
     <div class="col">
-        <?=$form->field($new_combination_form,'label_id')->widget(Select2::classname(), [
+        <?=$form->field($label,'combinated_label_list')->widget(Select2::classname(), [
             'data' => ArrayHelper::map(Label::find()
                 ->joinWith('combination')
                 ->where(['status_id'=>6,'prepress_login'=>Yii::$app->user->identity->username])
@@ -28,13 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ->orderBy('date_of_design DESC')
                 ->all(), 'id', 'nameSplitId'),
             'options'=>[
-                'placeholder' => 'Выберите этикетки для совмещения ...',
+                'placeholder' => ' Выберите этикетки для совмещения ...',
                 'multiple' => true,
             ],
             'pluginOptions' => [
                 'allowClear' => true
             ],
-        ])?>
+        ])->label('Этикетки')?>
     </div>
 </div>
 

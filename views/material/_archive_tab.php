@@ -2,6 +2,7 @@
 use yii\bootstrap5\Html;
 ?>
 <div class="border p-2 rounded">
+    <div class="table-responsive">
     <table class="table">
         <thead>
         <tr>
@@ -22,4 +23,5 @@ use yii\bootstrap5\Html;
         <?endforeach;?>
         </tbody>
     </table>
+    </div>
 </div>

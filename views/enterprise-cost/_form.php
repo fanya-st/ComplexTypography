@@ -19,6 +19,8 @@ use app\models\User;
 
     <?= $form->field($model, 'cost')->textInput() ?>
 
+    <?= $form->field($model, 'order_id')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>

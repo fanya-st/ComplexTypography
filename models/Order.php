@@ -12,6 +12,12 @@ class Order extends ActiveRecord{
 	public function getShipmentOrder(){
 		return $this->hasOne(ShipmentOrder::class,['order_id'=>'id']);
 	}
+
+	public function getShipment(){
+		return $this->hasOne(Shipment::class,['id'=>'shipment_id'])->via('shipmentOrder');
+	}
+
+
 	public function getSleeve(){
 		return $this->hasOne(Sleeve::class,['id'=>'sleeve_id']);
 	}
@@ -25,40 +31,25 @@ class Order extends ActiveRecord{
         return '['.$this->id.']'.$this->label->name;
     }
 
-    public function getCombinationOrder(){
-        return $this->hasOne(CombinationOrder::class,['order_id'=>'id']);
-    }
-
-	public function getCombinatedPrintOrder(){
-        return $this->hasMany(CombinationOrder::class,['combination_id'=>'combination_id'])->via('combinationOrder');
-	}
 	public function getFinishedProductsWarehouse(){
         return $this->hasMany(FinishedProductsWarehouse::class,['order_id'=>'id']);
 	}
 	public function getOrderMaterialList(){
         return $this->hasMany(OrderMaterial::class,['order_id'=>'id']);
 	}
-	public function getCombinatedPrintOrderName(){
-	    $name='совместная печать: ';
-        foreach ($this->combinatedPrintOrder as $com_ord) $name.='['.$com_ord->order_id.'],';
-        return $name;
+
+	public function getFormOrderHistory(){
+        return $this->hasMany(FormOrderHistory::class,['order_id'=>'id']);
+	}
+
+	public function getCombinatedPrintOrder(){
+        return Order::find()->where(['label_id'=>$this->label->combinatedLabel])->all();
 	}
 
     public function getOrderStatus(){
         return $this->hasOne(OrderStatus::class,['id'=>'status_id']);
     }
 
-    public function getTrialCirculationName(){
-	    switch($this->trial_circulation){
-            case 0:
-                return 'Нет';
-                break;
-            case 1:
-                return 'Да';
-                break;
-        }
-        return $this->orderStatus->name;
-    }
     public function getMashine(){
         return $this->hasOne(Mashine::class,['id'=>'mashine_id']);
     }
@@ -134,11 +125,24 @@ class Order extends ActiveRecord{
     }
     public function rules(){
         return[
-            [['id','status_id','label_id','stretch','cut_edge','label_on_roll','diameter_roll','winding_id',
-                'sleeve_id','actual_circulation','trial_circulation','sending','material_id'],'integer'],
-            [['tech_note','tech_note','printer_note','rewinder_note','packer_login','rewinder_login'],'trim'],
-            [['label_price_with_tax','label_price'],'double'],
-            [['date_of_sale','date_of_create','date_of_variable_print_begin','date_of_packing_begin','date_of_rewind_begin','date_of_print_end','date_of_variable_print_end','date_of_rewind_end','date_of_packing_end'],'safe'],
+            [['status_id','label_id','stretch','cut_edge','label_on_roll','winding_id',
+                'sleeve_id','actual_circulation','sending','material_id','mashine_id'],'integer'],
+            [['tech_note','printer_note','rewinder_note','manager_note','packer_login','rewinder_login','printer_login'],'trim'],
+            [['packer_login','rewinder_login','printer_login'],'string','max'=>50],
+            [['label_price_with_tax','label_price','order_price','order_price_with_tax'],'number'],
+            [['plan_circulation','sending','label_price_with_tax','label_price','order_price','order_price_with_tax','stretch','cut_edge','sleeve_id',
+                'material_id','mashine_id','date_of_sale','winding_id','label_on_roll'],'required'],
+            [['date_of_sale','date_of_create','date_of_variable_print_begin','date_of_packing_begin','date_of_rewind_begin',
+                'date_of_print_end','date_of_variable_print_end','date_of_rewind_end','date_of_packing_end'],'safe'],
         ];
+    }
+
+    public function beforeValidate()
+    {
+        //Проверяем если нет статуса, то ставим статус "Новый"
+        if (empty($this->status_id)) {
+            $this->status_id = 1;
+        }
+        return parent::beforeValidate();
     }
 }

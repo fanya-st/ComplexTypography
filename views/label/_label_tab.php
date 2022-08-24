@@ -101,10 +101,10 @@ use app\models\User;
             <div class="col">
                 <h6>Параметры Лаборатория:</h6>
                 <h6>Конверт: <? if (!empty($label->combination->combination_id)):?>
-                        <? echo '<span class="badge rounded-pill bg-primary">'.Html::encode(Form::find()->where(['combination_id'=>$label->combination])
-                                ->one()->envelope->fullLocationName).'</span>'?>
+                        <? echo '<span class="badge rounded-pill bg-secondary">'.Form::find()->where(['combination_id'=>$label->combination])
+                                ->one()->envelope->idWithColor.'</span>'?>
                     <? else: ?>
-                        <? echo '<span class="badge rounded-pill bg-primary">'.Html::encode(Form::find()->where(['label_id'=>$label->id])->one()->envelope->fullLocationName).'</span>'?>
+                        <? echo '<span class="badge rounded-pill bg-secondary">'.Form::find()->where(['label_id'=>$label->id])->one()->envelope->idWithColor.'</span>'?>
 
                     <? endif; ?>
                 </h6>

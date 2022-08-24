@@ -2,51 +2,84 @@
 
 
 namespace app\models;
+use yii\bootstrap5\Html;
+use yii\helpers\ArrayHelper;
 
 
 use yii\db\ActiveRecord;
 
 class Envelope extends ActiveRecord
 {
-    public $new_checkbox;
-    public $rack_id;
-    public $shelf_id;
+
+    public function getShelf(){
+        return $this->hasOne(Shelf::class,['id'=>'shelf_id']);
+    }
+
     public static $location=[
-        //полка
-        'shelf'=>[
-            1=>['id'=>'1','name'=>'[Полка№1]'],
-            2=>['id'=>'2','name'=>'[Полка№2]'],
-            3=>['id'=>'3','name'=>'[Полка№3]'],
-            4=>['id'=>'4','name'=>'[Полка№4]'],
-            5=>['id'=>'5','name'=>'[Полка№5]'],
-            6=>['id'=>'6','name'=>'[Полка№6]'],
+        //цвет1
+        'color1'=>[
+            1=>['id'=>'1','name'=>'blue'],
+            2=>['id'=>'2','name'=>'green'],
+            3=>['id'=>'3','name'=>'red'],
+            4=>['id'=>'4','name'=>'yellow'],
+            5=>['id'=>'5','name'=>'cyan'],
+            6=>['id'=>'6','name'=>'black'],
         ],
-        //стелаж
-        'rack'=>[
-            1=>['id'=>'1','name'=>'[Стелаж№1]'],
-            2=>['id'=>'2','name'=>'[Стелаж№2]'],
-            3=>['id'=>'3','name'=>'[Стелаж№3]'],
-            4=>['id'=>'4','name'=>'[Стелаж№4]'],
-            5=>['id'=>'5','name'=>'[Стелаж№5]'],
+        //цвет1
+        'color2'=>[
+            1=>['id'=>'1','name'=>'blue'],
+            2=>['id'=>'2','name'=>'green'],
+            3=>['id'=>'3','name'=>'red'],
+            4=>['id'=>'4','name'=>'yellow'],
+            5=>['id'=>'5','name'=>'cyan'],
+            6=>['id'=>'6','name'=>'black'],
         ],
     ];
 
-    public function getFullLocationName(){
-        return $this->id.' '.Envelope::$location['rack'][$this->rack]['name'].' '.Envelope::$location['shelf'][$this->shelf]['name'];
+    public function getIdWithColor(){
+        return $this->id.' '.html::tag('svg',html::tag('rect','',['width'=>17, 'height'=>17,'style'=>'fill:'.Envelope::$location['color1'][$this->color1]['name'].';']),['width'=>17, 'height'=>17]).' '.
+            html::tag('svg',html::tag('rect','',['width'=>17, 'height'=>17,'style'=>'fill:'.Envelope::$location['color2'][$this->color2]['name'].';']),['width'=>17, 'height'=>17]);
+        }
+
+    public function getColorOne(){
+        return html::tag('svg',html::tag('rect','',['width'=>17, 'height'=>17,'style'=>'fill:'.Envelope::$location['color1'][$this->color1]['name'].';']),['width'=>17, 'height'=>17]);
     }
+    public function getColorTwo(){
+        return html::tag('svg',html::tag('rect','',['width'=>17, 'height'=>17,'style'=>'fill:'.Envelope::$location['color1'][$this->color2]['name'].';']),['width'=>17, 'height'=>17]);
+    }
+
+    public static function getDropDownOptionsColorTwo(){
+        ArrayHelper::setValue($array, 'prompt',['text' => '', 'options' => ['value' => '', 'class' => 'prompt', 'label' => '']]);
+        foreach (Envelope::$location['color2'] as $item){
+            ArrayHelper::setValue($array, 'options.'.$item['id'], ['style'=>'background:'.$item['name'].';']);
+        }
+        return  $array;
+    }
+
+    public static function getDropDownOptionsColorOne(){
+        ArrayHelper::setValue($array, 'prompt',['text' => '', 'options' => ['value' => '', 'class' => 'prompt', 'label' => '']]);
+
+        foreach (Envelope::$location['color1'] as $item){
+            ArrayHelper::setValue($array, 'options.'.$item['id'], ['style'=>'background:'.$item['name'].';']);
+        }
+        return  $array;
+    }
+
+
 
     public function attributeLabels()
     {
         return [
-            'new_checkbox'=>'Новый конверт',
-            'rack_id'=>'Стелаж',
             'shelf_id'=>'Полка',
+            'color1'=>'Цвет 1',
+            'color2'=>'Цвет 2',
+            'id'=>'ID',
         ];
     }
 
     public function rules(){
         return[
-            [['new_checkbox','rack','shelf','rack_id','shelf_id'],'safe'],
+            [['shelf_id','color1','color2'],'integer'],
         ];
     }
 }

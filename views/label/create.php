@@ -39,10 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     '0' => 'Не указана',
                     '1' => 'Альбомная',
                     '2'=>'Книжная'
-                ],
-                    [
-                        'prompt' => 'Выберите...'
-                    ])?>
+                ])?>
             </div>
         </div>
         <?=$form->field($model,'output_label_id')->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'),[
@@ -60,50 +57,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=$form->field($model,'laminate')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
-                ], [
-                    'prompt' => 'Выберите...'
                 ])?>
 
                 <?=$form->field($model,'takeoff_flash')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
-                ], [
-                    'prompt' => 'Выберите...'
                 ])?>
                 <?=$form->field($model,'print_on_glue')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
-                ], [
-                    'prompt' => 'Выберите...'
                 ])?>
                 <?=$form->field($model,'stencil')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
-                ], [
-                    'prompt' => 'Выберите...'
                 ])?>
 
                 <?=$form->field($model,'foil_id')->dropDownList(
                     ArrayHelper::map(Foil::find()->all(), 'id',
-                        'name'), [
-                    'prompt' => 'Выберите...'
-                ])?>
+                        'name'))?>
             </div>
             <div class="col">
                 <?=$form->field($model,'variable')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
-                ], [
-                    'prompt' => 'Выберите...'
                 ])?>
                 <?=$form->field($model,'varnish_id')->dropDownList(ArrayHelper::map(VarnishStatus::find()->all(), 'id',
-                    'name'), [
-                    'prompt' => 'Выберите...'
-                ])?>
+                    'name'))?>
                 <?=$form->field($model,'background_id')->dropDownList(ArrayHelper::map(BackgroundLabel::find()->all(), 'id',
-                    'name'), [
-                    'prompt' => 'Выберите...'
-                ])?>
+                    'name'))?>
 
                 <?=$form->field($model,'color_count')?>
             </div>

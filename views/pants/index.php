@@ -1,14 +1,14 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use app\models\Shaft;
 use yii\helpers\ArrayHelper;
 use app\models\PantsKind;
 use yii\bootstrap5\ActiveForm;
 
 use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 $this->title = 'Штанцы';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,10 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Создать штанец', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Совместимость штанцев со станками', ['mashine-pants/index'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="d-lg-inline-flex">
+        <div class="p-2">
+            <?= Html::a('Создать штанец', ['create'], ['class' => 'btn btn-success']) ?>
+        </div>
+        <div class="p-2">
+            <?=Html::a('Совместимость штанцев со станками', ['mashine-pants/index'], ['class' => 'btn btn-success'])?>
+        </div>
+    </div>
 
     <?ActiveForm::begin(['method'=>'post'])?>
 

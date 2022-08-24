@@ -27,35 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         'name'))?>
                 </div>
                 <div class="col">
-<!--                    --><?//=$form->field($flexform,'envelope_id')->dropDownList(ArrayHelper::map(Envelope::find()->all(), 'id',
-//                        'fullLocationName'))?>
                     <?=$form->field($flexform,'envelope_id')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(Envelope::find()->all(), 'id', 'fullLocationName'),
+                        'data' => ArrayHelper::map(Envelope::find()->all(), 'id', 'id'),
                         'options' => ['placeholder' => 'Выберите конверт...'],
                         'pluginOptions' => [
-                            'allowClear' => true
+                            'allowClear' => true,
+                            'data'=>true
                         ],
                     ])?>
-                    <?=$form->field($envelope,'new_checkbox')->checkbox()?>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="row">
-                <div class="col">
-                    <?=$form->field($envelope,'rack_id')->dropDownList(ArrayHelper::map(Envelope::$location['rack'],'id','name'),
-                    [
-                            'prompt' => 'Выберите...'
-                        ])?>
-                </div>
-                <div class="col">
-                    <?=$form->field($envelope,'shelf_id')->dropDownList(ArrayHelper::map(Envelope::$location['shelf'],'id','name'),
-                    [
-                            'prompt' => 'Выберите...'
-                        ])?>
-
-                </div>
-            </div>
         </div>
         <h6>Список форм:</h6>
         <?echo GridView::widget([
@@ -74,7 +57,4 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 <?=Html::submitButton('Сохранить',['class'=>'btn btn-success'])?>
 <?ActiveForm::end()?>
-<!--<pre>--><?//print_r($flexform)?><!--</pre>-->
-<!--<pre>--><?//print_r($envelope)?><!--</pre>-->
-<!--<pre>--><?//print_r($cur_label->combination)?><!--</pre>-->
-<!--<pre>--><?//print_r($order->id)?><!--</pre>-->
+

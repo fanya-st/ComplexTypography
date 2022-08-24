@@ -1,13 +1,11 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\PantoneKind;
-
 use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 $this->title = 'Пантоны';
 $this->params['breadcrumbs'][] = $this->title;

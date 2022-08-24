@@ -1,7 +1,8 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use app\models\User;
 use yii\bootstrap5\ActiveForm;
 

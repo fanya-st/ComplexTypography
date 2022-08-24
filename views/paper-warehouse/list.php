@@ -2,16 +2,14 @@
 
 
 use yii\bootstrap5\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use app\models\Material;
-use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use app\models\MaterialGroup;
 use kartik\field\FieldRange;
-use kartik\icons\Icon;
 use yii\web\View;
-Icon::map($this, Icon::FA);
 
 $this->title = 'Склад';
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,9 +28,7 @@ function printDiv(divName){
 );
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
-<!--<pre>--><?//print_r()?><!--</pre>-->
-<?//=$this->render('_search', ['model' => $searchModel])?>
-<div class="d-inline-flex">
+<div class="d-lg-inline-flex">
 <div class="p-2">
     <?=Html::a('Загрузить пришедший материал', ['paper-warehouse/upload-paper'], ['class'=>'btn btn-primary'])?>
 </div>

@@ -167,6 +167,18 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'start_time' => '8:00',
             'end_time' => '17:00',
         ],
+        '113' => [
+            'id' => '113',
+            'username' => 'Linar',
+            'password' => 'Linar',
+            'authKey' => 'test113key',
+            'accessToken' => '113-token',
+            'F' => 'Гарифуллин',
+            'I' => 'Линар',
+            'O' => '',
+            'start_time' => '8:00',
+            'end_time' => '17:00',
+        ],
     ];
 
 

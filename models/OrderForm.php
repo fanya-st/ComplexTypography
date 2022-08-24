@@ -3,8 +3,12 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii;
 
 class OrderForm extends ActiveRecord{
+
+    public $parent_label;
+
 	public static function tableName(){
 		return 'order';
 	}
@@ -28,20 +32,43 @@ class OrderForm extends ActiveRecord{
 		'rewinder_note'=>'Примечание перемотчика',
 		'printer_note'=>'Примечание печатника',
 		'manager_note'=>'Примечание менеджера',
+		'parent_label'=>'С внесением изменений в этикетку',
             'tech_note'=>'Примечание технолога',
 		'order_price'=>'Сумма за заказ, руб',
 		'order_price_with_tax'=>'Сумма за заказ с НДС, руб',
 		];
 	}
-	public function rules(){
-		return[
-		[['date_of_sale','label_id','trial_circulation','label_price','sleeve_id',
-            'material_id','mashine_id','winding_id','stretch','cut_edge','order_price','order_price_with_tax',
-            'label_price_with_tax','material_id','status_id'],'required'],
-		[['rewinder_note','printer_note','manager_note'],'trim'],
-            [['plan_circulation','sending','label_on_roll'],'integer'],
-            [['order_price','order_price_with_tax',
-                'label_price_with_tax','label_price'],'double']
-		];
-	}
+    public function rules(){
+        return[
+            [['status_id','label_id','stretch','cut_edge','label_on_roll','winding_id',
+                'sleeve_id','actual_circulation','sending','material_id','mashine_id','parent_label'],'integer'],
+            [['tech_note','printer_note','rewinder_note','manager_note','packer_login','rewinder_login','printer_login'],'trim'],
+            [['packer_login','rewinder_login','printer_login'],'string','max'=>50],
+            [['label_price_with_tax','label_price','order_price','order_price_with_tax'],'number'],
+            [['plan_circulation','sending','label_price_with_tax','label_price','order_price','order_price_with_tax','stretch','cut_edge','sleeve_id',
+                'material_id','mashine_id','date_of_sale','winding_id','label_on_roll'],'required'],
+            [['date_of_sale','date_of_create','date_of_variable_print_begin','date_of_packing_begin','date_of_rewind_begin',
+                'date_of_print_end','date_of_variable_print_end','date_of_rewind_end','date_of_packing_end'],'safe'],
+        ];
+    }
+
+    public function beforeValidate()
+    {
+        //Проверяем если нет статуса, то ставим статус "Новый"
+        if (empty($this->status_id)) {
+            $this->status_id = 1;
+        }
+        return parent::beforeValidate();
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            Yii::$app->session->setFlash('success', 'Заказ создан !');
+        } else {
+            Yii::$app->session->setFlash('success', 'Заказ обновлен !');
+        }
+    }
+
+
 }

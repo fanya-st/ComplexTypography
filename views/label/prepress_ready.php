@@ -24,7 +24,37 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <h6>Prepress выполнил: <?=User::getFullNameByUsername($label->prepress_login)?></h6>
 <h6>Штанец №: <?=Pants::findOne($label->pants_id)->name?></h6>
-<!--<pre>--><?//print_r($new_form)?><!--</pre>-->
+<h6>Пантоны: <? foreach ($label->pantone as $pantone) {
+        switch($pantone->name){
+            case 'cyan':
+                echo '<span class="badge rounded-pill bg-info">'.Html::encode($pantone->name).'</span>';
+                break;
+            case 'magenta':
+                echo '<span class="badge rounded-pill bg-danger">'.Html::encode($pantone->name).'</span>';
+                break;
+            case 'yellow':
+                echo '<span class="badge rounded-pill bg-warning">'.Html::encode($pantone->name).'</span>';
+                break;
+            case 'black':
+                echo '<span class="badge rounded-pill bg-black">'.Html::encode($pantone->name).'</span>';
+                break;
+            default:
+                echo '<span class="badge rounded-pill bg-primary">'.Html::encode($pantone->name).'</span>';
+                break;
+        }
+
+    }
+    ?></h6>
+<h6>Фольга: <?=$label->foil->name?></h6>
+<h6>Лак: <?=$label->varnishStatus->name?></h6>
+<h6>Трафарет: <?
+    switch($label->stencil){
+        case 1: echo 'Да';
+        break;
+        case 0: echo 'Нет';
+        break;
+    }
+    ?></h6>
 <?
 $form = ActiveForm::begin();
 ?>
@@ -49,8 +79,8 @@ $form = ActiveForm::begin();
             <div class="col">
                 <?=$form->field($new_form,'lpi')->input('integer')?>
                 <?=$form->field($new_form,'set_form_count')?>
-                <?=$form->field($new_form,'foil_stencil_varnish',['inline'=>true])->radioList([0=>'Нет','varnish_form'=>'Лаковая форма',
-                    'foil_form'=>'Фольга','stencil_form'=>'Трафарет'])->label('Фольга, трафарет или лак?')?>
+<!--                --><?//=$form->field($new_form,'foil_stencil_varnish',['inline'=>true])->radioList(['pantone'=>'Пантон','varnish_form'=>'Лаковая форма',
+//                    'foil_form'=>'Фольга','stencil_form'=>'Трафарет'])->label('Фольга, трафарет или лак?')?>
                 <?=$form->field($new_form,'dpi')->widget(DepDrop::classname(), [
                     'type' => DepDrop::TYPE_SELECT2,
                     'pluginOptions'=>[

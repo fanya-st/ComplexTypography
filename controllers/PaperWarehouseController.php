@@ -30,6 +30,11 @@ class PaperWarehouseController extends Controller
                             'barcode-print','roll-cut','move-roll'],
                         'roles' => ['warehouse_manager'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['list'],
+                        'roles' => ['printer'],
+                    ],
                 ],
             ],
         ];

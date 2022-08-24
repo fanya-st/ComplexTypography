@@ -9,18 +9,14 @@ use yii\helpers\ArrayHelper;
 
 class Shipment extends ActiveRecord
 {
-    public $oneboxweight=0.1;//вес одной коробки в кг
-    public $onelabelweight=0.01;//вес одной коробки в кг
+
     public function getShipmentOrder(){
         return $this->hasMany(ShipmentOrder::class,['shipment_id'=>'id']);
     }
     public function getOrder(){
         return $this->hasMany(Order::class,['id'=>'order_id'])->via('shipmentOrder');
     }
-    public function getManagerFullName(){
-        $user=User::findByUserName($this->manager_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
+
     public function getLabel(){
         return $this->hasMany(Label::class,['id'=>'label_id'])->via('order');
     }
@@ -61,9 +57,10 @@ class Shipment extends ActiveRecord
     }
 
     public function getShipmentWeight(){
+        $common_param=CalcCommonParam::getCommonParam();
         foreach ($this->finishedProductsWarehouse as $f){
-            $weight+=$f->sended_roll_count*$f->label_in_roll*$this->onelabelweight;
-            $weight+=$f->sended_box_count*$this->oneboxweight;
+            $weight+=$f->sended_roll_count*$f->label_in_roll*$common_param['one_label_weight'];
+            $weight+=$f->sended_box_count*$common_param['one_box_weight'];
         }
         return $weight;
     }
@@ -86,19 +83,30 @@ class Shipment extends ActiveRecord
         }
     }
 
+    public function getTransport(){
+        return $this->hasOne(Transport::class,['id'=>'transport_id']);
+    }
+
     public function attributeLabels(){
         return[
             'id'=>'ID',
             'date_of_send'=>'Дата отправки',
+            'date_of_close'=>'Дата закрытия',
             'date_of_create'=>'Дата создания',
-            'managerFullName'=>'Менеджер',
             'manager_login'=>'Менеджер',
+            'transport_id'=>'Транспорт',
+            'gasoline_cost'=>'ГСМ, руб',
+            'cost'=>'Командировочные, руб',
         ];
     }
 
     public function rules(){
         return[
             [['date_of_send'],'required'],
+            [['transport_id'],'integer'],
+            [['manager_login'],'string'],
+            [['gasoline_cost','cost'],'number'],
+            [['date_of_send','date_of_close','date_of_create'],'safe'],
         ];
     }
 

@@ -16,6 +16,7 @@ use app\models\MaterialForm;
 use yii\filters\AccessControl;
 use app\models\Order;
 use yii\helpers\ArrayHelper;
+use app\models\MaterialMovement;
 use yii\web\Controller;
 use yii;
 use app\models\MaterialSearch;
@@ -35,7 +36,7 @@ class MaterialController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list','view','update','create','stock-on-hand-paper'],
+                        'actions' => ['list','view','update','create','stock-on-hand-paper','material-movement'],
                         'roles' => ['warehouse_manager'],
                     ],
 
@@ -108,20 +109,14 @@ class MaterialController extends Controller
     }
 
     public function actionStockOnHandPaper(){
-//        $roll=new StockOnHandPaper();
-        $searchModel = new StockOnHandPaperSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->post());
-//        if ($this->request->isPost && $roll->load($this->request->post()) && $roll->validate($this->request->post())) {
-//            $stock_on_hand=StockOnHandPaper::find()->andFilterWhere([
-//                'id'=>$roll->stock_material_id,
-//                'material_group_id'=>$roll->stock_material_group_id,
-//                ])->all();
-//            foreach ($stock_on_hand as $stock) {
-//                $stock->stock_date=$roll->stock_date;
-//                $stock->stockOnHand();
-//            }
-//        }
+        $searchModel = new StockOnHandPaper();
+        $items = $searchModel->search(Yii::$app->request->post());
+        return $this->render('stock-on-hand-paper',compact('items','searchModel'));
+    }
 
-        return $this->render('stock-on-hand-paper',compact('dataProvider','searchModel'));
+    public function actionMaterialMovement(){
+        $searchModel = new MaterialMovement();
+        $items = $searchModel->search(Yii::$app->request->post());
+        return $this->render('material-movement',compact('items','searchModel'));
     }
 }

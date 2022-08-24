@@ -41,11 +41,17 @@ return [
         'description' => 'design ready if it in design',
         'ruleName' => 'AllowToDesignReadyRule',
     ],
+    'driver' => [
+        'type' => 1,
+        'description' => 'Водитель',
+    ],
     'accountant' => [
         'type' => 1,
+        'description' => 'Бухгалтер',
     ],
     'designer' => [
         'type' => 1,
+        'description' => 'Дизайнер',
         'children' => [
             'updateOwnLabelDesigner',
             'allowToDesignReadyRule',
@@ -53,30 +59,37 @@ return [
     ],
     'logistician' => [
         'type' => 1,
+        'description' => 'Логист',
     ],
     'packer' => [
         'type' => 1,
+        'description' => 'Упаковщик',
     ],
     'rewinder' => [
         'type' => 1,
+        'description' => 'Перемотчик',
     ],
     'printer' => [
         'type' => 1,
+        'description' => 'Печатник',
     ],
     'prepress' => [
         'type' => 1,
+        'description' => 'Допечатник',
         'children' => [
             'allowToPrepressReadyRule',
         ],
     ],
     'laboratory' => [
         'type' => 1,
+        'description' => 'Лаборант',
         'children' => [
             'allowToFlexformReadyRule',
         ],
     ],
     'designer_admin' => [
         'type' => 1,
+        'description' => 'Начальник отдела дизайна',
         'children' => [
             'designer',
             'prepress',
@@ -84,6 +97,7 @@ return [
     ],
     'manager' => [
         'type' => 1,
+        'description' => 'Менеджер',
         'children' => [
             'updateOwnLabelManager',
             'updateOwnShipmentManager',
@@ -93,21 +107,25 @@ return [
     ],
     'manager_admin' => [
         'type' => 1,
+        'description' => 'Начальник отдела продаж',
         'children' => [
             'manager',
         ],
     ],
     'warehouse_manager' => [
         'type' => 1,
+        'description' => 'Заведующий складом',
     ],
     'admin' => [
         'type' => 1,
+        'description' => 'Администратор',
         'children' => [
             'accountant',
             'designer_admin',
             'logistician',
             'warehouse_manager',
             'rewinder',
+            'driver',
             'packer',
             'manager_admin',
             'manager',

@@ -1,12 +1,12 @@
 <?php
 
 use yii\bootstrap5\Html;
-//use yii\grid\GridView;
+use app\models\User;
 use kartik\grid\GridView;
 ?>
 <div class="row g-2 row-cols-2">
     <div class="col">
-        <?=Html::tag('h6','Менеджер: ' .Html::encode($shipment->managerFullName))?>
+        <?=Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameByUsername($shipment->manager_login)))?>
         <?switch ($shipment->status_id){
             case 0:
                 echo Html::tag('h6','Статус: Новая отгрузка');
@@ -20,7 +20,7 @@ use kartik\grid\GridView;
         }?>
         <?=Html::tag('h6','Дата отправки: ' .Html::encode($shipment->date_of_send))?>
         <?=Html::tag('h6','Вес, кг: ' .Html::encode($shipment->shipmentWeight))?>
-        <div class="d-inline-flex">
+        <div class="d-lg-inline-flex">
         <?switch ($shipment->status_id){
             case 0:
                 echo Html::tag('div',Html::a('Добавить заказы', ['shipment/order-add', 'id' => $shipment->id], ['class' => 'btn btn-primary']),['class'=>'p-1']);
@@ -30,6 +30,8 @@ use kartik\grid\GridView;
                 echo Html::tag('div',Html::a('Закрыть', ['shipment/close-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']),['class'=>'p-1']);
                 break;
         }?>
+            <?=Html::tag('div',Html::a('Пометить брак', ['shipment/mark-defect-roll','id'=>$shipment->id], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
+            <?=Html::tag('div',Html::a('Внести данные поездки', ['shipment/edit-transport','id'=>$shipment->id], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
             </div>
     </div>
 </div>
@@ -55,5 +57,6 @@ echo GridView::widget([
             'template' => '{delete}'
         ],
     ],
+    'responsive'=>true,
 ]);
 ?>

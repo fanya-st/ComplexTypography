@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'Комплекс Типография &copy;',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'timeZone' => 'Europe/Moscow',
@@ -28,6 +29,9 @@ $config = [
     ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+        ],
+        'mobileDetect' => [
+            'class' => '\skeeks\yii2\mobiledetect\MobileDetect'
         ],
         'user' => [
             'identityClass' => 'app\models\User',

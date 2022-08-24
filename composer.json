@@ -38,7 +38,8 @@
         "ruskid/yii2-csv-importer": "dev-master",
         "2amigos/qrcode-library": "~1.1",
         "kartik-v/yii2-checkbox-x": "dev-master",
-        "kartik-v/yii2-widget-datetimepicker": "dev-master"
+        "kartik-v/yii2-widget-datetimepicker": "dev-master",
+        "skeeks/yii2-mobile-detect": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

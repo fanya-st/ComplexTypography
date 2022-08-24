@@ -9,7 +9,7 @@ use app\models\Shelf;
 
 class ShelfSearch extends Shelf
 {
-
+    public $warehouse_id;
     public static function tableName()
     {
         return 'shelf';
@@ -18,7 +18,7 @@ class ShelfSearch extends Shelf
     public function rules()
     {
         return [
-            [['id', 'rack_id'], 'integer'],
+            [['id', 'rack_id','warehouse_id'], 'integer'],
         ];
     }
 
@@ -30,7 +30,7 @@ class ShelfSearch extends Shelf
 
     public function search($params)
     {
-        $query = Shelf::find();
+        $query = Shelf::find()->joinWith('rack.warehouse');
 
         // add conditions that should always apply here
 
@@ -48,8 +48,9 @@ class ShelfSearch extends Shelf
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'rack_id' => $this->rack_id,
+            'shelf.id' => $this->id,
+            'shelf.rack_id' => $this->rack_id,
+            'warehouse.id' => $this->warehouse_id,
         ]);
 
         return $dataProvider;

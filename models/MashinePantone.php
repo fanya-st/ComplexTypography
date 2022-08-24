@@ -7,6 +7,13 @@ use Yii;
 
 class MashinePantone extends \yii\db\ActiveRecord
 {
+    public function getMashine(){
+        return $this->hasOne(Mashine::class,['id'=>'mashine_id']);
+    }
+
+    public function getPantone(){
+        return $this->hasOne(Pantone::class,['id'=>'pantone_id']);
+    }
 
     public static function tableName()
     {

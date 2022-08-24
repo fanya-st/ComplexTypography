@@ -46,12 +46,37 @@ class LabelForm extends ActiveRecord
     }
     public function rules(){
         return[
-            [['name','customer_id','pants_id','laminate','stencil','variable','varnish_id',
-                'print_on_glue','background_id','orientation','foil_id','output_label_id','color_count','takeoff_flash'],'required'],
-            ['name','string','max'=>100],
-            [['name','manager_note','designer_note'],'trim'],
-            [['variable_paint_count'],'double'],
-            [['parent_label','status_id','image','image_crop','image_extended','design_file','date_of_design','shaft_id','variable_paint_count'],'safe'],
+            [['name','image','image_crop','image_extended','design_file','prepress_design_file'],'string','max'=>100],
+            [['designer_login','prepress_login','laboratory_login'],'string','max'=>50],
+            [['manager_note','prepress_note','designer_note','laboratory_note','name','image','image_crop','image_extended','design_file','prepress_design_file',
+                'designer_login','prepress_login','laboratory_login'],'trim'],
+            [['variable_paint_count'],'number'],
+            [['name','status_id','customer_id'],'required'],
+            [['date_of_create','date_of_design','date_of_prepress','date_of_flexformready'],'safe'],
+            [['status_id','customer_id','pants_id','laminate','stencil','variable','varnish_id','parent_label',
+                'print_on_glue','orientation', 'output_label_id','background_id','color_count','foil_id','takeoff_flash'],'integer'],
         ];
+    }
+
+    public function beforeValidate()
+    {
+        //Проверяем если нет статуса, то ставим статус "Новый"
+        if (empty($this->status_id)) {
+            $this->status_id = 1;
+        }
+        return parent::beforeValidate();
+    }
+
+    public function createSame(){
+        $this->setIsNewRecord(true);
+        $this->parent_label=$this->id;
+        $this->status_id=1;
+        unset($this->id);
+        unset($this->date_of_create);
+        unset($this->date_of_prepress);
+        unset($this->date_of_design);
+        unset($this->prepress_login);
+        unset($this->laboratory_login);
+        unset($this->date_of_flexformready);
     }
 }

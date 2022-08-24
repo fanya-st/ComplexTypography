@@ -71,7 +71,7 @@ $this->registerJs(
                 <?=Html::tag('h6','Время печати: ' .round($calculator->calculated_time_print, 3).' ч')?>
             </div>
         </div>
-
+        <div class="table-responsive">
         <table class="table">
             <thead>
             <tr>
@@ -92,13 +92,13 @@ $this->registerJs(
             </tr>
             </tbody>
         </table>
+        </div>
     </div>
 <?endif;?>
-<div class="row g-2 row-cols-2">
-    <div class="col">
+<div class="row g-2 row-cols-lg-2">
+    <div class="col-lg">
         <div class="border p-3 rounded">
             <h6 class="bg-success p-1 rounded">Параметры штанца</h6>
-
             <div class="row">
                 <div class="col">
                     <?= $form->field($calculator, 'pants_id')->dropDownList(ArrayHelper::map(Pants::find()->asArray()->all(),'id','name')) ?>
@@ -123,7 +123,7 @@ $this->registerJs(
         </div>
     </div>
 
-    <div class="col">
+    <div class="col-lg">
         <div class="border p-3 rounded">
             <h6 class="bg-primary p-1 rounded">Параметры бумаги и расходных материалов</h6>
             <div class="row">
@@ -152,7 +152,7 @@ $this->registerJs(
         </div>
     </div>
 
-    <div class="col">
+    <div class="col-lg">
         <div class="border p-3 rounded">
             <h6 class="bg-info p-1 rounded">Параметры красок</h6>
             <div class="row">

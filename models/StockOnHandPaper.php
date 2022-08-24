@@ -11,53 +11,80 @@ class StockOnHandPaper extends Material
         return 'material';
     }
 
-    public $paper_warehouse;
+    public $date;
+    public $result;
+    public $search_material_id;
+    public $search_material_group_id;
 
     public function attributeLabels()
     {
         return [
+            'search_material_id' => 'Материал',
+            'search_material_group_id' => 'Группа',
+            'date' => 'Выбрать дату',
         ];
+    }
+
+    public function search($params)
+    {
+        $dataProvider = $this::find();
+        // загружаем данные формы поиска и производим валидацию
+        if ($this->load($params) && $this->validate()) {
+            // изменяем запрос добавляя в его фильтрацию
+            $dataProvider->andFilterWhere(['material_group_id' => $this->search_material_group_id]);
+            $dataProvider->andFilterWhere(['id' => $this->search_material_id]);
+            $items = $dataProvider->all();
+            foreach ($items as $item) {
+                if (!empty($this->date))
+                    $item->date = $this->date;
+                $item->stockOnHand();
+            }
+
+            return $items;
+        }
     }
 
     public function rules()
     {
         return [
-            [['paper_warehouse'], 'safe'],
+            [['date'], 'required'],
+            [['date','result','search_material_group_id','search_material_id'], 'safe'],
         ];
     }
 
-    public function StockOnHand($stock_date){
-        //обрабатываем в цикле ролики со склада бумаги
-        foreach ($this->paperWarehouse as $paper_warehouse){
-            //приход с периода выборки и до сегодняшнего дня отнимаем
-            if(date_create($paper_warehouse->date_of_create) <= date_create($stock_date)){
-                //обрабатываем в цикле введенный расход по каждому ролику со склада
-                foreach($paper_warehouse->orderMaterial as $order_material){
-                    if(date_create($order_material->date) >= date_create($stock_date)){
-                        //расход с периода выборки и до сегодняшнего дня прибавляем
-                        $paper_warehouse->length+=$order_material->length;
-                    }
-                }
-                ArrayHelper::setValue($stock,$paper_warehouse->id,$paper_warehouse);
-            }
+    public function StockOnHand(){
+
+        //текущие запасы
+        $paper_warehouse = PaperWarehouse::find()->select(['material_id', 'width', 'sum(length) as length'])
+            ->andWhere(['material_id' => $this->id])
+            ->groupBy(['material_id', 'width'])->asArray()->all();
+        foreach ($paper_warehouse as $paper) {
+            ArrayHelper::setValue($this->result, $paper['width'].'.now', $paper['length']);
         }
-
-        $this->paper_warehouse=$stock;
-    }
-
-    public static function getTotal($provider,$time)
-    {
-        $total = 0;
-
-        foreach ($provider as $item) {
-            $item->stockOnHand($time);
-            if(!empty($item->paper_warehouse))
-                foreach($item->paper_warehouse as $paper_warehouse){
-                    $total+=$paper_warehouse->length*$paper_warehouse->width;
-                }
+        //приход в период выборки
+        $paper_warehouse = PaperWarehouse::find()->select(['material_id', 'width', 'sum(length) as length'])
+            ->andFilterWhere(['>=', 'date_of_create', date($this->date)])
+            ->andWhere(['material_id' => $this->id])
+            ->groupBy(['material_id', 'width'])->asArray()->all();
+        foreach ($paper_warehouse as $paper) {
+            ArrayHelper::setValue($this->result, $paper['width'].'.incoming', $paper['length']);
         }
-
-        return 'Общая, м2: '.round($total/1000,2);
+        //расход в периода выборки
+        $order_material = OrderMaterial::find()->select(['material.id', 'paper_warehouse.width', 'sum(order_material.length) as length'])
+            ->joinWith('paperWarehouse.material')
+            ->andFilterWhere(['>=', 'order_material.date', date($this->date)])
+            ->andWhere(['material.id' => $this->id])
+            ->groupBy(['material.id', 'paper_warehouse.width'])->asArray()->all();
+        foreach ($order_material as $paper) {
+            ArrayHelper::setValue($this->result, $paper['width'].'.usage', $paper['length']);
+        }
+        if(!empty($this->result))
+        foreach($this->result as $key=>$value){
+            ArrayHelper::setValue($this->result, $key.'.on_date', $value['now']-$value['incoming']+$value['usage']);
+            ArrayHelper::setValue($this->result, $key.'.square', round(($this->result[$key]['on_date'])*$key/1000,3));
+            $square+=$this->result[$key]['square'];
+        }
+        ArrayHelper::setValue($this->result, 'square',$square);
     }
 
 }

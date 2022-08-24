@@ -4,6 +4,7 @@ use yii\bootstrap5\Html;
 <!--<pre>--><?//print_r($material_warehouse)?><!--</pre>-->
 
 <div class="border p-2 rounded">
+    <div class="table-responsive">
     <table class="table">
         <thead>
         <tr>
@@ -30,4 +31,5 @@ use yii\bootstrap5\Html;
         </tr>
         </tbody>
     </table>
+</div>
 </div>

@@ -30,9 +30,13 @@ echo TabsX::widget([
             ],
         'finished_products_warehouse'=>
             [
-                'label' => 'Склад ГП',
+                'label' => 'Излишки Склад ГП',
                 'content'=>$this->render('//finished-products-warehouse/_finished_products_warehouse_tab',compact('surplus')),
             ],
+//        [
+//                'label' => 'Брак',
+//                'content'=>$this->render('//shipment/_defect_tab',compact('roll')),
+//            ],
 //        'technological_map'=>
 //            [
 //                'label' => 'Технокарта',

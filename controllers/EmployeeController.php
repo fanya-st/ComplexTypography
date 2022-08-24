@@ -18,8 +18,8 @@ class EmployeeController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list','qr-print'],
-                        'roles' => ['?','@'],
+                        'actions' => ['list','qr-print','view'],
+                        'roles' => ['@'],
                     ],
 
                 ],
@@ -31,6 +31,12 @@ class EmployeeController extends Controller
         $employees=User::getUserList();
         return $this->render('list',compact('employees'));
     }
+
+    public function actionView($username){
+        $employee=User::findByUsername($username);
+        return $this->render('view',compact('employee'));
+    }
+
     public function actionQrPrint($username){
         return $this->renderAjax('qr-code-print',compact('username'));
     }

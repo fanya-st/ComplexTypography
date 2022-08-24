@@ -87,20 +87,36 @@ class RbacController extends Controller
         $auth->add($allowToDesignReadyRule);
 
         // добавляем роль "manager" и даём роли разрешение "list"		
+		$driver = $auth->createRole('driver');
+        $driver->description='Водитель';
 		$manager = $auth->createRole('manager');
+        $manager->description='Менеджер';
 		$accountant = $auth->createRole('accountant');
+        $accountant->description='Бухгалтер';
 		$logistician = $auth->createRole('logistician');
+        $logistician->description='Логист';
 		$rewinder = $auth->createRole('rewinder');
+        $rewinder->description='Перемотчик';
         $packer = $auth->createRole('packer');
+        $packer->description='Упаковщик';
 		$laboratory = $auth->createRole('laboratory');
+        $laboratory->description='Лаборант';
 		$prepress = $auth->createRole('prepress');
+        $prepress->description='Допечатник';
 		$designer_admin = $auth->createRole('designer_admin');
+        $designer_admin->description='Начальник отдела дизайна';
         //$auth->addChild($manager, $permit_to_manager);
         $designer = $auth->createRole('designer');
+        $designer->description='Дизайнер';
         $printer = $auth->createRole('printer');
+        $printer->description='Печатник';
         $manager_admin = $auth->createRole('manager_admin');
+        $manager_admin->description='Начальник отдела продаж';
         $warehouse_manager = $auth->createRole('warehouse_manager');
+        $warehouse_manager->description='Заведующий складом';
         $admin = $auth->createRole('admin');
+        $admin->description='Администратор';
+        $auth->add($driver);
         $auth->add($accountant);
         $auth->add($designer);
         $auth->add($logistician);
@@ -134,6 +150,7 @@ class RbacController extends Controller
         $auth->addChild($admin, $logistician);
         $auth->addChild($admin, $warehouse_manager);
         $auth->addChild($admin, $rewinder);
+        $auth->addChild($admin, $driver);
         $auth->addChild($admin, $packer);
         $auth->addChild($admin, $manager_admin);
         $auth->addChild($admin, $manager);
@@ -145,6 +162,7 @@ class RbacController extends Controller
         // обычно реализуемый в модели User.
 //		$auth->assign($manager, 102);
 //		$auth->assign($designer, 104);
+		$auth->assign($driver, 113);
 		$auth->assign($accountant, 112);
 		$auth->assign($printer, 108);
 		$auth->assign($packer, 110);

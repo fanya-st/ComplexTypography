@@ -11,13 +11,10 @@ use app\models\Sleeve;
 use app\models\Winding;
 use yii\web\View;
 use app\models\Label;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 $this->title = 'Создание заказа';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
 $this->params['breadcrumbs'][] = $this->title;
-//$this->registerCssFile("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 $this->registerJs(
     "
     function changeSending(){
@@ -34,25 +31,9 @@ $this->registerJs(
     View::POS_HEAD,
     'change_sending'
 );
-//$this->registerJs(
-//    "
-//    $('#orderform-label_id').on('select2:select', function (e) {
-//    var data = document.getElementById('orderform-label_id').value;
-//    console.log(data);
-//    });
-//    ",
-//    View::POS_LOAD,
-//    'changeOrderName'
-//);
 ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
-<!--    <div class="alert alert-info">-->
-<!--        <strong>Внимание!</strong> Этикетка будет создана "на лету" со статусом - готовая</a>.-->
-<!--    </div>-->
-<!--<pre>--><?//print_r(date('Y-m-d', strtotime("+ 7 day")))?><!--</pre>-->
-<!--<pre>--><?//print_r($id_last)?><!--</pre>-->
-<!--<pre>--><?//print_r($new_label)?><!--</pre>-->
 	<?$form = ActiveForm::begin()?>
     <div class="row">
         <div class="col">
@@ -64,7 +45,7 @@ $this->registerJs(
                     'allowClear' => true
                 ],
             ])?>
-            <?=$form->field($new_label,'parent_label')->checkbox()?>
+            <?=$form->field($order,'parent_label')->checkbox()?>
             <div class="row">
                 <div class="col">
                     <?=$form->field($order,'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>0])->asArray()->all(), 'id', 'name'), [
@@ -103,45 +84,25 @@ $this->registerJs(
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <?=$form->field($order,'trial_circulation')->dropDownList([
-                        '0' => 'Нет',
-                        '1' => 'Да'
-                    ],
-                        [
-                            'prompt' => 'Выберите...'
-                        ])?>
                     <?=$form->field($order,'sleeve_id')
-                        ->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'),
-                        [
-                            'prompt' => 'Выберите...'
-                        ])?>
+                        ->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'))?>
                     <?=$form->field($order,'cut_edge')->dropDownList([
                         '0' => 'Не срезать',
                         '1' => 'Срезать',
-                    ],
-                        [
-                            'prompt' => 'Выберите...'
-                        ])?>
+                    ])?>
                     <?=$form->field($order,'stretch')->dropDownList([
                         '0' => 'Нет',
                         '1' => 'Да',
-                    ],
-                        [
-                            'prompt' => 'Выберите...'
-                        ])?>
+                    ])?>
                 </div>
                 <div class="col">
                     <?=$form->field($order,'plan_circulation')->textInput(['onchange'=>'changeSending()'])?>
                     <?=$form->field($order,'sending')?>
-                    <?=$form->field($order,'diameter_roll')?>
                     <?=$form->field($order,'label_on_roll')?>
                 </div>
             </div>
-<!--            --><?//=$form->field($order,'rewinder_note')->textarea()?>
-<!--            --><?//=$form->field($order,'printer_note')->textarea()?>
             <?=$form->field($order,'manager_note')->textarea()?>
         </div>
     </div>
-    <?=$form->field($order, 'status_id')->hiddenInput(['value' => 1])->label(false);?>
 	<?=Html::submitButton('Создать заказ',['class'=>'btn btn-success'])?>
 	<?ActiveForm::end()?>

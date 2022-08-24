@@ -586,6 +586,15 @@
             'reference' => '44bb1ab01811116f01fe216ab37d921dccc6c10d',
             'dev_requirement' => false,
         ),
+        'mobiledetect/mobiledetectlib' => array(
+            'pretty_version' => '2.8.39',
+            'version' => '2.8.39.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mobiledetect/mobiledetectlib',
+            'aliases' => array(),
+            'reference' => '0fd6753003fc870f6e229bae869cc1337c99bc45',
+            'dev_requirement' => false,
+        ),
         'mpdf/mpdf' => array(
             'pretty_version' => 'v8.1.2',
             'version' => '8.1.2.0',
@@ -939,6 +948,15 @@
             'reference' => '6231e315f73e4f62d72b73f3d6d78ff0eed93c31',
             'dev_requirement' => false,
         ),
+        'skeeks/yii2-mobile-detect' => array(
+            'pretty_version' => '1.0.2',
+            'version' => '1.0.2.0',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../skeeks/yii2-mobile-detect',
+            'aliases' => array(),
+            'reference' => '9b489bae01433806fbcda00ceb1a3809f71baa54',
+            'dev_requirement' => false,
+        ),
         'swiftmailer/swiftmailer' => array(
             'pretty_version' => 'v6.3.0',
             'version' => '6.3.0.0',
@@ -1135,12 +1153,12 @@
             'dev_requirement' => true,
         ),
         'yiisoft/yii2' => array(
-            'pretty_version' => '2.0.45',
-            'version' => '2.0.45.0',
+            'pretty_version' => '2.0.46',
+            'version' => '2.0.46.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../yiisoft/yii2',
             'aliases' => array(),
-            'reference' => 'e2223d4085e5612aa616635f8fcaf478607f62e8',
+            'reference' => 'd73259c3bc886648a6875109f9f09cddeff03708',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-app-basic' => array(

@@ -2,15 +2,12 @@
 
 use yii\bootstrap5\Html;
 use kartik\tabs\TabsX;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 $this->title = Html::encode("Отгрузка ID [$shipment->id]");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3><?= Html::encode($this->title)?></h3>
-<!--<pre>--><?//print_r($shipment->finishedProductsWarehouse)?><!--</pre>-->
 <div class="row">
     <?
     echo TabsX::widget([
@@ -33,7 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             [
                     'label' => 'Брак',
-                    'content'=>$this->render('_defect_tab',compact('shipment','shipment_roll')),
+                    'content'=>$this->render('_defect_tab',compact('roll')),
+                ],
+            [
+                    'label' => 'Транспортировка',
+                    'content'=>$this->render('_transport_tab',compact('shipment')),
                 ],
         ],
     ]);

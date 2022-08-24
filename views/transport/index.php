@@ -2,7 +2,8 @@
 
 use yii\bootstrap5\Html;
 use kartik\icons\Icon;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 
 
 $this->title = 'Транспорт';

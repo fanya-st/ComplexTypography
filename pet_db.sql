@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 18 2022 г., 15:27
+-- Время создания: Авг 24 2022 г., 12:38
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.1.33
 
@@ -68,6 +68,35 @@ INSERT INTO `bank_transfer` (`id`, `date_of_create`, `customer_id`, `date`, `sum
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `business_trip_employee`
+--
+
+CREATE TABLE `business_trip_employee` (
+  `id` int NOT NULL COMMENT 'ID',
+  `date_of_begin` datetime NOT NULL COMMENT 'Дата начала',
+  `date_of_end` datetime DEFAULT NULL COMMENT 'Дата окончания',
+  `gasoline_cost` double DEFAULT NULL COMMENT 'ГСМ, руб',
+  `cost` double DEFAULT NULL COMMENT 'Командировочные',
+  `employee_login` varchar(50) NOT NULL COMMENT 'Сотрудник',
+  `transport_id` int NOT NULL COMMENT 'Транспорт',
+  `address` text NOT NULL COMMENT 'Адрес',
+  `status_id` int NOT NULL DEFAULT '0' COMMENT 'Статус'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `business_trip_employee`
+--
+
+INSERT INTO `business_trip_employee` (`id`, `date_of_begin`, `date_of_end`, `gasoline_cost`, `cost`, `employee_login`, `transport_id`, `address`, `status_id`) VALUES
+(1, '2022-08-01 00:00:00', '2022-08-13 00:00:00', NULL, NULL, 'admin', 2, 'Альметьевск', 0),
+(2, '2022-08-19 09:23:19', NULL, NULL, NULL, 'Hamida', 1, 'fghfgh', 0),
+(3, '2022-08-19 09:23:19', NULL, NULL, NULL, 'Jura', 1, 'fghfgh', 0),
+(4, '2022-08-04 00:00:00', '2022-08-12 00:00:00', NULL, NULL, 'admin', 1, 'fghgf', 0),
+(5, '2022-08-04 00:00:00', '2022-08-12 00:00:00', NULL, NULL, 'admin', 1, 'dfvsdf', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `calc_common_param`
 --
 
@@ -96,7 +125,9 @@ INSERT INTO `calc_common_param` (`id`, `name`, `subscribe`, `value`, `date`) VAL
 (18, 'tax', 'Процент НДС (%)', 20, '2022-08-11 11:17:46'),
 (19, 'form_change_time', 'Время на смену одной формы (мин)', 30, '2022-08-11 14:17:21'),
 (20, 'desired_profit_min', 'Мин. желаемая прибыль (евро/час)', 33, '2022-08-11 14:20:03'),
-(21, 'price_increase', 'Повышение цены (коэф)', 1.04, '2022-08-15 10:22:49');
+(21, 'price_increase', 'Повышение цены (коэф)', 1.04, '2022-08-15 10:22:49'),
+(22, 'one_box_weight', 'Вес одной коробки, кг', 0.1, '2022-08-23 16:35:28'),
+(23, 'one_label_weight', 'Вес одной этикетки , кг', 0.01, '2022-08-23 16:36:17');
 
 -- --------------------------------------------------------
 
@@ -196,7 +227,8 @@ INSERT INTO `calc_mashine_param_value` (`id`, `mashine_id`, `calc_mashine_param_
 (20, 1, 19, 0.3, '2022-08-16 08:24:51'),
 (21, 1, 18, 0.1, '2022-08-16 08:25:28'),
 (22, 1, 22, 0.5, '2022-08-16 08:25:59'),
-(23, 1, 23, 10, '2022-08-16 08:26:51');
+(23, 1, 23, 10, '2022-08-16 08:26:51'),
+(24, 1, 25, 500, '2022-08-23 08:39:55');
 
 -- --------------------------------------------------------
 
@@ -244,7 +276,8 @@ INSERT INTO `combination` (`id`, `name`) VALUES
 (4, NULL),
 (5, NULL),
 (6, NULL),
-(7, NULL);
+(7, NULL),
+(8, NULL);
 
 -- --------------------------------------------------------
 
@@ -266,55 +299,9 @@ INSERT INTO `combination_form` (`id`, `combination_id`, `label_id`) VALUES
 (6, 4, 7),
 (7, 4, 9),
 (14, 7, 11),
-(15, 7, 10);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `combination_order`
---
-
-CREATE TABLE `combination_order` (
-  `id` int NOT NULL,
-  `order_id` int DEFAULT NULL,
-  `combination_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `combination_order`
---
-
-INSERT INTO `combination_order` (`id`, `order_id`, `combination_id`) VALUES
-(17, 4, 11),
-(18, 3, 11);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `combination_print_order`
---
-
-CREATE TABLE `combination_print_order` (
-  `id` int NOT NULL,
-  `name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `combination_print_order`
---
-
-INSERT INTO `combination_print_order` (`id`, `name`) VALUES
-(1, NULL),
-(2, NULL),
-(3, NULL),
-(4, NULL),
-(5, NULL),
-(6, NULL),
-(7, NULL),
-(8, NULL),
-(9, NULL),
-(10, NULL),
-(11, NULL);
+(15, 7, 10),
+(17, 8, 6),
+(18, 8, 15);
 
 -- --------------------------------------------------------
 
@@ -389,6 +376,7 @@ CREATE TABLE `enterprise_cost` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `login` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `service_id` int NOT NULL,
+  `order_id` int DEFAULT NULL,
   `cost` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -396,9 +384,9 @@ CREATE TABLE `enterprise_cost` (
 -- Дамп данных таблицы `enterprise_cost`
 --
 
-INSERT INTO `enterprise_cost` (`id`, `date`, `login`, `service_id`, `cost`) VALUES
-(1, '2022-08-17 13:49:48', '', 7, 1000),
-(2, '2022-08-17 13:51:29', 'Alex', 2, 1500);
+INSERT INTO `enterprise_cost` (`id`, `date`, `login`, `service_id`, `order_id`, `cost`) VALUES
+(1, '2022-08-17 13:49:48', '', 7, NULL, 1000),
+(2, '2022-08-17 13:51:29', 'Alex', 2, 1, 1500);
 
 -- --------------------------------------------------------
 
@@ -435,25 +423,26 @@ INSERT INTO `enterprise_cost_service` (`id`, `name`) VALUES
 
 CREATE TABLE `envelope` (
   `id` int NOT NULL,
-  `rack` int DEFAULT NULL,
-  `shelf` int DEFAULT NULL
+  `color1` int NOT NULL,
+  `color2` int NOT NULL,
+  `shelf_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `envelope`
 --
 
-INSERT INTO `envelope` (`id`, `rack`, `shelf`) VALUES
-(3, 1, 1),
-(4, 3, 3),
-(5, 2, 5),
-(6, 2, 5),
-(7, 2, 5),
-(8, 1, 1),
-(9, 1, 3),
-(10, 1, 1),
-(11, 3, 3),
-(12, 1, 2);
+INSERT INTO `envelope` (`id`, `color1`, `color2`, `shelf_id`) VALUES
+(3, 1, 1, 4),
+(4, 1, 1, 3),
+(5, 1, 2, 4),
+(6, 2, 3, 3),
+(7, 4, 5, 4),
+(8, 5, 5, 3),
+(9, 5, 5, 3),
+(10, 5, 5, 4),
+(11, 5, 5, 3),
+(12, 5, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -484,16 +473,16 @@ CREATE TABLE `finished_products_warehouse` (
 --
 
 INSERT INTO `finished_products_warehouse` (`id`, `date_of_create`, `order_id`, `previous_order_id`, `label_id`, `label_in_roll`, `roll_count`, `packed_roll_count`, `packed_box_count`, `packed_bale_count`, `sended_roll_count`, `sended_box_count`, `sended_bale_count`, `defect_roll_count`, `defect_note`) VALUES
-(6, '2022-06-28 10:49:56', 31, NULL, 5, 1000, 70, 70, 5, 1, 70, 5, 1, NULL, NULL),
-(7, '2022-06-28 10:49:56', 31, NULL, 5, 500, 0, 0, 1, 0, 0, 1, 0, NULL, NULL),
-(8, '2022-06-28 10:49:56', 1, NULL, 1, 1000, 10, 10, 1, 0, 10, 1, 0, 0, ''),
+(6, '2022-06-28 10:49:56', 31, NULL, 5, 1000, 70, 70, 5, 1, 70, 5, 1, NULL, 'Не попадание в цвет'),
+(7, '2022-06-28 10:49:56', 31, NULL, 5, 500, 0, 0, 1, 0, 0, 1, 0, NULL, ''),
+(8, '2022-06-28 10:49:56', 1, NULL, 1, 1000, 10, 10, 1, 0, 10, 1, 0, 1, ''),
 (9, '2022-06-28 10:49:56', 3, NULL, 7, 10000, 9, 9, 1, 0, 9, 1, 0, 0, ''),
-(10, '2022-06-28 10:49:56', 3, NULL, 7, 5000, 0, 0, 1, 0, 0, 1, 0, NULL, NULL),
+(10, '2022-06-28 10:49:56', 3, NULL, 7, 5000, 0, 0, 1, 0, 0, 1, 0, NULL, ''),
 (11, '2022-06-28 10:49:56', 4, NULL, 9, 10000, 10, 10, 2, 0, 10, 2, 0, 0, ''),
 (16, '2022-06-28 10:49:56', NULL, 31, 5, 1000, 15, 0, 0, 0, 0, 0, 0, 0, NULL),
 (17, '2022-06-28 10:49:56', NULL, 31, 5, 500, 3, 0, 0, 0, 0, 0, 0, 0, NULL),
 (18, '2022-06-28 10:49:56', NULL, 3, 7, 1000, 10, 0, 0, 0, 0, 0, 0, 0, NULL),
-(19, '2022-06-28 12:24:14', NULL, 2, 1, 1000, 2, 0, 0, 0, 0, 0, 0, 0, NULL),
+(19, '2022-06-28 12:24:14', 1, 2, 1, 1000, 2, 0, 0, 0, 0, 0, 0, 0, NULL),
 (20, '2022-07-08 10:27:18', 17, NULL, 4, 5000, 110, 0, 0, 0, 0, 0, 0, 0, NULL),
 (21, '2022-08-10 10:30:42', 35, NULL, 39, 5000, 35, 35, 3, 0, 35, 3, 0, NULL, NULL),
 (22, '2022-08-10 10:31:09', 35, NULL, 39, 2500, 5, 5, 1, 0, 5, 1, 0, NULL, NULL),
@@ -539,9 +528,6 @@ CREATE TABLE `form` (
   `dpi` int DEFAULT NULL,
   `pantone_id` int DEFAULT NULL,
   `photo_output_id` int DEFAULT NULL,
-  `foil_form` int NOT NULL DEFAULT '0',
-  `varnish_form` int NOT NULL DEFAULT '0',
-  `stencil_form` int NOT NULL DEFAULT '0',
   `combination_id` int DEFAULT NULL,
   `envelope_id` int DEFAULT NULL,
   `polymer_id` int DEFAULT NULL,
@@ -553,34 +539,36 @@ CREATE TABLE `form` (
 -- Дамп данных таблицы `form`
 --
 
-INSERT INTO `form` (`id`, `label_id`, `width`, `height`, `lpi`, `dpi`, `pantone_id`, `photo_output_id`, `foil_form`, `varnish_form`, `stencil_form`, `combination_id`, `envelope_id`, `polymer_id`, `ready`, `form_defect_id`) VALUES
-(53, NULL, 150, 150, 154, 5080, 1, 2, 0, 0, 0, 4, 10, 1, 1, NULL),
-(54, NULL, 150, 150, 154, 5080, 2, 2, 0, 0, 0, 4, 10, 1, 1, NULL),
-(55, NULL, 150, 150, 154, 5080, 3, 2, 0, 0, 0, 4, 10, 1, 1, NULL),
-(56, NULL, 150, 150, 154, 5080, 4, 2, 0, 0, 0, 4, 10, 1, 1, NULL),
-(57, NULL, 150, 150, 154, 5080, NULL, 2, 0, 0, 1, 4, 10, 1, 1, NULL),
-(58, NULL, 150, 150, 154, 5080, NULL, 2, 1, 0, 0, 4, 10, 1, 1, NULL),
-(59, NULL, 150, 150, 154, 5080, NULL, 2, 0, 1, 0, 4, 10, 1, 1, NULL),
-(60, 1, 150, 150, 154, 2540, 1, 2, 0, 0, 0, NULL, 11, 1, 1, NULL),
-(61, 1, 150, 150, 154, 2540, 3, 2, 0, 0, 0, NULL, 11, 1, 1, NULL),
-(62, 1, 150, 150, 154, 2540, NULL, 2, 0, 1, 0, NULL, 11, 1, 1, NULL),
-(71, NULL, 143, 145, 154, 5080, 1, 2, 0, 0, 0, 7, 3, 1, 1, NULL),
-(72, NULL, 143, 145, 154, 5080, 4, 2, 0, 0, 0, 7, 3, 1, 1, NULL),
-(73, NULL, 143, 145, 154, 5080, NULL, 2, 0, 0, 1, 7, 3, 1, 1, NULL),
-(74, NULL, 143, 145, 154, 5080, NULL, 2, 1, 0, 0, 7, 3, 1, 1, NULL),
-(75, NULL, 143, 145, 154, 5080, NULL, 2, 0, 1, 0, 7, 3, 1, 1, NULL),
-(78, 5, 150, 150, 154, 2400, 1, 1, 0, 0, 0, NULL, 3, 1, 1, NULL),
-(79, 5, 150, 150, 154, 2400, NULL, 1, 2, 0, 0, NULL, 3, 1, 1, NULL),
-(80, 5, 150, 150, 154, 2400, NULL, 1, 0, 2, 0, NULL, 3, 1, 1, NULL),
-(86, 15, 150, 150, 154, 2400, NULL, 1, 1, 0, 0, NULL, NULL, NULL, NULL, NULL),
-(99, 15, 150, 150, 154, 2540, 1, 2, 0, 0, 0, NULL, NULL, NULL, NULL, NULL),
-(100, 6, 300, 300, 154, 2400, 2, 1, 0, 0, 0, NULL, NULL, NULL, NULL, NULL),
-(101, 6, 300, 300, 154, 2400, 2, 1, 0, 0, 0, NULL, NULL, NULL, NULL, NULL),
-(102, 6, 300, 300, 154, 2540, NULL, 2, 0, 1, 0, NULL, NULL, NULL, NULL, NULL),
-(103, 39, 300, 250, 154, 2400, 1, 1, 0, 0, 0, NULL, 12, 2, 1, NULL),
-(104, 39, 150, 300, 154, 2400, 2, 1, 0, 0, 0, NULL, 12, 2, 1, NULL),
-(105, 39, 150, 250, 154, 2400, 3, 1, 0, 0, 0, NULL, 12, 2, 1, NULL),
-(106, 39, 300, 300, 154, 2400, 4, 1, 0, 0, 0, NULL, 12, 2, 1, NULL);
+INSERT INTO `form` (`id`, `label_id`, `width`, `height`, `lpi`, `dpi`, `pantone_id`, `photo_output_id`, `combination_id`, `envelope_id`, `polymer_id`, `ready`, `form_defect_id`) VALUES
+(53, NULL, 150, 150, 154, 5080, 1, 2, 4, 10, 1, 1, NULL),
+(54, NULL, 150, 150, 154, 5080, 2, 2, 4, 10, 1, 1, NULL),
+(55, NULL, 150, 150, 154, 5080, 3, 2, 4, 10, 1, 1, NULL),
+(56, NULL, 150, 150, 154, 5080, 4, 2, 4, 10, 1, 1, NULL),
+(57, NULL, 150, 150, 154, 5080, 9, 2, 4, 10, 1, 1, NULL),
+(58, NULL, 150, 150, 154, 5080, NULL, 2, 4, 10, 1, 1, NULL),
+(59, NULL, 150, 150, 154, 5080, NULL, 2, 4, 10, 1, 1, NULL),
+(60, 1, 150, 150, 154, 2540, 1, 2, NULL, 11, 1, 1, NULL),
+(61, 1, 150, 150, 154, 2540, 3, 2, NULL, 11, 1, 1, NULL),
+(62, 1, 150, 150, 154, 2540, 10, 2, NULL, 11, 1, 1, NULL),
+(71, NULL, 143, 145, 154, 5080, 1, 2, 7, 3, 1, 1, NULL),
+(72, NULL, 143, 145, 154, 5080, 4, 2, 7, 3, 1, 1, NULL),
+(73, NULL, 143, 145, 154, 5080, NULL, 2, 7, 3, 1, 1, NULL),
+(74, NULL, 143, 145, 154, 5080, NULL, 2, 7, 3, 1, 1, NULL),
+(75, NULL, 143, 145, 154, 5080, NULL, 2, 7, 3, 1, 1, NULL),
+(78, 5, 150, 150, 154, 2400, 1, 1, NULL, 3, 1, 1, NULL),
+(79, 5, 150, 150, 154, 2400, NULL, 1, NULL, 3, 1, 1, NULL),
+(80, 5, 150, 150, 154, 2400, NULL, 1, NULL, 3, 1, 1, NULL),
+(86, 15, 150, 150, 154, 2400, NULL, 1, NULL, NULL, NULL, NULL, NULL),
+(99, 15, 150, 150, 154, 2540, 1, 2, NULL, NULL, NULL, NULL, NULL),
+(100, 6, 300, 300, 154, 2400, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(101, 6, 300, 300, 154, 2400, 2, 1, NULL, NULL, NULL, NULL, NULL),
+(102, 6, 300, 300, 154, 2540, NULL, 2, NULL, NULL, NULL, NULL, NULL),
+(103, 39, 300, 250, 154, 2400, 1, 1, NULL, 12, 2, 1, NULL),
+(104, 39, 150, 300, 154, 2400, 2, 1, NULL, 12, 2, 1, NULL),
+(105, 39, 150, 250, 154, 2400, 3, 1, NULL, 12, 2, 1, NULL),
+(106, 39, 300, 300, 154, 2400, 4, 1, NULL, 12, 2, 1, NULL),
+(108, 42, 150, 150, 154, 2400, NULL, 1, NULL, NULL, NULL, NULL, NULL),
+(109, 42, 150, 150, 154, 2540, 2, 2, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -619,7 +607,6 @@ INSERT INTO `form_defect` (`id`, `name`) VALUES
 CREATE TABLE `form_order_history` (
   `id` int NOT NULL,
   `order_id` int DEFAULT NULL,
-  `combination_print_order_id` int DEFAULT NULL,
   `form_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -627,24 +614,24 @@ CREATE TABLE `form_order_history` (
 -- Дамп данных таблицы `form_order_history`
 --
 
-INSERT INTO `form_order_history` (`id`, `order_id`, `combination_print_order_id`, `form_id`) VALUES
-(1, NULL, 11, 53),
-(2, NULL, 11, 54),
-(3, NULL, 11, 55),
-(4, NULL, 11, 56),
-(5, NULL, 11, 57),
-(6, NULL, 11, 58),
-(7, NULL, 11, 59),
-(8, 1, NULL, 60),
-(9, 1, NULL, 61),
-(10, 1, NULL, 62),
-(11, 31, NULL, 78),
-(12, 31, NULL, 79),
-(13, 31, NULL, 80),
-(14, 35, NULL, 103),
-(15, 35, NULL, 104),
-(16, 35, NULL, 105),
-(17, 35, NULL, 106);
+INSERT INTO `form_order_history` (`id`, `order_id`, `form_id`) VALUES
+(1, NULL, 53),
+(2, NULL, 54),
+(3, NULL, 55),
+(4, NULL, 56),
+(5, NULL, 57),
+(6, NULL, 58),
+(7, NULL, 59),
+(8, 1, 60),
+(9, 1, 61),
+(10, 1, 62),
+(11, 31, 78),
+(12, 31, 79),
+(13, 31, 80),
+(14, 35, 103),
+(15, 35, 104),
+(16, 35, 105),
+(17, 35, 106);
 
 -- --------------------------------------------------------
 
@@ -694,8 +681,8 @@ CREATE TABLE `label` (
   `variable` int NOT NULL DEFAULT '0',
   `variable_paint_count` float DEFAULT NULL,
   `stencil` int NOT NULL DEFAULT '0',
-  `image` varchar(50) DEFAULT NULL,
-  `image_crop` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `image_crop` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `output_label_id` int NOT NULL DEFAULT '1',
   `background_id` int DEFAULT '1',
   `orientation` int NOT NULL DEFAULT '0',
@@ -714,7 +701,7 @@ CREATE TABLE `label` (
 --
 
 INSERT INTO `label` (`id`, `parent_label`, `name`, `designer_note`, `manager_note`, `prepress_note`, `date_of_create`, `date_of_design`, `date_of_prepress`, `customer_id`, `status_id`, `pants_id`, `foil_id`, `designer_login`, `prepress_login`, `varnish_id`, `laminate`, `print_on_glue`, `variable`, `variable_paint_count`, `stencil`, `image`, `image_crop`, `output_label_id`, `background_id`, `orientation`, `image_extended`, `design_file`, `prepress_design_file`, `color_count`, `laboratory_login`, `date_of_flexformready`, `laboratory_note`, `takeoff_flash`) VALUES
-(1, NULL, 'Этикетка заказа номер 1', 'примечание вот такое на', 'badge badge-successbadge badge-success', 'примечание вот такое напримечание вот такое напримечание вот такое напримечание вот такое на', '2022-05-18 14:55:03', '2022-06-06 16:12:15', '2022-06-06 16:13:56', 1, 10, 1, 1, 'Natasha', 'Alex', 1, 1, 0, 1, NULL, 0, 'label/1.jpg', 'label/1_crop.jpg', 2, 1, 0, 'label/1_extended.jpg', 'label/1_design.cdr', 'label/1.cdr', 0, NULL, '2022-06-17 10:28:03', '', 0),
+(1, NULL, 'Этикетка заказа номер 1', 'примечание вот такое на', 'badge badge-successbadge badge-success', 'примечание вот такое напримечание вот такое напримечание вот такое напримечание вот такое на', '2022-05-18 14:55:03', '2022-06-06 16:12:15', '2022-06-06 16:13:56', 1, 10, 1, 1, 'Natasha', 'Alex', 1, 1, 0, 1, 0.005, 0, 'label/1.jpg', 'label/1_crop.jpg', 2, 1, 0, 'label/1_extended.jpg', 'label/1_design.cdr', 'label/1.cdr', 0, NULL, '2022-06-17 10:28:03', '', 0),
 (2, NULL, 'Этикетка заказа', 'по ручьям', '', 'text', '2022-05-18 14:55:03', NULL, NULL, 2, 7, 1, 1, 'Masha', 'Alex', 2, 1, 0, 1, NULL, 1, 'label/2.jpg', 'label/2_crop.jpg', 2, 1, 0, 'label/2_extended.jpg', 'label/2_design.cdr', 'label/2.csv', 0, NULL, NULL, NULL, 0),
 (3, NULL, 'Ведро 12л', 'примечание вот такое на', '', '', '2022-05-18 14:55:03', NULL, NULL, 3, 1, 3, 1, 'Natasha', '', 0, 1, 0, 0, NULL, 0, '/web/label/3.jpg', NULL, 1, 1, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0),
 (4, NULL, 'Сосиски говяжие', 'примечание вот такое', '', 'text', '2022-05-18 14:55:03', '2022-06-02 14:50:54', '2022-06-06 11:43:36', 4, 7, 4, 1, 'Masha', 'Alex', 0, 1, 0, 0, NULL, 0, 'label/4.jpg', 'label/4_crop.jpg', 3, 1, 0, NULL, 'label/4_design.cdr', 'label/4.csv', 0, NULL, NULL, NULL, 0),
@@ -750,7 +737,10 @@ INSERT INTO `label` (`id`, `parent_label`, `name`, `designer_note`, `manager_not
 (36, 35, 'Казахстан Таз 15 л.  ПИЩЕВОЙ', 'text', 'Jura created fuck mate', '', '2022-06-17 09:01:38', '2022-06-06 12:35:52', NULL, 1, 1, 2, 1, 'Masha', 'Alex', 0, 0, 0, 0, NULL, 0, 'label/9.jpg', 'label/9_crop.jpg', 1, 1, 0, 'label/9_extended.jpg', 'label/9_design.jpg', NULL, 0, NULL, NULL, NULL, 0),
 (37, NULL, 'пустышка 80*120', '', '', NULL, '2022-06-17 09:03:44', NULL, NULL, 1, 11, 1, 1, NULL, NULL, 0, 0, 0, 0, NULL, 0, NULL, NULL, 1, 1, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0),
 (38, NULL, 'Колбаса', '', '', NULL, '2022-06-17 09:09:00', NULL, NULL, 1, 1, 2, 1, NULL, NULL, 1, 0, 0, 1, NULL, 0, NULL, NULL, 1, 2, 1, NULL, NULL, NULL, 4, NULL, NULL, NULL, 0),
-(39, NULL, 'Smart ENGINE 1800 Вт (ромбическая)', '', 'Создать дизайн-макет на основе исходника в CMYK. Без тиснения. Имитация золота и серебра. Материал - белый полипропилен. Лак сплошной глянцевый.', '', '2022-08-09 19:11:10', '2022-08-09 19:23:30', '2022-08-09 19:58:16', 9, 10, 3, 1, 'Masha', 'Alex', 2, 0, 0, 0, NULL, 0, 'label/39.jpg', 'label/39_crop.jpg', 4, 1, 2, NULL, 'label/39_design.cdr', 'label/39_prepress.zip', 4, 'Ivan', '2022-08-09 20:00:08', '', 1);
+(39, NULL, 'Smart ENGINE 1800 Вт (ромбическая)', '', 'Создать дизайн-макет на основе исходника в CMYK. Без тиснения. Имитация золота и серебра. Материал - белый полипропилен. Лак сплошной глянцевый.', '', '2022-08-09 19:11:10', '2022-08-09 19:23:30', '2022-08-09 19:58:16', 9, 10, 3, 1, 'Masha', 'Alex', 2, 0, 0, 0, NULL, 0, 'label/39.jpg', 'label/39_crop.jpg', 4, 1, 2, NULL, 'label/39_design.cdr', 'label/39_prepress.zip', 4, 'Ivan', '2022-08-09 20:00:08', '', 1),
+(40, 39, 'Smart ENGINE 1800 Вт (ромбическая)', '', 'Создать дизайн-макет на основе исходника в CMYK. Без тиснения. Имитация золота и серебра. Материал - белый полипропилен. Лак сплошной глянцевый.', '', '2022-08-09 19:11:10', '2022-08-09 19:23:30', '2022-08-09 19:58:16', 9, 1, 3, 1, 'Masha', 'Alex', 2, 0, 1, 1, NULL, 0, 'label/39.jpg', 'label/39_crop.jpg', 1, 1, 1, NULL, 'label/39_design.cdr', 'label/39_prepress.zip', 4, 'Ivan', '2022-08-09 20:00:08', '', 1),
+(41, 36, 'Казахстан Таз 12 л.', 'text', '', '', '2022-08-19 11:06:34', NULL, NULL, 1, 1, 2, 1, 'Masha', NULL, 1, 0, 0, 0, NULL, 1, 'label/9.jpg', 'label/9_crop.jpg', 2, 1, 0, 'label/9_extended.jpg', 'label/9_design.jpg', NULL, 0, NULL, NULL, NULL, 0),
+(42, 37, 'пустышка 80*120', 'bla bla bla bla', '', 'bla bla bla', '2022-08-19 13:07:16', '2022-08-19 13:50:28', '2022-08-19 15:07:09', 1, 9, 1, 1, 'Masha', 'Alex', 0, 0, 0, 0, NULL, 0, 'label/42.jpg', 'label/42_crop.jpg', 1, 1, 0, 'label/42_extended.jpg', 'label/42_design.cdr', 'label/42_prepress.zip', 0, 'Ivan', NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -832,7 +822,6 @@ INSERT INTO `mashine_pantone` (`id`, `pantone_id`, `mashine_id`) VALUES
 (22, 15, 3),
 (23, 16, 4),
 (24, 16, 5),
-(25, 16, 6),
 (26, 1, 1),
 (27, 1, 3);
 
@@ -889,9 +878,9 @@ CREATE TABLE `material` (
 
 INSERT INTO `material` (`id`, `date_of_create`, `material_group_id`, `name`, `material_provider_id`, `short_name`, `status`, `price_rub`, `price_rub_discount`, `price_euro`, `price_euro_discount`, `density`, `prompt`, `material_id_from_provider`) VALUES
 (1, '2022-07-06 06:34:39', 1, 'MC FSC S2045M-BG40BR (MC PRIMECOAT S2045N)', 1, 'полуглянец/акриловый клей', 0, 47.6, 40.2, 0.69, 0.45, 120, '', 103),
-(2, '2022-07-06 06:34:39', 1, 'MC PRIMECOAT S2000N-BG40BR ', 2, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, '2022-07-06 06:34:39', 1, 'MC PRIMECOAT S2000N-BG40BR ', 2, NULL, 1, NULL, NULL, 0.5, NULL, NULL, NULL, NULL),
 (3, '2022-06-01 06:34:39', 6, 'Фольга серебро', 3, NULL, 1, NULL, NULL, 0.5, NULL, NULL, NULL, NULL),
-(4, '2022-07-06 06:34:39', 2, 'Термобумага', 2, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, '2022-07-06 06:34:39', 2, 'Термобумага', 2, NULL, 0, NULL, NULL, 1.5, NULL, NULL, NULL, NULL),
 (5, '2022-07-08 05:36:31', 1, '(1) MC PRIMECOAT S2045N-BG40BR', 1, 'пг 2045', 1, 42.3, 41.8, 0.4, 0.35, 141, 'ПОЛУГЛЯНЕЦ , КАУЧУКОВЫЙ КЛЕЙ , 2045 .', 584),
 (6, '2022-08-15 09:47:36', 8, 'Ламинация', 2, 'Ламинация', 1, NULL, NULL, 0.7, 0.5, NULL, '', NULL);
 
@@ -1019,31 +1008,28 @@ INSERT INTO `mixed_pantone` (`id`, `pantone_id`, `component_pantone_id`, `weight
 
 CREATE TABLE `order` (
   `id` int NOT NULL,
-  `date_of_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status_id` int DEFAULT NULL,
+  `date_of_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status_id` int DEFAULT '1',
   `label_id` int DEFAULT NULL,
-  `date_of_sale` timestamp NULL DEFAULT NULL,
-  `date_of_print_begin` timestamp NULL DEFAULT NULL,
-  `date_of_print_end` timestamp NULL DEFAULT NULL,
+  `date_of_sale` datetime DEFAULT NULL,
+  `date_of_print_begin` datetime DEFAULT NULL,
+  `date_of_print_end` datetime DEFAULT NULL,
   `date_of_variable_print_begin` datetime DEFAULT NULL,
   `date_of_variable_print_end` datetime DEFAULT NULL,
-  `date_of_packing_begin` timestamp NULL DEFAULT NULL,
-  `date_of_packing_end` timestamp NULL DEFAULT NULL,
-  `date_of_rewind_begin` timestamp NULL DEFAULT NULL,
-  `date_of_rewind_end` timestamp NULL DEFAULT NULL,
+  `date_of_packing_begin` datetime DEFAULT NULL,
+  `date_of_packing_end` datetime DEFAULT NULL,
+  `date_of_rewind_begin` datetime DEFAULT NULL,
+  `date_of_rewind_end` datetime DEFAULT NULL,
   `mashine_id` int DEFAULT NULL,
   `plan_circulation` int DEFAULT NULL,
   `actual_circulation` int DEFAULT NULL,
-  `trial_circulation` int NOT NULL DEFAULT '0',
   `sending` int DEFAULT NULL,
   `material_id` int DEFAULT NULL,
   `printer_login` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `order_price` float DEFAULT NULL,
-  `order_price_with_tax` float DEFAULT NULL,
-  `delivery_price` float DEFAULT NULL,
-  `pants_price` int DEFAULT NULL,
-  `label_price` float DEFAULT NULL,
-  `label_price_with_tax` float DEFAULT NULL,
+  `order_price` double DEFAULT NULL,
+  `order_price_with_tax` double DEFAULT NULL,
+  `label_price` double DEFAULT NULL,
+  `label_price_with_tax` double DEFAULT NULL,
   `rewinder_login` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `packer_login` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `rewinder_note` text,
@@ -1052,7 +1038,6 @@ CREATE TABLE `order` (
   `tech_note` text,
   `sleeve_id` int DEFAULT NULL,
   `winding_id` int DEFAULT NULL,
-  `diameter_roll` int DEFAULT NULL,
   `label_on_roll` int DEFAULT NULL,
   `cut_edge` int NOT NULL DEFAULT '0',
   `stretch` int NOT NULL DEFAULT '0'
@@ -1062,39 +1047,42 @@ CREATE TABLE `order` (
 -- Дамп данных таблицы `order`
 --
 
-INSERT INTO `order` (`id`, `date_of_create`, `status_id`, `label_id`, `date_of_sale`, `date_of_print_begin`, `date_of_print_end`, `date_of_variable_print_begin`, `date_of_variable_print_end`, `date_of_packing_begin`, `date_of_packing_end`, `date_of_rewind_begin`, `date_of_rewind_end`, `mashine_id`, `plan_circulation`, `actual_circulation`, `trial_circulation`, `sending`, `material_id`, `printer_login`, `order_price`, `order_price_with_tax`, `delivery_price`, `pants_price`, `label_price`, `label_price_with_tax`, `rewinder_login`, `packer_login`, `rewinder_note`, `printer_note`, `manager_note`, `tech_note`, `sleeve_id`, `winding_id`, `diameter_roll`, `label_on_roll`, `cut_edge`, `stretch`) VALUES
-(1, '2022-05-16 21:00:00', 8, 1, '2022-08-08 12:00:00', '2022-06-24 05:59:17', '2022-06-24 06:03:24', NULL, NULL, '2022-06-24 06:13:31', '2022-06-24 06:14:12', '2022-06-24 06:04:02', '2022-06-24 06:12:58', 1, 10000, 10000, 100, NULL, 2, 'Maksim', NULL, NULL, NULL, NULL, 0.78, 0.82, 'Ilnur', 'Albert', 'test', '', NULL, '', 1, 1, NULL, NULL, 0, 1),
-(2, '2022-05-17 21:00:00', 1, 4, '2022-06-13 17:10:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, 0, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(3, '2022-05-17 21:00:00', 8, 7, NULL, '2022-06-24 06:27:00', '2022-06-24 06:43:40', NULL, NULL, '2022-06-24 06:47:33', '2022-06-24 06:49:30', '2022-06-24 06:44:30', '2022-06-24 06:47:09', 3, 100000, 100000, 0, NULL, NULL, 'Maksim', NULL, NULL, NULL, NULL, 0.12, 0.15, 'Ilnur', 'Albert', NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(4, '2022-05-17 21:00:00', 8, 9, NULL, '2022-06-24 06:27:00', '2022-06-24 06:43:40', NULL, NULL, '2022-06-24 06:47:53', '2022-06-24 06:48:33', '2022-06-24 06:44:30', '2022-06-24 06:46:35', 3, 100000, 100000, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.1, 1.3, 'Ilnur', 'Albert', NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(5, '2022-05-17 21:00:00', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(6, '2022-05-18 09:36:24', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(8, '2022-05-18 09:52:17', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(10, '2022-05-18 09:53:02', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(11, '2022-05-18 09:54:39', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(12, '2022-05-18 09:56:22', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(13, '2022-05-18 09:59:11', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(14, '2022-05-18 10:00:08', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(16, '2022-05-18 10:09:19', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(17, '2022-05-18 10:10:08', 7, 4, '2022-05-31 10:35:45', '2022-07-01 07:23:17', '2022-07-02 07:23:17', NULL, NULL, '2022-07-08 07:27:34', NULL, '2022-07-03 07:23:17', '2022-07-04 07:23:17', 2, 560000, 560000, 0, 50000, 2, 'Maksim', NULL, NULL, NULL, NULL, 0.25, 0.28, 'Ilnur', 'Albert', NULL, NULL, NULL, NULL, 0, 0, 250, 5000, 1, 1),
-(18, '2022-05-18 10:44:17', 1, 3, '2022-05-31 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(19, '2022-05-18 11:26:38', 1, 3, '2022-05-26 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100000, NULL, 0, NULL, 101, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(20, '2022-05-18 11:27:33', 1, 4, '2022-05-28 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100000, NULL, 0, NULL, 101, NULL, NULL, NULL, NULL, NULL, 0.12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(21, '2022-05-30 09:44:52', 1, 16, '2022-06-29 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100000, NULL, 0, 100000, 1, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', NULL, NULL, NULL, 1, 3, 50, 1000, 0, 0),
-(22, '2022-05-30 12:49:02', 1, 15, '2022-06-23 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 100000, NULL, 0, 100000, 1, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', NULL, NULL, NULL, 1, 1, 50, 1000, 0, 0),
-(23, '2022-05-30 16:42:00', 1, 13, '2022-06-28 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 100000, NULL, 0, 100000, 1, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', NULL, NULL, NULL, 1, 2, 50, 1000, 0, 0),
-(24, '2022-05-30 16:45:27', 1, 18, '2022-06-28 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 100000, NULL, 0, 100000, 1, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', NULL, NULL, NULL, 2, 1, 50, 1000, 0, 0),
-(25, '2022-05-30 16:47:47', 1, 17, '2022-06-28 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 100000, NULL, 0, 100000, 1, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', NULL, NULL, NULL, 3, 1, 50, 1000, 0, 0),
-(26, '2022-05-30 16:49:55', 1, 18, '2022-06-28 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 100000, NULL, 1, 100000, 2, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', NULL, NULL, NULL, 2, 2, 50, 1000, 0, 0),
-(27, '2022-05-30 16:51:36', 1, 19, '2022-06-07 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 100000, NULL, 0, 100000, 2, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', NULL, NULL, NULL, 2, 2, 50, 1000, 0, 1),
-(28, '2022-05-31 07:11:30', 1, 22, '2022-06-29 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 100000, NULL, 0, 100000, 1, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', '', NULL, NULL, 1, 1, 50, 1000, 0, 0),
-(29, '2022-06-10 12:39:03', 1, 34, '2022-06-21 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100000, NULL, 0, 100000, 1, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', '', NULL, NULL, 1, 1, 50, 1000, 0, 1),
-(30, '2022-06-14 18:23:36', 1, 35, '2022-06-21 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 100000, NULL, 1, 100000, 2, NULL, 12000, 14400, NULL, NULL, 0.12, 0.144, NULL, NULL, '', '', NULL, NULL, 3, 1, 50, 1000, 1, 0),
-(31, '2022-06-15 08:27:11', 8, 5, '2022-06-29 21:00:00', '2022-06-15 17:56:44', '2022-06-20 07:08:06', NULL, NULL, '2022-06-20 10:53:39', '2022-06-22 17:04:39', '2022-06-20 07:47:53', '2022-06-20 10:35:41', 3, 100000, 100000, 0, 100000, 1, 'Maksim', 12000, 14400, NULL, NULL, 0.12, 0.144, 'Ilnur', 'Albert', '', '', NULL, NULL, 1, 1, 50, 1000, 0, 0),
-(32, '2022-06-17 06:01:38', 1, 36, '2022-06-29 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1000, NULL, 0, 1000, 1, NULL, 120, 144, NULL, NULL, 0.12, 0.144, NULL, NULL, 'Перематывать осторожно', 'Печатать внимательно', NULL, NULL, 1, 1, 100, 1000, 0, 0),
-(33, '2022-06-17 06:03:44', 1, 37, '2022-06-28 21:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1000, NULL, 0, 1000, 2, NULL, 120, 144, NULL, NULL, 0.12, 0.144, NULL, NULL, '', '', NULL, NULL, 2, 1, 100, 1000, 0, 0),
-(34, '2022-06-28 08:27:11', 4, 5, '2022-06-29 21:00:00', NULL, NULL, '2022-08-11 11:39:23', '2022-08-11 12:41:31', NULL, NULL, NULL, NULL, 3, 100000, 100000, 0, 100000, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', '', NULL, '', 1, 1, 50, 1000, 0, 0),
-(35, '2022-08-09 16:35:57', 8, 39, '2022-08-18 21:00:00', '2022-08-09 17:01:38', '2022-08-10 07:29:21', NULL, NULL, '2022-08-10 07:32:17', '2022-08-10 07:33:38', '2022-08-10 07:30:08', '2022-08-10 07:31:42', 3, 225000, 225000, 0, 225000, 2, 'Maksim', 270000, 324000, NULL, NULL, 1.2, 1.44, 'Ilnur', 'Albert', '', '', '', '', 2, 4, NULL, 5000, 1, 1);
+INSERT INTO `order` (`id`, `date_of_create`, `status_id`, `label_id`, `date_of_sale`, `date_of_print_begin`, `date_of_print_end`, `date_of_variable_print_begin`, `date_of_variable_print_end`, `date_of_packing_begin`, `date_of_packing_end`, `date_of_rewind_begin`, `date_of_rewind_end`, `mashine_id`, `plan_circulation`, `actual_circulation`, `sending`, `material_id`, `printer_login`, `order_price`, `order_price_with_tax`, `label_price`, `label_price_with_tax`, `rewinder_login`, `packer_login`, `rewinder_note`, `printer_note`, `manager_note`, `tech_note`, `sleeve_id`, `winding_id`, `label_on_roll`, `cut_edge`, `stretch`) VALUES
+(1, '2022-05-17 00:00:00', 8, 1, '2022-08-08 15:00:00', '2022-06-24 08:59:17', '2022-06-24 09:03:24', NULL, NULL, '2022-06-24 09:13:31', '2022-06-24 09:14:12', '2022-06-24 09:04:02', '2022-06-24 09:12:58', 1, 10000, 10000, NULL, 2, 'Maksim', NULL, NULL, 0.7799999713897705, 0.8199999928474426, 'Ilnur', 'Albert', 'test', '', NULL, '', 1, 1, NULL, 0, 1),
+(2, '2022-05-18 00:00:00', 1, 4, '2022-06-13 20:10:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(3, '2022-05-18 00:00:00', 2, 7, NULL, '2022-06-24 09:27:00', '2022-06-24 09:43:40', NULL, NULL, '2022-06-24 09:47:33', '2022-06-24 09:49:30', '2022-06-24 09:44:30', '2022-06-24 09:47:09', 1, 100000, 100000, NULL, NULL, 'Maksim', NULL, NULL, 0.11999999731779099, 0.15000000596046448, 'Ilnur', 'Albert', NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(4, '2022-05-18 00:00:00', 8, 9, NULL, '2022-06-24 09:27:00', '2022-06-24 09:43:40', NULL, NULL, '2022-06-24 09:47:53', '2022-06-24 09:48:33', '2022-06-24 09:44:30', '2022-06-24 09:46:35', 3, 100000, 100000, NULL, NULL, NULL, NULL, NULL, 1.100000023841858, 1.2999999523162842, 'Ilnur', 'Albert', NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(5, '2022-05-18 00:00:00', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(6, '2022-05-18 12:36:24', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(8, '2022-05-18 12:52:17', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(10, '2022-05-18 12:53:02', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(11, '2022-05-18 12:54:39', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(12, '2022-05-18 12:56:22', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(13, '2022-05-18 12:59:11', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(14, '2022-05-18 13:00:08', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(16, '2022-05-18 13:09:19', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(17, '2022-05-18 13:10:08', 7, 4, '2022-05-31 13:35:45', '2022-07-01 10:23:17', '2022-07-02 10:23:17', NULL, NULL, '2022-07-08 10:27:34', NULL, '2022-07-03 10:23:17', '2022-07-04 10:23:17', 2, 560000, 560000, 50000, 2, 'Maksim', NULL, NULL, 0.25, 0.2800000011920929, 'Ilnur', 'Albert', NULL, NULL, NULL, NULL, 0, 0, 5000, 1, 1),
+(18, '2022-05-18 13:44:17', 1, 3, '2022-06-01 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(19, '2022-05-18 14:26:38', 1, 3, '2022-05-27 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100000, NULL, NULL, 101, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(20, '2022-05-18 14:27:33', 1, 4, '2022-05-29 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100000, NULL, NULL, 101, NULL, NULL, NULL, 0.11999999731779099, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0),
+(21, '2022-05-30 12:44:52', 1, 16, '2022-06-30 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100000, NULL, 100000, 1, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', NULL, NULL, NULL, 1, 3, 1000, 0, 0),
+(22, '2022-05-30 15:49:02', 1, 15, '2022-06-24 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 100000, NULL, 100000, 1, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', NULL, NULL, NULL, 1, 1, 1000, 0, 0),
+(23, '2022-05-30 19:42:00', 1, 13, '2022-06-29 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 100000, NULL, 100000, 1, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', NULL, NULL, NULL, 1, 2, 1000, 0, 0),
+(24, '2022-05-30 19:45:27', 1, 18, '2022-06-29 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 100000, NULL, 100000, 1, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', NULL, NULL, NULL, 2, 1, 1000, 0, 0),
+(25, '2022-05-30 19:47:47', 1, 17, '2022-06-29 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 100000, NULL, 100000, 1, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', NULL, NULL, NULL, 3, 1, 1000, 0, 0),
+(26, '2022-05-30 19:49:55', 1, 18, '2022-06-29 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 100000, NULL, 100000, 2, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', NULL, NULL, NULL, 2, 2, 1000, 0, 0),
+(27, '2022-05-30 19:51:36', 1, 19, '2022-06-08 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 100000, NULL, 100000, 2, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', NULL, NULL, NULL, 2, 2, 1000, 0, 1),
+(28, '2022-05-31 10:11:30', 1, 22, '2022-06-30 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 100000, NULL, 100000, 1, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', '', NULL, NULL, 1, 1, 1000, 0, 0),
+(29, '2022-06-10 15:39:03', 1, 34, '2022-06-22 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100000, NULL, 100000, 1, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', '', NULL, NULL, 1, 1, 1000, 0, 1),
+(30, '2022-06-14 21:23:36', 1, 35, '2022-06-22 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 100000, NULL, 100000, 2, NULL, 12000, 14400, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', '', NULL, NULL, 3, 1, 1000, 1, 0),
+(31, '2022-06-15 11:27:11', 8, 5, '2022-06-30 00:00:00', '2022-06-15 20:56:44', '2022-06-20 10:08:06', NULL, NULL, '2022-06-20 13:53:39', '2022-06-22 20:04:39', '2022-06-20 10:47:53', '2022-06-20 13:35:41', 3, 100000, 100000, 100000, 1, 'Maksim', 12000, 14400, 0.11999999731779099, 0.14399999380111694, 'Ilnur', 'Albert', '', '', NULL, NULL, 1, 1, 1000, 0, 0),
+(32, '2022-06-17 09:01:38', 1, 36, '2022-06-30 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1000, NULL, 1000, 1, NULL, 120, 144, 0.11999999731779099, 0.14399999380111694, NULL, NULL, 'Перематывать осторожно', 'Печатать внимательно', NULL, NULL, 1, 1, 1000, 0, 0),
+(33, '2022-06-17 09:03:44', 1, 37, '2022-06-29 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1000, NULL, 1000, 2, NULL, 120, 144, 0.11999999731779099, 0.14399999380111694, NULL, NULL, '', '', NULL, NULL, 2, 1, 1000, 0, 0),
+(34, '2022-06-28 11:27:11', 4, 5, '2022-06-30 00:00:00', NULL, NULL, '2022-08-11 11:39:23', '2022-08-11 12:41:31', NULL, NULL, NULL, NULL, 3, 100000, 100000, 100000, 1, NULL, NULL, NULL, NULL, NULL, '', '', '', '', NULL, '', 1, 1, 1000, 0, 0),
+(35, '2022-08-09 19:35:57', 8, 39, '2022-08-19 00:00:00', '2022-08-09 20:01:38', '2022-08-10 10:29:21', NULL, NULL, '2022-08-10 10:32:17', '2022-08-10 10:33:38', '2022-08-10 10:30:08', '2022-08-10 10:31:42', 3, 225000, 225000, 225000, 2, 'Maksim', 270000, 324000, 1.2000000476837158, 1.440000057220459, 'Ilnur', 'Albert', '', '', '', '', 2, 4, 5000, 1, 1),
+(36, '2022-08-19 13:01:28', 1, 37, '2022-08-27 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100000, NULL, 100000, 2, '', 12000, 14400, 0.12, 0.144, '', '', '', '', '', '', 1, 1, 5000, 0, 1),
+(37, '2022-08-19 13:03:31', 1, 37, '2022-08-27 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100000, NULL, 100000, 2, '', 12000, 14400, 0.12, 0.144, '', '', '', '', '', '', 1, 2, 5000, 0, 0),
+(38, '2022-08-19 13:07:16', 1, 42, '2022-08-27 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100000, NULL, 100000, 5, '', 12000, 14400, 0.12, 0.144, '', '', '', '', '', '', 1, 1, 1000, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1476,17 +1464,17 @@ INSERT INTO `paper_warehouse` (`id`, `date_of_create`, `material_id`, `length`, 
 (101, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
 (102, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
 (103, '2022-08-01 10:38:46', 5, 2000, 200, NULL),
-(104, '2022-08-01 10:38:46', 5, -500, 200, NULL),
+(104, '2022-08-01 10:38:46', 5, 500, 200, NULL),
 (105, '2022-08-01 10:38:46', 5, 0, 200, NULL),
 (106, '2022-08-01 10:38:46', 5, 0, 200, 2),
 (107, '2022-08-15 15:36:37', 5, 500, 100, 1),
 (108, '2022-08-15 15:36:37', 5, 0, 100, NULL),
 (109, '2022-08-15 15:44:39', 5, 100, 60, NULL),
 (110, '2022-08-15 15:44:39', 5, 500, 60, NULL),
-(111, '2022-08-15 15:48:18', 5, -9900, 100, NULL),
+(111, '2022-08-15 15:48:18', 5, 9900, 100, NULL),
 (112, '2022-08-15 15:48:18', 5, 2000, 100, NULL),
 (113, '2022-08-15 15:49:59', 5, 50, 50, NULL),
-(114, '2022-08-15 15:49:59', 5, -10000, 50, NULL),
+(114, '2022-08-15 15:49:59', 5, 10000, 50, NULL),
 (115, '2022-08-15 15:52:04', 5, 20000, 25, NULL),
 (116, '2022-08-15 15:52:04', 5, 20000, 25, NULL);
 
@@ -1567,7 +1555,8 @@ CREATE TABLE `rack` (
 
 INSERT INTO `rack` (`id`, `name`, `warehouse_id`) VALUES
 (1, 'Gallus', 1),
-(2, 'G340', 2);
+(2, 'G340', 2),
+(3, 'Лаборатория 1', 6);
 
 -- --------------------------------------------------------
 
@@ -1630,7 +1619,9 @@ CREATE TABLE `shelf` (
 
 INSERT INTO `shelf` (`id`, `rack_id`) VALUES
 (1, 2),
-(2, 1);
+(2, 1),
+(3, 3),
+(4, 3);
 
 -- --------------------------------------------------------
 
@@ -1642,19 +1633,23 @@ CREATE TABLE `shipment` (
   `id` int NOT NULL,
   `manager_login` varchar(50) NOT NULL,
   `date_of_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_of_close` datetime DEFAULT NULL,
   `date_of_send` datetime DEFAULT NULL,
-  `status_id` int NOT NULL DEFAULT '0'
+  `status_id` int NOT NULL DEFAULT '0',
+  `transport_id` int DEFAULT NULL,
+  `gasoline_cost` double DEFAULT NULL,
+  `cost` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `shipment`
 --
 
-INSERT INTO `shipment` (`id`, `manager_login`, `date_of_create`, `date_of_send`, `status_id`) VALUES
-(1, 'Jura', '2022-06-20 20:56:31', '2022-06-30 09:42:22', 0),
-(2, 'Jura', '2022-06-22 12:59:26', '2022-06-01 00:00:00', 0),
-(3, 'Jura', '2022-06-22 14:34:51', '2022-06-02 00:00:00', 2),
-(4, 'Jura', '2022-08-10 10:36:49', '2022-08-19 00:00:00', 2);
+INSERT INTO `shipment` (`id`, `manager_login`, `date_of_create`, `date_of_close`, `date_of_send`, `status_id`, `transport_id`, `gasoline_cost`, `cost`) VALUES
+(1, 'Jura', '2022-06-20 20:56:31', NULL, '2022-06-30 09:42:22', 0, NULL, NULL, NULL),
+(2, 'Jura', '2022-06-22 12:59:26', NULL, '2022-06-01 00:00:00', 0, NULL, NULL, NULL),
+(3, 'Jura', '2022-06-22 14:34:51', NULL, '2022-06-02 00:00:00', 2, 2, 2500, 2000),
+(4, 'Jura', '2022-08-10 10:36:49', NULL, '2022-08-19 00:00:00', 2, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1955,7 +1950,8 @@ INSERT INTO `warehouse` (`id`, `name`) VALUES
 (2, 'Склад бумаги Gallus340'),
 (3, 'Теплый склад'),
 (4, 'Склад ЛКМ Gallus340'),
-(5, 'Склад ЛКМ Gallus');
+(5, 'Склад ЛКМ Gallus'),
+(6, 'Склад готовых форм лаборатория');
 
 -- --------------------------------------------------------
 
@@ -1997,6 +1993,12 @@ ALTER TABLE `background_label`
 -- Индексы таблицы `bank_transfer`
 --
 ALTER TABLE `bank_transfer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `business_trip_employee`
+--
+ALTER TABLE `business_trip_employee`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2045,18 +2047,6 @@ ALTER TABLE `combination`
 ALTER TABLE `combination_form`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `label_id` (`label_id`);
-
---
--- Индексы таблицы `combination_order`
---
-ALTER TABLE `combination_order`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `combination_print_order`
---
-ALTER TABLE `combination_print_order`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `customer`
@@ -2397,10 +2387,16 @@ ALTER TABLE `bank_transfer`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT для таблицы `business_trip_employee`
+--
+ALTER TABLE `business_trip_employee`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID', AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT для таблицы `calc_common_param`
 --
 ALTER TABLE `calc_common_param`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `calc_common_param_archive`
@@ -2418,7 +2414,7 @@ ALTER TABLE `calc_mashine_param`
 -- AUTO_INCREMENT для таблицы `calc_mashine_param_value`
 --
 ALTER TABLE `calc_mashine_param_value`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT для таблицы `calc_mashine_param_value_archive`
@@ -2430,25 +2426,13 @@ ALTER TABLE `calc_mashine_param_value_archive`
 -- AUTO_INCREMENT для таблицы `combination`
 --
 ALTER TABLE `combination`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `combination_form`
 --
 ALTER TABLE `combination_form`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT для таблицы `combination_order`
---
-ALTER TABLE `combination_order`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT для таблицы `combination_print_order`
---
-ALTER TABLE `combination_print_order`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT для таблицы `customer`
@@ -2496,7 +2480,7 @@ ALTER TABLE `foil`
 -- AUTO_INCREMENT для таблицы `form`
 --
 ALTER TABLE `form`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT для таблицы `form_defect`
@@ -2520,7 +2504,7 @@ ALTER TABLE `knife_kind`
 -- AUTO_INCREMENT для таблицы `label`
 --
 ALTER TABLE `label`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT для таблицы `mashine_pantone`
@@ -2568,7 +2552,7 @@ ALTER TABLE `mixed_pantone`
 -- AUTO_INCREMENT для таблицы `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT для таблицы `order_material`
@@ -2652,7 +2636,7 @@ ALTER TABLE `polymer_kind`
 -- AUTO_INCREMENT для таблицы `rack`
 --
 ALTER TABLE `rack`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID стеллажа', AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID стеллажа', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `region`
@@ -2670,7 +2654,7 @@ ALTER TABLE `shaft`
 -- AUTO_INCREMENT для таблицы `shelf`
 --
 ALTER TABLE `shelf`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID', AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `shipment`
@@ -2730,7 +2714,7 @@ ALTER TABLE `upload_paper`
 -- AUTO_INCREMENT для таблицы `warehouse`
 --
 ALTER TABLE `warehouse`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `winding`

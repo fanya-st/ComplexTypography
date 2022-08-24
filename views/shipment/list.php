@@ -2,13 +2,12 @@
 
 
 use yii\bootstrap5\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use kartik\date\DatePicker;
 use app\models\User;
 use kartik\daterange\DateRangePicker;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 $this->title = 'Работа с отгрузками';
 $this->params['breadcrumbs'][] = $this->title;
@@ -62,7 +61,9 @@ echo GridView::widget([
         ],
         [
             'attribute' => 'manager_login',
-            'value' => 'managerFullName',
+            'value' => function($model){
+                return User::getFullNameByUsername($model->manager_login);
+            },
             'filter' => User::findUsersByGroup('manager')
         ],
         [
@@ -121,6 +122,7 @@ echo GridView::widget([
             'template' => '{view}'
         ],
     ],
+    'responsive'=>true,
 ]);
 ActiveForm::end();
 ?>

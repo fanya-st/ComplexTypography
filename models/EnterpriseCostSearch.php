@@ -17,7 +17,7 @@ class EnterpriseCostSearch extends EnterpriseCost
     public function rules()
     {
         return [
-            [['id', 'service_id'], 'integer'],
+            [['id', 'service_id','order_id'], 'integer'],
             [['date', 'login'], 'safe'],
             [['cost'], 'number'],
         ];
@@ -52,6 +52,7 @@ class EnterpriseCostSearch extends EnterpriseCost
             'id' => $this->id,
             'date' => $this->date,
             'service_id' => $this->service_id,
+            'order_id' => $this->order_id,
             'cost' => $this->cost,
         ]);
 

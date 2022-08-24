@@ -99,6 +99,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         ),
         's' => 
         array (
+            'skeeks\\yii2\\mobiledetect\\' => 25,
             'setasign\\Fpdi\\' => 14,
         ),
         'r' => 
@@ -259,6 +260,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'skeeks\\yii2\\mobiledetect\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/skeeks/yii2-mobile-detect/src',
         ),
         'setasign\\Fpdi\\' => 
         array (
@@ -572,6 +577,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             array (
                 0 => __DIR__ . '/..' . '/phpspec/php-diff/lib',
             ),
+            'Detection' => 
+            array (
+                0 => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced',
+            ),
         ),
         'C' => 
         array (
@@ -613,6 +622,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'Codeception\\Util\\Shared\\InheritedAsserts' => __DIR__ . '/..' . '/codeception/lib-asserts/src/Codeception/Util/Shared/InheritedAsserts.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',

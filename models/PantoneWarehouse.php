@@ -11,6 +11,10 @@ class PantoneWarehouse extends \yii\db\ActiveRecord
         return $this->hasOne(Pantone::class,['id'=>'pantone_id']);
     }
 
+    public function getMaterial(){
+        return $this->hasOne(Material::class,['id'=>'material_id']);
+    }
+
     public static function tableName()
     {
         return 'pantone_warehouse';
