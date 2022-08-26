@@ -9,8 +9,6 @@ use app\models\Subject;
 use kartik\select2\Select2;
 use yii\helpers\Url;
 use kartik\time\TimePicker;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 
 $this->title = 'Добавление заказчика';
@@ -101,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ])
         ?>
         <?=$form->field($customer,'contact')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'text'],
             ])
@@ -112,11 +110,3 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 <?ActiveForm::end()?>
-<!--<pre>--><?//print_r($customer)?><!--</pre>-->
-<?php
-//foreach (ArrayHelper::map(Region::find()->all(),'id','name') as $key => $value){
-//    ArrayHelper::setValue($regions, $key, ['id' => $key,'name'=>$value]);
-//}
-//?>
-<!--<pre>--><?//print_r(ArrayHelper::map(Region::find()->all(),'id','name'))?><!--</pre>-->
-<!--<pre>--><?//print_r($regions)?><!--</pre>-->

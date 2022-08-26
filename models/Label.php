@@ -159,14 +159,14 @@ class Label extends ActiveRecord{
         ];
     }
 
-    public function beforeValidate()
-    {
-        //Проверяем если нет статуса, то ставим статус "Новый"
-        if (empty($this->status_id)) {
-            $this->status_id = 1;
-        }
-        return parent::beforeValidate();
-    }
+//    public function beforeValidate()
+//    {
+//        //Проверяем если нет статуса, то ставим статус "Новый"
+//        if (empty($this->status_id)) {
+//            $this->status_id = 1;
+//        }
+//        return parent::beforeValidate();
+//    }
 
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);

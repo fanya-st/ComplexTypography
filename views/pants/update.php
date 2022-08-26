@@ -3,9 +3,9 @@
 use yii\bootstrap5\Html;
 
 
-$this->title = 'Обновить штанец: ' . $model->name;
+$this->title = 'Обновить штанец: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Штанцы', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Штанец №'.$model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="pants-update">

@@ -1,7 +1,8 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\widgets\DetailView;
+//use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 
 

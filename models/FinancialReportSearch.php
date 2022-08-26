@@ -19,14 +19,14 @@ class FinancialReportSearch extends FinancialReport
     public $mashine_id;
     public $pants_id;
     public $customer_id;
-    public $enterprise_cost;
     public $manager_login;
+    public $excel;
 
     public function rules()
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [['label_id','pants_id','mashine_id','customer_id','enterprise_cost'], 'integer'],
+            [['label_id','pants_id','mashine_id','customer_id','excel'], 'integer'],
             [['manager_login',], 'trim'],
             [['date_of_print_start','date_of_print_end'], 'required'],
         ];
@@ -41,7 +41,7 @@ class FinancialReportSearch extends FinancialReport
             'mashine_id'=>'Станок',
             'customer_id'=>'Заказчик',
             'pants_id'=>'Штанец',
-            'enterprise_cost'=>'Включая разовые затраты предприятия',
+            'excel'=>'Выгрузить в Excel',
         ];
     }
 
@@ -71,6 +71,9 @@ class FinancialReportSearch extends FinancialReport
             $orders = $dataProvider->all();
             foreach ($orders as $order) {
                 $order->calculate();
+            }
+            if($this->excel==1){
+                    FinancialReport::excel($orders,$this);
             }
             return $orders;
         }

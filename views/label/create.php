@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col">
                 <?=$form->field($model,'pants_id')->widget(Select2::classname(), [
-                    'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'name'),
+                    'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
                     'options' => ['placeholder' => 'Выбрать штанец ...'],
                 ])?>
             </div>

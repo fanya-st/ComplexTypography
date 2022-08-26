@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <h6 class="bg-success p-1 rounded">Параметры нарезки и перемотки</h6>
         <div class="col">
             <h6>Была совместная печать заказов: <?foreach ($order->combinatedPrintOrder as $com_ord) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($com_ord->order_id).'</span>'?></h6>
-            <h6>Плановый тираж: <?='<span class="badge rounded-pill bg-primary">'.Html::encode($order->plan_circulation).'</span>'?></h6>
-            <h6>Этикеток на ролике: <?='<span class="badge rounded-pill bg-primary">'.Html::encode($order->label_on_roll).'</span>'?></h6>
+            <h6>Плановый тираж, шт: <?='<span class="badge rounded-pill bg-primary">'.Html::encode($order->plan_circulation).'</span>'?></h6>
+            <h6>Этикеток на ролике, шт: <?='<span class="badge rounded-pill bg-primary">'.Html::encode($order->label_on_roll).'</span>'?></h6>
             <h6>Втулка: <?='<span class="badge rounded-pill bg-primary">'.Html::encode($order->sleeve->name).'</span>'?></h6>
             <?if($order->cut_edge==0):?>
                 <h6>Срезать кромки: <span class="badge rounded-pill bg-primary">Нет</span></h6>
@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <?endif;?>
         </div>
         <div class="col">
-            <h6>Фактический тираж: <?='<span class="badge rounded-pill bg-primary">'.Html::encode($order->actual_circulation).'</span>'?></h6>
-            <h6>Диаметр ролика: <?='<span class="badge rounded-pill bg-primary">'.Html::encode($order->diameter_roll).'</span>'?></h6>
+            <h6>Тираж по печати, шт: <?='<span class="badge rounded-pill bg-primary">'.Html::encode($order->printed_circulation).'</span>'?></h6>
+<!--            <h6>Диаметр ролика: --><?//='<span class="badge rounded-pill bg-primary">'.Html::encode($order->diameter_roll).'</span>'?><!--</h6>-->
             <h6>Намотка: <?= Html::img($order->winding->image, ['alt' => $order->winding->name,'title' => $order->winding->name,'width'=>'100px']) ?></h6>
             <?if($order->stretch==0):?>
                 <h6>Стретч лента: <span class="badge rounded-pill bg-primary">Нет</span></h6>

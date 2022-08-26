@@ -98,6 +98,8 @@ class CustomNav extends Model
         ArrayHelper::setValue($items, 'label','Менеджер');
         if (ArrayHelper::isIn($order->status_id, ['1']))
             ArrayHelper::setValue($items, 'items.update', ['label' => 'Внести изменения', 'url' => ['order/update','id'=>$order->id]]);
+        if (!empty($order->shipment) and $order->shipment->status_id==2)
+            ArrayHelper::setValue($items, 'items.close-order', ['label' => 'Закрыть заказ', 'url' => ['order/close-order','id'=>$order->id]]);
         return $items;
     }
     public static function getOrderItemsPrinter($order){
@@ -112,9 +114,9 @@ class CustomNav extends Model
             ArrayHelper::setValue($items, 'items.paper-consumption', ['label' => 'Расход материала', 'url' => ['material/paper-consumption','id'=>$order->id]]);
         if (ArrayHelper::isIn($order->status_id, ['2','3']))
             ArrayHelper::setValue($items, 'items.form-defect', ['label' => 'Брак форм', 'url' => ['order/form-defect','id'=>$order->id]]);
-        if (ArrayHelper::isIn($order->status_id, ['1','2','3']) && $order->label->variable==1)
+        if ($order->label->variable==1)
             ArrayHelper::setValue($items, 'items.start-print-variable', ['label' => 'Начать печать переменной информации', 'url' => ['order/start-print-variable','id'=>$order->id]]);
-        if (ArrayHelper::isIn($order->status_id, ['2','3']) && $order->label->variable==1)
+        if ($order->label->variable==1)
             ArrayHelper::setValue($items, 'items.finish-print-variable', ['label' => 'Закончить печать переменной информации', 'url' => ['order/finish-print-variable','id'=>$order->id]]);
 
         return $items;
@@ -134,6 +136,8 @@ class CustomNav extends Model
             ArrayHelper::setValue($items, 'items.start-pack', ['label' => 'Начать упаковку', 'url' => ['order/start-pack','id'=>$order->id]]);
         if (ArrayHelper::isIn($order->status_id, ['7']))
             ArrayHelper::setValue($items, 'items.pack', ['label' => 'Упаковка', 'url' => ['order/pack','id'=>$order->id]]);
+        if (!empty($order->shipment) and $order->shipment->status_id==0)
+            ArrayHelper::setValue($items, 'items.pack', ['label' => 'На отправку', 'url' => ['order/pack-send','id'=>$order->id]]);
         ArrayHelper::setValue($items, 'items.print-box-label', ['label' => 'Печать ярлыков', 'url' => ['order/print-label-package','id'=>$order->id]]);
         return $items;
     }

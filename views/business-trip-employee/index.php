@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['class' => 'btn btn-outline-danger']), ['business-trip-employee/delete', 'id' => $model->id]);
                     },
                     'view' => function($url, $model, $key) {     // render your custom button
-                        return Html::a(Html::button( Icon::show('list'),
+                        return Html::a(Html::button( Icon::show('eye'),
                             ['class' => 'btn btn-outline-success']), ['business-trip-employee/view', 'id' => $model->id]);
                     }
                 ],

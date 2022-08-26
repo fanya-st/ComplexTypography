@@ -35,11 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'id',
                 'contentOptions'=>['class' => 'text-center'],
-                'headerOptions' => ['class' => 'text-center','style' => 'width:5%'],
-            ],
-            [
-                'attribute' =>  'name',
-                'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],
             [

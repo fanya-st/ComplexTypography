@@ -5,8 +5,8 @@ use yii\bootstrap5\Modal;
 use app\models\User;
 
 ?>
-<div class="row g-2 row-cols-2">
-    <div class="col">
+<div class="row g-2 row-cols-lg-2">
+    <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <div class="row">
                 <div class="col">
@@ -28,7 +28,9 @@ use app\models\User;
             </div>
         </div>
     </div>
-    <div class="col">
+<!--    <div class="row g-2 row-cols-lg-2">-->
+<!--        <div class="col-lg">-->
+    <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-info p-1 rounded">Параметры печати</h6>
 <!--            --><?//if ($order->status_id==3) echo Html::tag('h6','Печать приостановлена',['class'=>'bg-warning p-1 rounded'])?>
@@ -36,7 +38,7 @@ use app\models\User;
                 <? echo Html::tag('h6','Печатник: ' .Html::encode(User::getFullNameByUsername($order->printer_login)));
                 echo Html::tag('h6','Дата начала печати: ' .Html::encode($order->date_of_print_begin));
                 echo Html::tag('h6','Дата конца печати: ' .Html::encode($order->date_of_print_end));?>
-                <h6>Факт. тираж, шт: <?=Html::encode($order->actual_circulation)?>
+                <h6>Тираж по печати, шт: <?=Html::encode($order->printed_circulation)?>
                     <h6>
                     <?
                     Modal::begin([
@@ -54,16 +56,7 @@ use app\models\User;
                 </h6>
         </div>
     </div>
-<!--    <div class="col">-->
-<!--        <div class="border p-3 rounded" style="background-color:#dee2e6;">-->
-<!--            <h6 class="bg-primary p-1 rounded">Параметры нарезки</h6>-->
-<!--            --><?// echo Html::tag('h6','Нарезчик: ' .Html::encode($order->cutterName));
-//            echo Html::tag('h6','Дата начала нарезки: ' .Html::encode($order->date_of_cut_begin));
-//            echo Html::tag('h6','Дата конца нарезки: ' .Html::encode($order->date_of_cut_end));?>
-<!--            </h6>-->
-<!--        </div>-->
-<!--    </div>-->
-    <div class="col">
+    <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-success p-1 rounded">Параметры нарезки и перемотки</h6>
             <? echo Html::tag('h6','Перемотчик: ' .Html::encode(User::getFullNameByUsername($order->rewinder_login)));
@@ -94,7 +87,7 @@ use app\models\User;
                 ?></h6>
         </div>
     </div>
-    <div class="col">
+    <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-warning p-1 rounded">Параметры упаковки</h6>
             <? echo Html::tag('h6','Упаковчик: ' .Html::encode(User::getFullNameByUsername($order->packer_login)));
@@ -103,11 +96,14 @@ use app\models\User;
             </h6>
             <h6> Упакованный тираж, шт:
                 <? $packed_circulation=null;
-                foreach ($order->finishedProductsWarehouse as $packed_roll)
+                foreach ($order->finishedProductsWarehouse as $packed_roll){
                     $packed_circulation+=$packed_roll->label_in_roll*$packed_roll->packed_roll_count;
+                    $sended_circulation+=$packed_roll->label_in_roll*$packed_roll->sended_roll_count;
+                }
                 echo Html::encode($packed_circulation);
                 ?>
-            Излишки, шт: <?=Html::encode($rewinded_circulation-$packed_circulation)?>
+            На отправку, шт: <?=Html::encode($sended_circulation)?>
+<!--            Излишки, шт: --><?//=Html::encode($rewinded_circulation-$packed_circulation)?>
             </h6>
             <h6>
                 <?

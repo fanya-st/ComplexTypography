@@ -38,7 +38,6 @@ class Pants extends ActiveRecord
     {
         return [
             'id'=>'ID',
-            'name'=>'Наименование',
             'pants_kind_id'=>'Вид штанца',
             'knife_kind_id'=>'Тип ножа',
             'knife_width'=>'Ширина ножа, мм',
@@ -56,10 +55,9 @@ class Pants extends ActiveRecord
 
     public function rules(){
         return[
-            [['id','pants_kind_id','knife_kind_id','shaft_id','material_group_id','knife_width','paper_width','cuts'],'integer'],
+            [['pants_kind_id','knife_kind_id','shaft_id','material_group_id','knife_width','paper_width','cuts'],'integer'],
             ['cuts', 'compare', 'compareValue' => 0, 'operator' => '!=', 'type' => 'number'],
-            [['name','picture'],'trim'],
-            [['name'],'string','max'=>50],
+            [['picture'],'trim'],
             [['picture'],'string','max'=>100],
             [['radius','gap','width_label','height_label'],'double'],
             [['picture'],'safe'],

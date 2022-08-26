@@ -15,7 +15,6 @@ use yii\bootstrap5\Html;
         <tbody>
         <?foreach ($material->materialPriceArchive as $materialPriceArchive):?>
             <tr>
-                <td><?=Html::encode($material->getAttributeLabel($materialPriceArchive->price_attribute))?></td>
                 <td><?=Html::encode($material->name)?></td>
                 <td><?=Html::encode($materialPriceArchive->date_of_change)?></td>
                 <td><?=Html::encode($materialPriceArchive->old_value)?></td>

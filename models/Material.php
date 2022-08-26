@@ -40,10 +40,7 @@ class Material extends ActiveRecord
             'material_provider_id'=>'Поставщик',
             'materialGroup.name'=>'Тип',
             'material_group_id'=>'Тип',
-            'price_rub'=>'Цена в рублях за м2',
-            'price_rub_discount'=>'Цена в рублях за м2 со скидкой',
-            'price_euro'=>'Цена в евро за м2',
-            'price_euro_discount'=>'Цена в евро за м2 со скидкой',
+            'price_euro'=>'Цена евро/м2',
             'density'=>'Плотность г/м2',
             'status'=>'Статус',
             'material_id_from_provider'=>'ID от поставщика',
@@ -56,32 +53,10 @@ class Material extends ActiveRecord
             if ($insert) {
                 Yii::$app->session->setFlash('success', 'Материал добавлен!');
             } else {
-                if ($this->getOldAttribute('price_rub')!=$this->price_rub) {
-                    $archive=new MaterialPriceArchive();
-                    $archive->material_id=$this->id;
-                    $archive->price_attribute='price_rub';
-                    $archive->old_value=$this->getOldAttribute('price_rub');
-                    $archive->save();
-                }
-                if ($this->getOldAttribute('price_rub_discount')!=$this->price_rub_discount) {
-                    $archive=new MaterialPriceArchive();
-                    $archive->material_id=$this->id;
-                    $archive->price_attribute='price_rub_discount';
-                    $archive->old_value=$this->getOldAttribute('price_rub_discount');
-                    $archive->save();
-                }
-                if ($this->getOldAttribute('price_euro_discount')!=$this->price_euro_discount) {
-                    $archive=new MaterialPriceArchive();
-                    $archive->material_id=$this->id;
-                    $archive->price_attribute='price_euro_discount';
-                    $archive->old_value=$this->getOldAttribute('price_euro_discount');
-                    $archive->save();
-                }
                 if ($this->getOldAttribute('price_euro')!=$this->price_euro) {
                     $archive=new MaterialPriceArchive();
                     $archive->material_id=$this->id;
-                    $archive->price_attribute='price_euro';
-                    $archive->old_value=$this->getOldAttribute('price_euro');
+                    $archive->old_value=$this->price_euro;
                     $archive->save();
                 }
                 Yii::$app->session->setFlash('success', 'Материал обновлен!');
@@ -91,5 +66,4 @@ class Material extends ActiveRecord
             return false;
         }
     }
-
 }

@@ -33,10 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute'=>'pantone_kind_id',
                     'value'=>$model->pantoneKind->name,
             ],
-            'price_rub',
-            'price_rub_discount',
             'price_euro',
-            'price_euro_discount',
             'subscribe',
             [
                     'attribute'=>'mashine_list',

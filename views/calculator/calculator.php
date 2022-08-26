@@ -1,16 +1,14 @@
 <?php
 
-use app\models\CalcCommonParam;
-use app\models\CalcMashineParamValue;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Pants;
-use yii\widgets\Pjax;
 use app\models\Shaft;
 use yii\web\View;
 use app\models\Mashine;
 use app\models\Material;
+use kartik\select2\Select2;
 
 $this->title = Html::encode('Калькулятор');
 $this->params['breadcrumbs'][] = $this->title;
@@ -42,7 +40,6 @@ $this->registerJs(
 );
 ?>
 <h3><?= Html::encode($this->title)?></h3>
-<?//print_r(\app\models\)?>
 <?$form=ActiveForm::begin(['method'=>'post'])?>
 <?if($calculator->calculated_label_price):?>
     <div class="border p-3 rounded">
@@ -101,7 +98,12 @@ $this->registerJs(
             <h6 class="bg-success p-1 rounded">Параметры штанца</h6>
             <div class="row">
                 <div class="col">
-                    <?= $form->field($calculator, 'pants_id')->dropDownList(ArrayHelper::map(Pants::find()->asArray()->all(),'id','name')) ?>
+                    <?= $form->field($calculator, 'pants_id')
+//                        ->dropDownList(ArrayHelper::map(Pants::find()->asArray()->all(),'id','id'))
+                        ->widget(Select2::class, [
+                        'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
+                        'options' => ['placeholder' => 'Выбрать штанец ...'],
+                    ]) ?>
 
                     <?= Html::button('Получить параметры штанца', ['class' => 'btn btn-success m-2','onclick'=>'getPantsParam()']) ?>
 

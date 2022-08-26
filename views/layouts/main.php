@@ -46,11 +46,21 @@ AppAsset::register($this);
         'material'=>['label' => 'Материалы', 'items' => [
             ['label' => 'Материалы', 'url' => ['/material/list']],
             ['label' => 'Склад бумаги, фольги и ламинации', 'url' => ['/paper-warehouse/list']],
+            ['label' => 'Краски, лаки, химия', 'url' => ['/pantone/index']],
+            ['label' => 'Склад красок, лаков, химии', 'url' => ['/pantone-warehouse/index']],
             ['label' => 'Загрузка пришедшей бумаги', 'url' => ['/paper-warehouse/upload-paper']]
         ]
         ],
+        'accountant'=>['label' => 'Бухгалтерия', 'items' => [
+            ['label' => 'Затраты предприятия', 'url' => ['/enterprise-cost/index']],
+            ['label' => 'Банк', 'url' => ['/bank-transfer/index']],
+            ['label' => 'Оборотная ведомость по материалу', 'url' => ['/material/material-movement']],
+            ['label' => 'Наличные складские запасы бумаги', 'url' => ['/material/stock-on-hand-paper']],
+            ['label' => 'Финансовый отчет', 'url' => ['/financial-report/index']]
+        ]
+        ],
         'messenger'=>['label' => 'Мессенджер', 'url' => ['/site/contact']],
-        'about_us'=>['label' => 'О типографии', 'url' => ['/site/about']],
+//        'about_us'=>['label' => 'О типографии', 'url' => ['/site/about']],
     ];
     if(!Yii::$app->user->isGuest){
         ArrayHelper::setValue($nav_items,'login',

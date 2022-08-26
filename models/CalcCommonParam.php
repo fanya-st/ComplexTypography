@@ -54,8 +54,7 @@ class CalcCommonParam extends ActiveRecord
                 if ($this->getOldAttribute('value')!=$this->value) {
                     $archive=new CalcCommonParamArchive();
                     $archive->calc_common_param_id=$this->id;
-                    $archive->value=$this->getOldAttribute('value');
-                    $archive->date=$this->getOldAttribute('date');
+                    $archive->value=$this->value;
                     $archive->save();
                 }
                 Yii::$app->session->setFlash('success', 'Параметр изменен!');
@@ -64,6 +63,17 @@ class CalcCommonParam extends ActiveRecord
         } else {
             return false;
         }
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        if ($insert) {
+            $archive=new CalcCommonParamArchive();
+            $archive->calc_common_param_id=$this->id;
+            $archive->value=$this->value;
+            $archive->save();
+        } else {
+        }
+        parent::afterSave($insert, $changedAttributes);
     }
 
 }

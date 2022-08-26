@@ -52,11 +52,6 @@ echo GridView::widget([
             'headerOptions' => ['class' => 'text-center']
         ],
         [
-            'attribute'=>'price_rub',
-            'contentOptions'=>['class' => 'text-center'],
-            'headerOptions' => ['class' => 'text-center']
-        ],
-        [
             'attribute'=>'price_euro',
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center']

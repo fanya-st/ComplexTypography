@@ -34,7 +34,7 @@ class Pantone extends ActiveRecord
         return [
             [['name','mashine_list'], 'required'],
             [['id','pantone_kind_id'], 'integer'],
-            [['price_rub','price_euro','price_rub_discount','price_euro_discount',], 'double'],
+            [['price_euro'], 'double'],
             [['name'], 'string','max'=>50],
             [['subscribe'], 'string','max'=>100],
             [['name','subscribe'], 'trim'],
@@ -48,10 +48,7 @@ class Pantone extends ActiveRecord
             'id' => 'ID',
             'pantone_kind_id' => 'Тип PANTONE',
             'name' => 'Наименование',
-            'price_rub' => 'Цена, руб/кг',
-            'price_rub_discount' => 'Цена со скидкой, руб/кг',
             'price_euro' => 'Цена, евро/кг',
-            'price_euro_discount' => 'Цена со скидкой, евро/кг',
             'subscribe' => 'Подсказка',
             'mashine_list' => 'Совместимость со станками',
         ];
@@ -96,32 +93,10 @@ class Pantone extends ActiveRecord
         if (parent::beforeSave($insert)) {
             if ($insert) {
             } else {
-                if ($this->getOldAttribute('price_rub')!=$this->price_rub) {
-                    $archive=new PantonePriceArchive();
-                    $archive->pantone_id=$this->id;
-                    $archive->price_attribute='price_rub';
-                    $archive->old_value=$this->getOldAttribute('price_rub');
-                    $archive->save();
-                }
-                if ($this->getOldAttribute('price_rub_discount')!=$this->price_rub_discount) {
-                    $archive=new PantonePriceArchive();
-                    $archive->pantone_id=$this->id;
-                    $archive->price_attribute='price_rub_discount';
-                    $archive->old_value=$this->getOldAttribute('price_rub_discount');
-                    $archive->save();
-                }
-                if ($this->getOldAttribute('price_euro_discount')!=$this->price_euro_discount) {
-                    $archive=new PantonePriceArchive();
-                    $archive->pantone_id=$this->id;
-                    $archive->price_attribute='price_euro_discount';
-                    $archive->old_value=$this->getOldAttribute('price_euro_discount');
-                    $archive->save();
-                }
                 if ($this->getOldAttribute('price_euro')!=$this->price_euro) {
                     $archive=new PantonePriceArchive();
                     $archive->pantone_id=$this->id;
-                    $archive->price_attribute='price_euro';
-                    $archive->old_value=$this->getOldAttribute('price_euro');
+                    $archive->old_value=$this->price_euro;
                     $archive->save();
                 }
                 if(!empty($this->mashine_list)){

@@ -46,7 +46,7 @@ class OrderController extends Controller
                 ],
                 [
                     'allow' => true,
-                    'actions' => ['list','view','start-pack','pack','pack-in','finish-pack','print-label-package','print-box-label','print-sleeve-label'],
+                    'actions' => ['list','view','start-pack','pack','pack-in','finish-pack','print-label-package','print-box-label','print-sleeve-label','pack-send'],
                     'roles' => ['packer'],
                 ],
                 [
@@ -75,10 +75,13 @@ class OrderController extends Controller
         $surplus = new ActiveDataProvider([
             'query' => FinishedProductsWarehouse::find()->where(['order_id'=>null,'label_id'=>$order->label_id]),
         ]);
+        $roll = new ActiveDataProvider([
+            'query' => FinishedProductsWarehouse::find()->where(['order_id'=>$id]),
+        ]);
             if(Yii::$app->request->post('selection') && Yii::$app->request->post('add_from_fpwarehouse', 'start')){
                     return $this->runAction('add-from-fpwarehouse', compact('id'));
             }
-        return $this->render('view',compact('order','label','surplus'));
+        return $this->render('view',compact('order','label','surplus','roll'));
     }
     public function actionAddFromFpwarehouse($id)
     {
@@ -98,19 +101,22 @@ class OrderController extends Controller
             $order->status_id=2;
             $order->printer_login=Yii::$app->user->identity->username;
             $order->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
-            $order->save();
             if (!empty($order->combinatedPrintOrder)){
                 foreach ($order->combinatedPrintOrder as $com_ord){
                     if($com_ord->order_id!=$id){
-                        $order=Order::findOne($com_ord->order_id);
-                        $order->printer_login=Yii::$app->user->identity->username;
-                        $order->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
-                        $order->status_id=2;
-                        $order->save();
+                        $o=Order::findOne($com_ord->order_id);
+                        $o->printer_login=Yii::$app->user->identity->username;
+                        $o->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+                        $o->status_id=2;
+                        $o->save();
                     }
                 }
             }
-            Yii::$app->session->setFlash('success','Заказ в печати');
+            if($order->validate() && $order->save()){
+                Yii::$app->session->setFlash('success','Заказ в печати');
+            }else{
+                Yii::$app->session->setFlash('error','Ошибка');
+            }
         }else{
             Yii::$app->session->setFlash('error','Этикетка не готова к печати');
         }
@@ -218,20 +224,19 @@ class OrderController extends Controller
 //        }
         if(Yii::$app->request->post('print_box_label')==''){
             if (Model::loadMultiple($finished_products, Yii::$app->request->post())){
-                return $this->render('print-box-label', compact('order','model','finished_products'));
+                return $this->render('print-box-label', compact('order','finished_products'));
             }
         }
-        return $this->render('print-label-package-form', compact('order','model','finished_products'));
+        return $this->render('print-label-package-form', compact('order','finished_products'));
     }
 
-
+    //завершить печать и ввести получившиеся ролики
     public function actionFinishPrint($id)
     {
         $order=OrderPrintEndForm::findOne($id);
-        if($order->load(Yii::$app->request->post()) && $order->validate(Yii::$app->request->post())){
+        if($order->load(Yii::$app->request->post()) && $order->validate()){
             $order->status_id=4;
             $order->date_of_print_end=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
-            $order->save();
             if (!empty($order->combinatedPrintOrder)){
                 foreach ($order->combinatedPrintOrder as $com_ord){
                     if($com_ord->order_id!=$order->id){
@@ -243,6 +248,7 @@ class OrderController extends Controller
                     }
                 }
             }
+            if($order->save())
             Yii::$app->session->setFlash('success','Печать закончена');
             return $this->redirect(['order/view','id'=>$id]);
         }
@@ -253,8 +259,7 @@ class OrderController extends Controller
     {
         $order=Order::findOne($id);
         $label=Label::findOne($order->label_id);
-        if($label->load(Yii::$app->request->post()) && $label->validate(Yii::$app->request->post())){
-            $order->status_id=4;
+        if($label->load(Yii::$app->request->post()) && $label->validate()){
             $order->date_of_variable_print_end=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $order->save();
             $label->save();
@@ -280,7 +285,7 @@ class OrderController extends Controller
         $new_roll=new FinishedProductsWarehouse();
         $new_roll->order_id=$id;
         $new_roll->label_id=$order->label_id;
-        if($new_roll->load(Yii::$app->request->post()) && $new_roll->validate(Yii::$app->request->post())){
+        if($new_roll->load(Yii::$app->request->post()) && $new_roll->validate()){
             if($new_roll->save()){
                 Yii::$app->session->setFlash('success','Добавлено');
                 $this->refresh();
@@ -306,6 +311,23 @@ class OrderController extends Controller
                 return $this->refresh();
             }
         return $this->render('pack', compact('order','order_roll'));
+    }
+
+    public function actionPackSend($id)
+    {
+        $order=Order::findOne($id);
+        $order_roll = FinishedProductsWarehouse::find()->where(['order_id' => $id])->indexBy('id')->all();
+            if (FinishedProductsWarehouse::loadMultiple($order_roll, $this->request->post()) && FinishedProductsWarehouse::validateMultiple($order_roll)) {
+                foreach ($order_roll as $roll) {
+                    if ($roll->packed_roll_count<=$roll->roll_count){
+                        $roll->save(false);
+                    }
+                    else
+                        Yii::$app->session->setFlash('error','Нет такого количества смотанных роликов');
+                }
+                return $this->refresh();
+            }
+        return $this->render('pack-send', compact('order','order_roll'));
     }
     public function actionFinishPack($id)
     {

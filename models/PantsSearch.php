@@ -21,7 +21,7 @@ class PantsSearch extends Pants
     {
         return [
             [['id', 'shaft_id', 'paper_width', 'pants_kind_id', 'cuts', 'knife_kind_id', 'knife_width', 'material_group_id'], 'integer'],
-            [['name', 'picture'], 'safe'],
+            [['picture'], 'safe'],
             [['width_label', 'height_label', 'radius', 'gap'], 'number'],
         ];
     }
@@ -76,8 +76,7 @@ class PantsSearch extends Pants
             'material_group_id' => $this->material_group_id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'picture', $this->picture]);
+        $query->andFilterWhere(['like', 'picture', $this->picture]);
 
         return $dataProvider;
     }

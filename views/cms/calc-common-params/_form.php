@@ -9,7 +9,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true,'disabled'=>true]) ?>
 
     <?= $form->field($model, 'subscribe')->textInput(['maxlength' => true]) ?>
 

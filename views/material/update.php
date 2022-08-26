@@ -23,15 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <?=$form->field($material,'material_group_id')->dropDownList(ArrayHelper::map(MaterialGroup::find()->asArray()->all(), 'id', 'name'))?>
             <?=$form->field($material,'material_provider_id')->dropDownList(ArrayHelper::map(MaterialProvider::find()->asArray()->all(), 'id', 'name'))?>
             <?=$form->field($material,'price_euro')->textInput()?>
-            <?=$form->field($material,'price_euro_discount')->textInput()?>
             <?=$form->field($material,'density')->textInput()?>
         </div>
         <div class="col">
             <?=$form->field($material,'short_name')->textInput()?>
             <?=$form->field($material,'prompt')->textInput()?>
             <?=$form->field($material,'status')->dropDownList([0=>'В архиве',1=>'Активный'])?>
-            <?=$form->field($material,'price_rub')->textInput()?>
-            <?=$form->field($material,'price_rub_discount')->textInput()?>
             <?=$form->field($material,'material_id_from_provider')->textInput()?>
         </div>
     </div>

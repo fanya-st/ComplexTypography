@@ -2,10 +2,7 @@
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
-use kartik\grid\GridView;
 use kartik\icons\Icon;
-use yii\bootstrap5\Modal;
-Icon::map($this, Icon::FA);
 
 $this->title = 'Упаковка';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];

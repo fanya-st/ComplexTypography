@@ -2,7 +2,8 @@
 
 
 use yii\bootstrap5\Html;
-use yii\widgets\DetailView;
+//use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 
 $this->title = $model->name;

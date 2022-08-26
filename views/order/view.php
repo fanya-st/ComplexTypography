@@ -3,8 +3,6 @@
 use yii\bootstrap5\Html;
 use kartik\tabs\TabsX;
 use app\models\CustomNav;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 $this->title = Html::encode("ID [$order->id] $label->name");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
@@ -30,8 +28,12 @@ echo TabsX::widget([
             ],
         'finished_products_warehouse'=>
             [
-                'label' => 'Излишки Склад ГП',
+                'label' => 'Излишки',
                 'content'=>$this->render('//finished-products-warehouse/_finished_products_warehouse_tab',compact('surplus')),
+            ],
+        [
+                'label' => 'ГП',
+                'content'=>$this->render('_finished_products',compact('roll')),
             ],
 //        [
 //                'label' => 'Брак',
@@ -49,3 +51,4 @@ echo TabsX::widget([
 ]);
 ?>
 </div>
+<!--<pre>--><?//print_r($order)?><!--</pre>-->

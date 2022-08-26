@@ -22,10 +22,10 @@ $this->title = 'Комплекс Типография CMS-Панель';
                 <h2>Редактирование этикеток</h2>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/label-index">Редактирование этикеток &raquo;</a></p>
             </div>
-            <div class="col-lg-4">
-                <h2>Редактирование отгрузок</h2>
-                <p><a class="btn btn-outline-secondary" href="?r=shipment/list">Работа с отгрузками &raquo;</a></p>
-            </div>
+<!--            <div class="col-lg-4">-->
+<!--                <h2>Редактирование отгрузок</h2>-->
+<!--                <p><a class="btn btn-outline-secondary" href="?r=shipment/list">Работа с отгрузками &raquo;</a></p>-->
+<!--            </div>-->
             <div class="col-lg-4">
                 <h2>Редактирование заказчиков</h2>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/customer-index">Редактирование заказчиков &raquo;</a></p>
@@ -34,10 +34,10 @@ $this->title = 'Комплекс Типография CMS-Панель';
                 <p><a class="btn btn-outline-secondary" href="?r=cms/town-index">Редактирование списка адм.центров &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/street-index">Редактирование списка улиц &raquo;</a></p>
             </div>
-            <div class="col-lg-4">
-                <h2>Редактирование сотрудников</h2>
-                <p><a class="btn btn-outline-secondary" href="?r=time-tracker/kiosk">Список сотрудников &raquo;</a></p>
-            </div>
+<!--            <div class="col-lg-4">-->
+<!--                <h2>Редактирование сотрудников</h2>-->
+<!--                <p><a class="btn btn-outline-secondary" href="?r=time-tracker/kiosk">Список сотрудников &raquo;</a></p>-->
+<!--            </div>-->
             <div class="col-lg-4">
                 <h2>Редактирование параметров калькулятора</h2>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/calc-common-params-index">Редактирование общих параметров &raquo;</a></p>

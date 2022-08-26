@@ -4,7 +4,8 @@ use app\models\Envelope;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use kartik\icons\Icon;
 use kartik\select2\Select2;
 use app\models\Shelf;
@@ -83,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {view} {delete}',
+                'template' => '{update} {delete}',
                 'buttons' => [
                     'update' => function($url, $model, $key) {     // render your custom button
                         return Html::a(Html::button( Icon::show('edit'),

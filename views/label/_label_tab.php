@@ -22,7 +22,7 @@ use app\models\User;
         <h6>Дата дизайна: <small><?=Html::encode($label->date_of_design)?></small> </h6>
         <h6>Препрессник: <small><?=Html::encode(User::getFullNameByUsername($label->prepress_login))?></small> </h6>
         <h6>Дата Prepress: <small><?=Html::encode($label->date_of_prepress)?></small> </h6>
-        <h6>Штанец: <small class="badge bg-secondary"><?=Html::encode($label->pants->name)?></small>
+        <h6>Штанец: <small class="badge bg-secondary"><?=Html::encode($label->pants->id)?></small>
             Вал: <small class="badge bg-secondary"><?=Html::encode($label->pants->shaft->name)?></small>
             Кол-во форм: <small class="badge bg-secondary"><?=Html::encode($label->formCount)?></small></h6>
         <h6></h6>

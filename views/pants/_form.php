@@ -15,8 +15,6 @@ use app\models\MaterialGroup;
     <div class="row">
         <div class="col">
 
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
             <?= $form->field($model, 'shaft_id')->dropDownList(ArrayHelper::map(Shaft::find()->asArray()->all(),'id','name')) ?>
 
             <?= $form->field($model, 'paper_width')->textInput() ?>

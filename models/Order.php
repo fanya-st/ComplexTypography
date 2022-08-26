@@ -70,6 +70,16 @@ class Order extends ActiveRecord{
 	        $count+=$roll->sended_roll_count*$roll->label_in_roll;
         return $count;
     }
+
+    public function getActualCirculation(){
+        foreach(FinishedProductsWarehouse::find()->select(['label_in_roll','roll_count'])->where(['order_id'=>$this->id])->all() as $roll){
+            $actual_circulation+=$roll->label_in_roll*$roll->roll_count;
+        }
+        return $actual_circulation;
+    }
+
+
+
     public function attributeLabels()
     {
         return [
@@ -83,26 +93,14 @@ class Order extends ActiveRecord{
             'date_of_rewind_begin'=>'Дата начала перемотки',
             'date_of_rewind_end'=>'Дата окончания перемотки',
             'status_id'=>'Статус заказа',
-            'orderStatusName'=>'Статус заказа',
-            'labelStatusName'=>'Статус этикетки',
-            'labelName'=>'Наименование',
-            'label_id'=>'ID Этикетки',
-            'label.name'=>'Наименование этикетки',
+            'label_id'=>'Этикетка',
             'date_of_sale'=>'Дата продажи',
             'mashine_id'=>'Станок',
-            'mashineName'=>'Станок',
             'plan_circulation'=>'Плановый тираж',
-            'actual_circulation'=>'Фактический тираж',
-            'trial_circulation'=>'Пробный тираж',
+            'printed_circulation'=>'Тираж по печати',
             'label_price'=>'Цена этикетки',
-            'order_price'=>'Цена заказа',
             'label_price_with_tax'=>'Цена этикетки с НДС',
-            'order_price_with_tax'=>'Цена заказа с НДС',
-            'pants_price'=>'Цена штанца',
-            'delivery_price'=>'Цена доставки',
             'material_id'=>'Материал',
-            'printer'=>'Печатник',
-            'fullName'=>'Менеджер',
             'sending'=>'Отправка',
             'manager_login'=>'Менеджер',
             'printer_login'=>'Печатник',
@@ -112,37 +110,25 @@ class Order extends ActiveRecord{
             'tech_note'=>'Примечание технолога',
             'manager_note'=>'Примечание менеджера',
             'packer_login'=>'Упаковщик',
-            'customerId'=>'Заказчик',
-            'pantsId'=>'Штанец',
-            'shaft_id'=>'Вал',
+            'pants_id'=>'Штанец',
             'stretch'=>'Стретч лента',
             'label_on_roll'=>'Этикеток на ролике',
             'winding_id'=>'Намотка',
             'sleeve_id'=>'Втулка',
-            'diameter_roll'=>'Диаметр ролика',
             'cut_edge'=>'Обрезать кромки',
         ];
     }
     public function rules(){
         return[
             [['status_id','label_id','stretch','cut_edge','label_on_roll','winding_id',
-                'sleeve_id','actual_circulation','sending','material_id','mashine_id'],'integer'],
+                'sleeve_id','sending','material_id','mashine_id','printed_circulation'],'integer'],
             [['tech_note','printer_note','rewinder_note','manager_note','packer_login','rewinder_login','printer_login'],'trim'],
             [['packer_login','rewinder_login','printer_login'],'string','max'=>50],
-            [['label_price_with_tax','label_price','order_price','order_price_with_tax'],'number'],
-            [['plan_circulation','sending','label_price_with_tax','label_price','order_price','order_price_with_tax','stretch','cut_edge','sleeve_id',
+            [['label_price_with_tax','label_price'],'number'],
+            [['plan_circulation','sending','label_price_with_tax','label_price','stretch','cut_edge','sleeve_id',
                 'material_id','mashine_id','date_of_sale','winding_id','label_on_roll'],'required'],
             [['date_of_sale','date_of_create','date_of_variable_print_begin','date_of_packing_begin','date_of_rewind_begin',
                 'date_of_print_end','date_of_variable_print_end','date_of_rewind_end','date_of_packing_end'],'safe'],
         ];
-    }
-
-    public function beforeValidate()
-    {
-        //Проверяем если нет статуса, то ставим статус "Новый"
-        if (empty($this->status_id)) {
-            $this->status_id = 1;
-        }
-        return parent::beforeValidate();
     }
 }

@@ -45,7 +45,8 @@ class CalcMashineParamValue extends ActiveRecord
             [['value'],'double'],
             [['date'],'safe'],
             [['id','mashine_id','calc_mashine_param_id'],'integer'],
-            [['mashine_id','calc_mashine_param_id','value'],'required']
+            [['mashine_id','calc_mashine_param_id','value'],'required'],
+            [['mashine_id','calc_mashine_param_id'], 'unique', 'targetAttribute' => ['mashine_id','calc_mashine_param_id']],
         ];
     }
 
@@ -53,22 +54,28 @@ class CalcMashineParamValue extends ActiveRecord
     {
         if (parent::beforeSave($insert)) {
             if ($insert) {
-                $this->date=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
                 Yii::$app->session->setFlash('success', 'Добавлен новый параметр!');
             } else {
-                if ($this->getOldAttribute('value')!=$this->value) {
-                    $archive=new CalcMashineParamValueArchive();
-                    $archive->calc_mashine_param_value_id=$this->id;
-                    $archive->value=$this->getOldAttribute('value');
-                    $archive->date=$this->getOldAttribute('date');
-                    $archive->save();
-                }
+                $archive=new CalcMashineParamValueArchive();
+                $archive->calc_mashine_param_value_id=$this->id;
+                $archive->value=$this->value;
+                $archive->save();
                 Yii::$app->session->setFlash('success', 'Параметр изменен!');
             }
             return true;
         } else {
             return false;
         }
+    }
+    public function afterSave($insert, $changedAttributes) {
+        if ($insert) {
+            $archive=new CalcMashineParamValueArchive();
+            $archive->calc_mashine_param_value_id=$this->id;
+            $archive->value=$this->value;
+            $archive->save();
+        } else {
+        }
+        parent::afterSave($insert, $changedAttributes);
     }
 
 }

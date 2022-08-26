@@ -292,7 +292,7 @@ class Calculator extends Model
         }
 
         //стоимость скотча
-        $this->calculated_scotch_price=$square_form_common * $mashine_param['scotch_price'] + ( 0.03 * $this->circulation );
+        $this->calculated_scotch_price=($square_form_common * $mashine_param['scotch_price'] + $mashine_param['scotch_price']/10.66 * $this->circulation)*$common_param['euro_exchange'];
         $material_price += $this->calculated_scotch_price;
 
 

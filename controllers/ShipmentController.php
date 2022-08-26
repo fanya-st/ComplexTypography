@@ -96,7 +96,8 @@ class ShipmentController extends Controller
         $shipment = Shipment::findOne($id);
         if($this->request->isPost){
             if($shipment->load($this->request->post()) && $shipment->validate()){
-                $shipment->save();
+                if($shipment->save())
+                    return $this->redirect(['shipment/view','id'=>$id]);
             }
         }
         return $this->render('edit-transport',compact('shipment'));
@@ -111,7 +112,8 @@ class ShipmentController extends Controller
             if (FinishedProductsWarehouse::loadMultiple($shipment_roll, $this->request->post()) && FinishedProductsWarehouse::validateMultiple($shipment_roll)) {
                 foreach ($shipment_roll as $roll) {
                     if ($roll->defect_roll_count <= $roll->sended_roll_count) {
-                        $roll->save(false);
+                        if($roll->save(false))
+                            return $this->redirect(['shipment/view','id'=>$id]);
                     }
                     else {
                         Yii::$app->session->setFlash('error', 'Ошибка');
@@ -119,7 +121,7 @@ class ShipmentController extends Controller
                 }
             }
         }
-        return $this->render('mark_defect',compact('shipment_roll','shipment'));
+        return $this->render('mark-defect',compact('shipment_roll','shipment'));
     }
 
     public function actionOrderAdd($id)
@@ -172,7 +174,10 @@ class ShipmentController extends Controller
                     $new_roll->save();
                     $roll->roll_count=$roll->roll_count-$new_roll->roll_count;
                     $roll->packed_roll_count=$roll->packed_roll_count-$new_roll->roll_count;
-                    $roll->save();
+                    if($roll->roll_count<=0)
+                        $roll->delete();
+                    else
+                        $roll->save();
                 }
             }
             $shipment->status_id=1;
@@ -201,7 +206,10 @@ class ShipmentController extends Controller
                     $roll->sended_roll_count=$roll->sended_roll_count-$new_roll->roll_count;
                     $roll->defect_roll_count=null;
                     $roll->defect_note=null;
-                    $roll->save();
+                    if($roll->roll_count<=0)
+                        $roll->delete();
+                    else
+                        $roll->save();
                 }
             }
             $shipment->status_id=2;

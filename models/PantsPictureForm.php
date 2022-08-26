@@ -18,8 +18,8 @@ class PantsPictureForm extends Pants
     {
         if ($this->validate()) {
             if ($this->picture && $this->picture->tempName) {
-                $this->picture->saveAs('pants/' . $model->name . '.' . $this->picture->extension);
-                $model->picture = 'pants/' . $model->name . '.' . $this->picture->extension;
+                $this->picture->saveAs('pants/' . $model->id . '.' . $this->picture->extension);
+                $model->picture = 'pants/' . $model->id . '.' . $this->picture->extension;
             }
             return true;
         } else {

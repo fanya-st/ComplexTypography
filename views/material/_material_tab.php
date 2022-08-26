@@ -24,10 +24,7 @@ use yii\bootstrap5\Html;
     <div class="col">
         <div class="border p-3 rounded">
             <h6 class="bg-warning p-1 rounded">Цена</h6>
-            <?=Html::tag('h6','Цена в рублях за м2: ' .Html::encode($material->price_rub))?>
-            <?=Html::tag('h6','Цена в рублях за м2 со скидкой: ' .Html::encode($material->price_rub_discount))?>
-            <?=Html::tag('h6','Цена в евро за м2: ' .Html::encode($material->price_euro))?>
-            <?=Html::tag('h6','Цена в евро за м2 со скидкой: ' .Html::encode($material->price_euro_discount))?>
+            <?=Html::tag('h6','Цена евро/м2: ' .Html::encode($material->price_euro))?>
         </div>
     </div>
 </div>

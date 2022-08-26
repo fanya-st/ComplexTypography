@@ -21,7 +21,6 @@ class OrderForm extends ActiveRecord{
 		'mashine_id'=>'Машина',
 		'label_price'=>'Цена этикетки, руб',
 		'label_price_with_tax'=>'Цена этикетки с НДС, руб',
-		'trial_circulation'=>'Это пробный тираж?',
 		'sending'=>'Отправка',
 		'sleeve_id'=>'Втулка D, мм',
 		'winding_id'=>'Схема намотки',
@@ -34,18 +33,16 @@ class OrderForm extends ActiveRecord{
 		'manager_note'=>'Примечание менеджера',
 		'parent_label'=>'С внесением изменений в этикетку',
             'tech_note'=>'Примечание технолога',
-		'order_price'=>'Сумма за заказ, руб',
-		'order_price_with_tax'=>'Сумма за заказ с НДС, руб',
 		];
 	}
     public function rules(){
         return[
             [['status_id','label_id','stretch','cut_edge','label_on_roll','winding_id',
-                'sleeve_id','actual_circulation','sending','material_id','mashine_id','parent_label'],'integer'],
+                'sleeve_id','sending','material_id','mashine_id','parent_label','printed_circulation'],'integer'],
             [['tech_note','printer_note','rewinder_note','manager_note','packer_login','rewinder_login','printer_login'],'trim'],
             [['packer_login','rewinder_login','printer_login'],'string','max'=>50],
-            [['label_price_with_tax','label_price','order_price','order_price_with_tax'],'number'],
-            [['plan_circulation','sending','label_price_with_tax','label_price','order_price','order_price_with_tax','stretch','cut_edge','sleeve_id',
+            [['label_price_with_tax','label_price'],'number'],
+            [['plan_circulation','sending','label_price_with_tax','label_price','stretch','cut_edge','sleeve_id',
                 'material_id','mashine_id','date_of_sale','winding_id','label_on_roll'],'required'],
             [['date_of_sale','date_of_create','date_of_variable_print_begin','date_of_packing_begin','date_of_rewind_begin',
                 'date_of_print_end','date_of_variable_print_end','date_of_rewind_end','date_of_packing_end'],'safe'],

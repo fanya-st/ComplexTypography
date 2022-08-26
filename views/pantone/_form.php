@@ -15,16 +15,10 @@ use app\models\Mashine;
         <div class="col">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'price_rub')->textInput(['maxlength' => true]) ?>
-
             <?= $form->field($model, 'price_euro')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col">
             <?= $form->field($model, 'pantone_kind_id')->dropDownList(ArrayHelper::map(PantoneKind::find()->asArray()->all(),'id','name')) ?>
-
-            <?= $form->field($model, 'price_rub_discount')->textInput(['maxlength' => true]) ?>
-
-            <?= $form->field($model, 'price_euro_discount')->textInput(['maxlength' => true]) ?>
 
         </div>
         <div class="col">
