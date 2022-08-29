@@ -319,4 +319,13 @@ return array (
       '@skeeks/yii2/mobiledetect' => $vendorDir . '/skeeks/yii2-mobile-detect/src',
     ),
   ),
+  'kartik-v/yii2-password' => 
+  array (
+    'name' => 'kartik-v/yii2-password',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/password' => $vendorDir . '/kartik-v/yii2-password/src',
+    ),
+  ),
 );

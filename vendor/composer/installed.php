@@ -298,6 +298,15 @@
             'reference' => '54a8806002ee21b744508a2edb95ed01d35c6cf9',
             'dev_requirement' => false,
         ),
+        'kartik-v/strength-meter' => array(
+            'pretty_version' => 'v1.1.4',
+            'version' => '1.1.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kartik-v/strength-meter',
+            'aliases' => array(),
+            'reference' => '100147f588b12ff819014b445007a0decfd95fbb',
+            'dev_requirement' => false,
+        ),
         'kartik-v/yii2-bootstrap5-dropdown' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
@@ -449,6 +458,17 @@
             'install_path' => __DIR__ . '/../kartik-v/yii2-mpdf',
             'aliases' => array(),
             'reference' => '7ea3a5f9bcf5bcf6d681bd82cbe843c356d1428c',
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-password' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-password',
+            'aliases' => array(
+                0 => '1.5.x-dev',
+            ),
+            'reference' => '6de6686f5289ea4243c4f91797f11f6cdfb0dcd3',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-sortable' => array(

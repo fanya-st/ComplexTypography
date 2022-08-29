@@ -31,7 +31,7 @@ class MashinePantsController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list','view','index'],
+                        'actions' => ['list','view','index','delete','create'],
                         'roles' => ['warehouse_manager'],
                     ],
 

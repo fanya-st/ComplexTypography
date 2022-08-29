@@ -37,8 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'pants_id',
-                'value'=>'pants.name',
-                'filter'=>ArrayHelper::map(Pants::find()->asArray()->all(),'id','name'),
+                'filter'=>ArrayHelper::map(Pants::find()->asArray()->all(),'id','id'),
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],

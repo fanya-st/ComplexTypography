@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii;
 
 class Order extends ActiveRecord{
 
@@ -96,12 +97,12 @@ class Order extends ActiveRecord{
             'label_id'=>'Этикетка',
             'date_of_sale'=>'Дата продажи',
             'mashine_id'=>'Станок',
-            'plan_circulation'=>'Плановый тираж',
-            'printed_circulation'=>'Тираж по печати',
-            'label_price'=>'Цена этикетки',
-            'label_price_with_tax'=>'Цена этикетки с НДС',
+            'plan_circulation'=>'Плановый тираж, шт',
+            'printed_circulation'=>'Тираж по печати, шт',
+            'label_price'=>'Цена этикетки, руб',
+            'label_price_with_tax'=>'Цена этикетки с НДС, руб',
             'material_id'=>'Материал',
-            'sending'=>'Отправка',
+            'sending'=>'Отправка, шт',
             'manager_login'=>'Менеджер',
             'printer_login'=>'Печатник',
             'rewinder_login'=>'Перемотчик',
@@ -112,9 +113,9 @@ class Order extends ActiveRecord{
             'packer_login'=>'Упаковщик',
             'pants_id'=>'Штанец',
             'stretch'=>'Стретч лента',
-            'label_on_roll'=>'Этикеток на ролике',
+            'label_on_roll'=>'Этикеток на ролике, шт',
             'winding_id'=>'Намотка',
-            'sleeve_id'=>'Втулка',
+            'sleeve_id'=>'Втулка, мм',
             'cut_edge'=>'Обрезать кромки',
         ];
     }
@@ -130,5 +131,19 @@ class Order extends ActiveRecord{
             [['date_of_sale','date_of_create','date_of_variable_print_begin','date_of_packing_begin','date_of_rewind_begin',
                 'date_of_print_end','date_of_variable_print_end','date_of_rewind_end','date_of_packing_end'],'safe'],
         ];
+    }
+
+    public function beforeDelete()
+    {
+        if (!empty($this->orderMaterialList)) {
+            Yii::$app->session->setFlash('error','Заказ не может быть удален, на нем есть расход материала');
+            return false;
+        }
+        if (!empty($this->shipmentOrder)) {
+            Yii::$app->session->setFlash('error','Заказ не может быть удален, он находиться в отправке');
+            return false;
+        }
+        Yii::info("Заказ №".$this->id." удален пользователем ".Yii::$app->user->identity->username);
+        return parent::beforeDelete();
     }
 }

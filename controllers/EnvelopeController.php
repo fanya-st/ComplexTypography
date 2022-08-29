@@ -9,14 +9,10 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * EnvelopeController implements the CRUD actions for Envelope model.
- */
+
 class EnvelopeController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
+
     public function behaviors()
     {
         return [
@@ -33,11 +29,6 @@ class EnvelopeController extends Controller
         ];
     }
 
-    /**
-     * Lists all Envelope models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $searchModel = new EnvelopeSearch();
@@ -49,12 +40,7 @@ class EnvelopeController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Envelope model.
-     * @param int $id
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -62,11 +48,6 @@ class EnvelopeController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Envelope model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new Envelope();
@@ -84,13 +65,6 @@ class EnvelopeController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Envelope model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -104,13 +78,6 @@ class EnvelopeController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Envelope model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -118,13 +85,6 @@ class EnvelopeController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Envelope model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-     * @return Envelope the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Envelope::findOne(['id' => $id])) !== null) {

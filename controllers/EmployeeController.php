@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use app\models\UserSearch;
 use app\models\User;
 
 class EmployeeController extends Controller
@@ -18,8 +19,13 @@ class EmployeeController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list','qr-print','view'],
+                        'actions' => ['qr-print','view'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create','list','update','fire'],
+                        'roles' => ['admin'],
                     ],
 
                 ],
@@ -28,16 +34,49 @@ class EmployeeController extends Controller
     }
 
     public function actionList(){
-        $employees=User::getUserList();
-        return $this->render('list',compact('employees'));
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search($this->request->post());
+        return $this->render('list',compact('dataProvider','searchModel'));
     }
 
     public function actionView($username){
-        $employee=User::findByUsername($username);
+        $employee=User::findOne(['username'=>$username]);
         return $this->render('view',compact('employee'));
     }
 
     public function actionQrPrint($username){
         return $this->renderAjax('qr-code-print',compact('username'));
+    }
+
+    public function actionCreate()
+    {
+        $user=new User();
+        if ($this->request->isPost && $user->load($this->request->post())) {
+            if($user->validate() && $user->save()){
+                return $this->refresh();
+            }
+
+        }
+        return $this->render('create',compact('user'));
+    }
+
+    public function actionUpdate($id)
+    {
+        $user=User::findOne($id);
+        if ($this->request->isPost && $user->load($this->request->post())) {
+            if($user->validate() && $user->save()){
+                return $this->refresh();
+            }
+
+        }
+        return $this->render('update',compact('user'));
+    }
+
+    public function actionFire($id)
+    {
+        $user=User::findOne($id);
+        $user->status_id=1;
+        $user->save();
+        return $this->redirect(['list']);
     }
 }

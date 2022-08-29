@@ -4,12 +4,15 @@
 namespace app\controllers;
 
 
+use app\models\AuthItem;
 use app\models\Rack;
 use app\models\Region;
 use app\models\RegionSearch;
 use app\models\Shelf;
 use app\models\Street;
+use app\models\User;
 use app\models\Warehouse;
+use app\models\AuthItemSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\models\OrderSearch;
@@ -29,7 +32,10 @@ use app\models\CalcMashineParamValue;
 use app\models\CalcMashineParamValueSearch;
 use app\models\RackSearch;
 use app\models\ShelfSearch;
+use app\models\AuthAssignment;
+use app\models\AuthAssignmentSearch;
 use yii;
+use yii\web\NotFoundHttpException;
 
 class CmsController extends Controller
 {
@@ -41,20 +47,6 @@ class CmsController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['cms-panel','order-list','order-view','order-update','order-delete',
-                            'sleeve-index','sleeve-update','sleeve-create',
-                            'subject-index','subject-update','subject-create',
-                            'region-index','region-update','region-create',
-                            'town-index','town-update','town-create',
-                            'street-index','street-update','street-create',
-                            'warehouse-index','warehouse-update','warehouse-create','warehouse-delete',
-                            'rack-index','rack-update','rack-create','rack-delete',
-                            'shelf-index','shelf-update','shelf-create','shelf-delete',
-                            'calc-mashine-param-price-view','calc-mashine-param-price-update','calc-mashine-param-price-create','calc-mashine-param-price-index',
-                            'calc-common-params-index','calc-common-params-update','calc-common-params-create',
-                            'customer-index','customer-update',
-                            'label-index','label-update',
-                            ],
                         'roles' => ['admin'],
                     ],
 
@@ -93,17 +85,8 @@ class CmsController extends Controller
     public function actionOrderDelete($id)
     {
         $order = Order::findOne($id);
-        if(!empty($order->orderMaterialList)){
-            Yii::$app->session->setFlash('error','Заказ не может быть удален, на нем есть расход материала');
-            return $this->redirect(['cms/order-view','id'=>$order->id]);
-        }elseif(!empty($order->shipmentOrder)){
-            Yii::$app->session->setFlash('error','Заказ не может быть удален, он находиться в отправке');
-            return $this->redirect(['cms/order-view','id'=>$order->id]);
-        }else{
-            $order->delete();
-            Yii::info("Заказ №".$id." удален пользователем ".Yii::$app->user->identity->username);
-            return $this->runAction('order-list');
-        }
+        $order->delete();
+        return $this->redirect(['order-list']);
     }
 
     /*Редактирование списка втулок*/
@@ -159,12 +142,12 @@ class CmsController extends Controller
             'model' => $model,
         ]);
     }
-    public function actionSleeveDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['sleeve-index']);
-    }
+//    public function actionSleeveDelete($id)
+//    {
+//        $this->findModel($id)->delete();
+//
+//        return $this->redirect(['sleeve-index']);
+//    }
 
     /*Редактировние списка субъектов РФ*/
 
@@ -209,12 +192,12 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionSubjectDelete($id)
-    {
-        Subject::findOne($id)->delete();
-
-        return $this->redirect(['subject-index']);
-    }
+//    public function actionSubjectDelete($id)
+//    {
+//        Subject::findOne($id)->delete();
+//
+//        return $this->redirect(['subject-index']);
+//    }
 
     /*Редактирование списка регионов*/
 
@@ -259,12 +242,12 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionRegionDelete($id)
-    {
-        Region::findOne($id)->delete();
-
-        return $this->redirect(['region-index']);
-    }
+//    public function actionRegionDelete($id)
+//    {
+//        Region::findOne($id)->delete();
+//
+//        return $this->redirect(['region-index']);
+//    }
 
     /*Редактирование адм.центров*/
 
@@ -311,12 +294,12 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionTownDelete($id)
-    {
-        Town::findOne($id)->delete();
-
-        return $this->redirect(['town-index']);
-    }
+//    public function actionTownDelete($id)
+//    {
+//        Town::findOne($id)->delete();
+//
+//        return $this->redirect(['town-index']);
+//    }
 
     /*Редактирование списка улиц*/
 
@@ -361,12 +344,12 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionStreetDelete($id)
-    {
-        Street::findOne($id)->delete();
-
-        return $this->redirect(['street-index']);
-    }
+//    public function actionStreetDelete($id)
+//    {
+//        Street::findOne($id)->delete();
+//
+//        return $this->redirect(['street-index']);
+//    }
 
     /*Редактирование заказчиков*/
 
@@ -395,12 +378,12 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionCustomerDelete($id)
-    {
-        CustomerForm::findOne($id)->delete();
-
-        return $this->redirect(['customer-index']);
-    }
+//    public function actionCustomerDelete($id)
+//    {
+//        CustomerForm::findOne($id)->delete();
+//
+//        return $this->redirect(['customer-index']);
+//    }
 
     /*Редактирование этикеток*/
 
@@ -428,12 +411,12 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionLabelDelete($id)
-    {
-        Label::findOne($id)->delete();
-
-        return $this->redirect(['label-index']);
-    }
+//    public function actionLabelDelete($id)
+//    {
+//        Label::findOne($id)->delete();
+//
+//        return $this->redirect(['label-index']);
+//    }
 
     /*Редактирование общих параметров для калькулятора*/
 
@@ -714,4 +697,136 @@ class CmsController extends Controller
 
         return $this->redirect(['shelf-index']);
     }
+
+
+    /*Редактирование состав сотрудников в группах */
+
+    public function actionAuthAssignIndex()
+    {
+        $searchModel = new AuthAssignmentSearch();
+        $dataProvider = $searchModel->search($this->request->post());
+
+        return $this->render('auth-assignment\index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionAuthAssignCreate()
+    {
+        $model = new AuthAssignment();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['auth-assign-index']);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('auth-assignment\create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionAuthAssignUpdate($item_name, $user_id)
+    {
+        $model = $this->findModelAuthAssign($item_name, $user_id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['auth-assign-index']);
+        }
+
+        return $this->render('auth-assignment\update', [
+            'model' => $model,
+        ]);
+    }
+
+
+    public function actionAuthAssignDelete($item_name, $user_id)
+    {
+        $this->findModelAuthAssign($item_name, $user_id)->delete();
+
+        return $this->redirect(['auth-assign-index']);
+    }
+
+    protected function findModelAuthAssign($item_name, $user_id)
+    {
+        if (($model = AuthAssignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+    /*Редактирование групп сотрудников*/
+
+    public function actionAuthItemIndex()
+    {
+        $searchModel = new AuthItemSearch();
+        $dataProvider = $searchModel->search($this->request->post());
+
+        return $this->render('auth-item\index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    public function actionAuthItemView($name)
+    {
+        return $this->render('auth-item\view', [
+            'model' => $this->findModelAuthItem($name),
+        ]);
+    }
+
+
+    public function actionAuthItemCreate()
+    {
+        $model = new AuthItem();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['auth-item-view', 'name' => $model->name]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('auth-item\create', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionAuthItemUpdate($name)
+    {
+        $model = $this->findModelAuthItem($name);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['auth-item-view', 'name' => $model->name]);
+        }
+
+        return $this->render('auth-item\update', [
+            'model' => $model,
+        ]);
+    }
+
+
+    public function actionAuthItemDelete($name)
+    {
+        $this->findModelAuthItem($name)->delete();
+
+        return $this->redirect(['auth-item-index']);
+    }
+
+    protected function findModelAuthItem($name)
+    {
+        if (($model = AuthItem::findOne(['name' => $name])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('Запрашиваемая страница не существует.');
+    }
+
 }

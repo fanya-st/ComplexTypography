@@ -11,9 +11,7 @@ use app\models\User;
 use kartik\daterange\DateRangePicker;
 use app\models\Mashine;
 use app\models\LabelStatus;
-use kartik\icons\FontAwesomeAsset;
 use kartik\label\LabelInPlace;
-FontAwesomeAsset::register($this);
 
 ?>
     <div class="order-search">

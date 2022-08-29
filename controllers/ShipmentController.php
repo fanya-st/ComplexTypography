@@ -15,6 +15,7 @@ use app\models\Customer;
 use app\models\OrderShipmentSearch;
 use yii;
 use app\models\ShipmentSearch;
+use yii\web\ForbiddenHttpException;
 
 class ShipmentController extends Controller
 {
@@ -26,16 +27,8 @@ class ShipmentController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create','list','view'],
+                        'actions' => ['create','list','view','delete','order-add','mark-defect-roll','close-shipment','order-add'],
                         'roles' => ['manager'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['delete','order-add','mark-defect-roll','close-shipment'],
-                        'roles' => ['updateOwnShipmentManager','manager_admin'],
-                        'roleParams' => function() {
-                            return ['customer' => Shipment::findOne(['id' => Yii::$app->request->get('id')])];
-                        },
                     ],
                     [
                         'allow' => true,
@@ -127,8 +120,11 @@ class ShipmentController extends Controller
     public function actionOrderAdd($id)
     {
         $shipment = Shipment::findOne($id);
+        if (!\Yii::$app->user->can('updateShipment', ['item' => $shipment])) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         $searchModel = new OrderShipmentSearch();
-        $add_order = $searchModel->search(Yii::$app->request->post());
+        $add_order = $searchModel->search($this->request->post());
         if(Yii::$app->request->post('selection')){
             $selected=Yii::$app->request->post('selection');
             foreach($selected as $order_id){

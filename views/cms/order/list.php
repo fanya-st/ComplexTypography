@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'headerOptions' => ['class' => 'text-center','style' => 'width:10%'],
         ],
         ['class' => 'yii\grid\ActionColumn',
-            'template' => '{view} {update}',
+            'template' => '{view} {update} {delete}',
             'contentOptions' => ['style' => 'width:40%'],
             'buttons' => [
                 'view' => function($url, $model, $key) {     // render your custom button
@@ -94,7 +94,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'update' => function($url, $model, $key) {     // render your custom button
                     return Html::a(Html::button( Icon::show('edit', ['class'=>'fa-0.5x'], Icon::FA),
                         ['class' => 'btn btn-outline-primary']), ['cms/order-update', 'id' => $model->id], ['class' => 'profile-link']);
-                }
+                },
+                'delete' => function($url, $model, $key) {     // render your custom button
+                    return Html::a(Html::button( Icon::show('minus', ['class'=>'fa-0.5x'], Icon::FA),
+                        ['class' => 'btn btn-outline-danger']), ['cms/order-delete', 'id' => $model->id], ['class' => 'profile-link']);
+                },
+
             ]
         ],
     ],

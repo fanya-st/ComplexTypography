@@ -43,9 +43,9 @@ echo GridView::widget([
             'filter' => ArrayHelper::map(Customer::find()->where(['status_id'=>1])->asArray()->all(),'id','name')
         ],
         'orderStatus.name',
-        'mashine.name',
+//        'mashine.name',
         'plan_circulation',
-        'circulationCountSend',
+//        'circulationCountSend',
     ],
 ]);
 ActiveForm::end();

@@ -24,6 +24,11 @@ class BusinessTripEmployeeController extends Controller
                         'actions' => ['index','create','update','view'],
                         'roles' => ['manager'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['admin'],
+                    ],
 
                 ],
             ],

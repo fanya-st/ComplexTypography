@@ -61,7 +61,7 @@ class Pants extends ActiveRecord
             [['picture'],'string','max'=>100],
             [['radius','gap','width_label','height_label'],'double'],
             [['picture'],'safe'],
-            [['pants_kind_id','knife_kind_id','shaft_id','material_group_id','knife_width','paper_width','cuts','radius','gap','name','width_label','height_label'],'required'],
+            [['pants_kind_id','knife_kind_id','shaft_id','material_group_id','knife_width','paper_width','cuts','radius','gap','width_label','height_label'],'required'],
         ];
     }
 }

@@ -5,7 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-    'name' => 'Комплекс Типография &copy;',
+    'name' => 'Комплекс Типография',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'timeZone' => 'Europe/Moscow',
@@ -25,7 +25,8 @@ $config = [
             'cookieValidationKey' => '_gaylA8L4sBKm1FAz1aL7JXZyF22RRyE',
         ],
 		'authManager' => [
-        'class' => 'yii\rbac\PhpManager',
+//		    'class' => 'yii\rbac\PhpManager',
+            'class' => 'yii\rbac\DbManager',
     ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -66,14 +67,15 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+//        'urlManager' => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//            'rules' => [
+//                'orders' => 'order/list',
+//                'order/<id:\d+>' => 'order/view',
+//            ],
+//        ],
+
     ],
     'modules' => [
         'gridview' =>  [

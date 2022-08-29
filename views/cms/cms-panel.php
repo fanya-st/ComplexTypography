@@ -34,10 +34,11 @@ $this->title = 'Комплекс Типография CMS-Панель';
                 <p><a class="btn btn-outline-secondary" href="?r=cms/town-index">Редактирование списка адм.центров &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/street-index">Редактирование списка улиц &raquo;</a></p>
             </div>
-<!--            <div class="col-lg-4">-->
-<!--                <h2>Редактирование сотрудников</h2>-->
-<!--                <p><a class="btn btn-outline-secondary" href="?r=time-tracker/kiosk">Список сотрудников &raquo;</a></p>-->
-<!--            </div>-->
+            <div class="col-lg-4">
+                <h2>Редактирование сотрудников</h2>
+                <p><a class="btn btn-outline-secondary" href="?r=user/create">Добавить сотрудника &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=cms/auth-assign-index">Привязка сотрудников к группам &raquo;</a></p>
+            </div>
             <div class="col-lg-4">
                 <h2>Редактирование параметров калькулятора</h2>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/calc-common-params-index">Редактирование общих параметров &raquo;</a></p>

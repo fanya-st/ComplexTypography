@@ -134,12 +134,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <li class="list-group-item">Длительность заказа, ч: <?=round($order->order_time,2)?></li>
                             <li class="list-group-item">Факт. тираж: <?=$order->actual_circulation?></li>
                             <li class="list-group-item">Факт. отправлено: <?=$order->circulationCountSend?></li>
-                            <li class="list-group-item">Себестомость тиража, руб: <?=round($order->circulation_price,2)?></li>
-                            <li class="list-group-item">Себестомость этикетки, руб: <?=round($order->one_label_material_price,2)?></li>
-                            <li class="list-group-item">Цена этикетки НДС, руб: <?=round($order->label_price_with_tax,2)?></li>
-                            <li class="list-group-item">Цена тиража по отгрузке НДС, руб: <?=round($order->order_send_price,2)?></li>
+                            <li class="list-group-item">Себестомость тиража, руб: <?=round($order->circulation_price,3)?></li>
+                            <li class="list-group-item">Себестомость этикетки, руб: <?=round($order->one_label_material_price,3)?></li>
+                            <li class="list-group-item">Цена этикетки НДС, руб: <?=round($order->label_price_with_tax,3)?></li>
+                            <li class="list-group-item">Цена тиража по отгрузке НДС, руб: <?=round($order->order_send_price,3)?></li>
                             <li class="list-group-item">Коэфф. эффективности: <span class="badge bg-primary"><?=round($order->efficiency_ratio,3)?></span></li>
-                            <li class="list-group-item <?if($order->order_income>=0) echo 'bg-success'; else echo 'bg-danger';?>">Доход, руб: <?=round($order->order_income,2)?></li>
+                            <li class="list-group-item <?if($order->order_income>=0) echo 'bg-success'; else echo 'bg-danger';?>">Доход, руб: <?=round($order->order_income,3)?></li>
                         </ul>
                     </td>
                 </tr>

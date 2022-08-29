@@ -18,7 +18,7 @@ class FinishedProductsWarehouseController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['surplus-list','view'],
+                        'actions' => ['surplus-list'],
                         'roles' => ['manager','logistician'],
                     ],
 

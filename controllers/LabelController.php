@@ -2,10 +2,7 @@
 
 
 namespace app\controllers;
-//namespace app\models;
 
-use app\models\Combination;
-use app\models\CombinationForm;
 use app\models\CustomNav;
 use app\models\DesignFileForm;
 use app\models\Form;
@@ -13,11 +10,9 @@ use app\models\FormOrderHistory;
 use app\models\LabelForm;
 use app\models\Order;
 use app\models\PhotoOutput;
-use app\models\PrepressForm;
 use Yii;
 use app\models\Label;
 use app\models\LabelSearch;
-use yii\base\BaseObject;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -26,6 +21,7 @@ use yii\web\Response;
 use app\models\PrepressFileForm;
 use yii\data\ActiveDataProvider;
 use app\models\Envelope;
+use yii\web\ForbiddenHttpException;
 
 class LabelController extends Controller
 {
@@ -37,72 +33,22 @@ class LabelController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list','create','view'],
+                        'actions' => ['list','create','view','update','create-same','approve-design'],
                         'roles' => ['manager'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['update'],
-                        'roles' => ['updateOwnLabelManager','designer_admin','manager_admin'],
-                        'roleParams' => function() {
-                            return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
-                        },
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['approve-design'],
-                        'roles' => ['updateOwnLabelManager','manager_admin'],
-                        'roleParams' => function() {
-                            return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
-                        },
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['design-ready'],
-                        'roles' => ['allowToDesignReadyRule','designer_admin'],
-                        'roleParams' => function() {
-                            return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
-                        },
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['list','view','create-design'],
+                        'actions' => ['design-ready','list','view','create-design'],
                         'roles' => ['designer'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['create-same'],
-                        'roles' => ['updateOwnLabelManager','manager_admin','designer_admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['list','view','create-prepress','re-prepress'],
+                        'actions' => ['list','view','create-prepress','re-prepress','prepress-delete-form','prepress-ready'],
                         'roles' => ['prepress'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['prepress-delete-form'],
-                        'roles' => ['prepress'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['prepress-ready','combinate-label','decombinate-label'],
-                        'roles' => ['allowToPrepressReadyRule'],
-                        'roleParams' => function() {
-                            return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
-                        },
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['flexform-ready'],
-                        'roles' => ['allowToFlexformReadyRule'],
-                        'roleParams' => function() {
-                            return ['label' => Label::findOne(['id' => Yii::$app->request->get('id')])];
-                        },
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['list','view','create-flexform','re-flexform-ready'],
+                        'actions' => ['list','view','create-flexform','re-flexform-ready','flexform-ready','combinate-label','decombinate-label'],
                         'roles' => ['laboratory'],
                     ],
                     [
@@ -162,6 +108,12 @@ class LabelController extends Controller
     public function actionUpdate($id)
     {
         $label=Label::findOne($id);
+        if (!\Yii::$app->user->can('updateLabel', ['item' => $label->customer])) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
+        if ($label->status_id >=9 ) {
+            throw new ForbiddenHttpException('Нельзя вносить изменения в этикетку когда изготовливаются формы');
+        }
         if($label->load(Yii::$app->request->post())){
             if ($label->save()){
                 return $this->redirect(['label/view','id'=>$id]);
@@ -207,48 +159,51 @@ class LabelController extends Controller
     public function actionCreateDesign($id)
     {
         $label=Label::findOne($id);
-            if ($label->status_id==1 and ($label->designer_login == null OR $label->designer_login==Yii::$app->user->identity->username)){
-                    $label->status_id=2;
-                    $label->designer_login=Yii::$app->user->identity->username;
-                if ($label->save()){
-                    Yii::$app->session->setFlash('success','Дизайн создан');
-                }
-            }else{
-                Yii::$app->session->setFlash('error','Ошибка');
-            }
+        if ($label->status_id != 1 AND ($label->designer_login != null OR $label->designer_login!=Yii::$app->user->identity->username) ) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
+        $label->status_id=2;
+        $label->designer_login=Yii::$app->user->identity->username;
+        if ($label->save()){
+            Yii::$app->session->setFlash('success','Дизайн создан');
+        }
         return $this->redirect(['label/view','id'=>$id]);
     }
     public function actionCreatePrepress($id)
     {
         $label=Label::findOne($id);
-            if ($label->status_id==4 or $label->status_id==5){
+        if ($label->status_id != 4 OR $label->status_id!=5) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
                 $label->status_id=6;
                 $label->prepress_login=Yii::$app->user->identity->username;
                 if ($label->save()){
                     Yii::$app->session->setFlash('success','Этикетка взята в Prepress');
                 }
-            }else{
-                Yii::$app->session->setFlash('error','Этикетка не может быть взята в препресс');
-            }
         return $this->redirect(['label/view','id'=>$id]);
     }
     public function actionApproveDesign($id)
     {
+
         $label=Label::findOne($id);
-            if ($label->status_id==3){
+        if (!\Yii::$app->user->can('updateLabel', ['item' => $label->customer])) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
+        if ($label->status_id != 3 ) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
                 $label->status_id=4;
                 if ($label->save()){
                     Yii::$app->session->setFlash('success','Дизайн утвержден');
                 }
-            }else{
-                Yii::$app->session->setFlash('error','Дизайн еще не готов');
-            }
         return $this->redirect(['label/view','id'=>$id]);
     }
     public function actionCreateFlexform($id)
     {
         $label = Label::findOne($id);
-        if($label->status_id==7 OR $label->status_id==8){
+        if ($label->status_id != 7 OR $label->status_id != 8) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if (!empty($label->combinatedLabel)) {
             foreach ($label->combinatedLabel as $label_id) {
                 $l = Label::findOne($label_id);
@@ -267,16 +222,17 @@ class LabelController extends Controller
                 Yii::$app->session->setFlash('error', 'Ошибка');
             }
         }
-    }else{
-            Yii::$app->session->setFlash('error', 'Ошибка этикетка не готова для изготовления форм');
-        }
         return $this->redirect(['label/view','id'=>$id]);
     }
 
 
     public function actionFlexformReady($id)
     {
+
         $cur_label=Label::findOne($id);
+        if ($cur_label->status_id != 9) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         $flexform=new Form();
         $envelope=new Envelope();
         /*Поиск форм для этикетки*/
@@ -335,6 +291,13 @@ class LabelController extends Controller
     {
         $design_file=DesignFileForm::findOne($id);
         $label = LabelForm::findOne($id);
+        if (!\Yii::$app->user->can('designReadyLabel', ['item' => $label])) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
+
+        if ($label->status_id != 2) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if ($label->load(Yii::$app->request->post())&&$design_file->load(Yii::$app->request->post())) {
             $design_file->image_file=UploadedFile::getInstance($design_file, 'image_file');
             $design_file->image_crop_file=UploadedFile::getInstance($design_file, 'image_crop_file');
@@ -361,6 +324,9 @@ class LabelController extends Controller
     public function actionPrepressReady($id)
     {
         $label=Label::findOne($id);
+        if ($label->status_id != 6) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         $new_form=new Form();
         $new_form->lpi=154;
         $prepress_file=PrepressFileForm::findOne($id);
@@ -406,7 +372,11 @@ class LabelController extends Controller
     /*Совмещение этикетки*/
     public function actionCombinateLabel($id)
     {
+
         $label=Label::findOne($id);
+        if ($label->status_id > 4) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if ($label->load(Yii::$app->request->post()) && $label->validate()) {
             if($label->combinateLabel())
                 return $this->redirect(['label/view', 'id' => $id]);
@@ -434,6 +404,9 @@ class LabelController extends Controller
     {
         $prepress_file=PrepressFileForm::findOne($id);
         $cur_label=Label::findOne($id);
+        if ($cur_label->status_id != 5) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if(isset($cur_label->combination))
             $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination->combination_id])->column();
         else $forms_id=Form::find()->select('id')->where(['label_id'=>$cur_label->id])->column();
@@ -465,7 +438,11 @@ class LabelController extends Controller
 
     public function actionReFlexformReady($id)
     {
+
         $cur_label=Label::findOne($id);
+        if ($cur_label->status_id != 9) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if(isset($cur_label->combination))
             $forms_id=Form::find()->select('id')->where(['combination_id'=>$cur_label->combination->combination_id])->column();
         else $forms_id=Form::find()->select('id')->where(['label_id'=>$cur_label->id])->column();

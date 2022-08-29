@@ -4,10 +4,7 @@
 namespace app\models;
 
 
-use yii\base\Model;
-use yii\helpers\ArrayHelper;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class FinancialReport extends Order
 {
@@ -391,7 +388,7 @@ class FinancialReport extends Order
 
     }
 
-    public function excel($orders,$searchModel){
+    public static function excel($orders,$searchModel){
         //Создаем экземпляр класса электронной таблицы
                 $spreadsheet = new Spreadsheet();
                 //Получаем текущий активный лист

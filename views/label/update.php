@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col">
                 <?=$form->field($label,'variable')->checkbox()?>
                 <?=$form->field($label,'print_on_glue')->checkbox()?>
-                <?=$form->field($label,'embossing')->checkbox()?>
             </div>
         </div>
     </div>

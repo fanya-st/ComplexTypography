@@ -54,7 +54,7 @@ class LabelSearch extends Label
         }
 
         // изменяем запрос добавляя в его фильтрацию
-        $query->andFilterWhere(['id' => $this->id]);
+        $query->andFilterWhere(['label.id' => $this->id]);
         $query->andFilterWhere(['like', 'name', $this->name]);
         $query->andFilterWhere(['designer_login'=> $this->designer_login]);
         $query->joinWith(['customer' => function ($q) {

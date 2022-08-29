@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'headerOptions'=>['class' => 'text-center']
                 ],
                 [
-                        'attribute'=>'pants.name',
+                        'attribute'=>'pants.id',
                     'label'=>'Штанец',
                     'headerOptions'=>['class' => 'text-center'],
                     'contentOptions'=>['class' => 'text-center'],

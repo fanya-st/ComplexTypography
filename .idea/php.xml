@@ -132,6 +132,8 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-datetimepicker" />
       <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
       <path value="$PROJECT_DIR$/vendor/skeeks/yii2-mobile-detect" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/strength-meter" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-password" />
     </include_path>
   </component>
 </project>

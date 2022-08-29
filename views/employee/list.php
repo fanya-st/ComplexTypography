@@ -1,44 +1,81 @@
 <?php
 use yii\bootstrap5\Html;
+use kartik\grid\GridView;
+use yii\bootstrap5\ActiveForm;
+use kartik\icons\Icon;
 
 $this->title = 'Сотрудники';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
-<!--<pre>--><?//print_r($employees)?><!--</pre>-->
-<div class="border p-2 rounded">
-    <div class="table-responsive">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">ФИО</th>
-            <th scope="col">Логин</th>
-            <th scope="col">Должность</th>
-            <th scope="col">Начало р-го дня</th>
-            <th scope="col">Конец р-го дня</th>
-            <th scope="col">QR-код</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?foreach ($employees as $employee):?>
-            <tr>
-                <td><?=Html::encode($employee['id'])?></td>
-                <td><?=Html::encode($employee['F'].' '.$employee['I'].' '.$employee['O'])?></td>
-                <td><?=Html::encode($employee['username'])?></td>
-                <td>
-                    <?foreach ($employee['group'] as $group):?>
-                        <h6 class="badge bg-success"><?=Html::encode($group->roleName)?></h6>
-                    <?endforeach;?>
-                </td>
-                <td><?=Html::encode($employee['start_time'])?></td>
-                <td><?=Html::encode($employee['end_time'])?></td>
-                <td>
-                    <?=Html::a('QR-код', ['employee/qr-print','username'=>$employee['username']], ['class'=>'btn btn-primary','target' => '_blank'])?>
-                </td>
-            </tr>
-        <?endforeach;?>
-        </tbody>
-    </table>
-    </div>
+
+<div class="d-lg-inline-flex">
+    <?=Html::tag('div',Html::a('Добавить сотрудника', ['employee/create'], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
 </div>
+
+<?ActiveForm::begin(['method'=>'post'])?>
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => [
+        [
+                'attribute'=>'id',
+            'contentOptions'=>['class' => 'text-center'],
+            'headerOptions' => ['class' => 'text-center'],
+        ],
+        'username',
+        'F',
+        'I',
+        'O',
+        [
+                'label'=>'Группа',
+                'format'=>'raw',
+                'value'=>function($model){
+                    foreach (Yii::$app->authManager->getRolesByUser($model->id) as $group){
+                        $result.=html::tag('h6',Html::encode($group->description),['class'=>'badge bg-success m-1']);
+                    }
+                    return $result;
+                },
+            'contentOptions'=>['class' => 'text-center'],
+            'headerOptions' => ['class' => 'text-center'],
+        ],
+        [
+                'attribute'=>'status_id',
+                'format'=>'raw',
+                'value'=>function($model){
+                        if($model->status_id==0)
+                            return html::tag('h6','Работает',['class'=>'badge bg-success']);
+                        else
+                            return html::tag('h6','Уволен',['class'=>'badge bg-danger']);
+                },
+            'contentOptions'=>['class' => 'text-center'],
+            'headerOptions' => ['class' => 'text-center'],
+            'filter'=>[0=>'Работает',1=>'Уволен'],
+        ],
+        [
+                'label'=>'QR-код',
+                'format'=>'raw',
+                'value'=>function($model){
+                    return Html::a('QR-код', ['employee/qr-print','username'=>$model->username], ['class'=>'btn btn-primary','target' => '_blank']);
+                },
+            'contentOptions'=>['class' => 'text-center'],
+            'headerOptions' => ['class' => 'text-center','style'=>'width:10%;'],
+        ],
+        ['class' => 'yii\grid\ActionColumn',
+            'template' => '{update} {delete}',
+            'buttons' => [
+                'update' => function($url, $model, $key) {     // render your custom button
+                    return Html::a(Html::button( Icon::show('edit'),
+                        ['class' => 'btn btn-outline-success']), ['employee/update', 'id' => $model->id]);
+                },
+                'delete' => function($url, $model, $key) {     // render your custom button
+                    return Html::a(Html::button( Icon::show('minus'),
+                        ['class' => 'btn btn-outline-danger']), ['employee/fire', 'id' => $model->id]);
+                }
+            ],
+            'contentOptions'=>['class' => 'text-center'],
+            'headerOptions' => ['class' => 'text-center','style'=>'width:10%;'],
+        ],
+    ],
+]); ?>
+<?ActiveForm::end()?>

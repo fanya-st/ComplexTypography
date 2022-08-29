@@ -27,6 +27,16 @@ class OrderSearch extends Order
             [['customerId','name','label_id','id','manager_login','shaft_id','date_of_create','status_id','pantsId','mashine_id','label_status_id'], 'safe'],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'labelName'=>'Наименование',
+            'id'=>'№ заказа',
+            'label_id'=>'№ этикетки',
+        ];
+    }
+
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class

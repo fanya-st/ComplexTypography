@@ -15,6 +15,7 @@ use yii;
 use yii\web\Response;
 use yii\helpers\ArrayHelper;
 use app\models\CustomerSearch;
+use yii\web\ForbiddenHttpException;
 
 class CustomerController extends Controller
 {
@@ -26,18 +27,9 @@ class CustomerController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create','region','town','street','list','view'],
+                        'actions' => ['create','region','town','street','list','view','update'],
                         'roles' => ['manager'],
                     ],
-                    [
-                        'allow' => true,
-                        'actions' => ['update'],
-                        'roles' => ['updateOwnCustomerManager','manager_admin'],
-                        'roleParams' => function() {
-                            return ['customer' => Customer::findOne(['id' => Yii::$app->request->get('id')])];
-                        },
-                    ],
-
                 ],
             ],
         ];
@@ -62,6 +54,9 @@ class CustomerController extends Controller
     public function actionUpdate($id)
     {
         $customer = CustomerForm::findOne($id);
+        if (!\Yii::$app->user->can('updateCustomer',['item'=>$customer])) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if ($customer->load(Yii::$app->request->post()) && $customer->validate(Yii::$app->request->post())) {
             if($customer->save()){
                 Yii::$app->session->setFlash('success', 'Обновлено');

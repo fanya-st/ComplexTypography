@@ -118,9 +118,11 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\sidenav\\' => 15,
             'kartik\\select2\\' => 15,
             'kartik\\plugins\\tabs\\' => 20,
+            'kartik\\plugins\\strengthmeter\\' => 29,
             'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\plugins\\depdrop\\' => 23,
             'kartik\\plugins\\checkbox\\' => 24,
+            'kartik\\password\\' => 16,
             'kartik\\mpdf\\' => 12,
             'kartik\\label\\' => 13,
             'kartik\\icons\\' => 13,
@@ -303,6 +305,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/kartik-v/bootstrap-tabs-x',
         ),
+        'kartik\\plugins\\strengthmeter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/strength-meter',
+        ),
         'kartik\\plugins\\fileinput\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
@@ -314,6 +320,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\plugins\\checkbox\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/bootstrap-checkbox-x',
+        ),
+        'kartik\\password\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-password/src',
         ),
         'kartik\\mpdf\\' => 
         array (

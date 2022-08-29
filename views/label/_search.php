@@ -64,15 +64,15 @@ FontAwesomeAsset::register($this);
         ])->label(false)?>
     </div>
     <div class="col">
-        <?=$form->field($model,'shaft_id')->widget(Select2::classname(), [
-            'data' => ArrayHelper::map(Shaft::find()->all(), 'id', 'name'),
-            'options' => ['placeholder' => 'Выбрать вал'],
-            'pluginOptions' => [
-                'allowClear' => true,
-            ],
-        ])->label(false)?>
-        <?= $form->field($model, 'pants_id')->widget(Select2::classname(), [
-            'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'name'),
+<!--        --><?//=$form->field($model,'shaft_id')->widget(Select2::classname(), [
+//            'data' => ArrayHelper::map(Shaft::find()->all(), 'id', 'name'),
+//            'options' => ['placeholder' => 'Выбрать вал'],
+//            'pluginOptions' => [
+//                'allowClear' => true,
+//            ],
+//        ])->label(false)?>
+        <?= $form->field($model, 'pants_id')->widget(Select2::class, [
+            'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
             'options' => ['placeholder' => 'Выбрать штанец'],
             'pluginOptions' => [
                 'allowClear' => true

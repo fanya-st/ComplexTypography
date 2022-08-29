@@ -1,14 +1,8 @@
 <?php
 namespace app\commands;
 
-use app\rbac\UpdateOwnLabelDesigner;
-use app\rbac\UpdateOwnLabelManager;
-use app\rbac\AllowToPrepressReadyRule;
-use app\rbac\AllowToDesignReadyRule;
-use app\rbac\AllowToFlexformReadyRule;
-use app\rbac\AllowToEditShipment;
-use app\rbac\AllowToEditOrder;
-use app\rbac\AllowToEditCustomer;
+use app\rbac\DesignerRule;
+use app\rbac\ManagerRule;
 use Yii;
 use yii\console\Controller;
 
@@ -17,76 +11,54 @@ class RbacController extends Controller
     public function actionInit()
     {
         $auth = Yii::$app->authManager;
+        $auth->removeAll();
 
-        // добавляем разрешение "list_of_orders"
-        /*$permit_to_manager = $auth->createPermission('permit_to_manager');
-        $permit_to_manager->description = 'list of orders';
-        $auth->add($permit_to_manager);*/
-        $labelOwnerDesigner = new UpdateOwnLabelDesigner();
-        $auth->add($labelOwnerDesigner);
+        // добавляем разрешения
+        $designerRule = new DesignerRule();
+        $auth->add($designerRule);
 
-        $shipmentOwnerManager = new AllowToEditShipment();
-        $auth->add($shipmentOwnerManager);
+        $managerRule = new ManagerRule();
+        $auth->add($managerRule);
 
-        $allowToEditOrder = new AllowToEditOrder();
-        $auth->add($allowToEditOrder);
+        //Редактирование этикетки
+        $updateLabel = $auth->createPermission('updateLabel');
+        $updateLabel->description = 'Редактирование этикетки';
+        $auth->add($updateLabel);
 
-        $allowToEditCustomer = new AllowToEditCustomer();
-        $auth->add($allowToEditCustomer);
+        //Редактирование заказа
+        $updateOrder = $auth->createPermission('updateOrder');
+        $updateOrder->description = 'Редактирование заказа';
+        $auth->add($updateOrder);
 
-        $labelOwnerManager = new UpdateOwnLabelManager();
-        $auth->add($labelOwnerManager);
+        //Редактирование отгрузки
+        $updateShipment = $auth->createPermission('updateShipment');
+        $updateShipment->description = 'Редактирование отгрузки';
+        $auth->add($updateShipment);
 
-        $labelinprepress = new AllowToPrepressReadyRule();
-        $auth->add($labelinprepress);
+        //Отметка о дизайн готов
+        $designReadyLabel = $auth->createPermission('designReadyLabel');
+        $designReadyLabel->description = 'Отметка о дизайн готов';
+        $auth->add($designReadyLabel);
 
-        $labelindesign = new AllowToDesignReadyRule();
-        $auth->add($labelindesign);
 
-        $labelinlaboratory = new AllowToFlexformReadyRule();
-        $auth->add($labelinlaboratory);
+        //Редактирование заказчика
+        $updateCustomer = $auth->createPermission('updateCustomer');
+        $updateCustomer->description = 'Редактирование заказчика';
+        $auth->add($updateCustomer);
 
-        $updateOwnLabelDesigner = $auth->createPermission('updateOwnLabelDesigner');
-        $updateOwnLabelDesigner->description = 'Update own label by designer';
-        $updateOwnLabelDesigner->ruleName = $labelOwnerDesigner->name;
-        $auth->add($updateOwnLabelDesigner);
+        //Редактирование своего ресурса(менеджер)
+        $updateByOwnerManager = $auth->createPermission('updateByOwnerManager');
+        $updateByOwnerManager->description = 'Редактирование своего ресурса(менеджер)';
+        $updateByOwnerManager->ruleName = $managerRule->name;
+        $auth->add($updateByOwnerManager);
 
-        $updateOwnShipmentManager = $auth->createPermission('updateOwnShipmentManager');
-        $updateOwnShipmentManager->description = 'Update own shipment by manager';
-        $updateOwnShipmentManager->ruleName = $shipmentOwnerManager->name;
-        $auth->add($updateOwnShipmentManager);
+        //Редактирование своего ресурса(дизайнер)
+        $designReadyOwnLabel = $auth->createPermission('designReadyOwnLabel');
+        $designReadyOwnLabel->description = 'Редактирование своего ресурса(дизайнер)';
+        $designReadyOwnLabel->ruleName = $designerRule->name;
+        $auth->add($designReadyOwnLabel);
 
-        $updateOwnCustomerManager = $auth->createPermission('updateOwnCustomerManager');
-        $updateOwnCustomerManager->description = 'updateOwnCustomerManager';
-        $updateOwnCustomerManager->ruleName = $allowToEditCustomer->name;
-        $auth->add($updateOwnCustomerManager);
-
-        $updateOwnOrderManager = $auth->createPermission('updateOwnOrderManager');
-        $updateOwnOrderManager->description = 'Update own order by manager';
-        $updateOwnOrderManager->ruleName = $allowToEditOrder->name;
-        $auth->add($updateOwnOrderManager);
-
-        $allowToFlexformReadyRule = $auth->createPermission('allowToFlexformReadyRule');
-        $allowToFlexformReadyRule->description = 'Update own label by designer';
-        $allowToFlexformReadyRule->ruleName = $labelinlaboratory->name;
-        $auth->add($allowToFlexformReadyRule);
-
-        $updateOwnLabelManager = $auth->createPermission('updateOwnLabelManager');
-        $updateOwnLabelManager->description = 'Update own label by manager';
-        $updateOwnLabelManager->ruleName = $labelOwnerManager->name;
-        $auth->add($updateOwnLabelManager);
-
-        $allowToPrepressReadyRule = $auth->createPermission('allowToPrepressReadyRule');
-        $allowToPrepressReadyRule->description = 'prepress ready if it in prepress';
-        $allowToPrepressReadyRule->ruleName = $labelinprepress->name;
-        $auth->add($allowToPrepressReadyRule);
-
-        $allowToDesignReadyRule = $auth->createPermission('allowToDesignReadyRule');
-        $allowToDesignReadyRule->description = 'design ready if it in design';
-        $allowToDesignReadyRule->ruleName = $labelindesign->name;
-        $auth->add($allowToDesignReadyRule);
-
-        // добавляем роль "manager" и даём роли разрешение "list"		
+        // добавляем роли
 		$driver = $auth->createRole('driver');
         $driver->description='Водитель';
 		$manager = $auth->createRole('manager');
@@ -97,6 +69,8 @@ class RbacController extends Controller
         $logistician->description='Логист';
 		$rewinder = $auth->createRole('rewinder');
         $rewinder->description='Перемотчик';
+        $technolog = $auth->createRole('technolog');
+        $technolog->description='Технолог';
         $packer = $auth->createRole('packer');
         $packer->description='Упаковщик';
 		$laboratory = $auth->createRole('laboratory');
@@ -105,7 +79,6 @@ class RbacController extends Controller
         $prepress->description='Допечатник';
 		$designer_admin = $auth->createRole('designer_admin');
         $designer_admin->description='Начальник отдела дизайна';
-        //$auth->addChild($manager, $permit_to_manager);
         $designer = $auth->createRole('designer');
         $designer->description='Дизайнер';
         $printer = $auth->createRole('printer');
@@ -116,12 +89,14 @@ class RbacController extends Controller
         $warehouse_manager->description='Заведующий складом';
         $admin = $auth->createRole('admin');
         $admin->description='Администратор';
+
         $auth->add($driver);
         $auth->add($accountant);
         $auth->add($designer);
         $auth->add($logistician);
         $auth->add($packer);
         $auth->add($rewinder);
+        $auth->add($technolog);
         $auth->add($printer);
         $auth->add($prepress);
         $auth->add($laboratory);
@@ -130,21 +105,25 @@ class RbacController extends Controller
         $auth->add($manager_admin);
         $auth->add($warehouse_manager);
         $auth->add($admin);
-        // добавляем роль "admin" и даём роли разрешение "list"
-        //$auth->addChild($admin, $permit_to_manager);
-//        $auth->addChild($updateOwnLabel,$updateLabel);
-//        $auth->addChild($updateOwnLabelDesigner,$);
-        $auth->addChild($designer,$updateOwnLabelDesigner);
-        $auth->addChild($designer,$allowToDesignReadyRule);
-        $auth->addChild($laboratory,$allowToFlexformReadyRule);
-        $auth->addChild($manager,$updateOwnLabelManager);
-        $auth->addChild($manager,$updateOwnShipmentManager);
-        $auth->addChild($manager,$updateOwnCustomerManager);
-        $auth->addChild($manager,$updateOwnOrderManager);
-        $auth->addChild($prepress,$allowToPrepressReadyRule);
+
+
+        // добавляем родительские связи
+        $auth->addChild($updateByOwnerManager,$updateCustomer);
+        $auth->addChild($updateByOwnerManager,$updateLabel);
+        $auth->addChild($updateByOwnerManager,$updateShipment);
+        $auth->addChild($updateByOwnerManager,$updateOrder);
+        $auth->addChild($manager,$updateByOwnerManager);
+
+        $auth->addChild($designReadyOwnLabel,$designReadyLabel);
+        $auth->addChild($designer,$designReadyLabel);
+
         $auth->addChild($designer_admin,$designer);
         $auth->addChild($designer_admin,$prepress);
+        $auth->addChild($designer_admin,$designReadyLabel);
         $auth->addChild($manager_admin,$manager);
+        $auth->addChild($manager_admin,$updateLabel);
+        $auth->addChild($manager_admin,$updateShipment);
+        $auth->addChild($manager_admin,$updateOrder);
         $auth->addChild($admin, $accountant);
         $auth->addChild($admin, $designer_admin);
         $auth->addChild($admin, $logistician);
@@ -155,27 +134,29 @@ class RbacController extends Controller
         $auth->addChild($admin, $manager_admin);
         $auth->addChild($admin, $manager);
         $auth->addChild($admin, $laboratory);
+        $auth->addChild($admin, $technolog);
         $auth->addChild($admin, $designer);
         $auth->addChild($admin, $printer);
 
         // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
         // обычно реализуемый в модели User.
-//		$auth->assign($manager, 102);
-//		$auth->assign($designer, 104);
-		$auth->assign($driver, 113);
-		$auth->assign($accountant, 112);
-		$auth->assign($printer, 108);
-		$auth->assign($packer, 110);
-		$auth->assign($logistician, 110);
-		$auth->assign($warehouse_manager, 111);
-		$auth->assign($rewinder, 109);
-		$auth->assign($designer, 105);
-		$auth->assign($designer, 107);
-		$auth->assign($prepress, 101);
-		$auth->assign($laboratory, 106);
-        $auth->assign($manager, 103);
-        $auth->assign($manager_admin, 102);
-        $auth->assign($designer_admin, 104);
-        $auth->assign($admin, 100);
+        $auth->assign($admin, 1);
+        $auth->assign($manager_admin, 3);
+        $auth->assign($laboratory, 9);
+        $auth->assign($manager, 5);
+        $auth->assign($printer, 10);
+        $auth->assign($technolog, 16);
+        $auth->assign($rewinder, 11);
+        $auth->assign($packer, 11);
+        $auth->assign($logistician, 12);
+        $auth->assign($packer, 12);
+        $auth->assign($designer_admin, 8);
+        $auth->assign($warehouse_manager, 13);
+        $auth->assign($accountant, 14);
+        $auth->assign($driver, 15);
+        $auth->assign($designer, 6);
+        $auth->assign($designer, 7);
+        $auth->assign($prepress, 2);
+        $auth->assign($manager, 4);
     }
 }

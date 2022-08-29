@@ -37,10 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $form->field($order, 'date_of_rewind_end')->textInput(['placeholder'=>'YYYY-MM-DD HH:MI:SS']) ?>
 
-            <?= $form->field($order, 'actual_circulation')->textInput() ?>
-
-            <?= $form->field($order, 'trial_circulation')->textInput() ?>
-
             <?= $form->field($order, 'sending')->textInput() ?>
 
             <?= $form->field($order, 'label_price')->textInput() ?>
@@ -66,8 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($order, 'sleeve_id')->dropDownList(ArrayHelper::map(Sleeve::find()->asArray()->all(), 'id', 'name')) ?>
 
             <?= $form->field($order, 'winding_id')->dropDownList(ArrayHelper::map(Winding::find()->asArray()->all(), 'id', 'name')) ?>
-
-            <?= $form->field($order, 'diameter_roll')->textInput()?>
 
             <?= $form->field($order, 'label_on_roll')->textInput() ?>
 

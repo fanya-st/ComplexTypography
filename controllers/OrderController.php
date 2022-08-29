@@ -20,6 +20,7 @@ use app\models\OrderForm;
 use app\models\OrderSearch;
 use barcode\barcode\BarcodeGenerator;
 use yii\base\Model;
+use yii\web\ForbiddenHttpException;
 
 class OrderController extends Controller
 {
@@ -31,7 +32,7 @@ class OrderController extends Controller
             'rules' => [
                 [
                     'allow' => true,
-                    'actions' => ['list','create','view','create-blank'],
+                    'actions' => ['list','create','view','create-blank','add-from-fpwarehouse','update'],
                     'roles' => ['manager'],
                 ],
                 [
@@ -49,14 +50,6 @@ class OrderController extends Controller
                     'actions' => ['list','view','start-pack','pack','pack-in','finish-pack','print-label-package','print-box-label','print-sleeve-label','pack-send'],
                     'roles' => ['packer'],
                 ],
-                [
-                    'allow' => true,
-                    'actions' => ['add-from-fpwarehouse'],
-                    'roles' => ['updateOwnOrderManager','manager_admin'],
-                    'roleParams' => function() {
-                        return ['order' => Order::findOne(['id' => Yii::$app->request->get('id')])];
-                    },
-                ],
 				
             ],
         ],
@@ -68,6 +61,21 @@ class OrderController extends Controller
         $orders = $searchModel->search(Yii::$app->request->post());
         return $this->render('list',compact('orders','searchModel'));
     }
+
+    public function actionUpdate($id){
+        $order = Order::findOne($id);
+        if (!\Yii::$app->user->can('updateOrder', ['item' => $order->label->customer])) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
+        if ($order->status_id>=2) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
+        if($order->load($this->request->post()) && $order->validate() && $order->save()){
+            return $this->redirect(['view', 'id' => $order->id]);
+        }
+        return $this->render('update',compact('order'));
+    }
+
     public function actionView($id)
     {
         $order = Order::findOne($id);
@@ -85,6 +93,10 @@ class OrderController extends Controller
     }
     public function actionAddFromFpwarehouse($id)
     {
+        $order=Order::findOne($id);
+        if (!\Yii::$app->user->can('updateOrder', ['item' => $order->label->customer])) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
                 $rolls=FinishedProductsWarehouse::find()->where(['id'=>Yii::$app->request->post('selection')])->all();
                 foreach($rolls as $roll){
                      $roll->order_id=$id;
@@ -97,7 +109,9 @@ class OrderController extends Controller
     public function actionStartPrint($id)
     {
         $order=Order::findOne($id);
-        if($order->label->status_id==10){
+        if ($order->label->status_id!=10 OR $order->status_id !=1) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
             $order->status_id=2;
             $order->printer_login=Yii::$app->user->identity->username;
             $order->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
@@ -117,9 +131,6 @@ class OrderController extends Controller
             }else{
                 Yii::$app->session->setFlash('error','Ошибка');
             }
-        }else{
-            Yii::$app->session->setFlash('error','Этикетка не готова к печати');
-        }
 
         return $this->redirect(['order/view','id'=>$id]);
     }
@@ -127,21 +138,23 @@ class OrderController extends Controller
     public function actionStartPrintVariable($id)
     {
         $order=Order::findOne($id);
-        if($order->label->status_id==10){
+        if ($order->label->status_id!=10) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
             $order->status_id=2;
             $order->date_of_variable_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $order->save();
             Yii::$app->session->setFlash('success','Заказ в печати');
-        }else{
-            Yii::$app->session->setFlash('error','Этикетка не готова к печати');
-        }
 
         return $this->redirect(['order/view','id'=>$id]);
     }
     public function actionStartRewind($id)
     {
         $order=Order::findOne($id);
-        if($order->status_id==4){
+
+        if ($order->status_id!=4) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
             $order->status_id=5;
             $order->rewinder_login=Yii::$app->user->identity->username;
             $order->date_of_rewind_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
@@ -158,16 +171,15 @@ class OrderController extends Controller
                 }
             }
             Yii::$app->session->setFlash('success','Заказ в нарезке');
-        }else{
-            Yii::$app->session->setFlash('error','Заказ не отпечатан');
-        }
 
         return $this->redirect(['order/view','id'=>$id]);
     }
     public function actionStartPack($id)
     {
         $order = Order::findOne($id);
-        if ($order->status_id == 6) {
+        if ($order->status_id!=6) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
             $order->status_id = 7;
             $order->packer_login=Yii::$app->user->identity->username;
             $order->date_of_packing_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
@@ -175,12 +187,14 @@ class OrderController extends Controller
                 Yii::$app->session->setFlash('success', 'Заказ в упаковке');
             else
                 Yii::$app->session->setFlash('error', 'Заказ не нарезан и не перемотан');
-        }
         return $this->redirect(['order/view','id'=>$id]);
     }
     public function actionPausePrint($id)
     {
         $order=Order::findOne($id);
+        if ($order->status_id!=2) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
             $order->status_id=3;
             $order->save();
             if (!empty($order->combinatedPrintOrder)){
@@ -199,6 +213,9 @@ class OrderController extends Controller
     public function actionContinuePrint($id)
     {
         $order=Order::findOne($id);
+        if ($order->status_id!=3) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
             $order->status_id=2;
             $order->save();
             if (!empty($order->combinatedPrintOrder)){
@@ -234,6 +251,9 @@ class OrderController extends Controller
     public function actionFinishPrint($id)
     {
         $order=OrderPrintEndForm::findOne($id);
+        if ($order->status_id!=2 OR $order->status_id!=3) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if($order->load(Yii::$app->request->post()) && $order->validate()){
             $order->status_id=4;
             $order->date_of_print_end=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
@@ -271,6 +291,9 @@ class OrderController extends Controller
     public function actionFinishRewind($id)
     {
         $order=Order::findOne($id);
+        if ($order->status_id!=5 ) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         $order->status_id=6;
         $order->date_of_rewind_end=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
         $order->save();
@@ -279,6 +302,9 @@ class OrderController extends Controller
     public function actionRewind($id)
     {
         $order=Order::findOne($id);
+        if ($order->status_id!=4 ) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         $order_roll = new ActiveDataProvider([
         'query' => FinishedProductsWarehouse::find()->where(['order_id'=>$id])
     ]);
@@ -299,6 +325,9 @@ class OrderController extends Controller
     public function actionPack($id)
     {
         $order=Order::findOne($id);
+        if ($order->status_id !=6 ) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         $order_roll = FinishedProductsWarehouse::find()->where(['order_id' => $id])->indexBy('id')->all();
             if (FinishedProductsWarehouse::loadMultiple($order_roll, $this->request->post()) && FinishedProductsWarehouse::validateMultiple($order_roll)) {
                 foreach ($order_roll as $roll) {
@@ -316,6 +345,9 @@ class OrderController extends Controller
     public function actionPackSend($id)
     {
         $order=Order::findOne($id);
+        if ($order->status_id !=7 ) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         $order_roll = FinishedProductsWarehouse::find()->where(['order_id' => $id])->indexBy('id')->all();
             if (FinishedProductsWarehouse::loadMultiple($order_roll, $this->request->post()) && FinishedProductsWarehouse::validateMultiple($order_roll)) {
                 foreach ($order_roll as $roll) {
@@ -332,6 +364,9 @@ class OrderController extends Controller
     public function actionFinishPack($id)
     {
             $order=Order::findOne($id);
+        if ($order->status_id !=7 ) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
             $order->status_id=8;
             $order->date_of_packing_end=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             if ($order->save()) {
@@ -445,56 +480,5 @@ class OrderController extends Controller
             return $this->render('create-blank', compact('order','label'));
 
     }
-
-//	public function actionCreate($blank,$label_id=null)
-//    {
-//        if(isset($blank) and $blank==1){
-//            $order = new OrderForm();
-//            $label=new LabelForm();
-//            if($order->load(Yii::$app->request->post())
-//                &&$label->load(Yii::$app->request->post())
-//                &&$order->validate(Yii::$app->request->post())
-//                &&$label->validate(Yii::$app->request->post())
-//            ){
-//                if ($label->save()){
-//                    $order->label_id=$label->id;
-//                }
-//                if ($order->save()){
-//                    Yii::$app->session->setFlash('success','Заказ создан');
-//                    return $this-> refresh();
-//                }else{
-//                    Yii::$app->session->setFlash('error','Ошибка');
-//                }
-//            }
-//            return $this->render('create_blank', compact('order','label'));
-//        }
-//        if(isset($blank) and $blank==0){
-//            $order = new OrderForm();
-//            $new_label = new LabelForm();
-//            if(isset($label_id)){$order->label_id=$label_id;}
-//            if($order->load(Yii::$app->request->post())
-//                && $new_label->load(Yii::$app->request->post())
-//                && $new_label->validate(Yii::$app->request->post())
-//                && $order->validate(Yii::$app->request->post())){
-//                if($new_label->parent_label==1){
-//                    $new_label=LabelForm::findOne($order->label_id);
-//                    $new_label->parent_label=$order->label_id;
-//                    unset($new_label->id);
-//                    unset($new_label->date_of_create);
-//                    unset($new_label->status_id);
-//                    $new_label->setisNewRecord(true);
-//                    $new_label->save();
-//                    $order->label_id=$new_label->id;
-//                }
-//                if ($order->save()){
-//                    Yii::$app->session->setFlash('success','Заказ создан');
-//                    return $this-> refresh();
-//                }else{
-//                    Yii::$app->session->setFlash('error','Ошибка');
-//                }
-//            }
-//            return $this->render('create', compact('order','new_label'));
-//        }
-//    }
 
 }
