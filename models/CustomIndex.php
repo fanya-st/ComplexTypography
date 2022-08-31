@@ -39,10 +39,20 @@ class CustomIndex extends Model
                 ArrayHelper::setValue($items, $role->name.'.label',Icon::show('user-crown', ['class'=>'fa-1x']).$role->description);
             if ($role->name=='designer')
                 ArrayHelper::setValue($items, $role->name.'.label',Icon::show('layer-group', ['class'=>'fa-1x']).$role->description);
+            if ($role->name=='laboratory')
+                ArrayHelper::setValue($items, $role->name.'.label',Icon::show('clone', ['class'=>'fa-1x']).$role->description);
+            if ($role->name=='driver')
+                ArrayHelper::setValue($items, $role->name.'.label',Icon::show('steering-wheel', ['class'=>'fa-1x']).$role->description);
+            if ($role->name=='warehouse_manager')
+                ArrayHelper::setValue($items, $role->name.'.label',Icon::show('warehouse', ['class'=>'fa-1x']).$role->description);
+            if ($role->name=='technolog')
+                ArrayHelper::setValue($items, $role->name.'.label',Icon::show('wrench', ['class'=>'fa-1x']).$role->description);
+            if ($role->name=='accountant')
+                ArrayHelper::setValue($items, $role->name.'.label',Icon::show('wallet', ['class'=>'fa-1x']).$role->description);
 
         }
         else{
-            ArrayHelper::setValue($items, 'guest', ['label' => Icon::show('', ['class'=>'fa-1x']).'Гость', 'content'=>Yii::$app->view->render('@app/views/site/index')]);
+            ArrayHelper::setValue($items, 'guest', ['label' => Icon::show('', ['class'=>'fa-1x']).'Гость', 'content'=>Yii::$app->view->render('@app/views/site/tab-guest')]);
         }
 //        switch ($status) {
 //            //статус этикетки новая этикетка
