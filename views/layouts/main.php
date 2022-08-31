@@ -8,6 +8,7 @@ use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 use kartik\bs5dropdown\Dropdown;
 use yii\helpers\ArrayHelper;
+use kartik\sidenav\SideNav;
 
 AppAsset::register($this);
 ?>
@@ -98,21 +99,20 @@ AppAsset::register($this);
 
 <main role="main" class="flex-shrink-0">
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-<!--        <pre>--><?//= print_r($nav_items) ?><!--</pre>-->
-        <?= $content ?>
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= Alert::widget() ?>
+                <?= $content ?>
     </div>
 </main>
 
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-        <p class="float-left">&copy; <?=Yii::$app->params['company_full_name']?><?= date('Y') ?></p>
-        <p class="float-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+<!--<footer class="footer mt-auto py-3 text-muted">-->
+<!--    <div class="container">-->
+<!--        <p class="float-left">&copy; --><?//=Yii::$app->params['company_full_name']?><!----><?//= date('Y') ?><!--</p>-->
+<!--        <p class="float-right">--><?//= Yii::powered() ?><!--</p>-->
+<!--    </div>-->
+<!--</footer>-->
 
 <?php $this->endBody() ?>
 </body>

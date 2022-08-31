@@ -6,8 +6,10 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\helpers\ArrayHelper;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\User;
 use app\models\ContactForm;
 
 class SiteController extends Controller
@@ -51,7 +53,10 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+//        if(ArrayHelper::keyExists('printer', Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()), false)){
+//            return $this->render('index-printer');
+//        }
+        return $this->render('index-test');
     }
 
     public function actionLogin()

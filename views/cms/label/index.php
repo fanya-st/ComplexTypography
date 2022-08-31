@@ -45,8 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status_id',
                 'label' => 'Статус',
-                'value' => 'labelStatus.name',
-                'filter' => ArrayHelper::map(LabelStatus::find()->asArray()->all(),'id','name'),
+                'value' => 'labelStatus',
+                'filter' => LabelStatus::$label_status,
             ],
             //'pants_id',
             //'foil_id',

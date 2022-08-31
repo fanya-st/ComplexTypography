@@ -13,12 +13,6 @@ class CustomerForm extends ActiveRecord
         return 'customer';
     }
 
-    public function getCustomerStatus(){
-        return $this->hasOne(CustomerStatus::class,['id'=>'status_id']);
-    }
-    public function getCustomerStatusName(){
-        return $this->customerStatus->name;
-    }
 
     public function attributeLabels()
     {

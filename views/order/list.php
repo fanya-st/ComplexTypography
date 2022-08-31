@@ -5,17 +5,15 @@ use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use app\models\User;
+use app\models\OrderStatus;
 
 $this->title = 'Работа с заказами';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
     <?echo $this->render('_search', ['model' => $searchModel])?>
-    <? $form = ActiveForm::begin(['action'=>['order/selected-order-process']])?>
-<!--<div class="col p-2">-->
-<!--    --><?//=Html::submitButton('Совместная печать',['name'=>'combinated-print', 'value' => 'combinated-print','class'=>'btn btn-info'])?>
-<!--    --><?//=Html::submitButton('Отменить совместную печать',['name'=>'combinated-print-unset', 'value' => 'combinated-print-unset','class'=>'btn btn-info'])?>
-<!--</div>-->
+    <? $form = ActiveForm::begin()?>
+<?php //Pjax::begin()?>
     <? echo GridView::widget([
         'dataProvider' => $orders,
         'id'=>'order-list',
@@ -48,7 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_of_create',
             [
                 'attribute'=>'status_id',
-                'value'=>'orderStatus.name',
+//                'value'=>'orderStatus.name',
+                'value' => function($model){return OrderStatus::$order_status[$model->status_id];},
+                'filter' => OrderStatus::$order_status,
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center']
 
@@ -81,5 +81,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
         ],
     ]);
+//    Pjax::end();
     ActiveForm::end()
     ?>

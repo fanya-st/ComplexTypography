@@ -52,7 +52,6 @@ $this->registerJs(
                         'prompt' => 'Выберите...'
                     ])?>
                     <?=$form->field($order,'label_price')->textInput(['onchange'=>'changeLabelPriceTax()'])?>
-                    <?=$form->field($order,'order_price')->textInput()?>
                 </div>
                 <div class="col">
                     <?=$form->field($order,'date_of_sale')->widget(DatePicker::classname(), [
@@ -65,7 +64,6 @@ $this->registerJs(
                         ]
                     ])?>
                     <?=$form->field($order,'label_price_with_tax')->textInput()?>
-                    <?=$form->field($order,'order_price_with_tax')->textInput()?>
                 </div>
             </div>
             <?=$form->field($order,'material_id')->widget(Select2::classname(), [

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ])
         ?>
         <?=$form->field($customer,'status_id')->widget(Select2::classname(), [
-            'data' => ArrayHelper::map(CustomerStatus::find()->all(), 'id', 'name'),
+            'data' => CustomerStatus::$customer_status,
             'pluginOptions' => [
             ],
         ])->label(false)?>

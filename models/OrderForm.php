@@ -61,6 +61,7 @@ class OrderForm extends ActiveRecord{
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
+            Yii::info("Создана заказ пользователем ".Yii::$app->user->identity->username.' №'.$this->id);
             Yii::$app->session->setFlash('success', 'Заказ создан !');
         } else {
             Yii::$app->session->setFlash('success', 'Заказ обновлен !');

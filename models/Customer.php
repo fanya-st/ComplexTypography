@@ -10,7 +10,7 @@ class Customer extends ActiveRecord
 {
 
     public function getCustomerStatus(){
-        return $this->hasOne(CustomerStatus::class,['id'=>'status_id']);
+        return CustomerStatus::$customer_status[$this->status_id];
     }
     public function getSubject(){
         return $this->hasOne(Subject::class,['id'=>'subject_id']);
@@ -24,9 +24,7 @@ class Customer extends ActiveRecord
     public function getStreet(){
         return $this->hasOne(Street::class,['id'=>'street_id']);
     }
-    public function getCustomerStatusName(){
-        return $this->customerStatus->name;
-    }
+
 
     public function getLabel(){
         return $this->hasMany(Label::class,['customer_id'=>'id']);

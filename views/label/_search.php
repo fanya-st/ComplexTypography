@@ -55,8 +55,8 @@ FontAwesomeAsset::register($this);
                 'allowClear' => true,
             ],
         ])->label(false)?>
-        <?=$form->field($model,'status_id')->widget(Select2::classname(), [
-            'data' => ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'),
+        <?=$form->field($model,'status_id')->widget(Select2::class, [
+            'data' => LabelStatus::$label_status,
             'options' => ['placeholder' => 'Статус этикетки'],
             'pluginOptions' => [
                 'allowClear' => true,

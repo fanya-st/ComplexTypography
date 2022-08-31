@@ -23,6 +23,8 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '_gaylA8L4sBKm1FAz1aL7JXZyF22RRyE',
+            'enableCookieValidation' => true,
+            'enableCsrfValidation' => true,
         ],
 		'authManager' => [
 //		    'class' => 'yii\rbac\PhpManager',
@@ -41,6 +43,10 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+//        'session' => [
+////            'class' => 'yii\web\DbSession',
+//            'class' => 'yii\web\CacheSession',
+//        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
@@ -61,8 +67,8 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error','info'],
-                    'logVars' => ['_GET', '_POST'],
+                    'levels' => ['error','info','warning'],
+                    'logVars' => ['_GET', '_POST','_SERVER'],
                 ],
             ],
         ],

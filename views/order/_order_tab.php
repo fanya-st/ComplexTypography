@@ -10,7 +10,7 @@ use app\models\User;
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <div class="row">
                 <div class="col">
-                    <? echo Html::tag('h6','Статус заказа: ' .Html::tag('small',Html::encode($order->orderStatus->name), ['class' => 'badge bg-primary']));
+                    <? echo Html::tag('h6','Статус заказа: ' .Html::tag('small',Html::encode($order->orderStatus), ['class' => 'badge bg-primary']));
                     echo Html::tag('h6','Машина: ' .Html::encode($order->mashine->name));
                     echo Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameByUsername($order->customer->manager_login)));
                     echo Html::tag('h6','Заказчик: ' .Html::encode('ID ['.$order->label->customer->id.
@@ -65,6 +65,7 @@ use app\models\User;
             </h6>
             <h6>Перемотанный тираж, шт:
                 <? $rewinded_circulation=null;
+//                if (!empty($order->finishedProductsWarehouse))
                 foreach ($order->finishedProductsWarehouse as $rewinded_roll)
                     $rewinded_circulation+=$rewinded_roll->label_in_roll*$rewinded_roll->roll_count;
                 echo Html::encode($rewinded_circulation);

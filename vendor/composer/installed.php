@@ -56,12 +56,12 @@
             'dev_requirement' => false,
         ),
         'bower-asset/jquery' => array(
-            'pretty_version' => '3.6.0',
-            'version' => '3.6.0.0',
+            'pretty_version' => '3.6.1',
+            'version' => '3.6.1.0',
             'type' => 'bower-asset',
             'install_path' => __DIR__ . '/../bower-asset/jquery',
             'aliases' => array(),
-            'reference' => 'e786e3d9707ffd9b0dd330ca135b66344dcef85a',
+            'reference' => '3711efedf0ca2e998cd0417324f717f2e0b828ec',
             'dev_requirement' => false,
         ),
         'bower-asset/jquery-ui' => array(
@@ -554,7 +554,7 @@
             'aliases' => array(
                 0 => '2.2.x-dev',
             ),
-            'reference' => '2346248bb09377bd4f0a585d7cad10be103d72ca',
+            'reference' => 'f74f2cfbd5b4628ea578735890c39f9a8e4ed062',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-widget-sidenav' => array(
@@ -996,12 +996,12 @@
             'dev_requirement' => true,
         ),
         'symfony/console' => array(
-            'pretty_version' => 'v4.4.44',
-            'version' => '4.4.44.0',
+            'pretty_version' => 'v4.4.45',
+            'version' => '4.4.45.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
-            'reference' => 'c35fafd7f12ebd6f9e29c95a370df7f1fb171a40',
+            'reference' => '28b77970939500fb04180166a1f716e75a871ef8',
             'dev_requirement' => true,
         ),
         'symfony/css-selector' => array(
@@ -1023,12 +1023,12 @@
             'dev_requirement' => true,
         ),
         'symfony/dom-crawler' => array(
-            'pretty_version' => 'v4.4.44',
-            'version' => '4.4.44.0',
+            'pretty_version' => 'v4.4.45',
+            'version' => '4.4.45.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/dom-crawler',
             'aliases' => array(),
-            'reference' => '53cee1108a9748682b1268bc1a76a3d6a665ede2',
+            'reference' => '4b8daf6c56801e6d664224261cb100b73edc78a5',
             'dev_requirement' => true,
         ),
         'symfony/event-dispatcher' => array(
@@ -1146,12 +1146,12 @@
             'dev_requirement' => true,
         ),
         'symfony/yaml' => array(
-            'pretty_version' => 'v4.4.44',
-            'version' => '4.4.44.0',
+            'pretty_version' => 'v4.4.45',
+            'version' => '4.4.45.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/yaml',
             'aliases' => array(),
-            'reference' => 'c2b28c10fb3b7ac67bafa7b8f952cd83f35acde2',
+            'reference' => 'aeccc4dc52a9e634f1d1eebeb21eacfdcff1053d',
             'dev_requirement' => true,
         ),
         'theseer/tokenizer' => array(
@@ -1198,7 +1198,7 @@
             'aliases' => array(
                 0 => '2.0.x-dev',
             ),
-            'reference' => 'fe254a7d1f360ef8e5cea2a2bd5f32c95f423155',
+            'reference' => 'bd8ed65e7ef4192c023198165a21e90bd476f3d4',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-composer' => array(

@@ -251,8 +251,8 @@ class OrderController extends Controller
     public function actionFinishPrint($id)
     {
         $order=OrderPrintEndForm::findOne($id);
-        if ($order->status_id!=2 OR $order->status_id!=3) {
-            throw new ForbiddenHttpException('Доступ запрещен');
+        if ($order->status_id<2 OR $order->status_id>2) {
+            throw new ForbiddenHttpException('Заказ не находиться в печати чтобы завершить печать');
         }
         if($order->load(Yii::$app->request->post()) && $order->validate()){
             $order->status_id=4;
@@ -302,7 +302,7 @@ class OrderController extends Controller
     public function actionRewind($id)
     {
         $order=Order::findOne($id);
-        if ($order->status_id!=4 ) {
+        if ($order->status_id!=5 ) {
             throw new ForbiddenHttpException('Доступ запрещен');
         }
         $order_roll = new ActiveDataProvider([
@@ -325,7 +325,7 @@ class OrderController extends Controller
     public function actionPack($id)
     {
         $order=Order::findOne($id);
-        if ($order->status_id !=6 ) {
+        if ($order->status_id !=7 ) {
             throw new ForbiddenHttpException('Доступ запрещен');
         }
         $order_roll = FinishedProductsWarehouse::find()->where(['order_id' => $id])->indexBy('id')->all();
@@ -345,9 +345,9 @@ class OrderController extends Controller
     public function actionPackSend($id)
     {
         $order=Order::findOne($id);
-        if ($order->status_id !=7 ) {
-            throw new ForbiddenHttpException('Доступ запрещен');
-        }
+//        if ($order->status_id !=7 ) {
+//            throw new ForbiddenHttpException('Доступ запрещен');
+//        }
         $order_roll = FinishedProductsWarehouse::find()->where(['order_id' => $id])->indexBy('id')->all();
             if (FinishedProductsWarehouse::loadMultiple($order_roll, $this->request->post()) && FinishedProductsWarehouse::validateMultiple($order_roll)) {
                 foreach ($order_roll as $roll) {
@@ -381,7 +381,7 @@ class OrderController extends Controller
     {
         $roll=FinishedProductsWarehouse::findOne($roll_id);
         $roll->delete();
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->goBack();
     }
     public function actionFormDefect($id)
     {
@@ -446,10 +446,8 @@ class OrderController extends Controller
                 //создаем на основе выбранной этикетки дочернюю со статусом новый
                 $label=Label::findOne($order->label_id);
                 $order->label_id=$label->createSubLabel();
-                Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->username.' №'.$label->id);
             }
             if ($order->save()){
-                Yii::info("Создана заказ пользователем ".Yii::$app->user->identity->username.' №'.$order->id);
                 return $this->redirect(['order/view','id'=>$order->id]);
             }else{
                 Yii::$app->session->setFlash('error','Ошибка');
@@ -461,20 +459,20 @@ class OrderController extends Controller
 
 
     /*Создание нового заказа для пустышек*/
-    public function actionCreateBlank($label_id=null){
+    public function actionCreateBlank(){
         $order = new OrderForm();
             $label=new Label();
-            if($order->load(Yii::$app->request->post()) && $label->load(Yii::$app->request->post()) && $label->validate() && $order->validate()){
+            if($order->load(Yii::$app->request->post()) && $label->load(Yii::$app->request->post())){
                 $label->status_id=10;
-                if ( $label->save()){
-                    Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->username.' №'.$label->id);
-                    $order->label_id=$label->id;
-                }
-                if ($order->save()){
-                    Yii::info("Создана заказ пользователем ".Yii::$app->user->identity->username.' №'.$order->id);
-                    return $this->redirect(['order/view','id'=>$order->id]);
-                }else{
-                    Yii::$app->session->setFlash('error','Ошибка');
+                if($label->validate() && $order->validate()){
+                    if ($label->save()){
+                        $order->label_id=$label->id;
+                        if ($order->save()){
+                            return $this->redirect(['order/view','id'=>$order->id]);
+                        }else{
+                            Yii::$app->session->setFlash('error','Ошибка');
+                        }
+                    }
                 }
             }
             return $this->render('create-blank', compact('order','label'));

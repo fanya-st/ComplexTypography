@@ -1,8 +1,4 @@
 <?php
-
-/** @var yii\web\View $this */
-
-
 $this->title = 'Комплекс Типография CMS-Панель';
 ?>
 <div class="site-index">
@@ -22,10 +18,6 @@ $this->title = 'Комплекс Типография CMS-Панель';
                 <h2>Редактирование этикеток</h2>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/label-index">Редактирование этикеток &raquo;</a></p>
             </div>
-<!--            <div class="col-lg-4">-->
-<!--                <h2>Редактирование отгрузок</h2>-->
-<!--                <p><a class="btn btn-outline-secondary" href="?r=shipment/list">Работа с отгрузками &raquo;</a></p>-->
-<!--            </div>-->
             <div class="col-lg-4">
                 <h2>Редактирование заказчиков</h2>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/customer-index">Редактирование заказчиков &raquo;</a></p>
@@ -36,7 +28,7 @@ $this->title = 'Комплекс Типография CMS-Панель';
             </div>
             <div class="col-lg-4">
                 <h2>Редактирование сотрудников</h2>
-                <p><a class="btn btn-outline-secondary" href="?r=user/create">Добавить сотрудника &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="?r=employee/create">Добавить сотрудника &raquo;</a></p>
                 <p><a class="btn btn-outline-secondary" href="?r=cms/auth-assign-index">Привязка сотрудников к группам &raquo;</a></p>
             </div>
             <div class="col-lg-4">

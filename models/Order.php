@@ -48,7 +48,7 @@ class Order extends ActiveRecord{
 	}
 
     public function getOrderStatus(){
-        return $this->hasOne(OrderStatus::class,['id'=>'status_id']);
+        return OrderStatus::$order_status[$this->status_id];
     }
 
     public function getMashine(){
@@ -145,5 +145,15 @@ class Order extends ActiveRecord{
         }
         Yii::info("Заказ №".$this->id." удален пользователем ".Yii::$app->user->identity->username);
         return parent::beforeDelete();
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        if ($insert) {
+            Yii::info("Создана заказ пользователем ".Yii::$app->user->identity->username.' №'.$this->id);
+            Yii::$app->session->setFlash('success', 'Заказ добавлен');
+        } else {
+            Yii::$app->session->setFlash('success', 'Запись обновлена');
+        }
+        parent::afterSave($insert, $changedAttributes);
     }
 }

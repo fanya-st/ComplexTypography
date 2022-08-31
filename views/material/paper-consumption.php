@@ -6,7 +6,7 @@ use yii\web\View;
 use yii\bootstrap5\Modal;
 use kartik\icons\Icon;
 use Da\QrCode\QrCode;
-Icon::map($this, Icon::FA);
+use yii\widgets\Pjax;
 
 $this->title = Html::encode('Ввод расхода материала для заказа ID ['.$order->id.'] '.$order->label->name);
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
@@ -28,7 +28,6 @@ function printDiv(divName){
 ?>
 <h3><?= Html::encode($this->title)?></h3>
 <?php $form = ActiveForm::begin()?>
-<!--<pre>--><?//print_r(Yii::$app->request->post())?><!--</pre>-->
     <div class="alert alert-info">
         <strong>Внимание!</strong> Не забудьте распечатать и наклеить новый QR-код на использованный ролик</a>.
     </div>
@@ -75,11 +74,6 @@ function printDiv(divName){
                             echo "<div id='modalContent-".$paper->paperWarehouse->id."'>";
                             echo Html::tag('p', Html::encode($paper->paperWarehouse->material->name.' Ширина: '.$paper->paperWarehouse->width.
                                 'мм Длина: '.$paper->paperWarehouse->length.' м'),['class'=>'small text-center','style'=>'font-size:10px']);
-//                            $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
-//                            echo Html::tag('div',Html::img('data:image/png;base64,' . base64_encode($generator->
-//                                getBarcode(str_pad($paper->paper_warehouse_id, 12, '0', STR_PAD_LEFT),
-//                                    $generator::TYPE_EAN_13,2, 70)) . '', ['alt' => 'barcode','class'=>'text-center']),
-//                                ['class'=>'text-center']);
                             echo Html::tag('div',Html::img($qrCode->writeDataUri(), ['alt' => 'qrcode','width'=>70,'height'=>70]),
                                 ['style'=>'text-align:center;']);
                             echo Html::tag('p', Html::encode($paper->paperWarehouse->id),['class'=>'small text-center']);

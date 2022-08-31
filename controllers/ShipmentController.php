@@ -79,9 +79,14 @@ class ShipmentController extends Controller
     public function actionDelete($id)
     {
         $shipmentorder = ShipmentOrder::findOne(['order_id'=>$id]);
+        $shipment=Shipment::findOne($shipmentorder->shipment_id);
+        if (!\Yii::$app->user->can('updateShipment',['item'=>$shipment])) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if($shipmentorder->delete()) Yii::$app->session->setFlash('success', 'Успешно');
             else Yii::$app->session->setFlash('error', 'Ошибка');
-        return $this->redirect(Yii::$app->request->referrer);
+//        return $this->redirect(Yii::$app->request->referrer);
+        return $this->goBack();
     }
 
     public function actionEditTransport($id)
@@ -158,6 +163,9 @@ class ShipmentController extends Controller
     public function actionSendShipment($id)
     {
         $shipment = Shipment::findOne($id);
+        if ($shipment->status_id!=0) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
         if ($shipment->readyToSend!=true)Yii::$app->session->setFlash('error', 'Заказы должны быть на складе готовой продукции');
         else {
             foreach($shipment->finishedProductsWarehouse as $roll){
@@ -187,6 +195,9 @@ class ShipmentController extends Controller
     public function actionCloseShipment($id)
     {
         $shipment = Shipment::findOne($id);
+        if ($shipment->status_id!=1) {
+            throw new ForbiddenHttpException('Доступ запрещен');
+        }
             foreach($shipment->finishedProductsWarehouse as $roll){
                 if(!empty($roll->defect_roll_count)) { //проверяем кол-во дефектных
                     $new_roll=new FinishedProductsWarehouse();

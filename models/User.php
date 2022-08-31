@@ -4,7 +4,6 @@ namespace app\models;
 use yii;
 use yii\helpers\ArrayHelper;
 
-//class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     public static function tableName()
@@ -22,12 +21,13 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'I'=>'Имя',
             'O'=>'Отчество',
             'status_id'=>'Статус',
+            'rememberMe'=>'Запомнить меня',
         ];
     }
     public function rules(){
         return[
-            [['F','I','O'],'string','max'=>100],
-            [['username','password'],'string','max'=>50],
+            [['F','I','O','password'],'string','max'=>100],
+            [['username'],'string','max'=>50],
             [['username','password','F','I','O'],'trim'],
             [['username','password','F','I','O'],'required'],
             [['status_id'],'integer'],
@@ -38,10 +38,13 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         if (parent::beforeSave($insert)) {
             if ($insert) {
-                $this->authKey='user-'.$this->username.'-key';
-                $this->accessToken=$this->username.'-token';
-                Yii::$app->session->setFlash('success', 'Запись добавлена!');
+                $this->authKey=\Yii::$app->security->generateRandomString();
+//                $this->accessToken=\Yii::$app->security->generateRandomString();
+                $this->password = Yii::$app->security->generatePasswordHash($this->password);
+                Yii::$app->session->setFlash('success', 'Сотрудник добавлен!');
             } else {
+                $this->authKey=\Yii::$app->security->generateRandomString();
+                $this->password = Yii::$app->security->generatePasswordHash($this->password);
                 Yii::$app->session->setFlash('success', 'Запись обновлена!');
             }
             return true;
@@ -160,11 +163,11 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->authKey === $authKey;
     }
 
-
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
+
 
     public function beforeDelete()
     {
@@ -174,4 +177,5 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
         return parent::beforeDelete();
     }
+
 }

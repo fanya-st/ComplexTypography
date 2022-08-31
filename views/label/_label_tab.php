@@ -14,7 +14,7 @@ use app\models\User;
         <?= Html::a('Файл дизайна Prepress',$label->prepress_design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
     </div>
     <div class="col">
-        <h6>№: <small class="badge bg-primary"><?=Html::encode($label->id)?></small> Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatus->name)?></small> </h6>
+        <h6>№: <small class="badge bg-primary"><?=Html::encode($label->id)?></small> Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatus)?></small> </h6>
         <h6>Заказчик: <small><?=Html::encode($label->customer->name)?></small> </h6>
         <h6>Менеджер: <small><?=Html::encode(User::getFullNameByUsername($label->customer->manager_login))?></small> </h6>
         <h6>Дата создания: <small><?=Html::encode($label->date_of_create)?></small> </h6>

@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'label' => 'Наименование',
-            'attribute' => 'labelName',
+            'attribute' => 'label.name',
             'headerOptions' => ['class' => 'text-center','style' => 'width:20%'],
             'contentOptions'=>function($model, $key, $index, $column) {
                 if(isset($model->combinationOrder))
@@ -54,8 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'attribute' => 'status_id',
             'label' => 'Статус заказа',
-            'value' => 'orderStatus.name',
-            'filter' => ArrayHelper::map(OrderStatus::find()->asArray()->all(),'id','name'),
+            'value' => function($model){return OrderStatus::$order_status[$model->status_id];},
+            'filter' => OrderStatus::$order_status,
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center','style' => 'width:10%'],
         ],

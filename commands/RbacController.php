@@ -124,6 +124,7 @@ class RbacController extends Controller
         $auth->addChild($manager_admin,$updateLabel);
         $auth->addChild($manager_admin,$updateShipment);
         $auth->addChild($manager_admin,$updateOrder);
+        $auth->addChild($manager_admin,$updateCustomer);
         $auth->addChild($admin, $accountant);
         $auth->addChild($admin, $designer_admin);
         $auth->addChild($admin, $logistician);

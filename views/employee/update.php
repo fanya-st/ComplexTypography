@@ -11,6 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php $form=ActiveForm::begin()?>
+<?=$form->field($user,'username')->textInput(['disabled'=>true])?>
 <?=$form->field($user, 'password')->widget(PasswordInput::class, [])?>
 <?=$form->field($user,'F')->textInput()?>
 <?=$form->field($user,'I')->textInput()?>

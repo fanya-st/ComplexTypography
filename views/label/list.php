@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                         'label'=>'Статус этикетки',
-                        'value'=>'labelStatus.name',
+                        'value'=>'labelStatus',
                     'headerOptions'=>['class' => 'text-center']
                 ],
                 [

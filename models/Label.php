@@ -59,7 +59,7 @@ class Label extends ActiveRecord{
         return $this->hasOne(Customer::class,['id'=>'customer_id']);
     }
     public function getLabelStatus(){
-        return $this->hasOne(LabelStatus::class,['id'=>'status_id']);
+        return LabelStatus::$label_status[$this->status_id];
     }
     public function getPants(){
         return $this->hasOne(Pants::class,['id'=>'pants_id']);
@@ -171,6 +171,7 @@ class Label extends ActiveRecord{
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
             if ($insert) {
+                Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->username.' №'.$this->id);
                 Yii::$app->session->setFlash('success', 'Этикетка создана !');
             } else {
                 Yii::$app->session->setFlash('success', 'Этикетка обновлена!');

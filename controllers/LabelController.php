@@ -397,7 +397,8 @@ class LabelController extends Controller
     {
         $form=Form::findOne($form_id);
         $form->delete();
-        return $this->redirect(Yii::$app->request->referrer);
+//        return $this->redirect(Yii::$app->request->referrer);
+        return $this->goBack();
     }
 
     public function actionRePrepress($id)

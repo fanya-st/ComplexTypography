@@ -52,7 +52,7 @@ class EmployeeController extends Controller
     {
         $user=new User();
         if ($this->request->isPost && $user->load($this->request->post())) {
-            if($user->validate() && $user->save()){
+            if($user->save()){
                 return $this->refresh();
             }
 
@@ -63,6 +63,7 @@ class EmployeeController extends Controller
     public function actionUpdate($id)
     {
         $user=User::findOne($id);
+        $user->password=null;
         if ($this->request->isPost && $user->load($this->request->post())) {
             if($user->validate() && $user->save()){
                 return $this->refresh();

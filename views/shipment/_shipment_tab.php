@@ -46,7 +46,7 @@ echo GridView::widget([
             'label.name',
             'customer.name',
             'customer.customerAddress',
-            'orderStatus.name',
+            'orderStatus',
             'mashine.name',
             'plan_circulation',
         [

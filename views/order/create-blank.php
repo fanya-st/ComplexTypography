@@ -58,7 +58,7 @@ $this->registerJs(
                             ])?>
                     </div>
                     <div class="col">
-                        <?=$form->field($label,'customer_id')->widget(Select2::classname(), [
+                        <?=$form->field($label,'customer_id')->widget(Select2::class, [
                             'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','manager_login'=>Yii::$app->user->identity->username])->all(), 'id', 'name'),
                             'options' => ['placeholder' => 'Выбрать заказчика ...'],
                             'pluginOptions' => [
@@ -67,8 +67,8 @@ $this->registerJs(
                         ])?>
                         <div class="row">
                             <div class="col">
-                                <?=$form->field($label,'pants_id')->widget(Select2::classname(), [
-                                    'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'name'),
+                                <?=$form->field($label,'pants_id')->widget(Select2::class, [
+                                    'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
                                     'options' => ['placeholder' => 'Выбрать штанец ...'],
                                     'pluginOptions' => [
                                         'allowClear' => true
@@ -104,8 +104,6 @@ $this->registerJs(
                         </div>
                         <div class="col">
                             <?=$form->field($order,'sending')?>
-                            <?=$form->field($order,'order_price')->textInput()?>
-                            <?=$form->field($order,'order_price_with_tax')->textInput()?>
                             <?=$form->field($order,'sleeve_id')->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'),
                                 [
                                     'prompt' => 'Выберите...'
@@ -156,15 +154,6 @@ $this->registerJs(
             </div>
             <?=Html::submitButton('Создать заказ',['class'=>'btn btn-success'])?>
         </div>
-<!--        --><?//=$form->field($label, 'output_label_id')->hiddenInput(['value' => 1])->label(false);?>
-<!--        --><?//=$form->field($label, 'background_id')->hiddenInput(['value' => 1])->label(false);?>
-<!--        --><?//=$form->field($label, 'print_on_glue')->hiddenInput(['value' => 0])->label(false);?>
-<!--        --><?//=$form->field($label, 'varnish_id')->hiddenInput(['value' => 0])->label(false);?>
-<!--        --><?//=$form->field($label, 'variable')->hiddenInput(['value' => 0])->label(false);?>
-<!--        --><?//=$form->field($label, 'stencil')->hiddenInput(['value' => 0])->label(false);?>
-<!--        --><?//=$form->field($label, 'takeoff_flash')->hiddenInput(['value' => 0])->label(false);?>
-<!--        --><?//=$form->field($label, 'laminate')->hiddenInput(['value' => 0])->label(false);?>
-<!--        --><?//=$form->field($label, 'color_count')->hiddenInput(['value' => 0])->label(false);?>
-<!--        --><?//=$form->field($label, 'foil_id')->hiddenInput(['value' => 1])->label(false);?>
     </div>
 	<?ActiveForm::end()?>
+<pre><?print_r($label)?></pre>
