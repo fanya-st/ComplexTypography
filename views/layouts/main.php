@@ -72,9 +72,9 @@ AppAsset::register($this);
                     ]
                 ]
         );
-        if(ArrayHelper::keyExists('admin', Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()), false)){
-            ArrayHelper::setValue($nav_items,'login.items.cms',['label' => 'Администраторская панель', 'url' => ['/cms/cms-panel']]);
-        }
+//        if(ArrayHelper::keyExists('admin', Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()), false)){
+//            ArrayHelper::setValue($nav_items,'login.items.cms',['label' => 'Администраторская панель', 'url' => ['/cms/cms-panel']]);
+//        }
 
 
     } else{

@@ -1,27 +1,49 @@
 <?php
-
+use yii\bootstrap5\Html;
+use app\models\Order;
+use app\models\User;
+use yii\bootstrap5\Button;
 ?>
-<div class="site-index-printer">
+<!--<pre>--><?//print_r(Order::find()->andFilterWhere(['status_id'=>1])->orderBy(['date_of_sale'=>SORT_ASC])->limit(3)->all())?><!--</pre>-->
+<div class="row g-2 row-cols-lg-2">
+    <div class="col-lg">
+        <div class="border p-3 rounded">
+<!--            <h6 class="bg-success p-1 rounded">Очередь печати</h6>-->
+            <h6 class="p-1 rounded">Очередь печати</h6>
+            <ol class="list-group list-group-numbered">
+                <?foreach(Order::find()->andFilterWhere(['order.status_id'=>1])->joinWith('label')->andFilterWhere(['label.status_id'=>10])->orderBy(['date_of_sale'=>SORT_ASC])->limit(3)->all() as $order):?>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold"><span class="badge bg-primary rounded-pill">№<?=$order->id?></span> <?=$order->label->name?></div>
+                        <?=$order->label->customer->name?> (<?=User::getFullNameByUsername($order->label->customer->manager_login)?>)
+                    </div>
+                    <?= Html::a('Начать печать', ['order/start-print', 'id' => $order->id], ['class' => 'btn btn-primary']) ?>
+                </li>
+                <?endforeach;?>
+            </ol>
+            <div class="m-1"><a class="btn btn-outline-secondary" href="?r=order/list">Заказы &raquo;</a></div>
+        </div>
+    </div>
 
-    <div class="body-content">
-<!--        <h1>--><?//= Yii::$app->authManager->getRole('printer')->description?><!--</h1>-->
-        <div class="row">
-            <div class="col-lg-4">
-                <h5>Заказы</h5>
-                <p><a class="btn btn-outline-secondary" href="?r=order/list">Заказы &raquo;</a></p>
+    <div class="col-lg">
+        <div class="border p-3 rounded">
+            <h6 class="p-1 rounded">Материалы</h6>
+            <div class="d-inline">
+                <?= Html::a('Разрезать ролик', ['paper-warehouse/roll-cut'], ['class' => 'm-1 btn btn-primary']) ?>
+                <?= Html::a('Штанцы', ['pants/index'], ['class' => 'm-1 btn btn-primary']) ?>
+                <?= Html::a('Склад красок, лаков и химии', ['pantone-warehouse/index'], ['class' => 'm-1 btn btn-primary']) ?>
+                <?= Html::a('Склад бумаги, фольги, ламинации', ['paper-warehouse/list'], ['class' => ' m-1 btn btn-primary']) ?>
+                <?= Html::a('Наличные складские запасы бумаги', ['material/stock-on-hand-paper'], ['class' => ' m-1 btn btn-primary']) ?>
             </div>
-            <div class="col-lg-4">
-                <h5>Материалы</h5>
-                <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse/roll-cut">Разрезать ролик &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=pants/index">Штанцы &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=pantone-warehouse/index">Склад красок, лаков и химии &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=paper-warehouse/list">Склад бумаги, фольги, ламинации &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=material/stock-on-hand-paper">Наличные складские запасы бумаги &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=">График баллов по печатникам &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h5>Статистика</h5>
-                <p><a class="btn btn-outline-secondary" href="?r=">График баллов по печатникам &raquo;</a></p>
+        </div>
+    </div>
+
+    <div class="col-lg">
+        <div class="border p-3 rounded">
+            <h6 class="p-1 rounded">Статистика</h6>
+            <div class="d-inline">
+                <?= Html::a('График баллов по печатникам', ['/'], ['class' => 'm-1 btn btn-primary']) ?>
+                <?= Html::a('Электронный табель', ['/'], ['class' => 'm-1 btn btn-primary']) ?>
             </div>
         </div>
     </div>

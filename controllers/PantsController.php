@@ -26,6 +26,11 @@ class PantsController extends Controller
                         'actions' => ['list','view','update','create','index'],
                         'roles' => ['manager'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['list','view','index'],
+                        'roles' => ['printer'],
+                    ],
 
                     [
                         'allow' => true,

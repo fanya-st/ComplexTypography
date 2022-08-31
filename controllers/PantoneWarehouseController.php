@@ -24,6 +24,11 @@ class PantoneWarehouseController extends Controller
                         'actions' => ['index','update','barcode-print','create','move-pantone'],
                         'roles' => ['warehouse_manager'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index','barcode-print'],
+                        'roles' => ['printer'],
+                    ],
                 ],
             ],
         ];

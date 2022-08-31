@@ -32,7 +32,7 @@ class PaperWarehouseController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list'],
+                        'actions' => ['list', 'barcode-print','roll-cut'],
                         'roles' => ['printer'],
                     ],
                 ],

@@ -1,5 +1,6 @@
 <?php
 use kartik\tabs\TabsX;
+use app\models\CustomIndex;
 
 $this->title = Yii::$app->name;
 ?>
@@ -7,10 +8,11 @@ $this->title = Yii::$app->name;
 
 
 echo TabsX::widget([
-    'items'=>\app\models\CustomIndex::getIndexItems(),
+    'items'=>CustomIndex::getIndexItems(),
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
-    'encodeLabels'=>false
+    'enableStickyTabs'=>true,
+    'encodeLabels'=>false,
 ]);
 ?>
 

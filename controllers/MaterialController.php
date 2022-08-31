@@ -39,6 +39,11 @@ class MaterialController extends Controller
                         'actions' => ['list','view','update','create','stock-on-hand-paper','material-movement'],
                         'roles' => ['warehouse_manager'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['list','view','stock-on-hand-paper'],
+                        'roles' => ['printer'],
+                    ],
 
                 ],
             ],

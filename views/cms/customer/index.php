@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_of_agreement',
             [
                 'attribute'=>'status_id',
-                'value'=>'customerStatus.name',
-                'filter'=>ArrayHelper::map(CustomerStatus::find()->asArray()->all(),'id','name'),
+                'value'=>'customerStatus',
+                'filter'=>CustomerStatus::$customer_status,
             ],
             'name',
             [

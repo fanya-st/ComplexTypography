@@ -25,8 +25,9 @@ class CustomIndex extends Model
                 ArrayHelper::setValue($items, $role->name.'.label',Icon::show('user-crown', ['class'=>'fa-1x']).$role->description);
             if ($role->name=='admin'){
                 ArrayHelper::setValue($items, 'guest', ['label' => Icon::show('border-all', ['class'=>'fa-1x']).'Все функции', 'content'=>Yii::$app->view->render('@app/views/site/index')]);
-            }
                 ArrayHelper::setValue($items, $role->name.'.label',Icon::show('user-shield', ['class'=>'fa-1x']).$role->description);
+            }
+
             if ($role->name=='packer')
                 ArrayHelper::setValue($items, $role->name.'.label',Icon::show('box-open', ['class'=>'fa-1x']).$role->description);
             if ($role->name=='logistician')

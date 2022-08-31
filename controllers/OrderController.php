@@ -110,7 +110,7 @@ class OrderController extends Controller
     {
         $order=Order::findOne($id);
         if ($order->label->status_id!=10 OR $order->status_id !=1) {
-            throw new ForbiddenHttpException('Доступ запрещен');
+            throw new ForbiddenHttpException('Этикетка не готова к печати');
         }
             $order->status_id=2;
             $order->printer_login=Yii::$app->user->identity->username;

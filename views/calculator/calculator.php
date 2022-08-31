@@ -99,7 +99,6 @@ $this->registerJs(
             <div class="row">
                 <div class="col">
                     <?= $form->field($calculator, 'pants_id')
-//                        ->dropDownList(ArrayHelper::map(Pants::find()->asArray()->all(),'id','id'))
                         ->widget(Select2::class, [
                         'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
                         'options' => ['placeholder' => 'Выбрать штанец ...'],
