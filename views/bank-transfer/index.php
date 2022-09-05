@@ -3,47 +3,29 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use app\models\BankTransfer;
-use yii\helpers\ArrayHelper;
-//use yii\grid\GridView;
-use kartik\grid\GridView;
-use app\models\Customer;
-use kartik\select2\Select2;
-use kartik\daterange\DateRangePicker;
+use yii\grid\GridView;
 use app\models\User;
 use kartik\icons\Icon;
-
-
-
 
 $this->title = 'Банк';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="bank-transfer-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?= Html::a('Добавить поступление', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<?=$this->render('_search', ['model' => $searchModel])?>
+<div class="d-lg-flex flex-wrap">
+    <div class="p-2"><?= Html::a('Добавить поступление', ['create'], ['class' => 'btn btn-success']) ?></div>
+</div>
     <?ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'showFooter' => true,
         'columns' => [
             [
                 'attribute' => 'customer_id',
                 'value'=>'customer.name',
-                'filter'=>Select2::widget([
-                    'model' => $searchModel,
-                    'attribute' => 'customer_id',
-                    'data' => ArrayHelper::map(Customer::find()->asArray()->all(),'id','name'),
-                    'options' => [
-                        'prompt' => ''
-                    ],
-                    'pluginOptions' => [
-                        'allowClear' => true,
-                    ]
-                ]),
                 'contentOptions'=>['class' => 'text-left'],
                 'headerOptions' => ['class' => 'text-left'],
             ],
@@ -52,30 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>function($model){
                     return User::getFullNameByUsername($model->customer->manager_login);
                 },
-                'filter'=>Select2::widget([
-                    'model' => $searchModel,
-                    'attribute' => 'manager_login',
-                    'data' => User::findUsersByGroup('manager'),
-                    'options' => [
-                        'prompt' => ''
-                    ],
-                    'pluginOptions' => [
-                        'allowClear' => true,
-                    ]
-                ]),
                 'contentOptions'=>['class' => 'text-left'],
                 'headerOptions' => ['class' => 'text-left'],
             ],
             [
                 'attribute' => 'date',
-                'filter'=>DateRangePicker::widget([
-                    'model' => $searchModel,
-                    'attribute' => 'date',
-                    'presetDropdown'=>true,
-                    'convertFormat'=>true,
-                    'pluginOptions' => ['locale' => ['format' => 'Y-m-d'],'selectOnClose'=>false],
-                    'options' => ['placeholder' => 'Выберите дату...']
-                ]),
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],

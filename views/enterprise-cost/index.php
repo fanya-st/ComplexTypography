@@ -1,11 +1,8 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
 use kartik\icons\Icon;
-//use yii\grid\GridView;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap5\ActiveForm;
 use app\models\EnterpriseCostService;
@@ -15,18 +12,17 @@ use app\models\User;
 $this->title = 'Затраты предприятия';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="enterprise-cost-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
+<?=$this->render('_search', ['model' => $searchModel])?>
+<div class="d-lg-flex flex-wrap">
+    <div class="p-2"><?= Html::a('Добавить расход', ['create'], ['class' => 'btn btn-success']) ?></div>
+</div>
 
-    <p>
-        <?= Html::a('Добавить расход', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?ActiveForm::begin(['method'=>'post'])?>
+<?ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'columns' => [
             'id',
             'date',
@@ -45,7 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                     'attribute'=>'order_id',
-//                    'filter'=>ArrayHelper::map(EnterpriseCostService::find()->asArray()->all(),'id','name'),
             ],
 
             'cost',
@@ -67,6 +62,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <?ActiveForm::end()?>
-
 
 </div>

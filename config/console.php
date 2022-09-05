@@ -18,11 +18,18 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                [
+                'file'=>[
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error','info','warning'],
+                    'logVars' => ['_GET', '_POST'],
                 ],
+//                'db'=>[
+//                    'class' => 'yii\log\DbTarget',
+//                    'levels' => ['info'],
+//                    'logVars' => ['_GET', '_POST'],
+//                ],
             ],
         ],
         'db' => $db,

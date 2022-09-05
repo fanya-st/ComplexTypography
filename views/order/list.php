@@ -6,21 +6,19 @@ use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use app\models\User;
 use app\models\OrderStatus;
+use app\models\LabelStatus;
+use kartik\icons\Icon;
 
 $this->title = 'Работа с заказами';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
     <?echo $this->render('_search', ['model' => $searchModel])?>
+<div class="table-responsive">
     <? $form = ActiveForm::begin()?>
-<?php //Pjax::begin()?>
     <? echo GridView::widget([
         'dataProvider' => $orders,
-        'id'=>'order-list',
         'columns' => [
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-            ],
             [
                 'attribute' => 'id',
                 'label' => 'ID',
@@ -46,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_of_create',
             [
                 'attribute'=>'status_id',
-//                'value'=>'orderStatus.name',
                 'value' => function($model){return OrderStatus::$order_status[$model->status_id];},
                 'filter' => OrderStatus::$order_status,
                 'contentOptions'=>['class' => 'text-center'],
@@ -55,7 +52,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label'=>'Статус эт-ки',
-                'value'=>'label.labelStatus.name',
+                'value'=>function($model){
+                    return LabelStatus::$label_status[$model->label->status_id];
+                },
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center']
 
@@ -76,11 +75,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class' => 'text-center']
 
             ],
+//            ['class' => 'yii\grid\ActionColumn',
+//                'template' => '{view}'
+//                ],
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{view}'
-                ],
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function($url, $model, $key) {     // render your custom button
+                        return Html::a(Html::button( Icon::show('eye', ['class'=>'fa-0.5x'], Icon::FA),
+                            ['class' => 'btn btn-outline-primary']), ['order/view', 'id' => $model->id], ['class' => 'profile-link']);
+                    }
+                ]
+            ],
         ],
     ]);
-//    Pjax::end();
     ActiveForm::end()
     ?>
+</div>

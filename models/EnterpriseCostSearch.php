@@ -50,11 +50,22 @@ class EnterpriseCostSearch extends EnterpriseCost
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'date' => $this->date,
             'service_id' => $this->service_id,
             'order_id' => $this->order_id,
             'cost' => $this->cost,
         ]);
+
+        if(!empty($this->date)){
+            $date_explode=explode(" - ",$this->date);
+            $date1=trim($date_explode[0]);
+            $date2=trim($date_explode[1]);
+            $query->andFilterWhere(
+                ['>=','date',date($date1)]
+            );
+            $query->andFilterWhere(
+                ['<=','date',date($date2)]
+            );
+        }
 
         $query->andFilterWhere(['like', 'login', $this->login]);
 

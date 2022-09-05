@@ -93,15 +93,6 @@ return array (
       '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
     ),
   ),
-  'kartik-v/yii2-bootstrap5-dropdown' => 
-  array (
-    'name' => 'kartik-v/yii2-bootstrap5-dropdown',
-    'version' => 'dev-master',
-    'alias' => 
-    array (
-      '@kartik/bs5dropdown' => $vendorDir . '/kartik-v/yii2-bootstrap5-dropdown/src',
-    ),
-  ),
   'kartik-v/yii2-label-inplace' => 
   array (
     'name' => 'kartik-v/yii2-label-inplace',
@@ -163,15 +154,6 @@ return array (
     'alias' => 
     array (
       '@kartik/dialog' => $vendorDir . '/kartik-v/yii2-dialog/src',
-    ),
-  ),
-  'kartik-v/yii2-grid' => 
-  array (
-    'name' => 'kartik-v/yii2-grid',
-    'version' => '3.5.0.0',
-    'alias' => 
-    array (
-      '@kartik/grid' => $vendorDir . '/kartik-v/yii2-grid/src',
     ),
   ),
   'kartik-v/yii2-widget-timepicker' => 
@@ -327,5 +309,23 @@ return array (
       '@yii/bootstrap5' => $vendorDir . '/yiisoft/yii2-bootstrap5/src',
     ),
     'bootstrap' => 'yii\\bootstrap5\\i18n\\TranslationBootstrap',
+  ),
+  'kartik-v/yii2-grid' => 
+  array (
+    'name' => 'kartik-v/yii2-grid',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/grid' => $vendorDir . '/kartik-v/yii2-grid/src',
+    ),
+  ),
+  'kartik-v/yii2-bootstrap5-dropdown' => 
+  array (
+    'name' => 'kartik-v/yii2-bootstrap5-dropdown',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/bs5dropdown' => $vendorDir . '/kartik-v/yii2-bootstrap5-dropdown/src',
+    ),
   ),
 );

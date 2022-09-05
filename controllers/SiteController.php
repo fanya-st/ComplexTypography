@@ -53,9 +53,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-//        if(ArrayHelper::keyExists('printer', Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()), false)){
-//            return $this->render('index-printer');
-//        }
         return $this->render('index-test');
     }
 

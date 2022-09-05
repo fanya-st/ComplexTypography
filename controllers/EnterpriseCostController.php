@@ -7,6 +7,7 @@ use app\models\EnterpriseCostSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii;
 
 
 class EnterpriseCostController extends Controller
@@ -22,6 +23,11 @@ class EnterpriseCostController extends Controller
                         'allow' => true,
                         'actions' => ['index','create','update','delete'],
                         'roles' => ['accountant'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['manager'],
                     ],
 
                 ],

@@ -1,5 +1,3 @@
-<?php?>
-
 <div class="p-5 mb-4 bg-transparent rounded-3">
     <div class="container-fluid py-5 text-center">
         <h1 class="display-4">Добро пожаловать в CRM систему для Типографии!</h1>

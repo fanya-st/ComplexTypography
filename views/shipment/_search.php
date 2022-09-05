@@ -1,39 +1,56 @@
 <?php
 
-use app\models\Shipment;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use kartik\select2\Select2;
-use yii\helpers\ArrayHelper;
 use app\models\User;
-use kartik\date\DatePicker;
-use yii\bootstrap5\Modal;
-use kartik\icons\FontAwesomeAsset;
 use kartik\label\LabelInPlace;
-FontAwesomeAsset::register($this);
+use kartik\daterange\DateRangePicker;
 
 ?>
-    <?php $form = ActiveForm::begin([
-        'action' => ['shipment/list'],
-        'method' => 'post',
-    ])?>
-    <div class="row border p-3 rounded-lg">
-        <div class="col">
-            <?=$form->field($model,'id')->widget(LabelInPlace::classname(),[
-                'type' => LabelInPlace::TYPE_HTML5,
-                'options' => ['type' => 'text']
-            ])?>
-            <?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Создать отгрузку', ['/shipment/create'], ['class'=>'btn btn-primary']) ?>
-        </div>
-        <div class="col">
-            <?=$form->field($model,'manager_login')->widget(Select2::classname(), [
-                'data' => (User::findUsersByGroup('manager')),
-                'options' => ['placeholder' => 'Выбрать менеджера ...'],
+<?php $form = ActiveForm::begin(['action' => ['shipment/list'], 'method' => 'post',])?>
+
+<div class="text-nowrap">
+    <div class="border p-3 rounded">
+        <div class="d-lg-flex flex-wrap">
+            <div class="p-1"><?=$form->field($model,'id')->widget(LabelInPlace::class,[
+                    'type' => LabelInPlace::TYPE_HTML5,
+                    'options' => ['type' => 'text']
+                ])?></div>
+            <div class="p-1 flex-fill"><?=$form->field($model,'manager_login')->widget(Select2::class, [
+                    'data' => (User::findUsersByGroup('manager')),
+                    'options' => ['placeholder' => 'Выбрать менеджера'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ])->label(false)?></div>
+            <div class="p-1 flex-fill"><?=$form->field($model,'date_of_create')->widget(DateRangePicker::class,[
+                'convertFormat' => true,
+                'presetDropdown'=>true,
+                'options'=>['placeholder' => 'Дата создания'],
                 'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ])->label(false)?>
-        </div>
-        <?php ActiveForm::end() ?>
+                    'format'=>'Y-m-d',
+                    'locale' => [
+                        'format' => 'd.m.Y',
+                        'separator' => ' | ',
+                        ],
+                    ],
+                    ])->label(false)?></div>
+            <div class="p-1 flex-fill"><?=$form->field($model,'date_of_send')->widget(DateRangePicker::class,[
+                'convertFormat' => true,
+                'presetDropdown'=>true,
+                'options'=>['placeholder' => 'Дата отправки'],
+                'pluginOptions' => [
+                    'format'=>'Y-m-d',
+                    'locale' => [
+                        'format' => 'd.m.Y',
+                        'separator' => ' | ',
+                        ],
+                    ],
+                    ])->label(false)?></div>
+            </div>
+        <div class="p-1"><?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
     </div>
+</div>
+
+<?php ActiveForm::end() ?>

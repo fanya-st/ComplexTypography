@@ -7,17 +7,6 @@
 class RoboFile extends \Robo\Tasks
 {
     // define public methods as commands
-    public function prepareOld()
-    {
-        $config = json_decode(file_get_contents(__DIR__ . '/composer.json'), true);
-
-        $config['name'] = 'codeception/phpunit-wrapper-test';
-        $config['require-dev']['codeception/codeception'] = getenv('CODECEPTION_VERSION');
-        $config['replace'] = ['codeception/phpunit-wrapper' => '*'];
-
-        file_put_contents(__DIR__ . '/composer.json', json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    }
-
     public function prepareDependencies()
     {
         $config = json_decode(file_get_contents(__DIR__ . '/composer.json'), true);
@@ -53,13 +42,5 @@ class RoboFile extends \Robo\Tasks
             ]
         ];
         file_put_contents(__DIR__ . '/composer.json', json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    }
-
-
-    public function test($params)
-    {
-        return $this->taskExec(__DIR__ . '/vendor/bin/codecept run ' . $params)
-            ->dir(__DIR__ .'/vendor/codeception/codeception')
-            ->run();
     }
 }

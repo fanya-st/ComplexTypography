@@ -28,13 +28,11 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/version" />
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
       <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/vendor/phpspec/php-diff" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
@@ -62,11 +60,8 @@
       <path value="$PROJECT_DIR$/vendor/codeception/module-filesystem" />
       <path value="$PROJECT_DIR$/vendor/codeception/phpunit-wrapper" />
       <path value="$PROJECT_DIR$/vendor/codeception/specify" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/codeception/stub" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/codeception/lib-innerbrowser" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/codeception/verify" />
       <path value="$PROJECT_DIR$/vendor/codeception/module-yii2" />
       <path value="$PROJECT_DIR$/vendor/codeception/module-asserts" />
@@ -134,6 +129,16 @@
       <path value="$PROJECT_DIR$/vendor/skeeks/yii2-mobile-detect" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/strength-meter" />
       <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-password" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
     </include_path>
   </component>
 </project>

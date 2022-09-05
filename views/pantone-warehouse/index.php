@@ -1,36 +1,28 @@
 <?php
-
-//use yii\grid\GridView;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Pantone;
-
 use kartik\icons\Icon;
-
 
 $this->title = 'Склад ЛКМ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pantone-warehouse-index">
+<h1><?= Html::encode($this->title) ?></h1>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?=$this->render('_search', ['model' => $searchModel])?>
 
-    <div class="d-lg-inline-flex">
-        <div class="p-2">
-            <?= Html::a('Добавить ЛКМ', ['create'], ['class' => 'btn btn-success']) ?>
-        </div>
-        <div class="p-2">
-            <?=Html::a('Перемещение ЛКМ', ['pantone-warehouse/move-pantone'], ['class'=>'btn btn-success'])?>
-        </div>
-    </div>
+<div class="d-lg-flex flex-wrap p-2">
+    <div class="p-1"><?= Html::a('Добавить ЛКМ', ['create'], ['class' => 'btn btn-success']) ?></div>
+    <div class="p-1"><?=Html::a('Перемещение ЛКМ', ['pantone-warehouse/move-pantone'], ['class'=>'btn btn-success'])?></div>
+</div>
 
 
-    <?ActiveForm::begin(['method'=>'post'])?>
+<?ActiveForm::begin(['method'=>'post'])?>
+    <div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             [
                 'attribute' => 'id',
@@ -40,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' =>  'pantone_id',
                 'value' =>  'pantone.name',
-                'filter'=>ArrayHelper::map(Pantone::find()->asArray()->all(),'id','name'),
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],
@@ -77,8 +68,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
+    ])?>
+    </div>
     <?ActiveForm::end()?>
-
-
-</div>

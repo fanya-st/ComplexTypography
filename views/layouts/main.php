@@ -6,9 +6,9 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
-use kartik\bs5dropdown\Dropdown;
+//use kartik\bs5dropdown\Dropdown;
 use yii\helpers\ArrayHelper;
-use kartik\sidenav\SideNav;
+use yii\bootstrap5\Dropdown;
 
 AppAsset::register($this);
 ?>

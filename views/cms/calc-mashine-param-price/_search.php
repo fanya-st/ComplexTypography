@@ -1,35 +1,27 @@
 <?php
+use yii\bootstrap5\Html;
+use yii\bootstrap5\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Mashine;
+use app\models\CalcMashineParam;
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model app\models\CalcMashineParamPriceSearch */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="calc-mashine-param-price-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
+        'action' => ['cms/calc-mashine-param-price-index'],
+        'method' => 'post',
     ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'mashine_id') ?>
-
-    <?= $form->field($model, 'calc_mashine_param_id') ?>
-
-    <?= $form->field($model, 'value') ?>
-
-    <?= $form->field($model, 'date') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="d-lg-flex flex-wrap">
+        <div class="p-1"><?= $form->field($searchModel, 'id')->textInput() ?></div>
+        <div class="p-1"><?= $form->field($searchModel, 'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->asArray()->all(),'id','name'),['prompt'=>'']) ?></div>
+        <div class="p-1"><?= $form->field($searchModel, 'calc_mashine_param_id')->dropDownList(ArrayHelper::map(CalcMashineParam::find()->asArray()->all(),'id','subscribe'),['prompt'=>'']) ?></div>
     </div>
+    <div class="d-inline-flex">
+        <div class="p-1"><?= Html::submitButton('Поиск', ['class' => 'btn btn-success']) ?></div>
+        <div class="p-1"><?= Html::resetButton('Сброс', ['class' => 'btn btn-outline-secondary']) ?></div>
+        </div>
+
 
     <?php ActiveForm::end(); ?>
 
-</div>

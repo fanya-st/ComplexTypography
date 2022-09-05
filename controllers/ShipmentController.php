@@ -35,6 +35,11 @@ class ShipmentController extends Controller
                         'actions' => ['list','view','send-shipment','mark-defect-roll','close-shipment','edit-transport'],
                         'roles' => ['logistician'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['list','view'],
+                        'roles' => ['accountant'],
+                    ],
 
                 ],
             ],

@@ -42,10 +42,6 @@ class Customer extends ActiveRecord
         return Order::find()->joinWith(['shipmentOrder','label'])->where(['shipment_order.shipment_id'=>$shipment_id,'label.customer_id'=>$this->id])->column();
     }
 
-    public function getManagerFullName(){
-        $user=User::findByUserName($this->manager_login);
-        return $user->F. ' '.mb_substr($user->I,0,1).'.';
-    }
     public function getCustomerAddress(){
         return 'РФ, '.$this->subject->name.', '.$this->region->name.', '.$this->town->name.', улица '.$this->street->name.', '.$this->house;
     }
@@ -70,8 +66,19 @@ class Customer extends ActiveRecord
             'contact'=>'Контактное лицо',
             'customerAddress'=>'Адрес',
             'date_of_create'=>'Дата создания',
-            'managerFullName'=>'Менеджер',
+            'manager_login'=>'Менеджер',
             'customerStatus.name'=>'Статус',
+        ];
+    }
+
+    public function rules()
+    {
+        // только поля определенные в rules() будут доступны для поиска
+        return [
+            [['status_id','region_id','subject_id','town_id','street_id'], 'integer'],
+            [['name','manager_login','house'], 'trim'],
+            [['name','manager_login','house'], 'string'],
+            [['date_of_agreement'], 'safe'],
         ];
     }
 }

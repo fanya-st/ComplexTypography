@@ -39,7 +39,7 @@ class EnterpriseCost extends \yii\db\ActiveRecord
             'date' => 'Дата',
             'login' => 'Сотрудник',
             'service_id' => 'Услуга',
-            'order_id' => 'Для заказа',
+            'order_id' => 'Заказ',
             'cost' => 'Затрата, руб',
         ];
     }

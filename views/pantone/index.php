@@ -1,7 +1,7 @@
 <?php
 
 use yii\bootstrap5\Html;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\PantoneKind;
@@ -10,20 +10,18 @@ use kartik\icons\Icon;
 $this->title = 'Пантоны';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pantone-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+<?=$this->render('_search', ['model' => $searchModel])?>
     <div class="d-inline-flex">
         <div class="p-2">
             <?= Html::a('Добавить PANTONE', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
     </div>
     <? ActiveForm::begin(['method'=>'post'])?>
-
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             [
                 'attribute' => 'id',
@@ -84,8 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
-    <?ActiveForm::end()?>
-
-
+    ])?>
 </div>
+<?ActiveForm::end()?>
+

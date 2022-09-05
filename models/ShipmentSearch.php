@@ -6,7 +6,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class ShipmentSearch extends Customer
+class ShipmentSearch extends Shipment
 {
     public static function tableName()
     {

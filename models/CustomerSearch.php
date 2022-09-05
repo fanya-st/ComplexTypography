@@ -49,8 +49,10 @@ class CustomerSearch extends Customer
             ]
         ]);
 
+
+
         // загружаем данные формы поиска и производим валидацию
-        if (!($this->load($params) && $this->validate())) {
+        if (!$this->load($params) && $this->validate()) {
             return $dataProvider;
         }
 
@@ -59,7 +61,6 @@ class CustomerSearch extends Customer
         $query->andFilterWhere(['status_id' => $this->status_id]);
         $query->andFilterWhere(['manager_login' => $this->manager_login]);
         $query->andFilterWhere(['like', 'name', $this->name]);
-        $query->where(['=', 'date_of_agreement', Date('Y-m-d', strtotime($this->date_of_agreement))]);
         return $dataProvider;
     }
 }

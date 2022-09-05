@@ -23,6 +23,11 @@ class BankTransferController extends Controller
                         'actions' => ['index','create','update','delete'],
                         'roles' => ['accountant'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['manager'],
+                    ],
 
                 ],
             ],

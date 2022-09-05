@@ -30,6 +30,11 @@ class CustomerController extends Controller
                         'actions' => ['create','region','town','street','list','view','update'],
                         'roles' => ['manager'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['list','view'],
+                        'roles' => ['accountant'],
+                    ],
                 ],
             ],
         ];
@@ -119,7 +124,7 @@ class CustomerController extends Controller
     public function actionList()
     {
         $searchModel = new CustomerSearch();
-        $customers = $searchModel->search(Yii::$app->request->post());
+        $customers = $searchModel->search($this->request->post());
         return $this->render('list',compact('customers','searchModel'));
     }
 

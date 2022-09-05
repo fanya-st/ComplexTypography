@@ -50,6 +50,11 @@ class OrderController extends Controller
                     'actions' => ['list','view','start-pack','pack','pack-in','finish-pack','print-label-package','print-box-label','print-sleeve-label','pack-send'],
                     'roles' => ['packer'],
                 ],
+                [
+                    'allow' => true,
+                    'actions' => ['list','view'],
+                    'roles' => ['accountant'],
+                ],
 				
             ],
         ],

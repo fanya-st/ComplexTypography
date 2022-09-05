@@ -26,7 +26,6 @@
         "kartik-v/yii2-widget-fileinput": "dev-master",
         "kartik-v/yii2-widget-depdrop": "dev-master",
         "kartik-v/yii2-icons": "dev-master",
-        "kartik-v/yii2-bootstrap5-dropdown": "dev-master",
         "kartik-v/yii2-label-inplace": "dev-master",
         "kartik-v/yii2-widget-activeform": "dev-master",
         "kartik-v/yii2-tabs-x": "dev-master",
@@ -41,7 +40,10 @@
         "kartik-v/yii2-widget-datetimepicker": "dev-master",
         "skeeks/yii2-mobile-detect": "^1.0",
         "phpoffice/phpspreadsheet": "^1.12",
-        "kartik-v/yii2-password": "dev-master"
+        "kartik-v/yii2-password": "dev-master",
+        "kartik-v/yii2-grid": "dev-master",
+        "kartik-v/yii2-bootstrap5-dropdown": "@dev",
+        "symfony/mailer": "^5.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

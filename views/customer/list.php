@@ -2,8 +2,9 @@
 
 
 use yii\bootstrap5\Html;
-//use yii\grid\GridView;
 use kartik\grid\GridView;
+//use yii\grid\GridView;
+use app\models\User;
 
 $this->title = 'Работа с заказчиками';
 $this->params['breadcrumbs'][] = $this->title;
@@ -12,12 +13,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <?echo $this->render('_search', ['model' => $searchModel])?>
 <? echo GridView::widget([
     'dataProvider' => $customers,
+//    'filterModel' => $searchModel,
     'id'=>'order-list',
     'columns' => [
         'id',
         'name',
         'customerAddress',
-        'managerFullName',
+        [
+                'attribute'=>'manager_login',
+                'value'=>function($model){
+                        return User::getFullNameByUsername($model->manager_login);
+                },
+        ],
         'email',
         'number',
         ['class' => 'yii\grid\ActionColumn',

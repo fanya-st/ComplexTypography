@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ['autofocus' => 'autofocus']])->textInput()->label('Просканируйте штрихкод ролика или палета')?>
 <?=Html::submitButton('Ввод',['class'=>'btn btn-success'])?>
 <?php ActiveForm::end() ?>
+<div class="table-responsive">
 <?=GridView::widget([
     'dataProvider' => $paper,
     'columns' => [
@@ -39,3 +40,4 @@ $this->params['breadcrumbs'][] = $this->title;
 //        ],
     ]
 ])?>
+</div>

@@ -9,8 +9,7 @@ use yii\base\Model;
 class PaperWarehouseSearch extends PaperWarehouse
 {
 
-    public $materialGroupId;
-    public $materialName;
+    public $material_group_id;
     public $width_from;
     public $width_to;
     public static function tableName()
@@ -22,11 +21,21 @@ class PaperWarehouseSearch extends PaperWarehouse
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [['id','material_id','length','width','materialGroupId','width_from','width_to'], 'integer'],
-            [['length','width','materialName','width_from','width_to'], 'trim'],
-            [[], 'safe'],
+            [['id','material_id','length','material_group_id','width_from','width_to'], 'integer'],
+            [['id','material_id','length','material_group_id','width_from','width_to'], 'trim'],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'width_from'=>'Ширина от, мм',
+            'width_to'=>'Ширина до, мм',
+            'length'=>'Длина, м',
+            'id'=>'ID',
+        ];
+    }
+
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
@@ -62,18 +71,17 @@ class PaperWarehouseSearch extends PaperWarehouse
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
-
-        // изменяем запрос добавляя в его фильтрацию
-        $query->andFilterWhere(['paper_warehouse.id' => $this->id]);
-//        $query->andFilterWhere(['like','material.name',$this->materialName]);
-        $query->andFilterWhere(['material_id'=>$this->material_id]);
         $query->joinWith(['material' => function ($q) {
-            $q->andFilterWhere(['material.material_group_id' => $this->materialGroupId]);
+            $q->andFilterWhere([
+                'material.material_group_id' => $this->material_group_id,
+            ]);
         }]);
-        $query->andFilterWhere(['length' => $this->length]);
+        $query->andFilterWhere([
+            'length' => $this->length,
+            'paper_warehouse.id' => $this->id,
+            'material_id'=>$this->material_id
+        ]);
         $query->andFilterWhere(['between', 'width', $this->width_from, $this->width_to]);
-//        $query->andFilterWhere(['like', 'short_name', $this->short_name]);
-//        $query->andFilterWhere(['material_provider_id' => $this->material_provider_id]);
         return $dataProvider;
     }
 }

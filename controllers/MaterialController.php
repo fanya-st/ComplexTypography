@@ -36,7 +36,7 @@ class MaterialController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list','view','update','create','stock-on-hand-paper','material-movement'],
+                        'actions' => ['list','view','update','create','stock-on-hand-paper','material-movement','inactive','active'],
                         'roles' => ['warehouse_manager'],
                     ],
                     [
@@ -98,6 +98,22 @@ class MaterialController extends Controller
             }
         }
         return $this->render('update',compact('material'));
+    }
+
+    public function actionInactive($id)
+    {
+        $material=Material::findOne($id);
+        $material->status=0;
+        $material->save();
+        return $this->redirect(['material/list']);
+    }
+
+    public function actionActive($id)
+    {
+        $material=Material::findOne($id);
+        $material->status=1;
+        $material->save();
+        return $this->redirect(['material/list']);
     }
 
     public function actionCreate()

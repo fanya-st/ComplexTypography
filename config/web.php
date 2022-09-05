@@ -48,7 +48,7 @@ $config = [
 //            'class' => 'yii\web\CacheSession',
 //        ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => 'yii\symfony\Mailer',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure transport
             // for the mailer to send real emails.
@@ -65,11 +65,16 @@ $config = [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                [
+                'file'=>[
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error','info','warning'],
-                    'logVars' => ['_GET', '_POST','_SERVER'],
+                    'logVars' => ['_GET', '_POST'],
                 ],
+//                'db'=>[
+//                    'class' => 'yii\log\DbTarget',
+//                    'levels' => ['info'],
+//                    'logVars' => ['_GET', '_POST'],
+//                ],
             ],
         ],
         'db' => $db,

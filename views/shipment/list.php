@@ -2,59 +2,45 @@
 
 
 use yii\bootstrap5\Html;
-//use yii\grid\GridView;
-use kartik\grid\GridView;
+use yii\grid\GridView;
+//use kartik\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use kartik\date\DatePicker;
 use app\models\User;
-use kartik\daterange\DateRangePicker;
 
 $this->title = 'Работа с отгрузками';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
-<?//echo $this->render('_search', ['model' => $searchModel])?>
-<?//
-//Modal::begin([
-//    'title'=>'<h4>Создать отгрузку</h4>',
-//    'toggleButton' => ['label' => 'Создать отгрузку', 'class' => 'btn btn-primary'],
-//    'id'=>'modal',
-//    'centerVertical'=>true,
-//]);
-//$shipment = new Shipment();
-//$form=ActiveForm::begin(['action'=>'shipment/create','id' => 'shipment-form']);
-//echo $form->field($shipment,'date_of_send')->widget(DatePicker::classname(), [
-//    'options' => ['placeholder' => 'Введите дату отправки ...'],
-//    'pluginOptions' => [
-//        'allowClear' => true,
-//        'autoClose' => true,
-//        'format' => 'yyyy-mm-dd',
-//    ]
-//])->label(false);
-//echo Html::submitButton('Создать',['class'=>'btn btn-success']);
-//ActiveForm::end();
-//Modal::end();
-//?>
-<div class="border p-3">
-    <div class="col d-flex">
-        <? $form=ActiveForm::begin([]);
-        echo $form->field($new_shipment,'date_of_send')->widget(DatePicker::classname(), [
-            'options' => ['placeholder' => 'Введите дату отправки ...'],
-            'pluginOptions' => [
-                'allowClear' => true,
-                'autoClose' => true,
-                'format' => 'yyyy-mm-dd',
-            ]
-        ])->label(false);
-        echo Html::submitButton('Создать',['class'=>'btn btn-success']);
-        ActiveForm::end()?>
+
+<div class="border p-3 row g-2 row-cols-lg-2 text-nowrap">
+    <div class="col-lg">
+            <div class="d-lg-flex flex-wrap">
+                <?$form=ActiveForm::begin([])?>
+                <div class="p-1 flex-fill"><?=$form->field($new_shipment,'date_of_send')->widget(DatePicker::class, [
+                        'options' => ['placeholder' => 'Введите дату отправки ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true,
+                            'autoClose' => true,
+                            'format' => 'yyyy-mm-dd',
+                        ]
+                    ])->label(false)?></div>
+                <div class="p-1"><?=Html::submitButton('Создать',['class'=>'btn btn-success'])?></div>
+                <?ActiveForm::end()?>
+            </div>
+    </div>
+    <div class="col-lg">
+        <div class="d-lg-flex flex-wrap">
+            <?=$this->render('_search', ['model' => $searchModel])?>
+        </div>
     </div>
 </div>
-<?
-$form=ActiveForm::begin(['method' => 'post']);
-echo GridView::widget([
+
+
+<? $form=ActiveForm::begin(['method' => 'post'])?>
+<div class="table-responsive">
+<?=GridView::widget([
     'dataProvider' => $shipments,
-    'filterModel' => $searchModel,
     'columns' => [
         [
                 'attribute'=>'id',
@@ -64,7 +50,6 @@ echo GridView::widget([
             'value' => function($model){
                 return User::getFullNameByUsername($model->manager_login);
             },
-            'filter' => User::findUsersByGroup('manager')
         ],
         [
             'attribute' => 'shipmentWeight',
@@ -87,42 +72,15 @@ echo GridView::widget([
         [
             'attribute' => 'date_of_create',
             'value' => 'date_of_create',
-            'filter' => DateRangePicker::widget([
-                'model' => $searchModel,
-                'attribute' => 'date_of_create',
-                'convertFormat' => true,
-                'presetDropdown'=>true,
-                'pluginOptions' => [
-                    'format'=>'Y-m-d',
-                    'locale' => [
-                        'format' => 'd.m.Y',
-                        'separator' => ' | ',
-                    ],
-                ],
-            ]),
         ],
         [
             'attribute' => 'date_of_send',
             'value' => 'date_of_send',
-            'filter' => DateRangePicker::widget([
-                'model' => $searchModel,
-                'attribute' => 'date_of_send',
-                'convertFormat' => true,
-                'presetDropdown'=>true,
-                'pluginOptions' => [
-                    'format'=>'Y-m-d',
-                    'locale' => [
-                        'format' => 'd.m.Y',
-                        'separator' => ' | ',
-                    ],
-                ],
-            ]),
         ],
         ['class' => 'yii\grid\ActionColumn',
             'template' => '{view}'
         ],
     ],
-    'responsive'=>true,
-]);
-ActiveForm::end();
-?>
+])?>
+</div>
+<?ActiveForm::end()?>

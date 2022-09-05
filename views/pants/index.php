@@ -1,8 +1,8 @@
 <?php
 
 use yii\bootstrap5\Html;
-//use yii\grid\GridView;
-use kartik\grid\GridView;
+use yii\grid\GridView;
+//use kartik\grid\GridView;
 use app\models\Shaft;
 use yii\helpers\ArrayHelper;
 use app\models\PantsKind;
@@ -13,24 +13,19 @@ use kartik\icons\Icon;
 $this->title = 'Штанцы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pants-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+<?=$this->render('_search', ['model' => $searchModel])?>
+<div class="d-lg-flex flex-wrap">
+    <div class="p-2"><?= Html::a('Создать штанец', ['create'], ['class' => 'btn btn-success']) ?></div>
+    <div class="p-2"><?=Html::a('Совместимость штанцев со станками', ['mashine-pants/index'], ['class' => 'btn btn-success'])?></div>
+</div>
 
-    <div class="d-lg-inline-flex">
-        <div class="p-2">
-            <?= Html::a('Создать штанец', ['create'], ['class' => 'btn btn-success']) ?>
-        </div>
-        <div class="p-2">
-            <?=Html::a('Совместимость штанцев со станками', ['mashine-pants/index'], ['class' => 'btn btn-success'])?>
-        </div>
-    </div>
 
     <?ActiveForm::begin(['method'=>'post'])?>
-
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             [
                 'attribute' => 'id',
@@ -40,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                     'attribute'=>'shaft_id',
                     'value'=>'shaft.name',
-                    'filter'=>ArrayHelper::map(Shaft::find()->asArray()->all(),'id','name'),
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],
@@ -52,7 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'pants_kind_id',
                 'value' => 'pantsKind.name',
-                'filter'=>ArrayHelper::map(PantsKind::find()->asArray()->all(),'id','name'),
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],
@@ -97,8 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
+    ])?>
+</div>
     <?ActiveForm::end()?>
 
-
-</div>

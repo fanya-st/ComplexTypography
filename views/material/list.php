@@ -2,7 +2,8 @@
 
 
 use yii\bootstrap5\Html;
-use kartik\grid\GridView;
+//use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\MaterialProvider;
@@ -13,18 +14,15 @@ $this->title = 'Работа с материалами';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
-<!--<pre>--><?//print_r(Yii::$app->request->post())?><!--</pre>-->
-<div class="p-3">
-    <?=Html::a('Создать материал', ['material/create'], ['class'=>'btn btn-primary'])?>
-</div>
-<?
-$form=ActiveForm::begin(['method' => 'post']);
-echo GridView::widget([
+<?=$this->render('_search', ['model' => $searchModel])?>
+<div class="p-1"><?=Html::a('Создать материал', ['material/create'], ['class'=>'btn btn-primary'])?></div>
+<? $form=ActiveForm::begin(['method' => 'post'])?>
+<div class="table-responsive">
+<?= GridView::widget([
     'dataProvider' => $material,
-    'filterModel' => $searchModel,
        'rowOptions'=>function($model){
             if($model->status==0){
-                return ['class' => 'table-secondary','title'=>'Материал в архиве'];
+                return ['class' => 'table-danger','title'=>'Материал в архиве'];
                 }
             else return null;
             },
@@ -37,7 +35,6 @@ echo GridView::widget([
         [
             'attribute'=>'material_group_id',
             'value'=>'materialGroup.name',
-            'filter' => ArrayHelper::map(MaterialGroup::find()->asArray()->all(),'id','name'),
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center']
         ],
@@ -64,20 +61,23 @@ echo GridView::widget([
         [
             'attribute'=>'material_provider_id',
             'value'=>'materialProvider.name',
-            'filter' => ArrayHelper::map(MaterialProvider::find()->asArray()->all(),'id','name'),
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center']
         ],
         ['class' => 'yii\grid\ActionColumn',
-            'template' => '{view} {update} {delete}',
+            'template' => '{view} {update} {change_status}',
             'buttons' => [
                 'update' => function($url, $model, $key) {     // render your custom button
                     return Html::a(Html::button( Icon::show('edit'),
                         ['class' => 'btn btn-outline-primary']), ['material/update', 'id' => $model->id]);
                 },
-                'delete' => function($url, $model, $key) {     // render your custom button
+                'change_status' => function($url, $model, $key) {
+                    if($model->status!=0)
                     return Html::a(Html::button( Icon::show('minus'),
-                        ['class' => 'btn btn-outline-danger']), ['material/delete', 'id' => $model->id]);
+                        ['class' => 'btn btn-outline-danger']), ['material/inactive', 'id' => $model->id]);
+                    else
+                        return Html::a(Html::button( Icon::show('plus'),
+                            ['class' => 'btn btn-outline-success']), ['material/active', 'id' => $model->id]);
                 },
                 'view' => function($url, $model, $key) {     // render your custom button
                     return Html::a(Html::button( Icon::show('eye'),
@@ -85,9 +85,9 @@ echo GridView::widget([
                 }
             ],
             'contentOptions'=>['class' => 'text-center'],
-            'headerOptions' => ['class' => 'text-center'],
+            'headerOptions' => ['class' => 'text-center','style'=>'width:15%;'],
         ],
     ],
-]);
-ActiveForm::end();
-?>
+])?>
+</div>
+<?ActiveForm::end()?>

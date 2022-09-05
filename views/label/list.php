@@ -1,16 +1,17 @@
 <?php
 
 use yii\bootstrap5\Html;
-use kartik\grid\GridView;
+//use kartik\grid\GridView;
+use yii\grid\GridView;
 use app\models\User;
 
 $this->title = 'Работа с этикетками';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
-        <?
-        echo $this->render('_search', ['model' => $searchModel]);
-        echo GridView::widget([
+        <?=$this->render('_search', ['model' => $searchModel])?>
+<div class="table-responsive">
+        <?=GridView::widget([
             'dataProvider' => $labels,
 //            'filterModel' => $searchModel,
             'columns' => [
@@ -67,3 +68,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]);
         ?>
+</div>
