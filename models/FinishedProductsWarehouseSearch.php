@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 
 class FinishedProductsWarehouseSearch extends FinishedProductsWarehouse
 {
-    public $managerLogin;
+    public $manager_id;
     public static function tableName()
     {
         return 'finished_products_warehouse';
@@ -18,9 +18,8 @@ class FinishedProductsWarehouseSearch extends FinishedProductsWarehouse
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [['label_in_roll','roll_count','label_id','order_id','id'], 'integer'],
-            [['managerLogin'], 'trim'],
-            [['id','status_id','date_of_create','managerLogin','label_id','order_id','roll_count','label_in_roll'], 'safe'],
+            [['label_in_roll','roll_count','label_id','order_id','id','manager_id'], 'integer'],
+            [['id','status_id','date_of_create','label_id','order_id','roll_count','label_in_roll'], 'safe'],
         ];
     }
     public function scenarios()
@@ -57,24 +56,9 @@ class FinishedProductsWarehouseSearch extends FinishedProductsWarehouse
         $query->andFilterWhere(['finished_products_warehouse.roll_count' => $this->roll_count]);
         $query->andFilterWhere(['finished_products_warehouse.label_in_roll' => $this->label_in_roll]);
         $query->joinWith(['customer' => function ($q) {
-            $q->andFilterWhere(['customer.manager_login'=> $this->managerLogin]);
+            $q->andFilterWhere(['customer.user_id'=> $this->manager_id]);
         }]);
-//        $query->andFilterWhere(['customer_id'=> $this->customer_id]);
-//        $query->joinWith(['pants' => function ($q) {
-//            $q->andFilterWhere(['pants.shaft_id'=> $this->shaft_id]);
-//        }]);
-//        $query->andFilterWhere(['pants_id'=> $this->pants_id]);
-//        $query->andFilterWhere(['label.status_id'=> $this->status_id]);
-//        if(isset ($this->date_of_create)&&$this->date_of_create!=''){
-//            $date_explode=explode(" - ",$this->date_of_create);
-//            $date1=trim($date_explode[0]);
-//            $date2=trim($date_explode[1]);
-//            if($date1!=$date2) {
-//                $query->andWhere("date_of_create BETWEEN str_to_date('$date1' ,'%d.%m.%Y %H-%i-%S') AND str_to_date('$date2' ,'%d.%m.%Y %H-%i-%S') ");
-//            }else{
-//                $query->andWhere("date_of_create BETWEEN str_to_date('".$date1." 00-00-00','%d.%m.%Y %H-%i-%S') AND str_to_date('".$date2." 23-59-59','%d.%m.%Y %H-%i-%S') ");
-//            }
-//        }
+
         return $dataProvider;
     }
 }

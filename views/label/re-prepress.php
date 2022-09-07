@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => $cur_label->name, 'url' => ['label/
 $this->params['breadcrumbs'][] = $this->title;
 ?>
     <h3><?= Html::encode($this->title)?></h3>
-    <h6>Перевывод выполнил: <?=User::getFullNameByUsername($cur_label->prepress_login)?></h6>
+    <h6>Перевывод выполнил: <?=User::getFullNameById($cur_label->prepress_id)?></h6>
     <h6>Штанец №: <?=Pants::findOne($cur_label->pants_id)->name?></h6>
     <h6>Совмещение (ID этикеток): <?foreach ($cur_label->combinatedLabel as $label_id) echo '<span class=" badge rounded-pill bg-primary">'.$label_id.'</span>'?> </h6>
 <?$form = ActiveForm::begin()?>

@@ -75,21 +75,21 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
             if($user->status_id==0){
                 if(ArrayHelper::keyExists($group, Yii::$app->authManager->getRolesByUser($user->id), false)
                     OR ArrayHelper::keyExists($group.'_admin', Yii::$app->authManager->getRolesByUser($user->id ),false))
-                    $array[$user->username]=$user->F.' '.mb_substr($user->I,0,1).'.';
+                    $array[$user->id]=$user->F.' '.mb_substr($user->I,0,1).'.';
             }
         }
         return $array;
     }
 
-    public static function findUsersDropdown()
-    {
-        foreach(self::find()->all() as $user){
-            if($user->status_id==0){
-                $array[$user->username]=$user->F.' '.mb_substr($user->I,0,1).'.';
-            }
-        }
-        return $array;
-    }
+//    public static function findUsersDropdown()
+//    {
+//        foreach(self::find()->all() as $user){
+//            if($user->status_id==0){
+//                $array[$user->username]=$user->F.' '.mb_substr($user->I,0,1).'.';
+//            }
+//        }
+//        return $array;
+//    }
 
     public static function findUsersIdDropdown()
     {
@@ -101,13 +101,13 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $array;
     }
 
-    public static function getFullNameByUsername($username)
-    {
-        foreach(self::find()->all() as $user){
-            if($user->username == $username)
-            return $user->F.' '.mb_substr($user->I,0,1).'.';
-        }
-    }
+//    public static function getFullNameByUsername($username)
+//    {
+//        foreach(self::find()->all() as $user){
+//            if($user->username == $username)
+//            return $user->F.' '.mb_substr($user->I,0,1).'.';
+//        }
+//    }
 
     public static function getFullNameById($id)
     {

@@ -28,11 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'date',
 
             [
-                'attribute'=>'login',
+                'attribute'=>'user_id',
                 'value'=>function($model){
-                return User::getFullNameByUsername($model->login);
+                return User::getFullNameById($model->user_id);
                 },
-                'filter'=>User::findUsersDropdown(),
+                'filter'=>User::findUsersIdDropdown(),
             ],
             [
                     'attribute'=>'service_id',

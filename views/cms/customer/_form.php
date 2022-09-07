@@ -18,7 +18,7 @@ use app\models\User;
 <!---->
 <!--    --><?//= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'manager_login')->dropDownList(User::findUsersByGroup('manager')) ?>
+    <?= $form->field($model, 'user_id')->dropDownList(User::findUsersByGroup('manager')) ?>
 
 <!--    --><?//= $form->field($model, 'subject_id')->textInput() ?>
 <!---->

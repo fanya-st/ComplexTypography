@@ -68,8 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>$order->material->name,
             ],
             [
-                'attribute'=>'printer_login',
-                'value'=>User::getFullNameByUsername($order->printer_login),
+                'attribute'=>'printer_id',
+                'value'=>User::getFullNameById($order->printer_id),
             ],
             'order_price',
             'order_price_with_tax',
@@ -78,12 +78,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'label_price',
             'label_price_with_tax',
             [
-                'attribute'=>'rewinder_login',
-                'value'=>User::getFullNameByUsername($order->rewinder_login),
+                'attribute'=>'rewinder_id',
+                'value'=>User::getFullNameById($order->rewinder_id),
             ],
             [
-                'attribute'=>'packer_login',
-                'value'=>User::getFullNameByUsername($order->packer_login),
+                'attribute'=>'packer_id',
+                'value'=>User::getFullNameById($order->packer_id),
             ],
             'rewinder_note:ntext',
             'printer_note:ntext',
@@ -100,7 +100,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => ['image',['width'=>'100','title'=>$order->winding->name]],
             ],
-            'diameter_roll',
             'label_on_roll',
             [
                 'attribute'=>'cut_edge',

@@ -20,24 +20,24 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col">
         <?=$form->field($customer,'name')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'text']
             ])
         ?>
         <?=$form->field($customer,'email')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'email']
             ])
         ?>
         <?=$form->field($customer,'number')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'text']
             ])
         ?>
-        <?=$form->field($customer,'date_of_agreement')->widget(DatePicker::classname(), [
+        <?=$form->field($customer,'date_of_agreement')->widget(DatePicker::class, [
             'options' => ['placeholder' => 'Введите дату договора ...'],
             'pluginOptions' => [
                 'allowClear' => true,
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'yyyy-mm-dd',
             ]
         ])->label(false)?>
-        <?=$form->field($customer, 'time_to_delivery_from')->widget(TimePicker::classname(), [
+        <?=$form->field($customer, 'time_to_delivery_from')->widget(TimePicker::class, [
             'pluginOptions'=>[
                 'showMeridian'=>false,
             ]

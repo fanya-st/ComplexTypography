@@ -47,14 +47,12 @@ class LabelForm extends ActiveRecord
     public function rules(){
         return[
             [['name','image','image_crop','image_extended','design_file','prepress_design_file'],'string','max'=>100],
-            [['designer_login','prepress_login','laboratory_login'],'string','max'=>50],
-            [['manager_note','prepress_note','designer_note','laboratory_note','name','image','image_crop','image_extended','design_file','prepress_design_file',
-                'designer_login','prepress_login','laboratory_login'],'trim'],
+            [['manager_note','prepress_note','designer_note','laboratory_note','name','image','image_crop','image_extended','design_file','prepress_design_file'],'trim'],
             [['variable_paint_count'],'number'],
             [['name','status_id','customer_id'],'required'],
             [['date_of_create','date_of_design','date_of_prepress','date_of_flexformready'],'safe'],
             [['status_id','customer_id','pants_id','laminate','stencil','variable','varnish_id','parent_label',
-                'print_on_glue','orientation', 'output_label_id','background_id','color_count','foil_id','takeoff_flash'],'integer'],
+                'print_on_glue','orientation', 'output_label_id','background_id','color_count','foil_id','takeoff_flash','designer_id','prepress_id','laboratory_id'],'integer'],
         ];
     }
 
@@ -75,8 +73,8 @@ class LabelForm extends ActiveRecord
         unset($this->date_of_create);
         unset($this->date_of_prepress);
         unset($this->date_of_design);
-        unset($this->prepress_login);
-        unset($this->laboratory_login);
+        unset($this->prepress_id);
+        unset($this->laboratory_id);
         unset($this->date_of_flexformready);
     }
 }

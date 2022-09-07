@@ -19,15 +19,14 @@ class FinancialReportSearch extends FinancialReport
     public $mashine_id;
     public $pants_id;
     public $customer_id;
-    public $manager_login;
+    public $manager_id;
     public $excel;
 
     public function rules()
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [['label_id','pants_id','mashine_id','customer_id','excel'], 'integer'],
-            [['manager_login',], 'trim'],
+            [['label_id','pants_id','mashine_id','customer_id','excel','manager_id'], 'integer'],
             [['date_of_print_start','date_of_print_end'], 'required'],
         ];
     }
@@ -63,7 +62,7 @@ class FinancialReportSearch extends FinancialReport
             $dataProvider->andFilterWhere(['label_id' => $this->label_id]);
             $dataProvider->joinWith(['label.customer' => function ($q) {
                 $q->andFilterWhere(['customer.id'=> $this->customer_id]);
-                $q->andFilterWhere(['customer.manager_login'=> $this->manager_login]);
+                $q->andFilterWhere(['customer.user_id'=> $this->manager_id]);
             }]);
             $dataProvider->joinWith(['label' => function ($q) {
                 $q->andFilterWhere(['label.pants_id' => $this->pants_id]);

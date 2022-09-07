@@ -29,12 +29,12 @@ use app\models\BackgroundLabel;
 
             <?= $form->field($model, 'date_of_design')->textInput() ?>
 
-            <?= $form->field($model, 'customer_id')->widget(Select2::classname(), [
+            <?= $form->field($model, 'customer_id')->widget(Select2::class, [
                 'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1'])->asArray()->all(), 'id', 'name'),
                 'options' => ['placeholder' => 'Выбрать заказчика ...'],
             ]) ?>
 
-            <?= $form->field($model, 'status_id')->dropDownList(ArrayHelper::map(LabelStatus::find()->asArray()->all(),'id','name')) ?>
+            <?= $form->field($model, 'status_id')->dropDownList(LabelStatus::$label_status) ?>
 
             <?= $form->field($model, 'pants_id')->dropDownList(ArrayHelper::map(Pants::find()->asArray()->all(),'id','name')) ?>
 

@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col">
         <?=$form->field($model,'name')?>
-        <?=$form->field($model,'customer_id')->widget(Select2::classname(), [
-            'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','manager_login'=>Yii::$app->user->identity->username])->all(), 'id', 'name'),
+        <?=$form->field($model,'customer_id')->widget(Select2::class, [
+            'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','user_id'=>Yii::$app->user->identity->getId()])->all(), 'id', 'name'),
             'options' => ['placeholder' => 'Выбрать заказчика ...'],
             'pluginOptions' => [
 //                'allowClear' => true
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ])?>
         <div class="row">
             <div class="col">
-                <?=$form->field($model,'pants_id')->widget(Select2::classname(), [
+                <?=$form->field($model,'pants_id')->widget(Select2::class, [
                     'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
                     'options' => ['placeholder' => 'Выбрать штанец ...'],
                 ])?>

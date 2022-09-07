@@ -36,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, AuthItem $model, $key, $index, $column) {
+                'class' => ActionColumn::class,
+                'urlCreator' => function ($action,$model, $key, $index, $column) {
                     return Url::toRoute([$action, 'name' => $model->name]);
                  }
             ],

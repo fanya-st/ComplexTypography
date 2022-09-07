@@ -38,9 +38,9 @@ class OrderForm extends ActiveRecord{
     public function rules(){
         return[
             [['status_id','label_id','stretch','cut_edge','label_on_roll','winding_id',
-                'sleeve_id','sending','material_id','mashine_id','parent_label','printed_circulation'],'integer'],
-            [['tech_note','printer_note','rewinder_note','manager_note','packer_login','rewinder_login','printer_login'],'trim'],
-            [['packer_login','rewinder_login','printer_login'],'string','max'=>50],
+                'sleeve_id','sending','material_id','mashine_id','parent_label','printed_circulation','packer_id','rewinder_id','printer_id'],'integer'],
+            [['tech_note','printer_note','rewinder_note','manager_note'],'trim'],
+            [[],'string','max'=>50],
             [['label_price_with_tax','label_price'],'number'],
             [['plan_circulation','sending','label_price_with_tax','label_price','stretch','cut_edge','sleeve_id',
                 'material_id','mashine_id','date_of_sale','winding_id','label_on_roll'],'required'],

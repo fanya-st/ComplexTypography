@@ -7,7 +7,12 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 class Label extends ActiveRecord{
-	public function getOrder(){
+    public static function tableName()
+    {
+        return 'label';
+    }
+
+    public function getOrder(){
 		return $this->hasMany(Order::class,['label_id'=>'id']);
 	}
 	public function getForm(){
@@ -123,8 +128,8 @@ class Label extends ActiveRecord{
             'customerName'=>'Заказчик',
             'customer_id'=>'Заказчик',
             'fullName'=>'Дизайнер',
-            'designer_login'=>'Дизайнер',
-            'manager_login'=>'Менеджер',
+            'designer_id'=>'Дизайнер',
+            'manager_id'=>'Менеджер',
             'shaftName'=>'Вал',
             'fullCMYK'=>'CMYK',
             'manager_note'=>'Примечание от менеджера',
@@ -148,14 +153,12 @@ class Label extends ActiveRecord{
     public function rules(){
         return[
             [['name','image','image_crop','image_extended','design_file','prepress_design_file'],'string','max'=>100],
-            [['designer_login','prepress_login','laboratory_login'],'string','max'=>50],
-            [['manager_note','prepress_note','designer_note','laboratory_note','name','image','image_crop','image_extended','design_file','prepress_design_file',
-                'designer_login','prepress_login','laboratory_login'],'trim'],
+            [['manager_note','prepress_note','designer_note','laboratory_note','name','image','image_crop','image_extended','design_file','prepress_design_file'],'trim'],
             [['variable_paint_count'],'number'],
             [['name','status_id','customer_id'],'required'],
             [['date_of_create','date_of_design','date_of_prepress','date_of_flexformready','combinated_label_list'],'safe'],
             [['status_id','customer_id','pants_id','laminate','stencil','variable','varnish_id','parent_label',
-                'print_on_glue','orientation', 'output_label_id','background_id','color_count','foil_id','takeoff_flash'],'integer'],
+                'print_on_glue','orientation', 'output_label_id','background_id','color_count','foil_id','takeoff_flash','designer_id','laboratory_id','prepress_id'],'integer'],
         ];
     }
 
@@ -186,8 +189,8 @@ class Label extends ActiveRecord{
         unset($sub_label->date_of_create);
         unset($sub_label->date_of_prepress);
         unset($sub_label->date_of_design);
-        unset($sub_label->prepress_login);
-        unset($sub_label->laboratory_login);
+        unset($sub_label->prepress_id);
+        unset($sub_label->laboratory_id);
         unset($sub_label->date_of_flexformready);
         $sub_label->setisNewRecord(true);
         $sub_label->save();

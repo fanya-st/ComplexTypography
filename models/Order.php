@@ -103,14 +103,14 @@ class Order extends ActiveRecord{
             'label_price_with_tax'=>'Цена этикетки с НДС, руб',
             'material_id'=>'Материал',
             'sending'=>'Отправка, шт',
-            'manager_login'=>'Менеджер',
-            'printer_login'=>'Печатник',
-            'rewinder_login'=>'Перемотчик',
+            'manager_id'=>'Менеджер',
+            'printer_id'=>'Печатник',
+            'rewinder_id'=>'Перемотчик',
             'rewinder_note'=>'Примечание перемотчика',
             'printer_note'=>'Примечание печатника',
             'tech_note'=>'Примечание технолога',
             'manager_note'=>'Примечание менеджера',
-            'packer_login'=>'Упаковщик',
+            'packer_id'=>'Упаковщик',
             'pants_id'=>'Штанец',
             'stretch'=>'Стретч лента',
             'label_on_roll'=>'Этикеток на ролике, шт',
@@ -122,9 +122,8 @@ class Order extends ActiveRecord{
     public function rules(){
         return[
             [['status_id','label_id','stretch','cut_edge','label_on_roll','winding_id',
-                'sleeve_id','sending','material_id','mashine_id','printed_circulation'],'integer'],
-            [['tech_note','printer_note','rewinder_note','manager_note','packer_login','rewinder_login','printer_login'],'trim'],
-            [['packer_login','rewinder_login','printer_login'],'string','max'=>50],
+                'sleeve_id','sending','material_id','mashine_id','printed_circulation','packer_id','rewinder_id','printer_id'],'integer'],
+            [['tech_note','printer_note','rewinder_note','manager_note'],'trim'],
             [['label_price_with_tax','label_price'],'number'],
             [['plan_circulation','sending','label_price_with_tax','label_price','stretch','cut_edge','sleeve_id',
                 'material_id','mashine_id','date_of_sale','winding_id','label_on_roll'],'required'],
@@ -143,13 +142,13 @@ class Order extends ActiveRecord{
             Yii::$app->session->setFlash('error','Заказ не может быть удален, он находиться в отправке');
             return false;
         }
-        Yii::info("Заказ №".$this->id." удален пользователем ".Yii::$app->user->identity->username);
+        Yii::info("Заказ №".$this->id." удален пользователем ".Yii::$app->user->identity->getId());
         return parent::beforeDelete();
     }
 
     public function afterSave($insert, $changedAttributes) {
         if ($insert) {
-            Yii::info("Создана заказ пользователем ".Yii::$app->user->identity->username.' №'.$this->id);
+            Yii::info("Создана заказ пользователем ".Yii::$app->user->identity->getId().' №'.$this->id);
             Yii::$app->session->setFlash('success', 'Заказ добавлен');
         } else {
             Yii::$app->session->setFlash('success', 'Запись обновлена');

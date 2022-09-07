@@ -46,9 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'id',
         ],
         [
-            'attribute' => 'manager_login',
+            'attribute' => 'manager_id',
             'value' => function($model){
-                return User::getFullNameByUsername($model->manager_login);
+                return User::getFullNameById($model->manager_id);
             },
         ],
         [

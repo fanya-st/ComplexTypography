@@ -61,20 +61,16 @@ AppAsset::register($this);
         ]
         ],
         'messenger'=>['label' => 'Мессенджер', 'url' => ['/site/contact']],
-//        'about_us'=>['label' => 'О типографии', 'url' => ['/site/about']],
     ];
     if(!Yii::$app->user->isGuest){
         ArrayHelper::setValue($nav_items,'login',
             ['label' => Yii::$app->user->identity->username, 'items' => [
-                ['label' => 'Сотрудник', 'url' => ['/employee/view','username'=>Yii::$app->user->identity->username]],
-                ['label' => 'QR-код', 'url' => ['/employee/qr-print','username'=>Yii::$app->user->identity->username], 'linkOptions' => ['target' => '_blank']],
+                ['label' => 'Сотрудник', 'url' => ['/employee/view','id'=>Yii::$app->user->identity->getId()]],
+                ['label' => 'QR-код', 'url' => ['/employee/qr-print','id'=>Yii::$app->user->identity->getId()], 'linkOptions' => ['target' => '_blank']],
                 ['label' => 'Выйти', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                     ]
                 ]
         );
-//        if(ArrayHelper::keyExists('admin', Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()), false)){
-//            ArrayHelper::setValue($nav_items,'login.items.cms',['label' => 'Администраторская панель', 'url' => ['/cms/cms-panel']]);
-//        }
 
 
     } else{

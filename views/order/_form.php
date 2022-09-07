@@ -1,11 +1,8 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\Html;
+use yii\bootstrap5\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Order */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="order-form">
@@ -44,15 +41,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'material_id')->textInput() ?>
 
-    <?= $form->field($model, 'printer_login')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'printer_id')->textInput() ?>
 
     <?= $form->field($model, 'label_price')->textInput() ?>
 
     <?= $form->field($model, 'label_price_with_tax')->textInput() ?>
 
-    <?= $form->field($model, 'rewinder_login')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'rewinder_id')->textInput() ?>
 
-    <?= $form->field($model, 'packer_login')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'packer_id')->textInput() ?>
 
     <?= $form->field($model, 'rewinder_note')->textarea(['rows' => 6]) ?>
 

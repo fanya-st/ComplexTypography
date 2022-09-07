@@ -33,7 +33,7 @@ use kartik\daterange\DateRangePicker;
                     'pluginOptions' => ['locale' => ['format' => 'Y-m-d'],'selectOnClose'=>false],
                     'options' => ['placeholder' => 'Выберите дату...']
                 ])->label(false)?></div>
-            <div class="p-1 flex-fill"><?=$form->field($model,'manager_login')->widget(Select2::class, [
+            <div class="p-1 flex-fill"><?=$form->field($model,'manager_id')->widget(Select2::class, [
                     'data' => User::findUsersByGroup('manager'),
                     'options' => ['placeholder' => 'Менеджер'],
                     'pluginOptions' => [

@@ -64,7 +64,7 @@ class LabelController extends Controller
     public function actionList()
     {
         $searchModel = new LabelSearch();
-        $labels = $searchModel->search(Yii::$app->request->post());
+        $labels = $searchModel->search($this->request->post());
         return $this->render('list',compact('labels','searchModel'));
     }
     public function actionView($id)
@@ -130,7 +130,7 @@ class LabelController extends Controller
             $model=new LabelForm();
             if($model->load(Yii::$app->request->post()) && $model->validate(Yii::$app->request->post())){
                 if ($model->save()){
-                    Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->username.' №'.$model->id);
+                    Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->getId().' №'.$model->id);
                     return $this->redirect(['label/view','id'=>$model->id]);
                 }else{
                     Yii::$app->session->setFlash('error','Ошибка');
@@ -147,7 +147,7 @@ class LabelController extends Controller
             if($model->load(Yii::$app->request->post())){
             $model->createSame();
             if ($model->save()){
-                Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->username.' №'.$model->id);
+                Yii::info("Создана этикетка пользователем ".Yii::$app->user->identity->getId().' №'.$model->id);
                 return $this->redirect(['label/view','id'=>$model->id]);
             }else{
                 Yii::$app->session->setFlash('error','Ошибка');
@@ -159,11 +159,11 @@ class LabelController extends Controller
     public function actionCreateDesign($id)
     {
         $label=Label::findOne($id);
-        if ($label->status_id != 1 AND ($label->designer_login != null OR $label->designer_login!=Yii::$app->user->identity->username) ) {
+        if ($label->status_id != 1 AND ($label->designer_id != null OR $label->designer_id!=Yii::$app->user->identity->getId()) ) {
             throw new ForbiddenHttpException('Доступ запрещен');
         }
         $label->status_id=2;
-        $label->designer_login=Yii::$app->user->identity->username;
+        $label->designer_id=Yii::$app->user->identity->getId();
         if ($label->save()){
             Yii::$app->session->setFlash('success','Дизайн создан');
         }
@@ -176,7 +176,7 @@ class LabelController extends Controller
             throw new ForbiddenHttpException('Доступ запрещен');
         }
                 $label->status_id=6;
-                $label->prepress_login=Yii::$app->user->identity->username;
+                $label->prepress_id=Yii::$app->user->identity->getId();
                 if ($label->save()){
                     Yii::$app->session->setFlash('success','Этикетка взята в Prepress');
                 }
@@ -208,14 +208,14 @@ class LabelController extends Controller
             foreach ($label->combinatedLabel as $label_id) {
                 $l = Label::findOne($label_id);
                 $l->status_id = 9;
-                $l->laboratory_login = Yii::$app->user->identity->username;
+                $l->laboratory_id = Yii::$app->user->identity->getId();
                 if ($l->save()) {
                     Yii::$app->session->setFlash('success', 'Начато изготовление форм');
                 }
             }
         } else {
             $label->status_id = 9;
-            $label->laboratory_login = Yii::$app->user->identity->username;
+            $label->laboratory_id = Yii::$app->user->identity->getId();
             if ($label->save()) {
                 Yii::$app->session->setFlash('success', 'Начато изготовление форм');
             } else {

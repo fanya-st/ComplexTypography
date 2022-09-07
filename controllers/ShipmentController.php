@@ -49,11 +49,11 @@ class ShipmentController extends Controller
     public function actionList()
     {
         $new_shipment = new Shipment();
-        if ($new_shipment->load(Yii::$app->request->post()) && $new_shipment->validate()) {
+        if ($new_shipment->load($this->request->post()) && $new_shipment->validate()) {
             return Yii::$app->runAction('shipment/create',compact('new_shipment'));
         }
         $searchModel = new ShipmentSearch();
-        $shipments = $searchModel->search(Yii::$app->request->post());
+        $shipments = $searchModel->search($this->request->post());
         return $this->render('list',compact('shipments','searchModel','new_shipment'));
     }
 
@@ -140,7 +140,7 @@ class ShipmentController extends Controller
             foreach($selected as $order_id){
                 $current_shipment=Shipment::findOne($id);
                 $o=Order::findOne($order_id);
-                if($current_shipment->manager_login==$o->customer->manager_login){
+                if($current_shipment->manager_id==$o->customer->user_id){
                     $new_shipment_order=new ShipmentOrder();
                     $new_shipment_order->order_id=$order_id;
                     $new_shipment_order->shipment_id=$id;
@@ -157,7 +157,7 @@ class ShipmentController extends Controller
 
     public function actionCreate($new_shipment)
     {
-            $new_shipment->manager_login=Yii::$app->user->identity->username;
+            $new_shipment->manager_id=Yii::$app->user->identity->getId();
             if($new_shipment->save()){
                 Yii::$app->session->setFlash('success', 'Создана отгрузка');
             }else

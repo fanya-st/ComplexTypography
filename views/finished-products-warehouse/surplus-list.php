@@ -35,8 +35,8 @@ echo GridView::widget([
         ],
         [
             'label'=>'Менеджер',
-            'attribute'=>'managerLogin',
-            'value' => function($model){return User::getFullNameByUsername($model->label->customer->manager_login);},
+            'attribute'=>'manager_id',
+            'value' => function($model){return User::getFullNameById($model->label->customer->user_id);},
             'filter' => User::findUsersByGroup('manager'),
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center']

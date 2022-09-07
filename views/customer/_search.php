@@ -25,8 +25,8 @@ use app\models\CustomerStatus;
                         'options' => ['type' => 'text']
                     ])
                 ?></div>
-            <div class="p-1 flex-lg-fill"><?=$form->field($model,'manager_login')->widget(Select2::class, [
-                    'data' => (User::findUsersByGroup('manager')),
+            <div class="p-1 flex-lg-fill"><?=$form->field($model,'user_id')->widget(Select2::class, [
+                    'data' => User::findUsersByGroup('manager'),
                     'options' => ['placeholder' => 'Выбрать менеджера ...'],
                     'pluginOptions' => [
                         'allowClear' => true

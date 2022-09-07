@@ -41,10 +41,9 @@ class CustomerForm extends ActiveRecord
             [['email','number'],'string','max'=>50],
             [['number','name','house','email','contact'],'trim'],
             [['email'],'email'],
-//            ['status_id','default',1],
-            [['manager_login','date_of_create','time_to_delivery_from','time_to_delivery_to','comment'],'safe'],
-            [['subject_id','region_id','town_id','street_id'],'integer'],
-            [['name','region_id','town_id','street_id','email','number','house','status_id','date_of_agreement','manager_login'],'required']
+            [['date_of_create','time_to_delivery_from','time_to_delivery_to','comment'],'safe'],
+            [['subject_id','region_id','town_id','street_id','user_id'],'integer'],
+            [['name','region_id','town_id','street_id','email','number','house','status_id','date_of_agreement','user_id'],'required']
         ];
     }
 }

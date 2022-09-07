@@ -17,8 +17,7 @@ class ShipmentSearch extends Shipment
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [['id'], 'integer'],
-            [['manager_login'], 'trim'],
+            [['id','manager_id'], 'integer'],
             [['date_of_send','date_of_create'], 'safe'],
         ];
     }
@@ -60,7 +59,7 @@ class ShipmentSearch extends Shipment
 
         // изменяем запрос добавляя в его фильтрацию
         $query->andFilterWhere(['id' => $this->id]);
-        $query->andFilterWhere(['manager_login' => $this->manager_login]);
+        $query->andFilterWhere(['manager_id' => $this->manager_id]);
         if(isset ($this->date_of_create)&&$this->date_of_create!=''){
             $date_explode=explode(" | ",$this->date_of_create);
             $date1=trim($date_explode[0]);

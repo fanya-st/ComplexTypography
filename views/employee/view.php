@@ -2,7 +2,7 @@
 use app\models\User;
 use yii\bootstrap5\Html;
 
-$this->title = User::getFullNameByUsername($employee->username);
+$this->title = User::getFullNameById($employee->id);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
@@ -19,6 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?foreach(Yii::$app->authManager->getRolesByUser($employee->id) as $role):?>
             <p class="card-text"><?print_r($role->description)?></p>
         <?endforeach;?>
-        <?=Html::a('QR-код', ['employee/qr-print','username'=>$employee->username], ['class'=>'btn btn-primary','target' => '_blank'])?>
+        <?=Html::a('QR-код', ['employee/qr-print','id'=>$employee->id], ['class'=>'btn btn-primary','target' => '_blank'])?>
     </div>
 </div>

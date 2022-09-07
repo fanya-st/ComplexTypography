@@ -26,10 +26,10 @@ class BusinessTripEmployee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_of_begin', 'employee_login', 'transport_id', 'address'], 'required'],
+            [['date_of_begin', 'user_id', 'transport_id', 'address'], 'required'],
             [['date_of_begin', 'date_of_end'], 'safe'],
             [['gasoline_cost', 'cost'], 'number'],
-            [['transport_id', 'status_id'], 'integer'],
+            [['transport_id', 'status_id','user_id'], 'integer'],
             [['address'], 'trim'],
             [['address'], 'string', 'max' => 100],
         ];
@@ -43,7 +43,7 @@ class BusinessTripEmployee extends \yii\db\ActiveRecord
             'date_of_end' => 'Дата окончания',
             'gasoline_cost' => 'ГСМ, руб',
             'cost' => 'Командировочные',
-            'employee_login' => 'Сотрудник',
+            'user_id' => 'Сотрудник',
             'transport_id' => 'Транспорт',
             'address' => 'Адрес',
             'status_id' => 'Статус',

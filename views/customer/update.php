@@ -23,29 +23,29 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col">
         <?=$form->field($customer,'name')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'text']
             ])
         ?>
-        <?=$form->field($customer,'status_id')->widget(Select2::classname(), [
+        <?=$form->field($customer,'status_id')->widget(Select2::class, [
             'data' => CustomerStatus::$customer_status,
             'pluginOptions' => [
             ],
         ])->label(false)?>
         <?=$form->field($customer,'email')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'email']
             ])
         ?>
         <?=$form->field($customer,'number')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'text']
             ])
         ?>
-        <?=$form->field($customer,'date_of_agreement')->widget(DatePicker::classname(), [
+        <?=$form->field($customer,'date_of_agreement')->widget(DatePicker::class, [
             'options' => ['placeholder' => 'Введите дату договора ...'],
             'pluginOptions' => [
                 'allowClear' => true,
@@ -53,12 +53,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'yyyy-mm-dd',
             ]
         ])->label(false)?>
-        <?=$form->field($customer, 'time_to_delivery_from')->widget(TimePicker::classname(), [
+        <?=$form->field($customer, 'time_to_delivery_from')->widget(TimePicker::class, [
             'pluginOptions'=>[
                 'showMeridian'=>false,
             ]
         ]) ?>
-        <?=$form->field($customer, 'time_to_delivery_to')->widget(TimePicker::classname(), [
+        <?=$form->field($customer, 'time_to_delivery_to')->widget(TimePicker::class, [
             'pluginOptions'=>[
                 'showMeridian'=>false,
             ]
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?=$form->field($customer,'subject_id')
             ->dropDownList(ArrayHelper::map(Subject::find()->asArray()->all(),'id','name'),['id'=>'subject-id','prompt' => 'Выберите субьект РФ...'])->label(false)
         ?>
-        <?=$form->field($customer,'region_id')->widget(DepDrop::classname(), [
+        <?=$form->field($customer,'region_id')->widget(DepDrop::class, [
             'type' => DepDrop::TYPE_SELECT2,
             'options'=>['id'=>'region-id'],
             'pluginOptions'=>[
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ])->label(false)?>
 
-        <?=$form->field($customer,'town_id')->widget(DepDrop::classname(), [
+        <?=$form->field($customer,'town_id')->widget(DepDrop::class, [
             'type' => DepDrop::TYPE_SELECT2,
             'options'=>['id'=>'town-id'],
             'pluginOptions'=>[
@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ])->label(false)?>
 
-        <?=$form->field($customer,'street_id')->widget(DepDrop::classname(), [
+        <?=$form->field($customer,'street_id')->widget(DepDrop::class, [
             'type' => DepDrop::TYPE_SELECT2,
             'pluginOptions'=>[
                 'allowClear' => true,
@@ -101,23 +101,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ])->label(false)?>
         <?=$form->field($customer,'house')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'text'],
             ])
         ?>
         <?=$form->field($customer,'contact')
-            ->widget(LabelInPlace::classname(),[
+            ->widget(LabelInPlace::class,[
                 'type' => LabelInPlace::TYPE_HTML5,
                 'options' => ['type' => 'text'],
             ])
         ?>
-        <?=$form->field($customer, 'comment')->widget(LabelInPlace::classname(), [
+        <?=$form->field($customer, 'comment')->widget(LabelInPlace::class, [
             'type' => LabelInPlace::TYPE_TEXTAREA
         ])?>
     </div>
 </div>
 <?ActiveForm::end()?>
-<!--<pre>--><?//print_r($customer)?><!--</pre>-->
-<!--<pre>--><?//print_r(ArrayHelper::map(Region::find()->all(),'id','name'))?><!--</pre>-->
-<!--<pre>--><?//print_r($regions)?><!--</pre>-->

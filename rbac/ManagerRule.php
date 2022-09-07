@@ -11,6 +11,6 @@ class ManagerRule extends Rule
 
     public function execute($user, $item, $params)
     {
-        return isset($params['item']) ? $params['item']->manager_login == User::findIdentity($user)->username : false;
+        return isset($params['item']) ? $params['item']->manager_id == User::findIdentity($user)->getId() : false;
     }
 }

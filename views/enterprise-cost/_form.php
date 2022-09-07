@@ -13,7 +13,7 @@ use app\models\User;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'login')->dropDownList(User::findUsersDropdown(),['prompt'=>'Без указания сотрудника']) ?>
+    <?= $form->field($model, 'user_id')->dropDownList(User::findUsersIdDropdown(),['prompt'=>'Без указания сотрудника']) ?>
 
     <?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(EnterpriseCostService::find()->asArray()->all(),'id','name')) ?>
 

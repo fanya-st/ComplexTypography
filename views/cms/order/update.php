@@ -47,11 +47,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col">
             <?= $form->field($order, 'material_id')->dropDownList(ArrayHelper::map(Material::find()->asArray()->all(), 'id', 'name')) ?>
 
-            <?= $form->field($order, 'rewinder_login')->dropDownList(User::findUsersByGroup('rewinder'),['prompt'=>'Нет']) ?>
+            <?= $form->field($order, 'rewinder_id')->dropDownList(User::findUsersByGroup('rewinder'),['prompt'=>'Нет']) ?>
 
-            <?= $form->field($order, 'packer_login')->dropDownList(User::findUsersByGroup('packer'),['prompt'=>'Нет']) ?>
+            <?= $form->field($order, 'packer_id')->dropDownList(User::findUsersByGroup('packer'),['prompt'=>'Нет']) ?>
 
-            <?= $form->field($order, 'printer_login')->dropDownList(User::findUsersByGroup('printer'),['prompt'=>'Нет']) ?>
+            <?= $form->field($order, 'printer_id')->dropDownList(User::findUsersByGroup('printer'),['prompt'=>'Нет']) ?>
 
             <?= $form->field($order, 'rewinder_note')->textarea(['rows' => 1]) ?>
 

@@ -9,6 +9,6 @@ class DesignerRule extends Rule
     public $name = 'isDesigner';
     public function execute($user, $item, $params)
     {
-        return isset($params['item']) ? ($params['item']->designer_login == User::findIdentity($user)->username) : false;
+        return isset($params['item']) ? ($params['item']->designer_id == User::findIdentity($user)->getId()) : false;
     }
 }

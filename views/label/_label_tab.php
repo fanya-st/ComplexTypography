@@ -16,11 +16,11 @@ use app\models\User;
     <div class="col">
         <h6>№: <small class="badge bg-primary"><?=Html::encode($label->id)?></small> Статус этикетки: <small class="badge bg-primary"><?=Html::encode($label->labelStatus)?></small> </h6>
         <h6>Заказчик: <small><?=Html::encode($label->customer->name)?></small> </h6>
-        <h6>Менеджер: <small><?=Html::encode(User::getFullNameByUsername($label->customer->manager_login))?></small> </h6>
+        <h6>Менеджер: <small><?=Html::encode(User::getFullNameById($label->customer->user_id))?></small> </h6>
         <h6>Дата создания: <small><?=Html::encode($label->date_of_create)?></small> </h6>
-        <h6>Дизайнер: <small><?=Html::encode(User::getFullNameByUsername($label->designer_login))?></small> </h6>
+        <h6>Дизайнер: <small><?=Html::encode(User::getFullNameById($label->designer_id))?></small> </h6>
         <h6>Дата дизайна: <small><?=Html::encode($label->date_of_design)?></small> </h6>
-        <h6>Препрессник: <small><?=Html::encode(User::getFullNameByUsername($label->prepress_login))?></small> </h6>
+        <h6>Препрессник: <small><?=Html::encode(User::getFullNameById($label->prepress_id))?></small> </h6>
         <h6>Дата Prepress: <small><?=Html::encode($label->date_of_prepress)?></small> </h6>
         <h6>Штанец: <small class="badge bg-secondary"><?=Html::encode($label->pants->id)?></small>
             Вал: <small class="badge bg-secondary"><?=Html::encode($label->pants->shaft->name)?></small>

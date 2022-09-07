@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_of_end',
             'gasoline_cost',
             'cost',
-            'employee_login',
+            'user_id',
             'transport_id',
             'address:ntext',
             'status_id',

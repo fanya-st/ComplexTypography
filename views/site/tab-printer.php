@@ -16,7 +16,7 @@ use yii\widgets\Pjax;
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold"><span class="badge bg-primary rounded-pill">№<?=$order->id?></span> <?=$order->label->name?></div>
-                                <?=$order->label->customer->name?> (<?=User::getFullNameByUsername($order->label->customer->manager_login)?>)
+                                <?=$order->label->customer->name?> (<?=User::getFullNameById($order->label->customer->user_id)?>)
                             </div>
                             <?= Html::a('Начать печать', ['order/start-print', 'id' => $order->id], ['class' => 'btn btn-primary']) ?>
                         </li>

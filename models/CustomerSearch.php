@@ -17,8 +17,8 @@ class CustomerSearch extends Customer
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [['id','status_id'], 'integer'],
-            [['name','manager_login'], 'trim'],
+            [['id','status_id','user_id'], 'integer'],
+            [['name'], 'trim'],
             [['date_of_agreement'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class CustomerSearch extends Customer
         // изменяем запрос добавляя в его фильтрацию
         $query->andFilterWhere(['id' => $this->id]);
         $query->andFilterWhere(['status_id' => $this->status_id]);
-        $query->andFilterWhere(['manager_login' => $this->manager_login]);
+        $query->andFilterWhere(['user_id' => $this->user_id]);
         $query->andFilterWhere(['like', 'name', $this->name]);
         return $dataProvider;
     }

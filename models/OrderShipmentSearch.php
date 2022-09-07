@@ -15,7 +15,7 @@ class OrderShipmentSearch extends Order
     }
     public $customerId;
     public $labelName;
-    public $manager_login;
+    public $manager_id;
     public $pantsId;
     public $shaft_id;
     public $label_status_id;
@@ -23,9 +23,9 @@ class OrderShipmentSearch extends Order
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [[], 'integer'],
+            [['manager_id'], 'integer'],
             [['labelName'], 'trim'],
-            [['customerId','name','label_id','id','manager_login','shaft_id','date_of_create','status_id','pantsId','mashine_id','label_status_id'], 'safe'],
+            [['customerId','name','label_id','id','shaft_id','date_of_create','status_id','pantsId','mashine_id','label_status_id'], 'safe'],
         ];
     }
     public function scenarios()
@@ -36,7 +36,7 @@ class OrderShipmentSearch extends Order
     public function search($params)
     {
         $query = Order::find()->where(['not',['order.id'=>ShipmentOrder::find()->select('order_id')->column()]])
-                ->joinWith('customer')->andWhere(['customer.manager_login'=>Yii::$app->user->identity->username]);
+                ->joinWith('customer')->andWhere(['customer.user_id'=>Yii::$app->user->identity->getId()]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -65,13 +65,13 @@ class OrderShipmentSearch extends Order
         $query->andFilterWhere(['order.id' => $this->id]);
         $query->andFilterWhere(['order.mashine_id' => $this->mashine_id]);
         $query->andFilterWhere(['order.label_id' => $this->label_id]);
-        $query->andFilterWhere(['customer.manager_login' => $this->manager_login]);
+        $query->andFilterWhere(['customer.user_id' => $this->manager_id]);
         $query->andFilterWhere(['like', 'label.name', $this->labelName]);
         $query->joinWith(['label' => function ($q) {
             $q->andFilterWhere(['label.customer_id'=> $this->customerId]);
         }]);
         $query->joinWith(['customer' => function ($q) {
-            $q->andFilterWhere(['customer.manager_login'=> $this->manager_login]);
+            $q->andFilterWhere(['customer.user_id'=> $this->manager_id]);
         }]);
         $query->joinWith(['label' => function ($q) {
             $q->andFilterWhere(['label.status_id'=> $this->label_status_id]);

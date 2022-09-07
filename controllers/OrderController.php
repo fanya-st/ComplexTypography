@@ -2,23 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\CombinationOrder;
 use app\models\FinishedProductsWarehouse;
 use app\models\Form;
 use app\models\OrderPrintEndForm;
-use app\models\PrintLabelPackage;
-use app\models\ShipmentOrder;
 use yii\data\ActiveDataProvider;
-use app\models\CombinationPrintOrder;
 use app\models\Label;
-use app\models\LabelForm;
 use app\models\Order;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\models\OrderForm;
 use app\models\OrderSearch;
-use barcode\barcode\BarcodeGenerator;
 use yii\base\Model;
 use yii\web\ForbiddenHttpException;
 
@@ -56,6 +50,15 @@ class OrderController extends Controller
                     'roles' => ['accountant'],
                 ],
 				
+            ],
+        ],
+        'cache'=>[
+            'class' => 'yii\filters\PageCache',
+            'only' => ['list'],
+            'duration' => 60,
+            'dependency' => [
+                'class' => 'yii\caching\DbDependency',
+                'sql' => 'SELECT COUNT(*) FROM'. Order::tableName(),
             ],
         ],
     ];
@@ -118,13 +121,13 @@ class OrderController extends Controller
             throw new ForbiddenHttpException('Этикетка не готова к печати');
         }
             $order->status_id=2;
-            $order->printer_login=Yii::$app->user->identity->username;
+            $order->printer_id=Yii::$app->user->identity->getId();
             $order->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             if (!empty($order->combinatedPrintOrder)){
                 foreach ($order->combinatedPrintOrder as $com_ord){
                     if($com_ord->order_id!=$id){
                         $o=Order::findOne($com_ord->order_id);
-                        $o->printer_login=Yii::$app->user->identity->username;
+                        $o->printer_id=Yii::$app->user->identity->getId();
                         $o->date_of_print_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
                         $o->status_id=2;
                         $o->save();
@@ -161,14 +164,14 @@ class OrderController extends Controller
             throw new ForbiddenHttpException('Доступ запрещен');
         }
             $order->status_id=5;
-            $order->rewinder_login=Yii::$app->user->identity->username;
+            $order->rewinder_id=Yii::$app->user->identity->getId();
             $order->date_of_rewind_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             $order->save();
             if (!empty($order->combinatedPrintOrder)){
                 foreach ($order->combinatedPrintOrder as $com_ord){
                     if($com_ord->order_id!=$id){
                         $order=Order::findOne($com_ord->order_id);
-                        $order->rewinder_login=Yii::$app->user->identity->username;
+                        $order->rewinder_id=Yii::$app->user->identity->getId();
                         $order->date_of_rewind_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
                         $order->status_id=5;
                         $order->save();
@@ -186,7 +189,7 @@ class OrderController extends Controller
             throw new ForbiddenHttpException('Доступ запрещен');
         }
             $order->status_id = 7;
-            $order->packer_login=Yii::$app->user->identity->username;
+            $order->packer_id=Yii::$app->user->identity->getId();
             $order->date_of_packing_begin=Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
             if ($order->save())
                 Yii::$app->session->setFlash('success', 'Заказ в упаковке');

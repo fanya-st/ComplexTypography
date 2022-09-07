@@ -5,13 +5,7 @@ use app\models\LabelStatus;
 use yii\helpers\ArrayHelper;
 use app\models\Customer;
 use kartik\select2\Select2;
-use app\models\Pants;
-use app\models\Shaft;
 use app\models\User;
-use app\models\Foil;
-use app\models\VarnishStatus;
-use app\models\OutputLabel;
-use app\models\BackgroundLabel;
 
 $this->title = Html::encode("Редактирование ID [$label->id] $label->name ");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с этикетками', 'url' => ['label/list']];
@@ -27,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col">
                 <?=$form->field($label,'laminate')->checkbox()?>
                 <?=$form->field($label,'stencil')->checkbox()?>
-<!--                <p class="badge badge-primary">--><?//=Html::encode($label->fullCMYK)?><!--</p>-->
             </div>
             <div class="col">
                 <?=$form->field($label,'variable')->checkbox()?>
@@ -39,23 +32,23 @@ $this->params['breadcrumbs'][] = $this->title;
         <?=$form->field($label,'name')?>
         <div class="row">
             <div class="col">
-                <?=$form->field($label,'customer_id')->widget(Select2::classname(), [
+                <?=$form->field($label,'customer_id')->widget(Select2::class, [
                     'data' => ArrayHelper::map(Customer::find()->all(), 'id', 'name'),
                     'pluginOptions' => [
                         'allowClear' => false
                     ],
                 ])?>
-                <?=$form->field($label,'designer_login')
+                <?=$form->field($label,'designer_id')
                     ->dropDownList(User::findUsersByGroup('designer'))?>
             </div>
             <div class="col">
                 <?=$form->field($label,'status_id')
-                    ->dropDownList(ArrayHelper::map(LabelStatus::find()->all(), 'id', 'name'),['disabled'=>true])?>
+                    ->dropDownList(LabelStatus::$label_status,['disabled'=>true])?>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <?=$form->field($label,'pants_id')->widget(Select2::classname(), [
+                <?=$form->field($label,'pants_id')->widget(Select2::class, [
                     'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'name'),
                     'pluginOptions' => [
                         'allowClear' =>false

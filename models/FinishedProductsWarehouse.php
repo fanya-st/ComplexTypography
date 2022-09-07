@@ -21,10 +21,6 @@ class FinishedProductsWarehouse extends ActiveRecord
         return $this->hasOne(Customer::class,['id'=>'customer_id'])->via('label');
     }
 
-    public function getManagerLogin(){
-        return $this->customer->manager_login;
-}
-
 //    public function search($params)
 //    {
 //        $dataProvider = new ActiveDataProvider([
@@ -49,7 +45,8 @@ class FinishedProductsWarehouse extends ActiveRecord
     public function rules(){
         return[
             [['label_id','label_in_roll','roll_count'],'required'],
-            [['id','defect_roll_count','previous_order_id','defect_note','managerLogin','defect_note'],'safe'],
+            [['manager_id'],'integer'],
+            [['id','defect_roll_count','previous_order_id','defect_note','defect_note'],'safe'],
             [['packed_roll_count','packed_box_count','packed_bale_count','sended_roll_count','sended_box_count','sended_bale_count'], 'default', 'value' => 0],
 
         ];

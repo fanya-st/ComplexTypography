@@ -11,7 +11,6 @@ use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 $this->title = Html::encode("Prepress готов ID [$label->id] $label->name ");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с этикетками', 'url' => ['label/list']];
@@ -22,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="alert alert-info">
     <strong>Внимание!</strong> Если этикетка совмещена, то новые формы будут общие для всех этикеток в совмещении</a>.
 </div>
-<h6>Prepress выполнил: <?=User::getFullNameByUsername($label->prepress_login)?></h6>
+<h6>Prepress выполнил: <?=User::getFullNameById($label->prepress_id)?></h6>
 <h6>Штанец №: <?=Pants::findOne($label->pants_id)->name?></h6>
 <h6>Пантоны: <? foreach ($label->pantone as $pantone) {
         switch($pantone->name){

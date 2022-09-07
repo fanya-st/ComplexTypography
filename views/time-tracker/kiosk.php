@@ -4,7 +4,6 @@ use yii\web\View;
 use yii\bootstrap5\ActiveForm;
 use app\widgets\Alert;
 use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 $this->title = 'Учет рабочего времени';
 
@@ -50,7 +49,7 @@ $this->registerJs(
 <div class="flex-row p-4 text-center"><?=Icon::show('arrow-down', ['class'=>'fa-3x'], Icon::FA)?></div>
 <div class="flex-row p-4 text-center">
     <?$form=ActiveForm::begin()?>
-    <?=$form->field($time_tracker,'employer_login',['inputOptions' =>
+    <?=$form->field($time_tracker,'employee_id',['inputOptions' =>
         ['autofocus' => 'autofocus']])->label(false)?>
     <?ActiveForm::end()?>
 </div>

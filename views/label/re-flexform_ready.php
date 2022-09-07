@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?$form = ActiveForm::begin()?>
 <h3><?= Html::encode($this->title)?></h3>
-<h6>Флексоформы выполнил: <?=User::getFullNameByUsername($cur_label->laboratory_login)?></h6>
+<h6>Флексоформы выполнил: <?=User::getFullNameById($cur_label->laboratory_id)?></h6>
 <h6>Штанец №: <?=Pants::findOne($cur_label->pants_id)->name?></h6>
 <h6>Совмещение (ID этикеток): <?foreach ($cur_label->combinatedLabel as $label_id) echo '<span class=" badge rounded-pill bg-primary">'.$label_id.'</span>'?> </h6>
 <h6>Конверт №:<? if (!empty($cur_label->combination->combination_id)):?>

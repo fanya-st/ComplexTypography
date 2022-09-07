@@ -434,7 +434,7 @@ class FinancialReport extends Order
                 foreach($orders as $order){
                     $sheet->setCellValue('A'.$row, $order->mashine->name);
                     $sheet->setCellValue('B'.$row, $order->date_of_print_end);
-                    $sheet->setCellValue('C'.$row, User::getFullNameByUsername($order->label->customer->manager_login));
+                    $sheet->setCellValue('C'.$row, User::getFullNameById($order->label->customer->user_id));
                     $sheet->setCellValue('D'.$row, $order->label->customer->name);
                     $sheet->setCellValue('E'.$row, $order->id);
                     $sheet->setCellValue('F'.$row, $order->label_id);

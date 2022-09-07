@@ -16,16 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <? echo GridView::widget([
     'dataProvider' => $customers,
-//    'filterModel' => $searchModel,
     'id'=>'order-list',
     'columns' => [
         'id',
         'name',
         'customerAddress',
         [
-                'attribute'=>'manager_login',
+                'attribute'=>'user_id',
                 'value'=>function($model){
-                        return User::getFullNameByUsername($model->manager_login);
+                        return User::getFullNameById($model->user_id);
                 },
         ],
         'email',

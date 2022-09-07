@@ -6,7 +6,6 @@ use app\models\User;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 
-Icon::map($this, Icon::FA);
 
 
 $this->title = Html::encode('Печать ярлыков ID ['.$order->id.'] '.$order->label->name);
@@ -56,7 +55,7 @@ function changeSummary(){
                 <?endforeach;?>
                 </tbody>
             </table>
-            <?=$form->field($order, 'packer_login')->dropDownList(User::findUsersByGroup('packer'),[
+            <?=$form->field($order, 'packer_id')->dropDownList(User::findUsersByGroup('packer'),[
                     'prompt' => 'Все',
                 'onchange'=>'changeSummary()',
                 'disabled'=>true

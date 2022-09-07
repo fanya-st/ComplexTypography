@@ -18,10 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?$form = ActiveForm::begin()?>
 <div class="row">
     <div class="col">
-        <?=$form->field($label,'combinated_label_list')->widget(Select2::classname(), [
+        <?=$form->field($label,'combinated_label_list')->widget(Select2::class, [
             'data' => ArrayHelper::map(Label::find()
                 ->joinWith('combination')
-                ->where(['status_id'=>6,'prepress_login'=>Yii::$app->user->identity->username])
+                ->where(['status_id'=>6,'prepress_id'=>Yii::$app->user->identity->getId()])
                 ->andWhere(['!=', 'label.id',$label->id])
                 ->andWhere(['not in', 'label.id',CombinationForm::find()->select('label_id')->column()])
                 ->orderBy('date_of_design DESC')

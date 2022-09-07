@@ -3,10 +3,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use Yii;
 
 
 class TimeTrackerSearch extends TimeTracker
 {
+    public $role;
     public static function tableName()
     {
         return 'time_tracker';
@@ -15,8 +17,9 @@ class TimeTrackerSearch extends TimeTracker
     public function rules()
     {
         return [
-            [['employee_login'], 'string'],
-            [['employee_login'], 'trim'],
+            [['role'], 'string'],
+            [['employee_id'], 'integer'],
+            [['role'], 'trim'],
             [['date_of_action'], 'safe'],
         ];
     }
@@ -47,8 +50,29 @@ class TimeTrackerSearch extends TimeTracker
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'employee_login' => $this->employee_login,
+            'employee_id' => $this->employee_id,
         ]);
+        if(!empty($this->role)){
+            $user_list_id=Yii::$app->authManager->getUserIdsByRole($this->role);
+//            foreach($user_list_id as $user_id){
+//                $user_column[]=User::findIdentity($user_id)->getId();
+//            }
+            $query->andFilterWhere([
+                'employee_id' => $user_list_id,
+        ]);
+        }
+
+
+
+        if(!empty($this->date_of_action)){
+            $date_explode=explode(" - ",$this->date_of_action);
+            $date1=trim($date_explode[0]);
+            $date2=trim($date_explode[1]);
+            $query->andFilterWhere(
+                ['between','date_of_action',date_format(date_create($date1)->modify('-1 day'),"Y-m-d H:i:s"),date_format(date_create($date2)->modify('+1 day'),"Y-m-d H:i:s")]
+            );
+        }
+
         $query->orderBy([
             'id' => SORT_ASC,
         ]);

@@ -14,15 +14,14 @@ class BankTransferSearch extends BankTransfer
         return 'bank_transfer';
     }
 
-    public $manager_login;
+    public $manager_id;
 
     public function rules()
     {
         return [
-            [['id', 'customer_id'], 'integer'],
+            [['id', 'customer_id','manager_id'], 'integer'],
             [['date_of_create', 'date'], 'safe'],
             [['sum'], 'number'],
-            [['manager_login'], 'string'],
         ];
     }
 
@@ -62,14 +61,11 @@ class BankTransferSearch extends BankTransfer
             $date1=trim($date_explode[0]);
             $date2=trim($date_explode[1]);
             $query->andFilterWhere(
-                ['>=','bank_transfer.date',date($date1)]
-            );
-            $query->andFilterWhere(
-                ['<=','bank_transfer.date',date($date2)]
+                ['between','bank_transfer.date',date_format(date_create($date1)->modify('-1 day'),"Y-m-d H:i:s"),date_format(date_create($date2)->modify('+1 day'),"Y-m-d H:i:s")]
             );
         }
         $query->joinWith(['customer' => function ($q) {
-            $q->andFilterWhere(['customer.manager_login'=> $this->manager_login]);
+            $q->andFilterWhere(['customer.user_id'=> $this->manager_id]);
         }]);
 
         return $dataProvider;

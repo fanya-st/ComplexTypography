@@ -62,7 +62,7 @@ class BusinessTripEmployeeController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $model->employee_login=Yii::$app->user->identity->username;
+                $model->user_id=Yii::$app->user->identity->getId();
                 if($model->validate() && $model->save())
                 return $this->redirect(['view', 'id' => $model->id]);
             }

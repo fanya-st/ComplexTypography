@@ -1,7 +1,5 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var string $content */
 
 use app\assets\AppAsset;
 use yii\bootstrap5\Html;

@@ -17,7 +17,7 @@ use kartik\daterange\DateRangePicker;
                     'type' => LabelInPlace::TYPE_HTML5,
                     'options' => ['type' => 'text']
                 ])?></div>
-            <div class="p-1 flex-fill"><?=$form->field($model,'manager_login')->widget(Select2::class, [
+            <div class="p-1 flex-fill"><?=$form->field($model,'manager_id')->widget(Select2::class, [
                     'data' => (User::findUsersByGroup('manager')),
                     'options' => ['placeholder' => 'Выбрать менеджера'],
                     'pluginOptions' => [

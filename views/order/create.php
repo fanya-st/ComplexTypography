@@ -38,7 +38,7 @@ $this->registerJs(
     <div class="row">
         <div class="col">
             <?=$form->field($order,'label_id')->widget(Select2::classname(),
-                ['data' => ArrayHelper::map(Label::find()->joinWith('customer')->where(['customer.manager_login'=>Yii::$app->user->identity->username])->orderBy('date_of_create DESC')->limit(100)->all(),
+                ['data' => ArrayHelper::map(Label::find()->joinWith('customer')->where(['customer.user_id'=>Yii::$app->user->identity->getId()])->orderBy('date_of_create DESC')->limit(100)->all(),
                     'id', 'nameSplitId'),
                 'options' => ['placeholder' => 'Выбрать этикетку ...'],
                 'pluginOptions' => [
@@ -54,7 +54,7 @@ $this->registerJs(
                     <?=$form->field($order,'label_price')->textInput(['onchange'=>'changeLabelPriceTax()'])?>
                 </div>
                 <div class="col">
-                    <?=$form->field($order,'date_of_sale')->widget(DatePicker::classname(), [
+                    <?=$form->field($order,'date_of_sale')->widget(DatePicker::class, [
                         'options' => ['placeholder' => 'Введите дату сдачи ...'],
                         'pluginOptions' => [
                             'allowClear' => true,
@@ -66,7 +66,7 @@ $this->registerJs(
                     <?=$form->field($order,'label_price_with_tax')->textInput()?>
                 </div>
             </div>
-            <?=$form->field($order,'material_id')->widget(Select2::classname(), [
+            <?=$form->field($order,'material_id')->widget(Select2::class, [
                 'data' => ArrayHelper::map(Material::find()->all(), 'id', 'name'),
                 'options' => ['placeholder' => 'Выбрать материал ...'],
                 'pluginOptions' => [

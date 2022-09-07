@@ -29,8 +29,8 @@ use app\models\EnterpriseCostService;
                 ])?></div>
         </div>
         <div class="d-lg-flex flex-wrap">
-            <div class="p-1 flex-fill"><?=$form->field($model,'login')->widget(Select2::class, [
-                    'data' => User::findUsersDropdown(),
+            <div class="p-1 flex-fill"><?=$form->field($model,'user_id')->widget(Select2::class, [
+                    'data' => User::findUsersIdDropdown(),
                     'options' => ['placeholder' => 'Выбрать сотрудника'],
                     'pluginOptions' => [
                         'allowClear' => true

@@ -37,9 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class' => 'text-center'],
             ],
             [
-                'attribute' => 'employee_login',
+                'attribute' => 'user_id',
                 'value' => function($model){
-                    return User::getFullNameByUsername($model->employee_login);
+                    return User::getFullNameById($model->user_id);
                 },
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],

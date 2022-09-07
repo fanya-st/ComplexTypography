@@ -29,8 +29,6 @@ use kartik\date\DatePicker;
 
     <?= $form->field($model, 'cost')->textInput() ?>
 
-<!--    --><?//= $form->field($model, 'employee_login')->hiddenInput('value'=>Yii::$app->user->identity->username) ?>
-
     <?= $form->field($model, 'transport_id')->dropDownList(ArrayHelper::map(Transport::find()->asArray()->all(),'id','name')) ?>
 
     <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>

@@ -14,7 +14,7 @@ echo DetailView::widget([
     'attributes' => [
         'id',
         'name',
-        'managerFullName',
+        'user_id',
         'customerStatus.name',
         'date_of_agreement',
         'customerAddress',

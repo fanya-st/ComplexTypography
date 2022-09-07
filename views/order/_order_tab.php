@@ -12,7 +12,7 @@ use app\models\User;
                 <div class="col">
                     <? echo Html::tag('h6','Статус заказа: ' .Html::tag('small',Html::encode($order->orderStatus), ['class' => 'badge bg-primary']));
                     echo Html::tag('h6','Машина: ' .Html::encode($order->mashine->name));
-                    echo Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameByUsername($order->customer->manager_login)));
+                    echo Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameById($order->customer->user_id)));
                     echo Html::tag('h6','Заказчик: ' .Html::encode('ID ['.$order->label->customer->id.
                     '] '.$order->label->customer->name));
                     echo Html::tag('h6','Адрес заказчика: ' .Html::encode($order->label->customer->customerAddress));
@@ -35,7 +35,7 @@ use app\models\User;
             <h6 class="bg-info p-1 rounded">Параметры печати</h6>
 <!--            --><?//if ($order->status_id==3) echo Html::tag('h6','Печать приостановлена',['class'=>'bg-warning p-1 rounded'])?>
             <h6>Совместная печать: </h6>
-                <? echo Html::tag('h6','Печатник: ' .Html::encode(User::getFullNameByUsername($order->printer_login)));
+                <? echo Html::tag('h6','Печатник: ' .Html::encode(User::getFullNameById($order->printer_id)));
                 echo Html::tag('h6','Дата начала печати: ' .Html::encode($order->date_of_print_begin));
                 echo Html::tag('h6','Дата конца печати: ' .Html::encode($order->date_of_print_end));?>
                 <h6>Тираж по печати, шт: <?=Html::encode($order->printed_circulation)?>
@@ -59,7 +59,7 @@ use app\models\User;
     <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-success p-1 rounded">Параметры нарезки и перемотки</h6>
-            <? echo Html::tag('h6','Перемотчик: ' .Html::encode(User::getFullNameByUsername($order->rewinder_login)));
+            <? echo Html::tag('h6','Перемотчик: ' .Html::encode(User::getFullNameById($order->rewinder_id)));
             echo Html::tag('h6','Дата начала перемотки: ' .Html::encode($order->date_of_rewind_begin));
             echo Html::tag('h6','Дата конца перемотки: ' .Html::encode($order->date_of_rewind_end));?>
             </h6>
@@ -91,7 +91,7 @@ use app\models\User;
     <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-warning p-1 rounded">Параметры упаковки</h6>
-            <? echo Html::tag('h6','Упаковчик: ' .Html::encode(User::getFullNameByUsername($order->packer_login)));
+            <? echo Html::tag('h6','Упаковчик: ' .Html::encode(User::getFullNameById($order->packer_id)));
             echo Html::tag('h6','Дата начала упаковки: ' .Html::encode($order->date_of_packing_begin));
             echo Html::tag('h6','Дата конца упаковки: ' .Html::encode($order->date_of_packing_end));?>
             </h6>

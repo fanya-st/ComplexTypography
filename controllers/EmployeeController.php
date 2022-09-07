@@ -39,13 +39,13 @@ class EmployeeController extends Controller
         return $this->render('list',compact('dataProvider','searchModel'));
     }
 
-    public function actionView($username){
-        $employee=User::findOne(['username'=>$username]);
+    public function actionView($id){
+        $employee=User::findOne($id);
         return $this->render('view',compact('employee'));
     }
 
-    public function actionQrPrint($username){
-        return $this->renderAjax('qr-code-print',compact('username'));
+    public function actionQrPrint($id){
+        return $this->renderAjax('qr-code-print',compact('id'));
     }
 
     public function actionCreate()

@@ -59,7 +59,7 @@ $this->registerJs(
                     </div>
                     <div class="col">
                         <?=$form->field($label,'customer_id')->widget(Select2::class, [
-                            'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','manager_login'=>Yii::$app->user->identity->username])->all(), 'id', 'name'),
+                            'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','user_id'=>Yii::$app->user->identity->getId()])->all(), 'id', 'name'),
                             'options' => ['placeholder' => 'Выбрать заказчика ...'],
                             'pluginOptions' => [
                                 'allowClear' => true

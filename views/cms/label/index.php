@@ -7,7 +7,6 @@ use yii\bootstrap5\ActiveForm;
 use app\models\User;
 use app\models\LabelStatus;
 use app\models\Customer;
-Icon::map($this, Icon::FA);
 use yii\grid\GridView;
 
 
@@ -51,38 +50,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'pants_id',
             //'foil_id',
             [
-                'attribute' => 'designer_login',
+                'attribute' => 'designer_id',
                 'value' => function($model){
-                    return User::getFullNameByUsername($model->designer_login);
+                    return User::getFullNameById($model->designer_id);
                 },
                 'filter' => User::findUsersByGroup('designer'),
             ],
-//            [
-//                'attribute' => 'prepress_login',
-//                'value' => function($model){
-//                    return User::getFullNameByUsername($model->prepress_login);
-//                },
-//                'filter' => User::findUsersByGroup('prepress'),
-//            ],
-
-            //'varnish_id',
-            //'laminate',
-            //'print_on_glue',
-            //'variable',
-            //'stencil',
-            //'image',
-            //'image_crop',
-            //'output_label_id',
-            //'background_id',
-//            'orientation',
-            //'image_extended',
-            //'design_file',
-            //'prepress_design_file',
-            //'color_count',
-//            'laboratory_login',
-            //'date_of_flexformready',
-            //'laboratory_note:ntext',
-            //'takeoff_flash',
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{update}',
                 'buttons' => [

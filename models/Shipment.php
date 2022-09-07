@@ -93,7 +93,7 @@ class Shipment extends ActiveRecord
             'date_of_send'=>'Дата отправки',
             'date_of_close'=>'Дата закрытия',
             'date_of_create'=>'Дата создания',
-            'manager_login'=>'Менеджер',
+            'manager_id'=>'Менеджер',
             'transport_id'=>'Транспорт',
             'gasoline_cost'=>'ГСМ, руб',
             'cost'=>'Командировочные, руб',
@@ -103,8 +103,7 @@ class Shipment extends ActiveRecord
     public function rules(){
         return[
             [['date_of_send'],'required'],
-            [['transport_id'],'integer'],
-            [['manager_login'],'string'],
+            [['transport_id','manager_id'],'integer'],
             [['gasoline_cost','cost'],'number'],
             [['date_of_send','date_of_close','date_of_create'],'safe'],
         ];

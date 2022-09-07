@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'QR-код',
                 'format'=>'raw',
                 'value'=>function($model){
-                    return Html::a('QR-код', ['employee/qr-print','username'=>$model->username], ['class'=>'btn btn-primary','target' => '_blank']);
+                    return Html::a('QR-код', ['employee/qr-print','id'=>$model->id], ['class'=>'btn btn-primary','target' => '_blank']);
                 },
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center','style'=>'width:10%;'],

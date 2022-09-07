@@ -18,8 +18,8 @@ class BusinessTripEmployeeSearch extends BusinessTripEmployee
     public function rules()
     {
         return [
-            [['id', 'transport_id', 'status_id'], 'integer'],
-            [['date_of_begin', 'date_of_end', 'employee_login', 'address','date_range'], 'safe'],
+            [['id', 'transport_id', 'status_id', 'user_id'], 'integer'],
+            [['date_of_begin', 'date_of_end', 'address','date_range'], 'safe'],
             [['address'], 'trim'],
             [['gasoline_cost', 'cost'], 'number'],
         ];
@@ -56,7 +56,7 @@ class BusinessTripEmployeeSearch extends BusinessTripEmployee
             'id' => $this->id,
             'date_of_begin' => $this->date_of_begin,
             'date_of_end' => $this->date_of_end,
-            'employee_login' => $this->employee_login,
+            'user_id' => $this->user_id,
             'gasoline_cost' => $this->gasoline_cost,
             'cost' => $this->cost,
             'transport_id' => $this->transport_id,
@@ -67,10 +67,10 @@ class BusinessTripEmployeeSearch extends BusinessTripEmployee
             $date1=trim($date_explode[0]);
             $date2=trim($date_explode[1]);
             $query->orFilterWhere(
-                ['between', 'date_of_begin', date($date1), date($date2)]
+                ['between','date_of_begin',date_format(date_create($date1)->modify('-1 day'),"Y-m-d H:i:s"),date_format(date_create($date2)->modify('+1 day'),"Y-m-d H:i:s")]
             );
             $query->orFilterWhere(
-                ['between', 'date_of_end', date($date1), date($date2)]
+                ['between','date_of_end',date_format(date_create($date1)->modify('-1 day'),"Y-m-d H:i:s"),date_format(date_create($date2)->modify('+1 day'),"Y-m-d H:i:s")]
             );
 
         }

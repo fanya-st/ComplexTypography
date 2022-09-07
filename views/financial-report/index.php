@@ -74,7 +74,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?ActiveForm::end()?>
-<?//print_r(PantonePriceArchive::getPriceAverage('2022-06-20 10:08:06',[4,5],null,0))?>
 <?if(!empty($orders)):?>
     <div class="p-1 table-responsive-sm">
         <table class="table table-sm small text-center text-wrap table-bordered table-striped caption-top">
@@ -94,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <ul class="list-group">
                             <li class="list-group-item">Станок: <?=Mashine::findOne($order->mashine_id)->name?></li>
                             <li class="list-group-item">Дата конца печати: <?=$order->date_of_print_end ?></li>
-                            <li class="list-group-item">Заказчик: <?=$order->label->customer->name?> Менеджер: <?=User::getFullNameByUsername($order->label->customer->manager_login)?></li>
+                            <li class="list-group-item">Заказчик: <?=$order->label->customer->name?> Менеджер: <?=User::getFullNameById($order->label->customer->user_id)?></li>
                             <li class="list-group-item">Заказ №: <div class="badge bg-primary"><?=$order->id?></div> Этикетка №: <div class="badge bg-primary"><?=$order->label->id?></div></li>
                             <li class="list-group-item">Штанец №: <?=$order->label->pants_id?> Вал, мм: <?=$order->label->pants->shaft->name?></li>
                             <li class="list-group-item">Размер этикетки (ШхВ), мм : <?=$order->label->pants->width_label.'x'.$order->label->pants->height_label?></li>

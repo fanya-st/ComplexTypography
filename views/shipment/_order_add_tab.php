@@ -5,8 +5,6 @@ use yii\bootstrap5\Html;
 use app\models\User;
 use app\models\Customer;
 use yii\helpers\ArrayHelper;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 $this->title = 'Работа с отгрузками';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];
@@ -17,7 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
 $form=ActiveForm::begin(['method'=>'post']);
 echo Html::submitButton('Добавить',['class'=>'btn btn-primary']);
-echo GridView::widget([
+?>
+<div class="table-responsive">
+<? echo GridView::widget([
     'dataProvider' => $add_order,
     'filterModel' => $searchModel,
     'columns' => [
@@ -29,9 +29,9 @@ echo GridView::widget([
             'label'=>'ID'
         ],
         [
-            'attribute' => 'manager_login',
+            'attribute' => 'manager_id',
             'value' => function($model){
-                return User::getFullNameByUsername($model->customer->manager_login);
+                return User::getFullNameById($model->customer->user_id);
                 },
             'filter' => User::findUsersByGroup('manager')
         ],
@@ -42,11 +42,11 @@ echo GridView::widget([
             'value' => 'customer.name',
             'filter' => ArrayHelper::map(Customer::find()->where(['status_id'=>1])->asArray()->all(),'id','name')
         ],
-        'orderStatus.name',
-//        'mashine.name',
+        'order.status_id',
         'plan_circulation',
 //        'circulationCountSend',
     ],
 ]);
 ActiveForm::end();
 ?>
+</div>

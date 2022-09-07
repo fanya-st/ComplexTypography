@@ -66,7 +66,7 @@ class Customer extends ActiveRecord
             'contact'=>'Контактное лицо',
             'customerAddress'=>'Адрес',
             'date_of_create'=>'Дата создания',
-            'manager_login'=>'Менеджер',
+            'user_id'=>'Менеджер',
             'customerStatus.name'=>'Статус',
         ];
     }
@@ -75,9 +75,9 @@ class Customer extends ActiveRecord
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [['status_id','region_id','subject_id','town_id','street_id'], 'integer'],
-            [['name','manager_login','house'], 'trim'],
-            [['name','manager_login','house'], 'string'],
+            [['status_id','region_id','subject_id','town_id','street_id','user_id'], 'integer'],
+            [['name','house'], 'trim'],
+            [['name','house'], 'string'],
             [['date_of_agreement'], 'safe'],
         ];
     }

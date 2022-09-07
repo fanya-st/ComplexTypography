@@ -17,8 +17,8 @@ class EnterpriseCostSearch extends EnterpriseCost
     public function rules()
     {
         return [
-            [['id', 'service_id','order_id'], 'integer'],
-            [['date', 'login'], 'safe'],
+            [['id', 'service_id','order_id','user_id'], 'integer'],
+            [['date'], 'safe'],
             [['cost'], 'number'],
         ];
     }
@@ -53,6 +53,7 @@ class EnterpriseCostSearch extends EnterpriseCost
             'service_id' => $this->service_id,
             'order_id' => $this->order_id,
             'cost' => $this->cost,
+            'user_id' => $this->user_id,
         ]);
 
         if(!empty($this->date)){
@@ -66,8 +67,6 @@ class EnterpriseCostSearch extends EnterpriseCost
                 ['<=','date',date($date2)]
             );
         }
-
-        $query->andFilterWhere(['like', 'login', $this->login]);
 
         return $dataProvider;
     }

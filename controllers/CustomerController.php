@@ -44,7 +44,7 @@ class CustomerController extends Controller
     {
         $customer = new CustomerForm();
         $customer->status_id=1;
-        $customer->manager_login=Yii::$app->user->identity->username;
+        $customer->user_id=Yii::$app->user->identity->getId();
         if ($customer->load(Yii::$app->request->post()) && $customer->validate()) {
             if($customer->save()){
                 Yii::$app->session->setFlash('success', 'Заказчик добавлен');

@@ -6,7 +6,6 @@ use app\models\User;
 use yii\bootstrap5\Modal;
 
 use yii\bootstrap5\ActiveForm;
-Icon::map($this, Icon::FA);
 
 
 $this->title = Html::encode('Печать ярлыков ID ['.$order->id.'] '.$order->label->name);
@@ -36,7 +35,7 @@ function printDiv(divName){
             <div class="small fw-bold d-flex align-text-bottom"><?=Yii::$app->params['company_full_name'].' т/ф '
                 .Yii::$app->params['company_number']?><br><?='Заказчик: '.$order->label->customer->name.
                 ' № Заказа: '.$order->id?><br><?=
-                'Упаковщик: '.User::getFullNameByUsername($order->packer_login)
+                'Упаковщик: '.User::getFullNameById($order->packer_id)
                 ?>
             </div>
             <table class="table small table-bordered">

@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 class LabelSearch extends Label
 {
     public $shaft_id;
-    public $manager_login;
+    public $manager_id;
     public static function tableName()
     {
         return 'label';
@@ -19,9 +19,9 @@ class LabelSearch extends Label
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [[], 'integer'],
+            [['manager_id','designer_id','customer_id','pants_id','status_id','shaft_id','id'], 'integer'],
             [['name'], 'trim'],
-            [['id','name','manager_login','designer_login','customer_id','pants_id','status_id','date_of_create','shaft_id'], 'safe'],
+            [['name','date_of_create'], 'safe'],
         ];
     }
     public function scenarios()
@@ -56,9 +56,9 @@ class LabelSearch extends Label
         // изменяем запрос добавляя в его фильтрацию
         $query->andFilterWhere(['label.id' => $this->id]);
         $query->andFilterWhere(['like', 'name', $this->name]);
-        $query->andFilterWhere(['designer_login'=> $this->designer_login]);
+        $query->andFilterWhere(['designer_id'=> $this->designer_id]);
         $query->joinWith(['customer' => function ($q) {
-            $q->andFilterWhere(['customer.manager_login'=> $this->manager_login]);
+            $q->andFilterWhere(['customer.user_id'=> $this->manager_id]);
         }]);
         $query->andFilterWhere(['customer_id'=> $this->customer_id]);
         $query->joinWith(['pants' => function ($q) {

@@ -2,11 +2,11 @@
 
 use yii\bootstrap5\Html;
 use app\models\User;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 ?>
 <div class="row g-2 row-cols-2">
     <div class="col">
-        <?=Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameByUsername($shipment->manager_login)))?>
+        <?=Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameById($shipment->manager_id)))?>
         <?switch ($shipment->status_id){
             case 0:
                 echo Html::tag('h6','Статус: Новая отгрузка');
@@ -20,7 +20,7 @@ use kartik\grid\GridView;
         }?>
         <?=Html::tag('h6','Дата отправки: ' .Html::encode($shipment->date_of_send))?>
         <?=Html::tag('h6','Вес, кг: ' .Html::encode($shipment->shipmentWeight))?>
-        <div class="d-lg-inline-flex">
+        <div class="text-nowrap d-lg-inline-flex">
         <?switch ($shipment->status_id){
             case 0:
                 echo Html::tag('div',Html::a('Добавить заказы', ['shipment/order-add', 'id' => $shipment->id], ['class' => 'btn btn-primary']),['class'=>'p-1']);
@@ -35,6 +35,7 @@ use kartik\grid\GridView;
             </div>
     </div>
 </div>
+<div class="table-responsive">
 <?php
 echo GridView::widget([
     'dataProvider' => $orders,
@@ -46,7 +47,7 @@ echo GridView::widget([
             'label.name',
             'customer.name',
             'customer.customerAddress',
-            'orderStatus',
+            'order.status_id',
             'mashine.name',
             'plan_circulation',
         [
@@ -57,6 +58,6 @@ echo GridView::widget([
             'template' => '{delete}'
         ],
     ],
-    'responsive'=>true,
 ]);
 ?>
+</div>
