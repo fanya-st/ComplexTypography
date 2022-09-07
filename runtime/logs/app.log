@@ -15044,3 +15044,1864 @@ AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
 2022-09-07 21:46:40 [127.0.0.1][3][-][info][application] $_GET = []
 
 $_POST = []
+2022-09-07 21:47:40 [127.0.0.1][3][-][info][yii\web\Session::open] Session started
+2022-09-07 21:47:40 [127.0.0.1][3][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:40 [127.0.0.1][3][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:42 [127.0.0.1][3][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:42 [127.0.0.1][3][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=3
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:42 [127.0.0.1][3][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=3
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:42 [127.0.0.1][3][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`='3'
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:43
+2022-09-07 21:47:42 [127.0.0.1][3][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\employee\view.php:5
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:44
+2022-09-07 21:47:42 [127.0.0.1][3][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='3') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\view.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:44
+2022-09-07 21:47:40 [127.0.0.1][3][-][info][application] $_GET = [
+    'r' => 'employee/view'
+    'id' => '3'
+]
+
+$_POST = []
+2022-09-07 21:47:49 [127.0.0.1][-][-][info][yii\web\Session::open] Session started
+2022-09-07 21:47:49 [127.0.0.1][-][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:49 [127.0.0.1][-][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:51 [127.0.0.1][-][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:51 [127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=3
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:51 [127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=3
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:47:51 [127.0.0.1][-][-][info][yii\web\User::logout] User '3' logged out from 127.0.0.1.
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:78
+2022-09-07 21:47:51 [127.0.0.1][-][-][info][yii\web\Session::open] Session started
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:78
+2022-09-07 21:47:49 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'site/logout'
+]
+
+$_POST = [
+    '_csrf' => 'TbVAXWrkkC7b2kopQW4_S_qDsIOaKi96pM0ZzgD4AEor2wI7PqypT72zLWt5KFkMo_nWwutdTAz9lEGCSYxZGQ=='
+]
+2022-09-07 21:47:51 [127.0.0.1][-][-][info][yii\web\Session::open] Session started
+2022-09-07 21:47:51 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+2022-09-07 21:47:58 [127.0.0.1][-][-][info][yii\web\Session::open] Session started
+2022-09-07 21:47:58 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = []
+2022-09-07 21:48:06 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 21:48:06 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:141
+    in C:\OpenServer\domains\pet\models\LoginForm.php:52
+    in C:\OpenServer\domains\pet\models\LoginForm.php:33
+2022-09-07 21:48:08 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:141
+    in C:\OpenServer\domains\pet\models\LoginForm.php:52
+    in C:\OpenServer\domains\pet\models\LoginForm.php:33
+2022-09-07 21:48:08 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:141
+    in C:\OpenServer\domains\pet\models\LoginForm.php:52
+    in C:\OpenServer\domains\pet\models\LoginForm.php:33
+2022-09-07 21:48:08 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:141
+    in C:\OpenServer\domains\pet\models\LoginForm.php:52
+    in C:\OpenServer\domains\pet\models\LoginForm.php:33
+2022-09-07 21:48:09 [127.0.0.1][1][-][info][yii\web\User::login] User '1' logged in from 127.0.0.1 with duration 2592000.
+    in C:\OpenServer\domains\pet\models\LoginForm.php:44
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:66
+2022-09-07 21:48:06 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = [
+    '_csrf' => '378q9P6ylweIfgR4QGmuGNRZ14Yf9RWzWmgWipCiEji50WiSqvquZu4XYzp4L8hfjSOxx26CdsUDMU7G2dZLaw=='
+    'LoginForm' => [
+        'username' => 'admin'
+        'password' => 'F1@2n3i4l5'
+        'rememberMe' => '1'
+    ]
+    'login-button' => ''
+]
+2022-09-07 21:48:09 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 21:48:09 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:48:09 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:17
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item_child`
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `type`=1
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (7, 8)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-laboratory.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=6 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-packer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (4, 5)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-prepress.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id`=10) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-printer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 21:48:11 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=5 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-rewinder.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 21:48:09 [127.0.0.1][1][-][info][application] $_GET = []
+
+$_POST = []
+2022-09-07 22:01:42 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:01:42 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:42 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='manager'
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `parent` FROM `auth_item_child` WHERE `child`='manager'
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `pants`
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:83
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'pants' AND `kcu`.`TABLE_NAME` = 'pants'
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:83
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft`
+    in C:\OpenServer\domains\pet\views\pants\_form.php:18
+    in C:\OpenServer\domains\pet\views\pants\create.php:16
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:88
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind`
+    in C:\OpenServer\domains\pet\views\pants\_form.php:22
+    in C:\OpenServer\domains\pet\views\pants\create.php:16
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:88
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `knife_kind`
+    in C:\OpenServer\domains\pet\views\pants\_form.php:32
+    in C:\OpenServer\domains\pet\views\pants\create.php:16
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:88
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `material_group`
+    in C:\OpenServer\domains\pet\views\pants\_form.php:42
+    in C:\OpenServer\domains\pet\views\pants\create.php:16
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:88
+2022-09-07 22:01:42 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'pants/create'
+]
+
+$_POST = []
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:44 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='manager'
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `parent` FROM `auth_item_child` WHERE `child`='manager'
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `pants`
+    in C:\OpenServer\domains\pet\models\PantsSearch.php:57
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:54
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'pants' AND `kcu`.`TABLE_NAME` = 'pants'
+    in C:\OpenServer\domains\pet\models\PantsSearch.php:57
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:54
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft`
+    in C:\OpenServer\domains\pet\views\pants\_search.php:42
+    in C:\OpenServer\domains\pet\views\pants\index.php:18
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind`
+    in C:\OpenServer\domains\pet\views\pants\_search.php:49
+    in C:\OpenServer\domains\pet\views\pants\index.php:18
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `pants`
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants` LIMIT 20
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `shaft`
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'shaft' AND `kcu`.`TABLE_NAME` = 'shaft'
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `pants_kind`
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'pants_kind' AND `kcu`.`TABLE_NAME` = 'pants_kind'
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE `id`=2
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=2
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE `id`=3
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=3
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=3
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=3
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=2
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=2
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=3
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=3
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=2
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `shaft` WHERE 0=1
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:46 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `pants_kind` WHERE `id`=3
+    in C:\OpenServer\domains\pet\views\pants\index.php:89
+    in C:\OpenServer\domains\pet\controllers\PantsController.php:58
+2022-09-07 22:01:43 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'pants/index'
+]
+
+$_POST = []
+2022-09-07 22:02:03 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:02:03 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:02:03 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `order`
+    in C:\OpenServer\domains\pet\models\OrderSearch.php:56
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:66
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'order' AND `kcu`.`TABLE_NAME` = 'order'
+    in C:\OpenServer\domains\pet\models\OrderSearch.php:56
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:66
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `mashine`
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:74
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:74
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='2') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='2') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='3') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='3') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='4') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='5') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='6') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='6') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='7') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='7') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='8') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='8') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='9') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='9') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='10') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='10') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='11') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='11') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='12') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='12') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='13') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='13') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='14') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='14') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='15') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='15') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='16') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='16') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='17') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='17') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='19') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:76
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='19') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\User.php:77
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:82
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:05 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `order`
+    in C:\OpenServer\domains\pet\views\cms\order\list.php:101
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:67
+2022-09-07 22:02:03 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'cms/order-list'
+]
+
+$_POST = []
+2022-09-07 22:05:50 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:05:50 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:50 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:17
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item_child`
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `type`=1
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (7, 8)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-laboratory.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=6 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-packer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (4, 5)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-prepress.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id`=10) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-printer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:05:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=5 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-rewinder.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:05:50 [127.0.0.1][1][-][info][application] $_GET = []
+
+$_POST = []
+2022-09-07 22:05:55 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:05:55 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:55 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `user`
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` LIMIT 10
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='2') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='3') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='4') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='5') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='6') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='7') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='8') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='9') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='10') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:34
+    in C:\OpenServer\domains\pet\views\employee\list.php:18
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:05:54 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'employee/list'
+]
+
+$_POST = []
+2022-09-07 22:06:35 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:06:35 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:06:35 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `user`
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` LIMIT 10
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='2') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='3') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='4') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='5') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='6') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='7') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='8') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='9') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:37 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='10') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\views\employee\list.php:35
+    in C:\OpenServer\domains\pet\views\employee\list.php:19
+    in C:\OpenServer\domains\pet\controllers\EmployeeController.php:39
+2022-09-07 22:06:35 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'employee/list'
+]
+
+$_POST = []
+2022-09-07 22:07:17 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:07:17 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:17 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:17
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item_child`
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `type`=1
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (7, 8)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-laboratory.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=6 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-packer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (4, 5)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-prepress.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id`=10) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-printer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:07:19 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=5 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-rewinder.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:07:17 [127.0.0.1][1][-][info][application] $_GET = []
+
+$_POST = []
+2022-09-07 22:07:25 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:07:25 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:25 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='laboratory'
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `parent` FROM `auth_item_child` WHERE `child`='laboratory'
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `envelope`
+    in C:\OpenServer\domains\pet\models\EnvelopeSearch.php:54
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:35
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'envelope' AND `kcu`.`TABLE_NAME` = 'envelope'
+    in C:\OpenServer\domains\pet\models\EnvelopeSearch.php:54
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:35
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `shelf`.* FROM `shelf` LEFT JOIN `rack` ON `shelf`.`rack_id` = `rack`.`id` LEFT JOIN `warehouse` ON `rack`.`warehouse_id` = `warehouse`.`id` WHERE `warehouse`.`id`=6
+    in C:\OpenServer\domains\pet\views\envelope\index.php:74
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `shelf`
+    in C:\OpenServer\domains\pet\views\envelope\index.php:74
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'shelf' AND `kcu`.`TABLE_NAME` = 'shelf'
+    in C:\OpenServer\domains\pet\views\envelope\index.php:74
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `rack` WHERE `id`='3'
+    in C:\OpenServer\domains\pet\views\envelope\index.php:74
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `warehouse` WHERE `id`='6'
+    in C:\OpenServer\domains\pet\views\envelope\index.php:74
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `envelope`
+    in C:\OpenServer\domains\pet\views\envelope\index.php:24
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:07:28 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `envelope` LIMIT 20
+    in C:\OpenServer\domains\pet\views\envelope\index.php:24
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:07:25 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'envelope/index'
+]
+
+$_POST = []
+2022-09-07 22:08:14 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:08:14 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:08:14 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='laboratory'
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `parent` FROM `auth_item_child` WHERE `child`='laboratory'
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `envelope`
+    in C:\OpenServer\domains\pet\models\EnvelopeSearch.php:54
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:35
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'envelope' AND `kcu`.`TABLE_NAME` = 'envelope'
+    in C:\OpenServer\domains\pet\models\EnvelopeSearch.php:54
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:35
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `shelf`.* FROM `shelf` LEFT JOIN `rack` ON `shelf`.`rack_id` = `rack`.`id` LEFT JOIN `warehouse` ON `rack`.`warehouse_id` = `warehouse`.`id` WHERE `warehouse`.`id`=6
+    in C:\OpenServer\domains\pet\views\envelope\index.php:58
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `shelf`
+    in C:\OpenServer\domains\pet\views\envelope\index.php:58
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'shelf' AND `kcu`.`TABLE_NAME` = 'shelf'
+    in C:\OpenServer\domains\pet\views\envelope\index.php:58
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `rack` WHERE `id`='3'
+    in C:\OpenServer\domains\pet\views\envelope\index.php:58
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `warehouse` WHERE `id`='6'
+    in C:\OpenServer\domains\pet\views\envelope\index.php:58
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `envelope`
+    in C:\OpenServer\domains\pet\views\envelope\index.php:25
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:08:16 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `envelope` LIMIT 20
+    in C:\OpenServer\domains\pet\views\envelope\index.php:25
+    in C:\OpenServer\domains\pet\controllers\EnvelopeController.php:39
+2022-09-07 22:08:14 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'envelope/index'
+]
+
+$_POST = []
+2022-09-07 22:12:22 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:12:22 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:22 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:17
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item_child`
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `type`=1
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (7, 8)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-laboratory.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=6 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-packer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (4, 5)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-prepress.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id`=10) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-printer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:24 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=5 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-rewinder.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:22 [127.0.0.1][1][-][info][application] $_GET = []
+
+$_POST = []
+2022-09-07 22:12:29 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:12:29 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:29 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='logistician'
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `parent` FROM `auth_item_child` WHERE `child`='logistician'
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `transport`
+    in C:\OpenServer\domains\pet\views\transport\index.php:21
+    in C:\OpenServer\domains\pet\controllers\TransportController.php:50
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `transport`
+    in C:\OpenServer\domains\pet\views\transport\index.php:21
+    in C:\OpenServer\domains\pet\controllers\TransportController.php:50
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'transport' AND `kcu`.`TABLE_NAME` = 'transport'
+    in C:\OpenServer\domains\pet\views\transport\index.php:21
+    in C:\OpenServer\domains\pet\controllers\TransportController.php:50
+2022-09-07 22:12:31 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `transport` LIMIT 20
+    in C:\OpenServer\domains\pet\views\transport\index.php:21
+    in C:\OpenServer\domains\pet\controllers\TransportController.php:50
+2022-09-07 22:12:29 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'transport/index'
+]
+
+$_POST = []
+2022-09-07 22:12:40 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:12:40 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:40 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `b`.* FROM `auth_assignment` `a`, `auth_item` `b` WHERE (`a`.`item_name`=`b`.`name`) AND (`a`.`user_id`='1') AND (`b`.`type`=1)
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:17
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item_child`
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `type`=1
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:18
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+    in C:\OpenServer\domains\pet\controllers\SiteController.php:56
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (7, 8)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-laboratory.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=6 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-packer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id` IN (4, 5)) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-prepress.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT `order`.* FROM `order` LEFT JOIN `label` ON `order`.`label_id` = `label`.`id` WHERE (`order`.`status_id`=1) AND (`label`.`status_id`=10) ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-printer.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:42 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `order` WHERE `status_id`=5 ORDER BY `date_of_sale` LIMIT 3
+    in C:\OpenServer\domains\pet\views\site\tab-rewinder.php:15
+    in C:\OpenServer\domains\pet\models\CustomIndex.php:20
+    in C:\OpenServer\domains\pet\views\site\index-test.php:11
+2022-09-07 22:12:40 [127.0.0.1][1][-][info][application] $_GET = []
+
+$_POST = []
+2022-09-07 22:12:49 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:12:49 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:49 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `auth_assignment`
+    in C:\OpenServer\domains\pet\models\AuthAssignmentSearch.php:44
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:707
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'auth_assignment' AND `kcu`.`TABLE_NAME` = 'auth_assignment'
+    in C:\OpenServer\domains\pet\models\AuthAssignmentSearch.php:44
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:707
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:96
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:31
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item`
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:36
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `auth_assignment`
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` LIMIT 20
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `auth_item`
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'auth_item' AND `kcu`.`TABLE_NAME` = 'auth_item'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='accountant'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:51 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='designer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='designer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='designer_admin'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='driver'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='laboratory'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='logistician'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='manager'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='manager'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='manager_admin'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='packer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='packer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='prepress'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='printer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='rewinder'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='technolog'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:12:52 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='warehouse_manager'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:12:49 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'cms/auth-assign-index'
+]
+
+$_POST = []
+2022-09-07 22:12:55 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:12:55 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:55 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `auth_assignment`
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:724
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'auth_assignment' AND `kcu`.`TABLE_NAME` = 'auth_assignment'
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:724
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `type`=1
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\_form.php:15
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\create.php:15
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:728
+2022-09-07 22:12:57 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:96
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\_form.php:17
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\create.php:15
+2022-09-07 22:12:55 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'cms/auth-assign-create'
+]
+
+$_POST = []
+2022-09-07 22:13:01 [127.0.0.1][1][-][info][yii\web\Session::open] Session started
+2022-09-07 22:13:01 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:13:01 [127.0.0.1][1][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=pet_db
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'user' AND `kcu`.`TABLE_NAME` = 'user'
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user` WHERE `id`=1
+    in C:\OpenServer\domains\pet\models\User.php:58
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` WHERE `user_id`='1'
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `auth_assignment`
+    in C:\OpenServer\domains\pet\models\AuthAssignmentSearch.php:44
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:707
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'auth_assignment' AND `kcu`.`TABLE_NAME` = 'auth_assignment'
+    in C:\OpenServer\domains\pet\models\AuthAssignmentSearch.php:44
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:707
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:96
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:31
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item`
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:36
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT COUNT(*) FROM `auth_assignment`
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_assignment` LIMIT 20
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `auth_item`
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT
+    `kcu`.`CONSTRAINT_NAME` AS `constraint_name`,
+    `kcu`.`COLUMN_NAME` AS `column_name`,
+    `kcu`.`REFERENCED_TABLE_NAME` AS `referenced_table_name`,
+    `kcu`.`REFERENCED_COLUMN_NAME` AS `referenced_column_name`
+FROM `information_schema`.`REFERENTIAL_CONSTRAINTS` AS `rc`
+JOIN `information_schema`.`KEY_COLUMN_USAGE` AS `kcu` ON
+    (
+        `kcu`.`CONSTRAINT_CATALOG` = `rc`.`CONSTRAINT_CATALOG` OR
+        (`kcu`.`CONSTRAINT_CATALOG` IS NULL AND `rc`.`CONSTRAINT_CATALOG` IS NULL)
+    ) AND
+    `kcu`.`CONSTRAINT_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA` AND
+    `kcu`.`CONSTRAINT_NAME` = `rc`.`CONSTRAINT_NAME`
+WHERE `rc`.`CONSTRAINT_SCHEMA` = database() AND `kcu`.`TABLE_SCHEMA` = database()
+AND `rc`.`TABLE_NAME` = 'auth_item' AND `kcu`.`TABLE_NAME` = 'auth_item'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='accountant'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='admin'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='designer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='designer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='designer_admin'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='driver'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='laboratory'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='logistician'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='manager'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='manager'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='manager_admin'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='packer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='packer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='prepress'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='printer'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='rewinder'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='technolog'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `user`
+    in C:\OpenServer\domains\pet\models\User.php:114
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:32
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+2022-09-07 22:13:03 [127.0.0.1][1][-][info][yii\db\Command::query] SELECT * FROM `auth_item` WHERE `name`='warehouse_manager'
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:38
+    in C:\OpenServer\domains\pet\views\cms\auth-assignment\index.php:25
+    in C:\OpenServer\domains\pet\controllers\CmsController.php:711
+2022-09-07 22:13:01 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'cms/auth-assign-index'
+]
+
+$_POST = []

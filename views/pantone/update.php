@@ -1,11 +1,6 @@
 <?php
 
 use yii\bootstrap5\Html;
-use kartik\grid\GridView;
-use kartik\form\ActiveForm;
-use kartik\builder\TabularForm;
-use yii\widgets\Pjax;
-use app\models\MixedPantone;
 
 
 $this->title = 'Обновить PANTONE: ' . $model->name;

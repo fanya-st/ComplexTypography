@@ -1,12 +1,10 @@
 <?php
 
 use yii\bootstrap5\Html;
-//use yii\grid\GridView;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 ?>
 <?php $form=ActiveForm::begin(['method' => 'post'])?>
-<?//=Html::submitButton('Добавить в заказ',['name'=>'add_from_fpwarehouse','value'=>'start','class'=>'btn btn-primary'])?>
 <?
 echo GridView::widget([
     'dataProvider' => $roll,

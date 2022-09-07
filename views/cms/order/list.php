@@ -1,6 +1,5 @@
 <?php
 
-
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
@@ -10,7 +9,6 @@ use app\models\LabelStatus;
 use app\models\Mashine;
 use app\models\User;
 use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 $this->title = 'Заказы';
 $this->params['breadcrumbs'][] = $this->title;

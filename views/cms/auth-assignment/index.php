@@ -1,7 +1,7 @@
 <?php
 
 use yii\bootstrap5\Html;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use kartik\icons\Icon;
 use yii\bootstrap5\ActiveForm;
 use app\models\User;

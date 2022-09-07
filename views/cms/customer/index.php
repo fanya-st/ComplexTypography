@@ -3,11 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use kartik\icons\Icon;
-use yii\helpers\ArrayHelper;
 use app\models\CustomerStatus;
 use yii\bootstrap5\ActiveForm;
 use app\models\User;
-Icon::map($this, Icon::FA);
 
 $this->title = 'Customer';
 $this->params['breadcrumbs'][] = $this->title;

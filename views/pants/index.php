@@ -2,10 +2,6 @@
 
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
-//use kartik\grid\GridView;
-use app\models\Shaft;
-use yii\helpers\ArrayHelper;
-use app\models\PantsKind;
 use yii\bootstrap5\ActiveForm;
 
 use kartik\icons\Icon;

@@ -4,11 +4,8 @@ use yii\bootstrap5\Html;
 use kartik\grid\GridView;
 use kartik\export\ExportMenu;
 use app\models\Customer;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 ?>
-<!--<pre>--><?//print_r(Customer::findOne(1)->getCustomerShipmentOrder($shipment->id))?><!--</pre>-->
 <?php
 
 

@@ -4,8 +4,7 @@ use app\models\Envelope;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
-//use yii\grid\GridView;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use kartik\icons\Icon;
 use kartik\select2\Select2;
 use app\models\Shelf;
@@ -20,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Создать конверт', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<!--    <pre>--><?//print_r(Envelope::getDropDownOptionsColorTwo())?><!--</pre>-->
     <?ActiveForm::begin(['method'=>'post']) ?>
+    <div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -40,22 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'=>html::activeDropDownList($searchModel,'color1',
                     ArrayHelper::map(Envelope::$location['color1'],'id','name'),Envelope::getDropDownOptionsColorOne()),
             ],
-//            [
-//                    'attribute'=>'color1',
-//                    'value'=>'colorOne',
-//                'format'=>'raw',
-//                'contentOptions'=>['class' => 'text-center'],
-//                'headerOptions' => ['class' => 'text-center'],
-//                'filter'=>Select2::widget([
-//                        'model'=>$searchModel,
-//                        'attribute'=>'color1',
-//                        'data'=> ArrayHelper::map(Envelope::$location['color1'],'id','name'),
-//                    'options' => Envelope::getDropDownOptionsColorOne(),
-//                    'pluginOptions' => [
-//                        'allowClear' => true,
-//                    ],
-//                ]),
-//            ],
             [
                     'attribute'=>'color2',
                     'value'=>'colorTwo',
@@ -69,7 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'shelf_id',
-//                'filter'=>ArrayHelper::map(Envelope::find()->all(),'shelf_id','shelf_id'),
                 'filter'=>Select2::widget([
                         'model'=>$searchModel,
                         'attribute'=>'shelf_id',
@@ -103,9 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class' => 'text-center'],
             ],
         ],
-    ]); ?>
+    ]) ?>
+    </div>
     <?ActiveForm::end();?>
-
-
-<!--    --><?//=html::tag('svg',html::tag('rect','',['width'=>17, 'height'=>17,'style'=>'fill:cyan;']),['width'=>17, 'height'=>17])?>
 </div>

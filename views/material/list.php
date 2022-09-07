@@ -2,12 +2,8 @@
 
 
 use yii\bootstrap5\Html;
-//use kartik\grid\GridView;
 use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
-use yii\helpers\ArrayHelper;
-use app\models\MaterialProvider;
-use app\models\MaterialGroup;
 use kartik\icons\Icon;
 
 $this->title = 'Работа с материалами';

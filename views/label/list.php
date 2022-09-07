@@ -1,7 +1,6 @@
 <?php
 
 use yii\bootstrap5\Html;
-//use kartik\grid\GridView;
 use yii\grid\GridView;
 use app\models\User;
 

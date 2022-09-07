@@ -1,6 +1,6 @@
 <?php
 use yii\bootstrap5\Html;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use kartik\icons\Icon;
 
@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
@@ -77,5 +78,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'headerOptions' => ['class' => 'text-center','style'=>'width:10%;'],
         ],
     ],
-]); ?>
+])?>
+</div>
 <?ActiveForm::end()?>

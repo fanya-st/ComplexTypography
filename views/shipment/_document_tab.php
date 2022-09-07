@@ -1,10 +1,7 @@
 <?php
-use app\models\Order;
 use yii\bootstrap5\Html;
 use kartik\grid\GridView;
 use kartik\export\ExportMenu;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 ?>
 <?php
