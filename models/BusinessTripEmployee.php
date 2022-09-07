@@ -8,6 +8,12 @@ use Yii;
 class BusinessTripEmployee extends \yii\db\ActiveRecord
 {
 
+    public static $trip_status = [
+//        0=>'Открыт',
+        1=>'Открыт',
+        2=>'Закрыт',
+    ];
+
     public static function tableName()
     {
         return 'business_trip_employee';

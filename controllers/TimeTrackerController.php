@@ -7,6 +7,7 @@ namespace app\controllers;
 use app\models\TimeTracker;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use app\models\TimeTrackerSearch;
 use yii;
 
 class TimeTrackerController extends Controller
@@ -22,6 +23,11 @@ class TimeTrackerController extends Controller
                         'actions' => ['kiosk'],
                         'roles' => ['?','@'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['admin'],
+                    ],
 
                 ],
             ],
@@ -32,7 +38,7 @@ class TimeTrackerController extends Controller
     {
         $this->layout='main_without_navbar';
         $time_tracker=new TimeTracker();
-        if ($time_tracker->load(Yii::$app->request->post()) && $time_tracker->validate(Yii::$app->request->post())) {
+        if ($time_tracker->load(Yii::$app->request->post()) && $time_tracker->validate()) {
             if($time_tracker->save()){
                 return $this->refresh();
             }else{
@@ -40,5 +46,14 @@ class TimeTrackerController extends Controller
             }
         }
         return $this->render('kiosk',compact('time_tracker'));
+    }
+    public function actionIndex()
+    {
+        $searchModel = new TimeTrackerSearch();
+        $dataProvider = $searchModel->search($this->request->post());
+//        $data = $dataProvider->getModels();
+        $timesheet = TimeTracker::getTimesheet($dataProvider->getModels());
+
+        return $this->render('index',compact('searchModel','timesheet','dataProvider'));
     }
 }

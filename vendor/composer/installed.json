@@ -8436,17 +8436,17 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.1.19",
-            "version_normalized": "2.1.19.0",
+            "version": "2.1.20",
+            "version_normalized": "2.1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "84d20d738b0698298f851fcb6fc25e748d759223"
+                "reference": "9ca499a9c623d72736954ff9a7a8d13cccee2082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/84d20d738b0698298f851fcb6fc25e748d759223",
-                "reference": "84d20d738b0698298f851fcb6fc25e748d759223",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/9ca499a9c623d72736954ff9a7a8d13cccee2082",
+                "reference": "9ca499a9c623d72736954ff9a7a8d13cccee2082",
                 "shasum": ""
             },
             "require": {
@@ -8460,7 +8460,7 @@
                 "yiisoft/yii2-coding-standards": "~2.0",
                 "yiisoft/yii2-swiftmailer": "*"
             },
-            "time": "2022-04-05T20:35:14+00:00",
+            "time": "2022-09-04T09:43:35+00:00",
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -8614,17 +8614,17 @@
         },
         {
             "name": "yiisoft/yii2-gii",
-            "version": "2.2.4",
-            "version_normalized": "2.2.4.0",
+            "version": "2.2.5",
+            "version_normalized": "2.2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "80893fc4c0df97f3638938948bf34ca43dd8bff6"
+                "reference": "e2f2dcf0f16713e678df6ba70362c99a215a8f72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/80893fc4c0df97f3638938948bf34ca43dd8bff6",
-                "reference": "80893fc4c0df97f3638938948bf34ca43dd8bff6",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/e2f2dcf0f16713e678df6ba70362c99a215a8f72",
+                "reference": "e2f2dcf0f16713e678df6ba70362c99a215a8f72",
                 "shasum": ""
             },
             "require": {
@@ -8636,7 +8636,7 @@
                 "phpunit/phpunit": "4.8.34",
                 "yiisoft/yii2-coding-standards": "~2.0"
             },
-            "time": "2021-12-30T08:36:02+00:00",
+            "time": "2022-09-04T10:00:25+00:00",
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -8700,17 +8700,17 @@
         },
         {
             "name": "yiisoft/yii2-imagine",
-            "version": "2.3.0",
-            "version_normalized": "2.3.0.0",
+            "version": "2.3.1",
+            "version_normalized": "2.3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-imagine.git",
-                "reference": "b103b1b1deb786d4d5fe955898ec866dbee5c1b4"
+                "reference": "7ec4332dc25893aec5a7cf084722b162b3a4d55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/b103b1b1deb786d4d5fe955898ec866dbee5c1b4",
-                "reference": "b103b1b1deb786d4d5fe955898ec866dbee5c1b4",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/7ec4332dc25893aec5a7cf084722b162b3a4d55d",
+                "reference": "7ec4332dc25893aec5a7cf084722b162b3a4d55d",
                 "shasum": ""
             },
             "require": {
@@ -8721,7 +8721,7 @@
                 "cweagans/composer-patches": "^1.7",
                 "phpunit/phpunit": "4.8.34"
             },
-            "time": "2020-12-23T17:16:36+00:00",
+            "time": "2022-09-04T10:06:40+00:00",
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {

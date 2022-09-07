@@ -8,6 +8,8 @@ use app\models\BusinessTripEmployee;
 
 class BusinessTripEmployeeSearch extends BusinessTripEmployee
 {
+    public $date_range;
+
     public static function tableName()
     {
         return 'business_trip_employee';
@@ -17,7 +19,7 @@ class BusinessTripEmployeeSearch extends BusinessTripEmployee
     {
         return [
             [['id', 'transport_id', 'status_id'], 'integer'],
-            [['date_of_begin', 'date_of_end', 'employee_login', 'address'], 'safe'],
+            [['date_of_begin', 'date_of_end', 'employee_login', 'address','date_range'], 'safe'],
             [['address'], 'trim'],
             [['gasoline_cost', 'cost'], 'number'],
         ];
@@ -60,7 +62,18 @@ class BusinessTripEmployeeSearch extends BusinessTripEmployee
             'transport_id' => $this->transport_id,
             'status_id' => $this->status_id,
         ]);
+        if(!empty($this->date_range)){
+            $date_explode=explode(" - ",$this->date_range);
+            $date1=trim($date_explode[0]);
+            $date2=trim($date_explode[1]);
+            $query->orFilterWhere(
+                ['between', 'date_of_begin', date($date1), date($date2)]
+            );
+            $query->orFilterWhere(
+                ['between', 'date_of_end', date($date1), date($date2)]
+            );
 
+        }
         $query->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;

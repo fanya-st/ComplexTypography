@@ -8,7 +8,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 <?=$this->render('_search', ['model' => $searchModel])?>
-
 <div class="d-lg-flex flex-wrap">
     <div class="p-1"><?=Html::a('Загрузить пришедший материал', ['paper-warehouse/upload-paper'], ['class'=>'btn btn-primary'])?></div>
     <div class="p-1"><?=Html::a('Загрузить пришедную бумагу на склад', ['paper-warehouse/upload-paper-to-warehouse'], ['class'=>'btn btn-primary'])?></div>

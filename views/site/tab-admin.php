@@ -1,45 +1,80 @@
-<div class="site-index">
+<?
+use yii\bootstrap5\Html;
+?>
 
-    <div class="body-content">
+        <div class="row g-2 row-cols-lg-2 text-nowrap">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h4>Редактирование заказов</h4>
-                <p><a class="btn btn-outline-secondary" href="?r=cms%2Forder-list">Редактирование заказов &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h4>Редактирование материалов</h4>
-                <p><a class="btn btn-outline-secondary" href="?r=cms%2Fsleeve-index">Редактирование втулок &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h4>Редактирование этикеток</h4>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/label-index">Редактирование этикеток &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h4>Редактирование заказчиков</h4>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/customer-index">Редактирование заказчиков &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/subject-index">Редактирование списка субъектов РФ &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/region-index">Редактирование списка регионов &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/town-index">Редактирование списка адм.центров &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/street-index">Редактирование списка улиц &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h4>Редактирование сотрудников</h4>
-                <p><a class="btn btn-outline-secondary" href="?r=employee/create">Добавить сотрудника &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/auth-assign-index">Привязка сотрудников к группам &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h4>Редактирование параметров калькулятора</h4>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/calc-common-params-index">Редактирование общих параметров &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/calc-mashine-param-price-index">Редактирование параметров машин &raquo;</a></p>
+            <div class="col-lg">
+                <div class="border p-3 rounded">
+                    <h6 class="p-1 rounded">Заказы</h6>
+                    <div class="d-lg-flex flex-wrap">
+                        <div class="p-1"><?= Html::a('Редактирование заказов', ['cms/order-list'], ['class' => 'btn btn-primary']) ?></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-lg-4">
-                <h4>Редактирование складов и стеллажей</h4>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/warehouse-index">Редактирование складов &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/rack-index">Редактирование стелажей &raquo;</a></p>
-                <p><a class="btn btn-outline-secondary" href="?r=cms/shelf-index">Редактирование полок &raquo;</a></p>
+            <div class="col-lg">
+                <div class="border p-3 rounded">
+                    <h6 class="p-1 rounded">Этикетки</h6>
+                    <div class="d-lg-flex flex-wrap">
+                        <div class="p-1"><?= Html::a('Редактирование этикеток', ['cms/label-index'], ['class' => 'btn btn-primary']) ?></div>
+                    </div>
+                </div>
             </div>
+
+            <div class="col-lg">
+                <div class="border p-3 rounded">
+                    <h6 class="p-1 rounded">Материалы</h6>
+                    <div class="d-lg-flex flex-wrap">
+                        <div class="p-1"><?= Html::a('Редактирование втулок', ['cms/sleeve-index'], ['class' => 'btn btn-primary']) ?></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg">
+                <div class="border p-3 rounded">
+                    <h6 class="p-1 rounded">Параметры калькулятора</h6>
+                    <div class="d-lg-flex flex-wrap">
+                        <div class="p-1"><?= Html::a('Редактирование параметров машин', ['cms/calc-mashine-param-price-index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Редактирование общих параметров', ['cms/calc-common-params-index'], ['class' => 'btn btn-primary']) ?></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg">
+                <div class="border p-3 rounded">
+                    <h6 class="p-1 rounded">Сотрудники</h6>
+                    <div class="d-lg-flex flex-wrap">
+                        <div class="p-1"><?= Html::a('Привязка сотрудников к группам', ['cms/auth-assign-index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Создание сотрудника', ['employee/create'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg">
+                <div class="border p-3 rounded">
+                    <h6 class="p-1 rounded">Заказчики</h6>
+                    <div class="d-lg-flex flex-wrap">
+                        <div class="p-1"><?= Html::a('Редактирование заказчиков', ['cms/customer-index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Редактирование списка субъектов РФ', ['cms/subject-index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Редактирование списка регионов', ['cms/region-index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Редактирование списка адм.центров', ['cms/town-index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Редактирование списка улиц', ['cms/street-index'], ['class' => 'btn btn-primary']) ?></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg">
+                <div class="border p-3 rounded">
+                    <h6 class="p-1 rounded">Склады</h6>
+                    <div class="d-lg-flex flex-wrap">
+                        <div class="p-1"><?= Html::a('Редактирование складов', ['cms/warehouse-index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Редактирование стелажей', ['cms/rack-index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Редактирование полок', ['cms/shelf-index'], ['class' => 'btn btn-primary']) ?></div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-    </div>
-</div>

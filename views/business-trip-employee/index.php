@@ -1,11 +1,8 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\helpers\ArrayHelper;
-use app\models\Transport;
 use yii\bootstrap5\ActiveForm;
-//use yii\grid\GridView;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use kartik\icons\Icon;
 use app\models\User;
 
@@ -13,18 +10,16 @@ use app\models\User;
 $this->title = 'Командировки сотрудников';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="business-trip-employee-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Добавить командировку', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+<h1><?= Html::encode($this->title) ?></h1>
+<?=$this->render('_search', ['model' => $searchModel])?>
+<div class="d-lg-flex flex-wrap">
+    <div class="p-2"> <?= Html::a('Добавить командировку', ['create'], ['class' => 'btn btn-success']) ?></div>
+</div>
     <?ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             [
                 'attribute' => 'id',
@@ -36,11 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],
-            'date_of_end',
-
+            [
+                'attribute' => 'date_of_end',
+                'contentOptions'=>['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center'],
+            ],
             [
                 'attribute' => 'employee_login',
-                'filter' => User::findUsersDropdown(),
                 'value' => function($model){
                     return User::getFullNameByUsername($model->employee_login);
                 },
@@ -49,7 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'transport_id',
-                'filter'=>ArrayHelper::map(Transport::find()->asArray()->all(),'id','name'),
                 'value'=>'transport.name',
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
@@ -61,11 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'status_id',
-                'filter' => [0=>'Открыта',1=>'Закрыта'],
                 'value' => function($model){
                     switch ($model->status_id){
-                        case 0: return 'Открыта';
-                        case 1: return 'Закрыта';
+                        case 1: return 'Открыта';
+                        case 2: return 'Закрыта';
                     }
                 },
                 'contentOptions'=>['class' => 'text-center'],
@@ -91,8 +86,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class' => 'text-center'],
             ],
         ],
-    ]); ?>
-    <?ActiveForm::end()?>
-
-
+    ])?>
 </div>
+    <?ActiveForm::end()?>
