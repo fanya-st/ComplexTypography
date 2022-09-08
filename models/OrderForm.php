@@ -26,7 +26,7 @@ class OrderForm extends ActiveRecord{
 		'winding_id'=>'Схема намотки',
 		'diameter_roll'=>'Диаметр ролика, мм',
 		'label_on_roll'=>'Этикеток на ролике, шт',
-		'cut_edge'=>'Кромки',
+		'cut_edge'=>'Срезать кромки',
 		'stretch'=>'Стретч лента',
 		'rewinder_note'=>'Примечание перемотчика',
 		'printer_note'=>'Примечание печатника',

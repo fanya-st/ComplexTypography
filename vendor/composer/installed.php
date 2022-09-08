@@ -226,6 +226,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'et-soft/yii2-widget-select-year' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => '10210cf42b9e79ae14d053f10b5de2a6432ab473',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../et-soft/yii2-widget-select-year',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'ezyang/htmlpurifier' => array(
             'pretty_version' => 'v4.14.0',
             'version' => '4.14.0.0',
@@ -277,6 +286,15 @@
             'reference' => '213e0887d254a9c6fb028ff817abd8af7e734e78',
             'type' => 'library',
             'install_path' => __DIR__ . '/../kartik-v/bootstrap-fileinput',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'kartik-v/bootstrap-popover-x' => array(
+            'pretty_version' => 'v1.5.1',
+            'version' => '1.5.1.0',
+            'reference' => '36c382739c4f61ee44263a426e6447abed5ff0bd',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kartik-v/bootstrap-popover-x',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -433,6 +451,17 @@
             ),
             'dev_requirement' => false,
         ),
+        'kartik-v/yii2-ipinfo' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '01342d8be42d7ff3ab9b521e85a34af69418c61e',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-ipinfo',
+            'aliases' => array(
+                0 => '2.0.x-dev',
+            ),
+            'dev_requirement' => false,
+        ),
         'kartik-v/yii2-krajee-base' => array(
             'pretty_version' => 'v3.0.5',
             'version' => '3.0.5.0',
@@ -471,6 +500,15 @@
             'aliases' => array(
                 0 => '1.5.x-dev',
             ),
+            'dev_requirement' => false,
+        ),
+        'kartik-v/yii2-popover-x' => array(
+            'pretty_version' => 'v1.3.5',
+            'version' => '1.3.5.0',
+            'reference' => 'b0320d1315bbfce31ec8907882c6f4abed223a28',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../kartik-v/yii2-popover-x',
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-sortable' => array(
@@ -1289,6 +1327,15 @@
             'install_path' => __DIR__ . '/../yiisoft/yii2-gii',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'yiisoft/yii2-httpclient' => array(
+            'pretty_version' => '2.0.14',
+            'version' => '2.0.14.0',
+            'reference' => '50d670d2e1a30a354c27aeebf806a2db16954836',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../yiisoft/yii2-httpclient',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'yiisoft/yii2-imagine' => array(
             'pretty_version' => '2.3.1',

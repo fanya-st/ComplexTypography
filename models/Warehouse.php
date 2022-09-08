@@ -8,6 +8,12 @@ use Yii;
 class Warehouse extends \yii\db\ActiveRecord
 {
 
+    public function getRack()
+    {
+        return $this->hasMany(Rack::class,['warehouse_id'=>'id']);
+    }
+
+
     public static function tableName()
     {
         return 'warehouse';

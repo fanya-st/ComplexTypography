@@ -50,7 +50,7 @@ use yii\bootstrap5\Html;
                 <div class="p-1"><?= Html::a('Банк', ['bank-transfer/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Финансовый отчет', ['financial-report/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Показатели работы предприятия', ['/'], ['class' => 'btn btn-primary']) ?></div>
-                <div class="p-1"><?= Html::a('Электронный табель', ['/'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@ use yii\bootstrap5\Html;
         <div class="border p-3 rounded">
             <h6 class="p-1 rounded">Календарь событий</h6>
             <div class="d-lg-flex flex-wrap">
-                <div class="p-1"><?= Html::a('Календарь', ['/'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Календарь', ['business-trip-employee/calendar'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Командировки сотрудников', ['business-trip-employee/index'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>

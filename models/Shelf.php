@@ -10,9 +10,22 @@ class Shelf extends \yii\db\ActiveRecord
     public function getRack(){
         return $this->hasOne(Rack::class,['id'=>'rack_id']);
     }
-//    public function getWarehouse(){
-//        return $this->hasOne(Warehouse::class,['id'=>'warehouse_id'])->via('rack');
-//    }
+
+    public function getPaperWarehouse()
+    {
+        return $this->hasMany(PaperWarehouse::class,['shelf_id'=>'id']);
+    }
+
+    public function getEnvelope()
+    {
+        return $this->hasMany(Envelope::class,['shelf_id'=>'id']);
+    }
+
+    public function getPantoneWarehouse()
+    {
+        return $this->hasMany(PantoneWarehouse::class,['shelf_id'=>'id']);
+    }
+
 
     public static function tableName()
     {

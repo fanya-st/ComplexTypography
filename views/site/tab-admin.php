@@ -49,6 +49,7 @@ use yii\bootstrap5\Html;
                         <div class="p-1"><?= Html::a('Привязка сотрудников к группам', ['cms/auth-assign-index'], ['class' => 'btn btn-primary']) ?></div>
                         <div class="p-1"><?= Html::a('Создание сотрудника', ['employee/create'], ['class' => 'btn btn-primary']) ?></div>
                         <div class="p-1"><?= Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
+                        <div class="p-1"><?= Html::a('Киоск', ['time-tracker/kiosk'], ['class' => 'btn btn-primary']) ?></div>
                     </div>
                 </div>
             </div>

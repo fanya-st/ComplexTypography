@@ -31,7 +31,7 @@ use yii\bootstrap5\Html;
             <h6 class="p-1 rounded">Статистика</h6>
             <div class="d-lg-flex flex-wrap">
                     <div class="p-1"><?= Html::a('Финансовый отчет', ['financial-report/index'], ['class' => 'btn btn-primary']) ?></div>
-                    <div class="p-1"><?= Html::a('Электронный табель', ['/'], ['class' => 'btn btn-primary']) ?></div>
+                    <div class="p-1"><?= Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
                     <div class="p-1"><?= Html::a('Отчет по дизайнерам', ['/'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>

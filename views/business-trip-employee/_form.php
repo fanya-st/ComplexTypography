@@ -5,6 +5,7 @@ use yii\helpers\ArrayHelper;
 use app\models\Transport;
 use yii\bootstrap5\ActiveForm;
 use kartik\date\DatePicker;
+use app\models\Customer;
 
 
 ?>
@@ -31,8 +32,9 @@ use kartik\date\DatePicker;
 
     <?= $form->field($model, 'transport_id')->dropDownList(ArrayHelper::map(Transport::find()->asArray()->all(),'id','name')) ?>
 
-    <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'customer_id')->dropDownList(ArrayHelper::map(Customer::find()->asArray()->all(),'id','name')) ?>
 
+    <?= $form->field($model, 'comment')->textarea() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

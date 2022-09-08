@@ -45,7 +45,7 @@ use yii\bootstrap5\Html;
         <div class="border p-3 rounded">
             <h6 class="p-1 rounded">Статистика</h6>
             <div class="d-lg-flex flex-wrap">
-                <div class="p-1"><?= Html::a('Электронный табель', ['/'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>
     </div>

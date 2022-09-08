@@ -7,6 +7,7 @@ use kartik\label\LabelInPlace;
 use yii\helpers\ArrayHelper;
 use app\models\Transport;
 use kartik\daterange\DateRangePicker;
+use app\models\Customer;
 
 ?>
 <?php $form = ActiveForm::begin([
@@ -21,10 +22,13 @@ use kartik\daterange\DateRangePicker;
                     'type' => LabelInPlace::TYPE_HTML5,
                     'options' => ['type' => 'text']
                 ])?></div>
-            <div class="p-1"><?=$form->field($model,'address')->widget(LabelInPlace::class,[
-                    'type' => LabelInPlace::TYPE_HTML5,
-                    'options' => ['type' => 'text']
-                ])?></div>
+            <div class="p-1 flex-lg-fill"><?=$form->field($model,'customer_id')->widget(Select2::class, [
+                    'data' => ArrayHelper::map(Customer::find()->asArray()->all(),'id','name'),
+                    'options' => ['placeholder' => 'Заказчик ...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ])->label(false)?></div>
             <div class="p-1 flex-lg-fill"><?=$form->field($model,'user_id')->widget(Select2::class, [
                     'data' => User::findUsersIdDropdown(),
                     'options' => ['placeholder' => 'Сотрудник ...'],

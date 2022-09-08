@@ -45,13 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class' => 'text-center'],
             ],
             [
-                'attribute' => 'transport_id',
-                'value'=>'transport.name',
+                'attribute' => 'customer_id',
+                'value' => 'customer.name',
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],
             [
-                'attribute' => 'address',
+                'attribute' => 'transport_id',
+                'value'=>'transport.name',
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center'],
             ],

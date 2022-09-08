@@ -12,9 +12,7 @@ use app\models\Winding;
 use yii\web\View;
 use app\models\Customer;
 use app\models\Pants;
-use app\models\Shaft;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
+use kartik\helpers\Enum;
 
 $this->title = 'Создание заказа для пустышек';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
@@ -52,10 +50,7 @@ $this->registerJs(
                             '0' => 'Не указана',
                             '1' => 'Альбомная',
                             '2'=>'Книжная'
-                        ],
-                            [
-                                'prompt' => 'Выберите...'
-                            ])?>
+                        ])?>
                     </div>
                     <div class="col">
                         <?=$form->field($label,'customer_id')->widget(Select2::class, [
@@ -93,28 +88,13 @@ $this->registerJs(
                             <?=$form->field($order,'plan_circulation')->textInput(['onchange'=>'changeSending()'])?>
                             <?=$form->field($order,'label_price')->textInput(['onchange'=>'changeLabelPriceTax()'])?>
                             <?=$form->field($order,'label_price_with_tax')->textInput()?>
-                            <?=$form->field($order,'cut_edge')->dropDownList([
-                                '0' => 'Не срезать',
-                                '1' => 'Срезать',
-                            ],
-                                [
-                                    'prompt' => 'Выберите...'
-                                ])?>
+                            <?=$form->field($order,'cut_edge')->dropDownList(Enum::boolList())?>
                             <?=$form->field($order,'label_on_roll')?>
                         </div>
                         <div class="col">
                             <?=$form->field($order,'sending')?>
-                            <?=$form->field($order,'sleeve_id')->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'),
-                                [
-                                    'prompt' => 'Выберите...'
-                                ])?>
-                            <?=$form->field($order,'stretch')->dropDownList([
-                                '0' => 'Нет',
-                                '1' => 'Да',
-                            ],
-                                [
-                                    'prompt' => 'Выберите...'
-                                ])?>
+                            <?=$form->field($order,'sleeve_id')->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'))?>
+                            <?=$form->field($order,'stretch')->dropDownList(Enum::boolList())?>
                         </div>
                     </div>
                 </div>
@@ -126,7 +106,7 @@ $this->registerJs(
                             ])?>
                         </div>
                         <div class="col">
-                            <?=$form->field($order,'date_of_sale')->widget(DatePicker::classname(), [
+                            <?=$form->field($order,'date_of_sale')->widget(DatePicker::class, [
                                 'options' => ['placeholder' => 'Введите дату сдачи ...'],
                                 'pluginOptions' => [
                                     'allowClear' => true,
@@ -137,7 +117,7 @@ $this->registerJs(
                             ])?>
                         </div>
                     </div>
-                    <?=$form->field($order,'material_id')->widget(Select2::classname(), [
+                    <?=$form->field($order,'material_id')->widget(Select2::class, [
                         'data' => ArrayHelper::map(Material::find()->all(), 'id', 'name'),
                         'options' => ['placeholder' => 'Выбрать материал ...'],
                         'pluginOptions' => [

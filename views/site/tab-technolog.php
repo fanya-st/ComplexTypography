@@ -35,7 +35,7 @@ use yii\bootstrap5\Html;
                 <div class="p-1"><?= Html::a('Финансовый отчет', ['financial-report/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Отчет по печатникам', ['/'], ['class' => 'm-1 btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Отчет по перемотчикам', ['/'], ['class' => 'm-1 btn btn-primary']) ?></div>
-                <div class="p-1"><?= Html::a('Электронный табель', ['/'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>
     </div>

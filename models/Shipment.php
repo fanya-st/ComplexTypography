@@ -13,6 +13,7 @@ class Shipment extends ActiveRecord
     public function getShipmentOrder(){
         return $this->hasMany(ShipmentOrder::class,['shipment_id'=>'id']);
     }
+
     public function getOrder(){
         return $this->hasMany(Order::class,['id'=>'order_id'])->via('shipmentOrder');
     }

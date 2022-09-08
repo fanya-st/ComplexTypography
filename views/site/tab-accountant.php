@@ -22,7 +22,7 @@ use yii\bootstrap5\Html;
                 <div class="p-1"><?= Html::a('Банк', ['bank-transfer/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Финансовый отчет', ['financial-report/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Показатели работы предприятия', ['/'], ['class' => 'btn btn-primary']) ?></div>
-                <div class="p-1"><?= Html::a('Электронный табель', ['/'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>
     </div>

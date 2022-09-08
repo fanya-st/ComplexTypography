@@ -33,6 +33,7 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'yii\\swiftmailer\\' => 16,
             'yii\\jui\\' => 8,
             'yii\\imagine\\' => 12,
+            'yii\\httpclient\\' => 15,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
@@ -56,14 +57,17 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\sortable\\' => 16,
             'kartik\\sidenav\\' => 15,
             'kartik\\select2\\' => 15,
+            'kartik\\popover\\' => 15,
             'kartik\\plugins\\tabs\\' => 20,
             'kartik\\plugins\\strengthmeter\\' => 29,
+            'kartik\\plugins\\popover\\' => 23,
             'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\plugins\\depdrop\\' => 23,
             'kartik\\plugins\\checkbox\\' => 24,
             'kartik\\password\\' => 16,
             'kartik\\mpdf\\' => 12,
             'kartik\\label\\' => 13,
+            'kartik\\ipinfo\\' => 14,
             'kartik\\icons\\' => 13,
             'kartik\\helpers\\' => 15,
             'kartik\\grid\\' => 12,
@@ -82,6 +86,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
             'kartik\\builder\\' => 15,
             'kartik\\bs5dropdown\\' => 19,
             'kartik\\base\\' => 12,
+        ),
+        'e' => 
+        array (
+            'etsoft\\widgets\\' => 15,
         ),
         'c' => 
         array (
@@ -181,6 +189,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-imagine/src',
         ),
+        'yii\\httpclient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-httpclient/src',
+        ),
         'yii\\gii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-gii/src',
@@ -237,6 +249,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2/src',
         ),
+        'kartik\\popover\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-popover-x/src',
+        ),
         'kartik\\plugins\\tabs\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/bootstrap-tabs-x',
@@ -244,6 +260,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\plugins\\strengthmeter\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/strength-meter',
+        ),
+        'kartik\\plugins\\popover\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-popover-x',
         ),
         'kartik\\plugins\\fileinput\\' => 
         array (
@@ -268,6 +288,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\label\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-label-inplace/src',
+        ),
+        'kartik\\ipinfo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-ipinfo/src',
         ),
         'kartik\\icons\\' => 
         array (
@@ -340,6 +364,10 @@ class ComposerStaticInit2cd0204122d71a1c405aeafa701f4811
         'kartik\\base\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base/src',
+        ),
+        'etsoft\\widgets\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/et-soft/yii2-widget-select-year',
         ),
         'cebe\\markdown\\' => 
         array (

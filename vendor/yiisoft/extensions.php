@@ -328,4 +328,40 @@ return array (
       '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug/src',
     ),
   ),
+  'et-soft/yii2-widget-select-year' => 
+  array (
+    'name' => 'et-soft/yii2-widget-select-year',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@etsoft/widgets' => $vendorDir . '/et-soft/yii2-widget-select-year',
+    ),
+  ),
+  'kartik-v/yii2-popover-x' => 
+  array (
+    'name' => 'kartik-v/yii2-popover-x',
+    'version' => '1.3.5.0',
+    'alias' => 
+    array (
+      '@kartik/popover' => $vendorDir . '/kartik-v/yii2-popover-x/src',
+    ),
+  ),
+  'yiisoft/yii2-httpclient' => 
+  array (
+    'name' => 'yiisoft/yii2-httpclient',
+    'version' => '2.0.14.0',
+    'alias' => 
+    array (
+      '@yii/httpclient' => $vendorDir . '/yiisoft/yii2-httpclient/src',
+    ),
+  ),
+  'kartik-v/yii2-ipinfo' => 
+  array (
+    'name' => 'kartik-v/yii2-ipinfo',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/ipinfo' => $vendorDir . '/kartik-v/yii2-ipinfo/src',
+    ),
+  ),
 );

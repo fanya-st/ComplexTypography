@@ -11,6 +11,7 @@ use app\models\Sleeve;
 use app\models\Winding;
 use yii\web\View;
 use app\models\Label;
+use kartik\helpers\Enum;
 
 $this->title = 'Создание заказа';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
@@ -37,7 +38,7 @@ $this->registerJs(
 	<?$form = ActiveForm::begin()?>
     <div class="row">
         <div class="col">
-            <?=$form->field($order,'label_id')->widget(Select2::classname(),
+            <?=$form->field($order,'label_id')->widget(Select2::class,
                 ['data' => ArrayHelper::map(Label::find()->joinWith('customer')->where(['customer.user_id'=>Yii::$app->user->identity->getId()])->orderBy('date_of_create DESC')->limit(100)->all(),
                     'id', 'nameSplitId'),
                 'options' => ['placeholder' => 'Выбрать этикетку ...'],
@@ -48,9 +49,7 @@ $this->registerJs(
             <?=$form->field($order,'parent_label')->checkbox()?>
             <div class="row">
                 <div class="col">
-                    <?=$form->field($order,'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>0])->asArray()->all(), 'id', 'name'), [
-                        'prompt' => 'Выберите...'
-                    ])?>
+                    <?=$form->field($order,'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>0])->asArray()->all(), 'id', 'name'))?>
                     <?=$form->field($order,'label_price')->textInput(['onchange'=>'changeLabelPriceTax()'])?>
                 </div>
                 <div class="col">
@@ -82,16 +81,9 @@ $this->registerJs(
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <?=$form->field($order,'sleeve_id')
-                        ->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'))?>
-                    <?=$form->field($order,'cut_edge')->dropDownList([
-                        '0' => 'Не срезать',
-                        '1' => 'Срезать',
-                    ])?>
-                    <?=$form->field($order,'stretch')->dropDownList([
-                        '0' => 'Нет',
-                        '1' => 'Да',
-                    ])?>
+                    <?=$form->field($order,'sleeve_id')->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'))?>
+                    <?=$form->field($order,'cut_edge')->dropDownList(Enum::boolList())?>
+                    <?=$form->field($order,'stretch')->dropDownList(Enum::boolList())?>
                 </div>
                 <div class="col">
                     <?=$form->field($order,'plan_circulation')->textInput(['onchange'=>'changeSending()'])?>

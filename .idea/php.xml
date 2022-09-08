@@ -139,6 +139,11 @@
       <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/vendor/et-soft/yii2-widget-select-year" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-httpclient" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-popover-x" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-ipinfo" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/bootstrap-popover-x" />
     </include_path>
   </component>
 </project>

@@ -141,6 +141,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/php-enum" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mime" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/et-soft/yii2-widget-select-year" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/yiisoft/yii2-httpclient" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-popover-x" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-ipinfo" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/bootstrap-popover-x" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

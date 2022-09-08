@@ -1,7 +1,6 @@
 <?php
 
 use yii\bootstrap5\Html;
-//use yii\widgets\DetailView;
 use kartik\detail\DetailView;
 
 
@@ -36,8 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost',
             'user_id',
             'transport_id',
-            'address:ntext',
+            'customer_id',
             'status_id',
+            'comment',
         ],
     ]) ?>
 

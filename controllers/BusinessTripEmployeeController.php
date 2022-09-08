@@ -21,7 +21,7 @@ class BusinessTripEmployeeController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','create','update','view'],
+                        'actions' => ['index','create','update','view','calendar'],
                         'roles' => ['manager'],
                     ],
                     [
@@ -53,6 +53,14 @@ class BusinessTripEmployeeController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionCalendar()
+    {
+        $searchModel = new BusinessTripEmployeeSearch();
+        $dataProvider = $searchModel->search($this->request->post());
+        $data=$dataProvider ->getModels();
+        return $this->render('calendar',compact('data','searchModel'));
     }
 
 

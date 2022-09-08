@@ -9,6 +9,9 @@ use app\models\BusinessTripEmployee;
 class BusinessTripEmployeeSearch extends BusinessTripEmployee
 {
     public $date_range;
+    public $calendar_year_select;
+    public $calendar_month_select;
+    public $month_day_count;
 
     public static function tableName()
     {
@@ -18,10 +21,16 @@ class BusinessTripEmployeeSearch extends BusinessTripEmployee
     public function rules()
     {
         return [
-            [['id', 'transport_id', 'status_id', 'user_id'], 'integer'],
+            [['id', 'transport_id', 'status_id', 'user_id','calendar_year_select','calendar_month_select','customer_id'], 'integer'],
             [['date_of_begin', 'date_of_end', 'address','date_range'], 'safe'],
-            [['address'], 'trim'],
             [['gasoline_cost', 'cost'], 'number'],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'calendar_month_select'=>'Месяц',
+            'calendar_year_select'=>'Год',
         ];
     }
 
@@ -60,6 +69,7 @@ class BusinessTripEmployeeSearch extends BusinessTripEmployee
             'gasoline_cost' => $this->gasoline_cost,
             'cost' => $this->cost,
             'transport_id' => $this->transport_id,
+            'customer_id' => $this->customer_id,
             'status_id' => $this->status_id,
         ]);
         if(!empty($this->date_range)){
@@ -74,7 +84,11 @@ class BusinessTripEmployeeSearch extends BusinessTripEmployee
             );
 
         }
-        $query->andFilterWhere(['like', 'address', $this->address]);
+
+        if(!empty($this->calendar_month_select)&& !empty($this->calendar_year_select)){
+            $this->month_day_count=cal_days_in_month(CAL_GREGORIAN, $this->calendar_month_select, $this->calendar_year_select);
+        }
+
 
         return $dataProvider;
     }

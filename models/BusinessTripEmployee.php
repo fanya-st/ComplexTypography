@@ -23,15 +23,17 @@ class BusinessTripEmployee extends \yii\db\ActiveRecord
         return $this->hasOne(Transport::class,['id'=>'transport_id']);
     }
 
+    public function getCustomer(){
+        return $this->hasOne(Customer::class,['id'=>'customer_id']);
+    }
+
     public function rules()
     {
         return [
-            [['date_of_begin', 'user_id', 'transport_id', 'address'], 'required'],
+            [['date_of_begin', 'user_id', 'transport_id'], 'required'],
             [['date_of_begin', 'date_of_end'], 'safe'],
             [['gasoline_cost', 'cost'], 'number'],
-            [['transport_id', 'status_id','user_id'], 'integer'],
-            [['address'], 'trim'],
-            [['address'], 'string', 'max' => 100],
+            [['transport_id', 'status_id','user_id','customer_id'], 'integer'],
         ];
     }
 
@@ -45,8 +47,9 @@ class BusinessTripEmployee extends \yii\db\ActiveRecord
             'cost' => 'Командировочные',
             'user_id' => 'Сотрудник',
             'transport_id' => 'Транспорт',
-            'address' => 'Адрес',
+            'customer_id' => 'Заказчик',
             'status_id' => 'Статус',
+            'comment' => 'Комментарий',
         ];
     }
 
