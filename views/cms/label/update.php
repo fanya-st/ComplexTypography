@@ -1,17 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Update Label: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Label', 'url' => ['label-index']];
+$this->title = 'Обновить этикетку: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Этикетки', 'url' => ['label-index']];
 ?>
-<div class="label-form-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

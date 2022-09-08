@@ -1,28 +1,25 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 
-$this->title = 'Subjects';
+$this->title = 'Субъекты РФ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="subject-index">
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Subject', ['subject-create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить субъект РФ', ['subject-create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-
             'id',
             'name',
             ['class' => 'yii\grid\ActionColumn',
@@ -35,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
-
+    ])?>
 
 </div>

@@ -1,17 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Update Town: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Towns', 'url' => ['town-index']];
+$this->title = 'Редиактировать город: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Города', 'url' => ['town-index']];
 ?>
-<div class="town-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

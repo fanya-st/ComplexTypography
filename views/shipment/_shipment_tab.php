@@ -47,7 +47,11 @@ echo GridView::widget([
             'label.name',
             'customer.name',
             'customer.customerAddress',
-            'order.status_id',
+        [
+            'attribute'=>'order.status_id',
+            'label'=>'Статус заказа'
+        ],
+
             'mashine.name',
             'plan_circulation',
         [

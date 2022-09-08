@@ -7,14 +7,15 @@ use app\models\CustomerStatus;
 use yii\bootstrap5\ActiveForm;
 use app\models\User;
 
-$this->title = 'Customer';
+$this->title = 'Заказчики';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="customer-form-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?$form=ActiveForm::begin(['method'=>'post'])?>
+
+<div class="table-responsive">
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -36,17 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter'=>User::findUsersByGroup('manager'),
             ],
-            //'subject_id',
-            //'region_id',
-            //'town_id',
-            //'street_id',
-            //'house',
-            //'email:email',
-            //'number',
-            //'comment:ntext',
-            //'time_to_delivery_from',
-            //'time_to_delivery_to',
-            //'contact',
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{update}',
                 'buttons' => [
@@ -57,7 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
+    ])?>
+</div>
     <?ActiveForm::end()?>
 
-</div>
+

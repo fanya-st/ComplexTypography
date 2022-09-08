@@ -12,14 +12,13 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'Стеллажи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="rack-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a('Добавить стеллаж', ['rack-create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?ActiveForm::begin(['method'=>'post'])?>
+    <div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -33,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  },
@@ -46,8 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{update}',
             ],
         ],
-    ]); ?>
+    ])?>
+    </div>
     <?ActiveForm::end()?>
-
-
-</div>

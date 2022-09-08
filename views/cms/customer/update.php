@@ -1,17 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Update Customer: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Customer Forms', 'url' => ['customer-index']];
+$this->title = 'Редактировать заказчика: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Заказчики', 'url' => ['customer-index']];
 ?>
-<div class="customer-form-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

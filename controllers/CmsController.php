@@ -10,7 +10,6 @@ use app\models\Region;
 use app\models\RegionSearch;
 use app\models\Shelf;
 use app\models\Street;
-use app\models\User;
 use app\models\Warehouse;
 use app\models\AuthItemSearch;
 use yii\filters\AccessControl;
@@ -22,7 +21,7 @@ use app\models\Town;
 use app\models\TownSearch;
 use app\models\StreetSearch;
 use app\models\Subject;
-use app\models\CustomerForm;
+use app\models\Customer;
 use app\models\Label;
 use app\models\LabelSearch;
 use app\models\CustomerSearch;
@@ -142,12 +141,6 @@ class CmsController extends Controller
             'model' => $model,
         ]);
     }
-//    public function actionSleeveDelete($id)
-//    {
-//        $this->findModel($id)->delete();
-//
-//        return $this->redirect(['sleeve-index']);
-//    }
 
     /*Редактировние списка субъектов РФ*/
 
@@ -192,13 +185,6 @@ class CmsController extends Controller
         ]);
     }
 
-//    public function actionSubjectDelete($id)
-//    {
-//        Subject::findOne($id)->delete();
-//
-//        return $this->redirect(['subject-index']);
-//    }
-
     /*Редактирование списка регионов*/
 
     public function actionRegionIndex()
@@ -242,12 +228,6 @@ class CmsController extends Controller
         ]);
     }
 
-//    public function actionRegionDelete($id)
-//    {
-//        Region::findOne($id)->delete();
-//
-//        return $this->redirect(['region-index']);
-//    }
 
     /*Редактирование адм.центров*/
 
@@ -294,12 +274,6 @@ class CmsController extends Controller
         ]);
     }
 
-//    public function actionTownDelete($id)
-//    {
-//        Town::findOne($id)->delete();
-//
-//        return $this->redirect(['town-index']);
-//    }
 
     /*Редактирование списка улиц*/
 
@@ -344,13 +318,6 @@ class CmsController extends Controller
         ]);
     }
 
-//    public function actionStreetDelete($id)
-//    {
-//        Street::findOne($id)->delete();
-//
-//        return $this->redirect(['street-index']);
-//    }
-
     /*Редактирование заказчиков*/
 
     public function actionCustomerIndex()
@@ -367,7 +334,7 @@ class CmsController extends Controller
 
     public function actionCustomerUpdate($id)
     {
-        $model = CustomerForm::findOne($id);
+        $model = Customer::findOne($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['customer-index']);
@@ -377,13 +344,6 @@ class CmsController extends Controller
             'model' => $model,
         ]);
     }
-
-//    public function actionCustomerDelete($id)
-//    {
-//        CustomerForm::findOne($id)->delete();
-//
-//        return $this->redirect(['customer-index']);
-//    }
 
     /*Редактирование этикеток*/
 
@@ -411,12 +371,6 @@ class CmsController extends Controller
         ]);
     }
 
-//    public function actionLabelDelete($id)
-//    {
-//        Label::findOne($id)->delete();
-//
-//        return $this->redirect(['label-index']);
-//    }
 
     /*Редактирование общих параметров для калькулятора*/
 
@@ -477,12 +431,6 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionCalcCommonParamsDelete($id)
-    {
-        CalcCommonParam::findOne($id)->delete();
-
-        return $this->redirect(['calc-common-params-index']);
-    }
 
     /*Редактирование параметров машин*/
 
@@ -535,12 +483,6 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionCalcMashineParamPriceDelete($id)
-    {
-        CalcMashineParamValue::findOne($id)->delete();
-
-        return $this->redirect(['calc-mashine-param-price-index']);
-    }
 
     /*Редактирование списка складов*/
 
@@ -586,12 +528,6 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionWarehouseDelete($id)
-    {
-        Warehouse::findOne($id)->delete();
-
-        return $this->redirect(['warehouse-index']);
-    }
 
 
     /*Редактирование стелажей*/
@@ -640,12 +576,6 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionRackDelete($id)
-    {
-        Rack::findOne($id)->delete();
-
-        return $this->redirect(['rack-index']);
-    }
 
     /*Редактирование полок*/
 
@@ -691,12 +621,6 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionShelfDelete($id)
-    {
-        Shelf::findOne($id)->delete();
-
-        return $this->redirect(['shelf-index']);
-    }
 
 
     /*Редактирование состав сотрудников в группах */
@@ -742,13 +666,6 @@ class CmsController extends Controller
         ]);
     }
 
-
-    public function actionAuthAssignDelete($item_name, $user_id)
-    {
-        $this->findModelAuthAssign($item_name, $user_id)->delete();
-
-        return $this->redirect(['auth-assign-index']);
-    }
 
     protected function findModelAuthAssign($item_name, $user_id)
     {
@@ -810,14 +727,6 @@ class CmsController extends Controller
         return $this->render('auth-item\update', [
             'model' => $model,
         ]);
-    }
-
-
-    public function actionAuthItemDelete($name)
-    {
-        $this->findModelAuthItem($name)->delete();
-
-        return $this->redirect(['auth-item-index']);
     }
 
     protected function findModelAuthItem($name)

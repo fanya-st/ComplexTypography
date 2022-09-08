@@ -1,13 +1,11 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Update Subject: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Subjects', 'url' => ['subject-index']];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Редактировать Субъект РФ: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Субъекты РФ', 'url' => ['subject-index']];
 ?>
-<div class="subject-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -15,4 +13,3 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
     ]) ?>
 
-</div>

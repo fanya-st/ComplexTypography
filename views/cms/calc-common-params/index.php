@@ -3,23 +3,20 @@
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use kartik\icons\Icon;
-use app\models\CalcCommonParams;
-
-Icon::map($this, Icon::FA);
 
 
-$this->title = 'Calc Common Params';
+
+$this->title = 'Общие параметры калькулятора';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="calc-common-params-index">
+
 
     <h1><?= Html::encode($this->title) ?></h1>
-<!--    <pre>--><?//print_r(CalcCommonParams::findOne(1)->getOldAttributes())?><!--</pre>-->
     <p>
-        <?= Html::a('Create Calc Common Params', ['calc-common-params-create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать общий параметр для калькулятора', ['calc-common-params-create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -38,7 +35,5 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
-
-
+    ]) ?>
 </div>

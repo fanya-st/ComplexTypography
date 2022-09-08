@@ -1,18 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Create Calc Common Params';
-$this->params['breadcrumbs'][] = ['label' => 'Calc Common Params', 'url' => ['calc-common-params-index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Создать общий параметр для калькулятора';
+$this->params['breadcrumbs'][] = ['label' => 'Общие параметры калькулятора', 'url' => ['calc-common-params-index']];
 ?>
-<div class="calc-common-params-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

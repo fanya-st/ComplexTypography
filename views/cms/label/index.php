@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap5\ActiveForm;
@@ -10,14 +10,15 @@ use app\models\Customer;
 use yii\grid\GridView;
 
 
-$this->title = 'Label';
+$this->title = 'Этикетки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="label-form-index">
+
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?$form=ActiveForm::begin(['method'=>'post'])?>
 
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -27,12 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center','style' => 'width:5%'],
             ],
-//            'parent_label',
             'name',
-//            'designer_note:ntext',
-//            'manager_note:ntext',
-            //'prepress_note:ntext',
-            //'date_of_create',
             'date_of_design',
             'date_of_prepress',
 
@@ -47,8 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'labelStatus',
                 'filter' => LabelStatus::$label_status,
             ],
-            //'pants_id',
-            //'foil_id',
             [
                 'attribute' => 'designer_id',
                 'value' => function($model){
@@ -66,8 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
+    ]) ?>
+</div>
     <?ActiveForm::end()?>
 
 
-</div>
+

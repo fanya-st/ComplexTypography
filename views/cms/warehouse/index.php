@@ -11,7 +11,6 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'Склады';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="warehouse-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -20,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -39,8 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
                  'template' => '{update}',
             ],
         ],
-    ]); ?>
+    ])?>
+</div>
     <?ActiveForm::end()?>
 
 
-</div>
+

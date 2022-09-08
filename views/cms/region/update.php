@@ -1,18 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Update Region: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Regions', 'url' => ['region-index']];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Редактировать регион: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Регионы', 'url' => ['region-index']];
 ?>
-<div class="region-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

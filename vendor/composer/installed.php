@@ -1264,9 +1264,9 @@
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-debug' => array(
-            'pretty_version' => '2.1.20',
-            'version' => '2.1.20.0',
-            'reference' => '9ca499a9c623d72736954ff9a7a8d13cccee2082',
+            'pretty_version' => '2.1.21',
+            'version' => '2.1.21.0',
+            'reference' => 'fa9fa02e242c1b744eb68045ee8e9d698134836d',
             'type' => 'yii2-extension',
             'install_path' => __DIR__ . '/../yiisoft/yii2-debug',
             'aliases' => array(),

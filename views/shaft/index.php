@@ -7,12 +7,11 @@ use app\models\PolymerKind;
 use yii\bootstrap5\ActiveForm;
 
 use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 $this->title = 'Валы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="shaft-index">
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -21,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <? ActiveForm::begin(['method'=>'post'])?>
-
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -58,8 +57,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
+    ]) ?>
+</div>
     <?ActiveForm::end()?>
 
 
-</div>
+

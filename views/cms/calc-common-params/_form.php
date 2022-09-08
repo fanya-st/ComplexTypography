@@ -5,20 +5,18 @@ use yii\bootstrap5\ActiveForm;
 
 ?>
 
-<div class="calc-common-params-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin() ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true,'disabled'=>true]) ?>
+<p><?= $form->field($model, 'name')->textInput(['maxlength' => true,'disabled'=>true]) ?></p>
 
-    <?= $form->field($model, 'subscribe')->textInput(['maxlength' => true]) ?>
+<p><?= $form->field($model, 'subscribe')->textInput(['maxlength' => true]) ?></p>
 
-    <?= $form->field($model, 'value')->textInput() ?>
+<p><?= $form->field($model, 'value')->textInput() ?></p>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
 
-    <?php ActiveForm::end(); ?>
+<p><?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?></p>
 
-</div>
+
+    <?php ActiveForm::end() ?>
+

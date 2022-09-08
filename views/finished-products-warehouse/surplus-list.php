@@ -10,6 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 <?php $form=ActiveForm::begin(['method' => 'post'])?>
+<div class="table-responsive">
 <?
 echo GridView::widget([
     'dataProvider' => $surplus,
@@ -62,4 +63,5 @@ echo GridView::widget([
     ],
 ]);
 ?>
+</div>
 <?php ActiveForm::end()?>

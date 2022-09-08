@@ -12,7 +12,7 @@ use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\models\Customer;
-use app\models\OrderShipmentSearch;
+use app\models\OrderSearch;
 use yii;
 use app\models\ShipmentSearch;
 use yii\web\ForbiddenHttpException;
@@ -133,7 +133,7 @@ class ShipmentController extends Controller
         if (!\Yii::$app->user->can('updateShipment', ['item' => $shipment])) {
             throw new ForbiddenHttpException('Доступ запрещен');
         }
-        $searchModel = new OrderShipmentSearch();
+        $searchModel = new OrderSearch();
         $add_order = $searchModel->search($this->request->post());
         if(Yii::$app->request->post('selection')){
             $selected=Yii::$app->request->post('selection');

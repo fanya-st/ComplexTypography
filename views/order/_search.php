@@ -75,14 +75,14 @@ use kartik\label\LabelInPlace;
                             'allowClear' => true
                         ],
                     ])->label(false)?></div>
-                <div class="p-1"><?= $form->field($model, 'pantsId')->widget(Select2::class, [
+                <div class="p-1"><?= $form->field($model, 'pants_id')->widget(Select2::class, [
                         'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
                         'options' => ['placeholder' => 'Выбрать штанец ...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
                     ])->label(false)?></div>
-                <div class="p-1"><?=$form->field($model,'customerId')->widget(Select2::class, [
+                <div class="p-1"><?=$form->field($model,'customer_id')->widget(Select2::class, [
                         'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1'])->all(), 'id', 'name'),
                         'options' => ['placeholder' => 'Выбрать заказчика ...'],
                         'pluginOptions' => [

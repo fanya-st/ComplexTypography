@@ -12,28 +12,30 @@ class OrderSearch extends Order
     {
         return 'order';
     }
-    public $customerId;
+    public $customer_id;
     public $labelName;
     public $manager_id;
-    public $pantsId;
+    public $pants_id;
     public $shaft_id;
     public $label_status_id;
     public function rules()
     {
         // только поля определенные в rules() будут доступны для поиска
         return [
-            [['id','label_id','manager_id'], 'integer'],
+            [['id','label_id','manager_id','pants_id','shaft_id','status_id','label_status_id','mashine_id','customer_id'], 'integer'],
             [['labelName'], 'trim'],
-            [['customerId','name','label_id','id','shaft_id','date_of_create','status_id','pantsId','mashine_id','label_status_id'], 'safe'],
+            [['date_of_create'], 'safe'],
         ];
     }
 
-    public function attributeLabels()
-    {
-        return [
+    public function attributeLabels(){
+        return[
+            'manager_id'=>'Менеджер',
+            'label_status_id'=>'Статус этикетки',
             'labelName'=>'Наименование',
-            'id'=>'№ заказа',
-            'label_id'=>'№ этикетки',
+            'shaft_id'=>'Вал',
+            'pants_id'=>'Штанец',
+            'customer_id'=>'Заказчик',
         ];
     }
 
@@ -77,7 +79,7 @@ class OrderSearch extends Order
         $query->andFilterWhere(['customer.user_id' => $this->manager_id]);
         $query->andFilterWhere(['like', 'label.name', $this->labelName]);
         $query->joinWith(['label' => function ($q) {
-                $q->andFilterWhere(['label.customer_id'=> $this->customerId]);
+                $q->andFilterWhere(['label.customer_id'=> $this->customer_id]);
             }]);
         $query->joinWith(['customer' => function ($q) {
                 $q->andFilterWhere(['customer.user_id'=> $this->manager_id]);
@@ -86,7 +88,7 @@ class OrderSearch extends Order
                 $q->andFilterWhere(['label.status_id'=> $this->label_status_id]);
             }]);
         $query->joinWith(['label' => function ($q) {
-                $q->andFilterWhere(['label.pants_id'=> $this->pantsId]);
+                $q->andFilterWhere(['label.pants_id'=> $this->pants_id]);
             }]);
         $query->joinWith(['shaft' => function ($q) {
                 $q->andFilterWhere(['shaft.id'=> $this->shaft_id]);

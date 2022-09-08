@@ -1,26 +1,24 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
 use app\models\Subject;
 use yii\bootstrap5\ActiveForm;
-Icon::map($this, Icon::FA);
 
 
-$this->title = 'Regions';
+$this->title = 'Регионы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="region-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-<!--    <pre>--><?//print_r(Yii::$app->request->post())?><!--</pre>-->
     <p>
-        <?= Html::a('Create Region', ['region-create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить регион', ['region-create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?$form=ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -42,7 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
+    ]) ?>
+</div>
     <?ActiveForm::end()?>
 
-</div>
+

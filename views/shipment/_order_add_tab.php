@@ -6,10 +6,9 @@ use app\models\User;
 use app\models\Customer;
 use yii\helpers\ArrayHelper;
 
-$this->title = 'Работа с отгрузками';
+$this->title = 'Добавление заказов';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];
 $this->params['breadcrumbs'][] = ['label' => 'Отгрузка ID['.$shipment->id.'] ', 'url' => ['shipment/view','id'=>$shipment->id]];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
     <h1><?= Html::encode($this->title) ?></h1>
 <?php
@@ -38,13 +37,17 @@ echo Html::submitButton('Добавить',['class'=>'btn btn-primary']);
         'label.name',
         'date_of_sale',
         [
-            'attribute' => 'customerId',
+            'attribute' => 'customer_id',
+            'label' => 'Заказчик',
             'value' => 'customer.name',
             'filter' => ArrayHelper::map(Customer::find()->where(['status_id'=>1])->asArray()->all(),'id','name')
         ],
-        'order.status_id',
+        [
+            'attribute' => 'status_id',
+            'filter' => \app\models\OrderStatus::$order_status
+        ],
+
         'plan_circulation',
-//        'circulationCountSend',
     ],
 ]);
 ActiveForm::end();

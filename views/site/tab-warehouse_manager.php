@@ -32,6 +32,7 @@ use yii\bootstrap5\Html;
         <div class="border p-3 rounded">
             <h6 class="p-1 rounded">Склады</h6>
             <div class="d-lg-flex flex-wrap ">
+                <div class="p-1"><?= Html::a('Склады', ['warehouse/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Склад красок, лаков и химии', ['pantone-warehouse/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Склад бумаги, фольги, ламинации', ['paper-warehouse/list'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Оприходовать материал', ['material/upload-paper-to-warehouse'], ['class' => 'btn btn-primary']) ?></div>

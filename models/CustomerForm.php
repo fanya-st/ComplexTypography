@@ -32,6 +32,7 @@ class CustomerForm extends ActiveRecord
             'time_to_delivery_from'=>'Время доставки с',
             'time_to_delivery_to'=>'Время доставки до',
             'contact'=>'Контактное лицо',
+            'user_id'=>'Менеджер',
         ];
     }
 

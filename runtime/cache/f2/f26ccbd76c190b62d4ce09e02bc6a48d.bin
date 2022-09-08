@@ -1,4 +1,4 @@
-a:2:{i:0;a:9:{s:12:"cacheVersion";i:1;s:9:"cacheData";N;s:7:"content";s:147643:"<!DOCTYPE html>
+a:2:{i:0;a:9:{s:12:"cacheVersion";i:1;s:9:"cacheData";N;s:7:"content";s:150121:"<!DOCTYPE html>
 <html lang="ru-RU" class="h-100">
 <head>
     <meta charset="UTF-8">
@@ -73,24 +73,24 @@ window.daterangepicker_8d27b461 = {"opens":"left","cancelButtonClasses":"btn-sec
 <li class="breadcrumb-item active" aria-current="page">Работа с заказами</li>
 </ol></nav>                                <h1>Работа с заказами</h1>
     <form id="w0" action="/web/index.php?r=order%2Flist" method="post">
-<input type="hidden" name="_csrf" value="_SWA1hmp6YpSbNaQSRItZ10lj5sP576_tq5yMy76AyOSFNWZaeGcuwMW4NIYTVc1B2_DxEejz-r3xjV0Rpwwdw=="><div class="text-nowrap">
+<input type="hidden" name="_csrf" value="5guwLxNuUjqAG84GBgY0jbkV8Xlda9BV3KNoU-VIY5qBefZJYwU9crZKtGtTcFzYzSW0OBUfhAeR-isVhCwstw=="><div class="text-nowrap">
         <div class="border p-3 rounded">
             <div class="d-lg-flex flex-wrap justify-content-between">
                 <div class="p-1"><div class="mb-3 field-ordersearch-labelname">
 <label class="form-label" for="ordersearch-labelname">Наименование</label>
-<label for="ordersearch-labelname">Наименование</label><input type="text" id="ordersearch-labelname" class="form-control" name="OrderSearch[labelName]">
+<label for="ordersearch-labelname">Наименование</label><input type="text" id="ordersearch-labelname" class="form-control" name="OrderSearch[labelName]" value="">
 
 <div class="invalid-feedback"></div>
 </div></div>
                 <div class="p-1"><div class="mb-3 field-ordersearch-id">
 <label class="form-label" for="ordersearch-id">№ заказа</label>
-<label for="ordersearch-id">№ заказа</label><input type="text" id="ordersearch-id" class="form-control" name="OrderSearch[id]">
+<label for="ordersearch-id">№ заказа</label><input type="text" id="ordersearch-id" class="form-control" name="OrderSearch[id]" value="">
 
 <div class="invalid-feedback"></div>
 </div></div>
                 <div class="p-1"><div class="mb-3 field-ordersearch-label_id">
 <label class="form-label" for="ordersearch-label_id">№ этикетки</label>
-<label for="ordersearch-label_id">№ этикетки</label><input type="text" id="ordersearch-label_id" class="form-control" name="OrderSearch[label_id]">
+<label for="ordersearch-label_id">№ этикетки</label><input type="text" id="ordersearch-label_id" class="form-control" name="OrderSearch[label_id]" value="">
 
 <div class="invalid-feedback"></div>
 </div></div>
@@ -115,7 +115,7 @@ window.daterangepicker_8d27b461 = {"opens":"left","cancelButtonClasses":"btn-sec
 <div class="kv-plugin-loading loading-ordersearch-status_id">&nbsp;</div><select id="ordersearch-status_id" class="form-control" name="OrderSearch[status_id]" data-s2-options="s2options_fd268a17" data-krajee-select2="select2_5136bf5b" style="width: 1px; height: 1px; visibility: hidden;">
 <option value="">Статус заказа ...</option>
 <option value="1">Новый</option>
-<option value="2">В печати</option>
+<option value="2" selected>В печати</option>
 <option value="3">Печать приостановлена</option>
 <option value="4">Напечатан</option>
 <option value="5">Нарезка/Перемотка</option>
@@ -133,7 +133,7 @@ window.daterangepicker_8d27b461 = {"opens":"left","cancelButtonClasses":"btn-sec
 <div class="kv-plugin-loading loading-ordersearch-label_status_id">&nbsp;</div><select id="ordersearch-label_status_id" class="form-control" name="OrderSearch[label_status_id]" data-s2-options="s2options_fd268a17" data-krajee-select2="select2_b9ff277f" style="width: 1px; height: 1px; visibility: hidden;">
 <option value="">Статус этикетки ...</option>
 <option value="1">Новая этикетка</option>
-<option value="2">В дизайне</option>
+<option value="2" selected>В дизайне</option>
 <option value="3">Дизайн готов</option>
 <option value="4">Дизайн утвержден</option>
 <option value="5">Ожидает перевывода</option>
@@ -152,7 +152,7 @@ window.daterangepicker_8d27b461 = {"opens":"left","cancelButtonClasses":"btn-sec
 <div class="kv-plugin-loading loading-ordersearch-shaft_id">&nbsp;</div><select id="ordersearch-shaft_id" class="form-control" name="OrderSearch[shaft_id]" data-s2-options="s2options_fd268a17" data-krajee-select2="select2_29dee358" style="width: 1px; height: 1px; visibility: hidden;">
 <option value="">Выбрать вал ...</option>
 <option value="1">430</option>
-<option value="2">425.45</option>
+<option value="2" selected>425.45</option>
 <option value="3">403.225</option>
 <option value="4">203.2</option>
 <option value="5">254</option>
@@ -172,9 +172,9 @@ window.daterangepicker_8d27b461 = {"opens":"left","cancelButtonClasses":"btn-sec
 
 <div class="invalid-feedback"></div>
 </div></div>
-                <div class="p-1"><div class="mb-3 field-ordersearch-pantsid">
+                <div class="p-1"><div class="mb-3 field-ordersearch-pants_id">
 
-<div class="kv-plugin-loading loading-ordersearch-pantsid">&nbsp;</div><select id="ordersearch-pantsid" class="form-control" name="OrderSearch[pantsId]" data-s2-options="s2options_fd268a17" data-krajee-select2="select2_eb1d16ac" style="width: 1px; height: 1px; visibility: hidden;">
+<div class="kv-plugin-loading loading-ordersearch-pants_id">&nbsp;</div><select id="ordersearch-pants_id" class="form-control" name="OrderSearch[pants_id]" data-s2-options="s2options_fd268a17" data-krajee-select2="select2_eb1d16ac" style="width: 1px; height: 1px; visibility: hidden;">
 <option value="">Выбрать штанец ...</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -2999,9 +2999,9 @@ window.daterangepicker_8d27b461 = {"opens":"left","cancelButtonClasses":"btn-sec
 
 <div class="invalid-feedback"></div>
 </div></div>
-                <div class="p-1"><div class="mb-3 field-ordersearch-customerid">
+                <div class="p-1"><div class="mb-3 field-ordersearch-customer_id">
 
-<div class="kv-plugin-loading loading-ordersearch-customerid">&nbsp;</div><select id="ordersearch-customerid" class="form-control" name="OrderSearch[customerId]" data-s2-options="s2options_fd268a17" data-krajee-select2="select2_ddb59238" style="width: 1px; height: 1px; visibility: hidden;">
+<div class="kv-plugin-loading loading-ordersearch-customer_id">&nbsp;</div><select id="ordersearch-customer_id" class="form-control" name="OrderSearch[customer_id]" data-s2-options="s2options_fd268a17" data-krajee-select2="select2_ddb59238" style="width: 1px; height: 1px; visibility: hidden;">
 <option value="">Выбрать заказчика ...</option>
 <option value="1">Изыскатель</option>
 <option value="2">Изыскатель ТПФ</option>
@@ -3024,7 +3024,7 @@ window.daterangepicker_8d27b461 = {"opens":"left","cancelButtonClasses":"btn-sec
             <span class="right-ind kv-clear" style="" title="Clear">&times;</span>
             <span class="right-ind"><b class="caret"></b></span>
         </div>
-        <input type="hidden" id="ordersearch-date_of_create" class="form-control" name="OrderSearch[date_of_create]" placeholder="Дата создания ..." data-krajee-daterangepicker="daterangepicker_8d27b461"></div>
+        <input type="hidden" id="ordersearch-date_of_create" class="form-control" name="OrderSearch[date_of_create]" value="" placeholder="Дата создания ..." data-krajee-daterangepicker="daterangepicker_8d27b461"></div>
 
 <div class="invalid-feedback"></div>
 </div></div>
@@ -3035,7 +3035,7 @@ window.daterangepicker_8d27b461 = {"opens":"left","cancelButtonClasses":"btn-sec
 
 </form><div class="table-responsive">
     <form id="w1" action="/web/index.php?r=order%2Flist" method="post">
-<input type="hidden" name="_csrf" value="_SWA1hmp6YpSbNaQSRItZ10lj5sP576_tq5yMy76AyOSFNWZaeGcuwMW4NIYTVc1B2_DxEejz-r3xjV0Rpwwdw==">    <div id="w2" class="grid-view">
+<input type="hidden" name="_csrf" value="5guwLxNuUjqAG84GBgY0jbkV8Xlda9BV3KNoU-VIY5qBefZJYwU9crZKtGtTcFzYzSW0OBUfhAeR-isVhCwstw==">    <div id="w2" class="grid-view">
 <table class="table table-striped table-bordered"><thead>
 <tr><th class="text-center" style="width:5%"><a class="desc" href="/web/index.php?r=order%2Flist&amp;sort=id" data-sort="id">ID</a></th><th class="text-center" style="width:5%"><a href="/web/index.php?r=order%2Flist&amp;sort=label_id" data-sort="label_id">ID Эт-ки</a></th><th>Наименование</th><th><a href="/web/index.php?r=order%2Flist&amp;sort=date_of_create" data-sort="date_of_create">Дата создания</a></th><th class="text-center"><a href="/web/index.php?r=order%2Flist&amp;sort=status_id" data-sort="status_id">Статус заказа</a></th><th class="text-center">Статус эт-ки</th><th class="text-center"><a href="/web/index.php?r=order%2Flist&amp;sort=mashine_id" data-sort="mashine_id">Станок</a></th><th class="text-center">Менеджер</th><th class="action-column">&nbsp;</th></tr>
 </thead>
@@ -3506,11 +3506,11 @@ jQuery.when(jQuery('#ordersearch-shaft_id').select2(select2_29dee358)).done(init
 if (jQuery('#ordersearch-manager_id').data('select2')) { jQuery('#ordersearch-manager_id').select2('destroy'); }
 jQuery.when(jQuery('#ordersearch-manager_id').select2(select2_b07460b5)).done(initS2Loading('ordersearch-manager_id','s2options_fd268a17'));
 
-if (jQuery('#ordersearch-pantsid').data('select2')) { jQuery('#ordersearch-pantsid').select2('destroy'); }
-jQuery.when(jQuery('#ordersearch-pantsid').select2(select2_eb1d16ac)).done(initS2Loading('ordersearch-pantsid','s2options_fd268a17'));
+if (jQuery('#ordersearch-pants_id').data('select2')) { jQuery('#ordersearch-pants_id').select2('destroy'); }
+jQuery.when(jQuery('#ordersearch-pants_id').select2(select2_eb1d16ac)).done(initS2Loading('ordersearch-pants_id','s2options_fd268a17'));
 
-if (jQuery('#ordersearch-customerid').data('select2')) { jQuery('#ordersearch-customerid').select2('destroy'); }
-jQuery.when(jQuery('#ordersearch-customerid').select2(select2_ddb59238)).done(initS2Loading('ordersearch-customerid','s2options_fd268a17'));
+if (jQuery('#ordersearch-customer_id').data('select2')) { jQuery('#ordersearch-customer_id').select2('destroy'); }
+jQuery.when(jQuery('#ordersearch-customer_id').select2(select2_ddb59238)).done(initS2Loading('ordersearch-customer_id','s2options_fd268a17'));
 
 jQuery("#ordersearch-date_of_create").off('change.kvdrp').on('change.kvdrp', function(e) {
     var drp = jQuery("#ordersearch-date_of_create-container").find('.kv-drp-dropdown').data('daterangepicker'), fm, to;
@@ -3540,9 +3540,9 @@ jQuery("#ordersearch-date_of_create").off('change.kvdrp').on('change.kvdrp', fun
 if (jQuery('#ordersearch-date_of_create').data('daterangepicker')) { jQuery('#ordersearch-date_of_create').daterangepicker('destroy'); }
 jQuery("#ordersearch-date_of_create-container").find('.kv-drp-dropdown').daterangepicker(daterangepicker_8d27b461, function(start,end,label){var val=start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD');jQuery("#ordersearch-date_of_create-container").find('.kv-drp-dropdown').find('.range-value').val(val);jQuery("#ordersearch-date_of_create").val(val).trigger('change');});
 
-jQuery('#w0').yiiActiveForm([{"id":"ordersearch-labelname","name":"labelName","container":".field-ordersearch-labelname","input":"#ordersearch-labelname","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {value = yii.validation.trim($form, attribute, {"skipOnArray":true,"skipOnEmpty":false,"chars":false}, value);}},{"id":"ordersearch-id","name":"id","container":".field-ordersearch-id","input":"#ordersearch-id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «№ заказа» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-label_id","name":"label_id","container":".field-ordersearch-label_id","input":"#ordersearch-label_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «№ этикетки» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-manager_id","name":"manager_id","container":".field-ordersearch-manager_id","input":"#ordersearch-manager_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «Manager Id» должно быть целым числом.","skipOnEmpty":1});}}], {"errorSummary":".alert.alert-danger","errorCssClass":"is-invalid","successCssClass":"is-valid","validationStateOn":"input"});
+jQuery('#w0').yiiActiveForm([{"id":"ordersearch-labelname","name":"labelName","container":".field-ordersearch-labelname","input":"#ordersearch-labelname","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {value = yii.validation.trim($form, attribute, {"skipOnArray":true,"skipOnEmpty":false,"chars":false}, value);}},{"id":"ordersearch-id","name":"id","container":".field-ordersearch-id","input":"#ordersearch-id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «№ заказа» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-label_id","name":"label_id","container":".field-ordersearch-label_id","input":"#ordersearch-label_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «№ этикетки» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-mashine_id","name":"mashine_id","container":".field-ordersearch-mashine_id","input":"#ordersearch-mashine_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «Mashine Id» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-status_id","name":"status_id","container":".field-ordersearch-status_id","input":"#ordersearch-status_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «Status Id» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-label_status_id","name":"label_status_id","container":".field-ordersearch-label_status_id","input":"#ordersearch-label_status_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «Label Status Id» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-shaft_id","name":"shaft_id","container":".field-ordersearch-shaft_id","input":"#ordersearch-shaft_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «Shaft Id» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-manager_id","name":"manager_id","container":".field-ordersearch-manager_id","input":"#ordersearch-manager_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «Manager Id» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-pants_id","name":"pants_id","container":".field-ordersearch-pants_id","input":"#ordersearch-pants_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «Pants Id» должно быть целым числом.","skipOnEmpty":1});}},{"id":"ordersearch-customer_id","name":"customer_id","container":".field-ordersearch-customer_id","input":"#ordersearch-customer_id","error":".invalid-feedback","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^[+-]?\d+$/,"message":"Значение «Customer Id» должно быть целым числом.","skipOnEmpty":1});}}], {"errorSummary":".alert.alert-danger","errorCssClass":"is-invalid","successCssClass":"is-valid","validationStateOn":"input"});
 jQuery('#w2').yiiGridView({"filterUrl":"\/web\/index.php?r=order%2Flist","filterSelector":"#w2-filters input, #w2-filters select","filterOnFocusOut":true});
 jQuery('#w1').yiiActiveForm([], {"errorSummary":".alert.alert-danger","errorCssClass":"is-invalid","successCssClass":"is-valid","validationStateOn":"input"});
 });</script></body>
 </html>
-";s:19:"dynamicPlaceholders";a:2:{s:25:"<![CDATA[YII-DYNAMIC-0]]>";s:40:"return yii\helpers\Html::csrfMetaTags();";s:25:"<![CDATA[YII-DYNAMIC-1]]>";s:55:"return Yii::$app->getModule("debug")->getToolbarHtml();";}s:6:"format";s:4:"html";s:7:"version";s:3:"1.1";s:10:"statusCode";i:200;s:10:"statusText";s:2:"OK";s:7:"headers";a:4:{s:12:"Content-Type";a:1:{i:0;s:24:"text/html; charset=UTF-8";}s:11:"X-Debug-Tag";a:1:{i:0;s:13:"6318e49043f3e";}s:16:"X-Debug-Duration";a:1:{i:0;s:5:"2,402";}s:12:"X-Debug-Link";a:1:{i:0;s:57:"/web/index.php?r=debug%2Fdefault%2Fview&tag=6318e49043f3e";}}}i:1;O:24:"yii\caching\DbDependency":5:{s:2:"db";s:2:"db";s:3:"sql";s:30:"SELECT COUNT(*) FROM{{%order}}";s:6:"params";a:0:{}s:4:"data";a:1:{s:8:"COUNT(*)";s:1:"0";}s:8:"reusable";b:0;}}
+";s:19:"dynamicPlaceholders";a:2:{s:25:"<![CDATA[YII-DYNAMIC-0]]>";s:40:"return yii\helpers\Html::csrfMetaTags();";s:25:"<![CDATA[YII-DYNAMIC-1]]>";s:55:"return Yii::$app->getModule("debug")->getToolbarHtml();";}s:6:"format";s:4:"html";s:7:"version";s:3:"1.1";s:10:"statusCode";i:200;s:10:"statusText";s:2:"OK";s:7:"headers";a:4:{s:12:"Content-Type";a:1:{i:0;s:24:"text/html; charset=UTF-8";}s:11:"X-Debug-Tag";a:1:{i:0;s:13:"6319a0f1d9762";}s:16:"X-Debug-Duration";a:1:{i:0;s:5:"2,384";}s:12:"X-Debug-Link";a:1:{i:0;s:57:"/web/index.php?r=debug%2Fdefault%2Fview&tag=6319a0f1d9762";}}}i:1;O:24:"yii\caching\DbDependency":5:{s:2:"db";s:2:"db";s:3:"sql";s:30:"SELECT COUNT(*) FROM{{%order}}";s:6:"params";a:0:{}s:4:"data";a:1:{s:8:"COUNT(*)";s:1:"0";}s:8:"reusable";b:0;}}

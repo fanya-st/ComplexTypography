@@ -52,21 +52,21 @@ class OrderController extends Controller
 				
             ],
         ],
-        'cache'=>[
-            'class' => 'yii\filters\PageCache',
-            'only' => ['list'],
-            'duration' => 60,
-            'dependency' => [
-                'class' => 'yii\caching\DbDependency',
-                'sql' => 'SELECT COUNT(*) FROM'. Order::tableName(),
-            ],
-        ],
+//        'cache'=>[
+//            'class' => 'yii\filters\PageCache',
+//            'only' => ['list'],
+//            'duration' => 60,
+//            'dependency' => [
+//                'class' => 'yii\caching\DbDependency',
+//                'sql' => 'SELECT COUNT(*) FROM'. Order::tableName(),
+//            ],
+//        ],
     ];
 }
 	public function actionList()
     {
         $searchModel = new OrderSearch();
-        $orders = $searchModel->search(Yii::$app->request->post());
+        $orders = $searchModel->search($this->request->post());
         return $this->render('list',compact('orders','searchModel'));
     }
 

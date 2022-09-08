@@ -45,7 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'status_id',
                 'value' => function($model){return OrderStatus::$order_status[$model->status_id];},
-                'filter' => OrderStatus::$order_status,
                 'contentOptions'=>['class' => 'text-center'],
                 'headerOptions' => ['class' => 'text-center']
 
@@ -75,9 +74,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class' => 'text-center']
 
             ],
-//            ['class' => 'yii\grid\ActionColumn',
-//                'template' => '{view}'
-//                ],
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{view}',
                 'buttons' => [

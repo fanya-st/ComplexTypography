@@ -1,13 +1,11 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Create Street';
-$this->params['breadcrumbs'][] = ['label' => 'Streets', 'url' => ['street-index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Добавить улицу';
+$this->params['breadcrumbs'][] = ['label' => 'Улицы', 'url' => ['street-index']];
 ?>
-<div class="street-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -15,4 +13,3 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
     ]) ?>
 
-</div>

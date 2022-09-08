@@ -1,18 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Create Town';
-$this->params['breadcrumbs'][] = ['label' => 'Towns', 'url' => ['town-index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Добавить город';
+$this->params['breadcrumbs'][] = ['label' => 'Города', 'url' => ['town-index']];
 ?>
-<div class="town-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

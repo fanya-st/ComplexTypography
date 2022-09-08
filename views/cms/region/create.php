@@ -1,18 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Create Region';
-$this->params['breadcrumbs'][] = ['label' => 'Regions', 'url' => ['region-index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Добавить регион';
+$this->params['breadcrumbs'][] = ['label' => 'Регионы', 'url' => ['region-index']];
 ?>
-<div class="region-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

@@ -1,11 +1,10 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 
-$this->title = 'Create Subject';
-$this->params['breadcrumbs'][] = ['label' => 'Subjects', 'url' => ['subject-index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Добавить Субъект РФ';
+$this->params['breadcrumbs'][] = ['label' => 'Субъекты РФ', 'url' => ['subject-index']];
 ?>
 <div class="subject-create">
 

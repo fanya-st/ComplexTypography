@@ -13,8 +13,6 @@ use app\models\Warehouse;
 $this->title = 'Полки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="shelf-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -22,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -54,8 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{update}',
             ],
         ],
-    ]); ?>
+    ])?>
+</div>
     <?ActiveForm::end()?>
 
-
-</div>

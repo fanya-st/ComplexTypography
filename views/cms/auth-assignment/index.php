@@ -12,15 +12,14 @@ use yii\helpers\ArrayHelper;
 $this->title = 'Привязка сотрудников к группам';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="auth-assignment-index">
+<h1><?= Html::encode($this->title) ?></h1>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Добавить', ['auth-assign-create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<p>
+    <?= Html::a('Добавить', ['auth-assign-create'], ['class' => 'btn btn-success']) ?>
+</p>
 
     <?ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -59,8 +58,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class' => 'text-center'],
             ],
         ],
-    ]); ?>
+    ])?>
+</div>
     <?ActiveForm::end()?>
 
 
-</div>
+

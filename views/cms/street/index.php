@@ -1,26 +1,26 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use kartik\icons\Icon;
 use yii\helpers\ArrayHelper;
 use app\models\Town;
 use yii\bootstrap5\ActiveForm;
-Icon::map($this, Icon::FA);
 
 
-$this->title = 'Streets';
+$this->title = 'Улицы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="street-index">
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Street', ['street-create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить улицу', ['street-create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?$form=ActiveForm::begin(['method'=>'post'])?>
+<div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -42,8 +42,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
-    ]); ?>
+    ]) ?>
+</div>
     <?ActiveForm::end()?>
 
 
-</div>
+
