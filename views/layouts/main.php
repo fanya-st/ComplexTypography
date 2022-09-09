@@ -60,7 +60,6 @@ AppAsset::register($this);
             ['label' => 'Финансовый отчет', 'url' => ['/financial-report/index']]
         ]
         ],
-        'messenger'=>['label' => 'Мессенджер', 'url' => ['/site/contact']],
     ];
     if(!Yii::$app->user->isGuest){
         ArrayHelper::setValue($nav_items,'login',

@@ -1,9 +1,7 @@
 <?php
 use yii\web\View;
 use yii\bootstrap5\Html;
-use kartik\icons\Icon;
 use Da\QrCode\QrCode;
-Icon::map($this, Icon::FA);
 
 
 $this->registerJs(

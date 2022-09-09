@@ -21,7 +21,7 @@ class WarehouseController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','rack-list','update','delete'],
+                        'actions' => ['index','rack-list','shelf-list','qr-print-rack','qr-print-shelf'],
                         'roles' => ['warehouse_manager'],
                     ],
 
@@ -43,8 +43,27 @@ class WarehouseController extends Controller
 
         $shelfs = Shelf::find()->where(['rack_id'=>$id])->all();
 
-//        $envelope_items= Envelope::find()->where(['shelf_id'=>$shelfs])->all();
-
         return $this->render('_rack', compact('shelfs','rack'));
+    }
+
+    public function actionShelfList($id)
+    {
+        $shelf=Shelf::findOne($id);
+
+        $rack=Rack::findOne($shelf->rack->id);
+
+        return $this->render('_shelf', compact('shelf','rack'));
+    }
+
+    public function actionQrPrintRack($id)
+    {
+        $rack=Rack::findOne($id);
+        return $this->renderAjax('qr-rack', compact('rack'));
+    }
+
+    public function actionQrPrintShelf($id)
+    {
+        $shelf=Shelf::findOne($id);
+        return $this->renderAjax('qr-shelf', compact('shelf'));
     }
 }
