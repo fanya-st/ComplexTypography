@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 class BankTransferController extends Controller
 {
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -34,7 +34,7 @@ class BankTransferController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new BankTransferSearch();
         $dataProvider = $searchModel->search($this->request->post());
@@ -46,7 +46,7 @@ class BankTransferController extends Controller
     }
 
 
-    public function actionCreate()
+    public function actionCreate(): \yii\web\Response|string
     {
         $model = new BankTransfer();
 
@@ -64,7 +64,10 @@ class BankTransferController extends Controller
     }
 
 
-    public function actionUpdate($id)
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdate(int $id): \yii\web\Response|string
     {
         $model = $this->findModel($id);
 
@@ -77,19 +80,27 @@ class BankTransferController extends Controller
         ]);
     }
 
-    public function actionDelete($id)
+    /**
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     * @throws NotFoundHttpException
+     */
+    public function actionDelete(int $id): \yii\web\Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id)
+    /**
+     * @throws NotFoundHttpException
+     */
+    protected function findModel(int $id): ?BankTransfer
     {
         if (($model = BankTransfer::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Запрашиваемая запись не найдена.');
     }
 }

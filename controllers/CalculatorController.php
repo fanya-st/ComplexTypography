@@ -14,7 +14,7 @@ use yii;
 
 class CalculatorController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -30,25 +30,22 @@ class CalculatorController extends Controller
         ];
     }
 
-    public function actionCalculator()
+    public function actionCalculator(): string
     {
         $calculator = new Calculator();
-//        $pants = Pants::findOne($pants_id);
         $pants = new Pants();
         if ($this->request->isPost) {
             if ($calculator->load($this->request->post()) && $calculator->validate() && $pants->load($this->request->post())) {
                     $calculator->calculate($pants);
-//                Yii::$app->session->setFlash('success','Успех');
             }
         }
         return $this->render('calculator',compact('calculator','pants'));
     }
 
-    public function actionGetPantsParam($pants_id)
+    public function actionGetPantsParam(int $pants_id): array
     {
         if ($this->request->isAjax) {
             $pants=Pants::findOne($pants_id);
-//
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
                 'status' => 'success',

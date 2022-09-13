@@ -38,9 +38,9 @@
             'dev_requirement' => true,
         ),
         'bower-asset/bootstrap' => array(
-            'pretty_version' => 'v5.2.0',
-            'version' => '5.2.0.0',
-            'reference' => 'edf9c40956d19e6ab3f9151bfe0dfac6be06fa21',
+            'pretty_version' => 'v5.2.1',
+            'version' => '5.2.1.0',
+            'reference' => '23e50829f958ea1d741d63e2781716be037e4644',
             'type' => 'bower-asset',
             'install_path' => __DIR__ . '/../bower-asset/bootstrap',
             'aliases' => array(),

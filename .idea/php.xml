@@ -146,4 +146,5 @@
       <path value="$PROJECT_DIR$/vendor/kartik-v/bootstrap-popover-x" />
     </include_path>
   </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
 </project>

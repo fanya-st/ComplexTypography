@@ -38,7 +38,7 @@ use yii\web\NotFoundHttpException;
 
 class CmsController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -54,25 +54,25 @@ class CmsController extends Controller
         ];
     }
 
-    public function actionCmsPanel()
+    public function actionCmsPanel(): string
     {
         return $this->render('cms-panel');
     }
 
-    public function actionOrderList()
+    public function actionOrderList(): string
     {
         $searchModel = new OrderSearch();
         $orders = $searchModel->search(Yii::$app->request->post());
         return $this->render('order\list',compact('orders','searchModel'));
     }
 
-    public function actionOrderView($id)
+    public function actionOrderView(int $id): string
     {
         $order = Order::findOne($id);
         return $this->render('order\view',compact('order'));
     }
 
-    public function actionOrderUpdate($id)
+    public function actionOrderUpdate(int $id): yii\web\Response|string
     {
         $order = Order::findOne($id);
         if($order->load(Yii::$app->request->post()) && $order->validate(Yii::$app->request->post())){
@@ -81,6 +81,10 @@ class CmsController extends Controller
         return $this->render('order\update',compact('order'));
     }
 
+    /**
+     * @throws \Throwable
+     * @throws yii\db\StaleObjectException
+     */
     public function actionOrderDelete($id)
     {
         $order = Order::findOne($id);
@@ -90,20 +94,10 @@ class CmsController extends Controller
 
     /*Редактирование списка втулок*/
 
-    public function actionSleeveIndex()
+    public function actionSleeveIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Sleeve::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
         ]);
 
         return $this->render('sleeve\index', [
@@ -112,7 +106,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionSleeveCreate()
+    public function actionSleeveCreate(): yii\web\Response|string
     {
         $model = new Sleeve();
 
@@ -129,7 +123,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionSleeveUpdate($id)
+    public function actionSleeveUpdate(int $id): yii\web\Response|string
     {
         $model = Sleeve::findOne($id);
 
@@ -144,7 +138,7 @@ class CmsController extends Controller
 
     /*Редактировние списка субъектов РФ*/
 
-    public function actionSubjectIndex()
+    public function actionSubjectIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Subject::find(),
@@ -155,7 +149,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionSubjectCreate()
+    public function actionSubjectCreate(): yii\web\Response|string
     {
         $model = new Subject();
 
@@ -172,7 +166,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionSubjectUpdate($id)
+    public function actionSubjectUpdate(int $id): yii\web\Response|string
     {
         $model = Subject::findOne($id);
 
@@ -187,7 +181,7 @@ class CmsController extends Controller
 
     /*Редактирование списка регионов*/
 
-    public function actionRegionIndex()
+    public function actionRegionIndex(): string
     {
         $searchModel = new RegionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -198,7 +192,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionRegionCreate()
+    public function actionRegionCreate(): yii\web\Response|string
     {
         $model = new Region();
 
@@ -215,7 +209,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionRegionUpdate($id)
+    public function actionRegionUpdate(int $id): yii\web\Response|string
     {
         $model = Region::findOne($id);
 
@@ -231,7 +225,7 @@ class CmsController extends Controller
 
     /*Редактирование адм.центров*/
 
-    public function actionTownIndex()
+    public function actionTownIndex(): string
     {
         $searchModel = new TownSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -243,7 +237,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionTownCreate()
+    public function actionTownCreate(): yii\web\Response|string
     {
         $model = new Town();
 
@@ -261,7 +255,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionTownUpdate($id)
+    public function actionTownUpdate(int $id): yii\web\Response|string
     {
         $model = Town::findOne($id);
 
@@ -277,7 +271,7 @@ class CmsController extends Controller
 
     /*Редактирование списка улиц*/
 
-    public function actionStreetIndex()
+    public function actionStreetIndex(): string
     {
         $searchModel = new StreetSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -288,7 +282,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionStreetCreate()
+    public function actionStreetCreate(): yii\web\Response|string
     {
         $model = new Street();
 
@@ -305,7 +299,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionStreetUpdate($id)
+    public function actionStreetUpdate(int $id): yii\web\Response|string
     {
         $model = Street::findOne($id);
 
@@ -320,7 +314,7 @@ class CmsController extends Controller
 
     /*Редактирование заказчиков*/
 
-    public function actionCustomerIndex()
+    public function actionCustomerIndex(): string
     {
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -332,7 +326,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionCustomerUpdate($id)
+    public function actionCustomerUpdate(int $id): yii\web\Response|string
     {
         $model = Customer::findOne($id);
 
@@ -347,7 +341,7 @@ class CmsController extends Controller
 
     /*Редактирование этикеток*/
 
-    public function actionLabelIndex()
+    public function actionLabelIndex(): string
     {
         $searchModel = new LabelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -358,7 +352,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionLabelUpdate($id)
+    public function actionLabelUpdate(int $id): yii\web\Response|string
     {
         $model=Label::findOne($id);
 
@@ -374,20 +368,10 @@ class CmsController extends Controller
 
     /*Редактирование общих параметров для калькулятора*/
 
-    public function actionCalcCommonParamsIndex()
+    public function actionCalcCommonParamsIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => CalcCommonParam::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
         ]);
 
         return $this->render('calc-common-params\index', [
@@ -395,7 +379,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionCalcCommonParamsCreate()
+    public function actionCalcCommonParamsCreate(): yii\web\Response|string
     {
         $model = new CalcCommonParam();
 
@@ -415,7 +399,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionCalcCommonParamsUpdate($id)
+    public function actionCalcCommonParamsUpdate(int $id): yii\web\Response|string
     {
         $model = CalcCommonParam::findOne($id);
 
@@ -434,7 +418,7 @@ class CmsController extends Controller
 
     /*Редактирование параметров машин*/
 
-    public function actionCalcMashineParamPriceIndex()
+    public function actionCalcMashineParamPriceIndex(): string
     {
         $searchModel = new CalcMashineParamValueSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -445,14 +429,14 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionCalcMashineParamPriceView($id)
+    public function actionCalcMashineParamPriceView(int $id): string
     {
         return $this->render('calc-mashine-param-price\view', [
             'model' => CalcMashineParamValue::findOne($id),
         ]);
     }
 
-    public function actionCalcMashineParamPriceCreate()
+    public function actionCalcMashineParamPriceCreate(): yii\web\Response|string
     {
         $model = new CalcMashineParamValue();
 
@@ -470,7 +454,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionCalcMashineParamPriceUpdate($id)
+    public function actionCalcMashineParamPriceUpdate(int $id): yii\web\Response|string
     {
         $model = CalcMashineParamValue::findOne($id);
 
@@ -486,7 +470,7 @@ class CmsController extends Controller
 
     /*Редактирование списка складов*/
 
-    public function actionWarehouseIndex()
+    public function actionWarehouseIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Warehouse::find(),
@@ -498,7 +482,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionWarehouseCreate()
+    public function actionWarehouseCreate(): yii\web\Response|string
     {
         $model = new Warehouse();
 
@@ -515,7 +499,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionWarehouseUpdate($id)
+    public function actionWarehouseUpdate(int $id): yii\web\Response|string
     {
         $model = Warehouse::findOne($id);
 
@@ -532,7 +516,7 @@ class CmsController extends Controller
 
     /*Редактирование стелажей*/
 
-    public function actionRackIndex()
+    public function actionRackIndex(): string
     {
         $searchModel = new RackSearch();
         $dataProvider = $searchModel->search($this->request->post());
@@ -545,7 +529,7 @@ class CmsController extends Controller
 
 
 
-    public function actionRackCreate()
+    public function actionRackCreate(): yii\web\Response|string
     {
         $model = new Rack();
 
@@ -563,7 +547,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionRackUpdate($id)
+    public function actionRackUpdate(int $id): yii\web\Response|string
     {
         $model = Rack::findOne($id);
 
@@ -579,7 +563,7 @@ class CmsController extends Controller
 
     /*Редактирование полок*/
 
-    public function actionShelfIndex()
+    public function actionShelfIndex(): string
     {
         $searchModel = new ShelfSearch();
         $dataProvider = $searchModel->search($this->request->post());
@@ -591,7 +575,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionShelfCreate()
+    public function actionShelfCreate(): yii\web\Response|string
     {
         $model = new Shelf();
 
@@ -608,7 +592,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionShelfUpdate($id)
+    public function actionShelfUpdate(int $id): yii\web\Response|string
     {
         $model = Shelf::findOne($id);
 
@@ -625,7 +609,7 @@ class CmsController extends Controller
 
     /*Редактирование состав сотрудников в группах */
 
-    public function actionAuthAssignIndex()
+    public function actionAuthAssignIndex(): string
     {
         $searchModel = new AuthAssignmentSearch();
         $dataProvider = $searchModel->search($this->request->post());
@@ -636,7 +620,7 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionAuthAssignCreate()
+    public function actionAuthAssignCreate(): yii\web\Response|string
     {
         $model = new AuthAssignment();
 
@@ -653,7 +637,10 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionAuthAssignUpdate($item_name, $user_id)
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionAuthAssignUpdate(string $item_name, int $user_id): yii\web\Response|string
     {
         $model = $this->findModelAuthAssign($item_name, $user_id);
 
@@ -667,7 +654,10 @@ class CmsController extends Controller
     }
 
 
-    protected function findModelAuthAssign($item_name, $user_id)
+    /**
+     * @throws NotFoundHttpException
+     */
+    protected function findModelAuthAssign(string $item_name, int $user_id): ?AuthAssignment
     {
         if (($model = AuthAssignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
             return $model;
@@ -679,7 +669,7 @@ class CmsController extends Controller
 
     /*Редактирование групп сотрудников*/
 
-    public function actionAuthItemIndex()
+    public function actionAuthItemIndex(): string
     {
         $searchModel = new AuthItemSearch();
         $dataProvider = $searchModel->search($this->request->post());
@@ -691,7 +681,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionAuthItemView($name)
+    public function actionAuthItemView(string $name): string
     {
         return $this->render('auth-item\view', [
             'model' => $this->findModelAuthItem($name),
@@ -699,7 +689,7 @@ class CmsController extends Controller
     }
 
 
-    public function actionAuthItemCreate()
+    public function actionAuthItemCreate(): yii\web\Response|string
     {
         $model = new AuthItem();
 
@@ -716,7 +706,10 @@ class CmsController extends Controller
         ]);
     }
 
-    public function actionAuthItemUpdate($name)
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionAuthItemUpdate(string $name): yii\web\Response|string
     {
         $model = $this->findModelAuthItem($name);
 
@@ -729,7 +722,10 @@ class CmsController extends Controller
         ]);
     }
 
-    protected function findModelAuthItem($name)
+    /**
+     * @throws NotFoundHttpException
+     */
+    protected function findModelAuthItem(string $name): ?AuthItem
     {
         if (($model = AuthItem::findOne(['name' => $name])) !== null) {
             return $model;

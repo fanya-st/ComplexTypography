@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 
 
 $this->title = 'Привязка сотрудников к группам';
+$this->params['breadcrumbs'][] = ['label' => 'Сотрудники', 'url' => ['employee/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>

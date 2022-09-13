@@ -11,6 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="d-lg-inline-flex">
     <?=Html::tag('div',Html::a('Добавить сотрудника', ['employee/create'], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
+    <?=Html::tag('div',Html::a('Привязка сотрудника к группам', ['cms/auth-assign-index'], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
 </div>
 
 <?ActiveForm::begin(['method'=>'post'])?>
@@ -31,11 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
         [
                 'label'=>'Группа',
                 'format'=>'raw',
-                'value'=>function($model){
+                'value'=>function($model) {
+                    $result='';
                     foreach (Yii::$app->authManager->getRolesByUser($model->id) as $group){
                         $result.=html::tag('h6',Html::encode($group->description),['class'=>'badge bg-success m-1']);
                     }
-                    return $result;
+                    if (!empty($result)) {
+                        return $result;
+                    }
                 },
             'contentOptions'=>['class' => 'text-center'],
             'headerOptions' => ['class' => 'text-center'],

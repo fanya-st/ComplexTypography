@@ -6,12 +6,13 @@ use yii\helpers\ArrayHelper;
 
 class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public static function tableName()
+
+    public static function tableName(): string
     {
         return 'user';
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id'=>'ID',
@@ -24,7 +25,8 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'rememberMe'=>'Запомнить меня',
         ];
     }
-    public function rules(){
+    public function rules(): array
+    {
         return[
             [['F','I','O','password'],'string','max'=>100],
             [['username'],'string','max'=>50],
@@ -34,17 +36,14 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         ];
     }
 
-    public function beforeSave($insert)
+    public function beforeSave($insert): bool
     {
         if (parent::beforeSave($insert)) {
+            $this->authKey=\Yii::$app->security->generateRandomString();
+            $this->password = Yii::$app->security->generatePasswordHash($this->password);
             if ($insert) {
-                $this->authKey=\Yii::$app->security->generateRandomString();
-//                $this->accessToken=\Yii::$app->security->generateRandomString();
-                $this->password = Yii::$app->security->generatePasswordHash($this->password);
                 Yii::$app->session->setFlash('success', 'Сотрудник добавлен!');
             } else {
-                $this->authKey=\Yii::$app->security->generateRandomString();
-                $this->password = Yii::$app->security->generatePasswordHash($this->password);
                 Yii::$app->session->setFlash('success', 'Запись обновлена!');
             }
             return true;
@@ -53,12 +52,12 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
-    public static function findIdentity($id)
+    public static function findIdentity($id): null|yii\web\IdentityInterface|static
     {
         return !empty(self::findOne($id)) ? new static(self::findOne($id)) : null;
     }
 
-    public static function findIdentityByAccessToken($token, $type = null)
+    public static function findIdentityByAccessToken($token, $type = null): null|yii\web\IdentityInterface|static
     {
         foreach (self::find()->all() as $user) {
             if ($user->accessToken === $token) {
@@ -69,7 +68,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return null;
     }
 
-    public static function findUsersByGroup($group)
+    public static function findUsersByGroup(string $group): array
     {
         foreach(self::find()->all() as $user){
             if($user->status_id==0){
@@ -78,38 +77,24 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
                     $array[$user->id]=$user->F.' '.mb_substr($user->I,0,1).'.';
             }
         }
-        return $array;
+        if (isset($array)) {
+            return $array;
+        }
     }
 
-//    public static function findUsersDropdown()
-//    {
-//        foreach(self::find()->all() as $user){
-//            if($user->status_id==0){
-//                $array[$user->username]=$user->F.' '.mb_substr($user->I,0,1).'.';
-//            }
-//        }
-//        return $array;
-//    }
-
-    public static function findUsersIdDropdown()
+    public static function findUsersIdDropdown(): array
     {
         foreach(self::find()->all() as $user){
             if($user->status_id==0){
                 $array[$user->id]=$user->F.' '.mb_substr($user->I,0,1).'.';
             }
         }
-        return $array;
+        if (isset($array)) {
+            return $array;
+        }
     }
 
-//    public static function getFullNameByUsername($username)
-//    {
-//        foreach(self::find()->all() as $user){
-//            if($user->username == $username)
-//            return $user->F.' '.mb_substr($user->I,0,1).'.';
-//        }
-//    }
-
-    public static function getFullNameById($id)
+    public static function getFullNameById(int $id): string
     {
         foreach(self::find()->all() as $user){
             if($user->id == $id)
@@ -117,7 +102,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
-    public static function getUserList()
+    public static function getUserList(): array
     {
         $user_list=[];
         foreach(self::find()->all() as $user){
@@ -136,7 +121,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $user_list;
     }
 
-    public static function findByUsername($username)
+    public static function findByUsername(string $username): null|static
     {
         foreach (self::find()->all() as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
@@ -148,7 +133,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
 
-    public function getId()
+    public function getId(): int|string
     {
         return $this->id;
     }
@@ -158,18 +143,18 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->authKey;
     }
 
-    public function validateAuthKey($authKey)
+    public function validateAuthKey($authKey): bool
     {
         return $this->authKey === $authKey;
     }
 
-    public function validatePassword($password)
+    public function validatePassword($password): bool
     {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
 
-    public function beforeDelete()
+    public function beforeDelete(): bool
     {
         if ($this->id==1) {
             Yii::$app->session->setFlash('error','Нельзя удалять Администратора!');

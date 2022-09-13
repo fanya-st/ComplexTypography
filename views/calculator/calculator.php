@@ -100,7 +100,7 @@ $this->registerJs(
                 <div class="col">
                     <?= $form->field($calculator, 'pants_id')
                         ->widget(Select2::class, [
-                        'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
+                        'data' => ArrayHelper::map(Pants::find()->asArray()->all(), 'id', 'id'),
                         'options' => ['placeholder' => 'Выбрать штанец ...'],
                     ]) ?>
 

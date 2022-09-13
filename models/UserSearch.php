@@ -8,12 +8,12 @@ use yii\data\ActiveDataProvider;
 
 class UserSearch extends User
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user';
     }
 
-    public function rules()
+    public function rules() : array
     {
         return [
             [['id','status_id'], 'integer'],

@@ -11,7 +11,7 @@ use app\models\User;
 
 class EmployeeController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -33,22 +33,25 @@ class EmployeeController extends Controller
         ];
     }
 
-    public function actionList(){
+    public function actionList(): string
+    {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->post());
         return $this->render('list',compact('dataProvider','searchModel'));
     }
 
-    public function actionView($id){
+    public function actionView(int $id): string
+    {
         $employee=User::findOne($id);
         return $this->render('view',compact('employee'));
     }
 
-    public function actionQrPrint($id){
+    public function actionQrPrint(int $id): string
+    {
         return $this->renderAjax('qr-code-print',compact('id'));
     }
 
-    public function actionCreate()
+    public function actionCreate(): \yii\web\Response|string
     {
         $user=new User();
         if ($this->request->isPost && $user->load($this->request->post())) {
@@ -60,7 +63,7 @@ class EmployeeController extends Controller
         return $this->render('create',compact('user'));
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): \yii\web\Response|string
     {
         $user=User::findOne($id);
         $user->password=null;
@@ -73,7 +76,7 @@ class EmployeeController extends Controller
         return $this->render('update',compact('user'));
     }
 
-    public function actionFire($id)
+    public function actionFire(int $id): \yii\web\Response
     {
         $user=User::findOne($id);
         $user->status_id=1;

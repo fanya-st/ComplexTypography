@@ -13,7 +13,7 @@ use yii;
 class BusinessTripEmployeeController extends Controller
 {
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -36,7 +36,7 @@ class BusinessTripEmployeeController extends Controller
     }
 
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new BusinessTripEmployeeSearch();
         $dataProvider = $searchModel->search($this->request->post());
@@ -48,14 +48,17 @@ class BusinessTripEmployeeController extends Controller
     }
 
 
-    public function actionView($id)
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    public function actionCalendar()
+    public function actionCalendar(): string
     {
         $searchModel = new BusinessTripEmployeeSearch();
         $dataProvider = $searchModel->search($this->request->post());
@@ -64,7 +67,7 @@ class BusinessTripEmployeeController extends Controller
     }
 
 
-    public function actionCreate()
+    public function actionCreate(): yii\web\Response|string
     {
         $model = new BusinessTripEmployee();
 
@@ -84,7 +87,10 @@ class BusinessTripEmployeeController extends Controller
     }
 
 
-    public function actionUpdate($id)
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdate(int $id): yii\web\Response|string
     {
         $model = $this->findModel($id);
 
@@ -97,19 +103,27 @@ class BusinessTripEmployeeController extends Controller
         ]);
     }
 
-    public function actionDelete($id)
+    /**
+     * @throws yii\db\StaleObjectException
+     * @throws \Throwable
+     * @throws NotFoundHttpException
+     */
+    public function actionDelete(int $id): yii\web\Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id)
+    /**
+     * @throws NotFoundHttpException
+     */
+    protected function findModel($id): ?BusinessTripEmployee
     {
         if (($model = BusinessTripEmployee::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Запрашиваемая командировка не найдена.');
     }
 }

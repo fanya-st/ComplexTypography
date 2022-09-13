@@ -70,7 +70,7 @@ class OrderController extends Controller
         return $this->render('list',compact('orders','searchModel'));
     }
 
-    public function actionUpdate($id){
+    public function actionUpdate(int $id){
         $order = Order::findOne($id);
         if (!\Yii::$app->user->can('updateOrder', ['item' => $order->label->customer])) {
             throw new ForbiddenHttpException('Доступ запрещен');
@@ -84,7 +84,7 @@ class OrderController extends Controller
         return $this->render('update',compact('order'));
     }
 
-    public function actionView($id)
+    public function actionView(int $id)
     {
         $order = Order::findOne($id);
         $label = Label::findOne($order->label_id);
@@ -99,7 +99,7 @@ class OrderController extends Controller
             }
         return $this->render('view',compact('order','label','surplus','roll'));
     }
-    public function actionAddFromFpwarehouse($id)
+    public function actionAddFromFpwarehouse(int $id)
     {
         $order=Order::findOne($id);
         if (!\Yii::$app->user->can('updateOrder', ['item' => $order->label->customer])) {
@@ -114,7 +114,7 @@ class OrderController extends Controller
         return $this->redirect(['order/view','id'=>$id]);
     }
 
-    public function actionStartPrint($id)
+    public function actionStartPrint(int $id)
     {
         $order=Order::findOne($id);
         if ($order->label->status_id!=10 OR $order->status_id !=1) {
@@ -143,7 +143,7 @@ class OrderController extends Controller
         return $this->redirect(['order/view','id'=>$id]);
     }
 
-    public function actionStartPrintVariable($id)
+    public function actionStartPrintVariable(int $id)
     {
         $order=Order::findOne($id);
         if ($order->label->status_id!=10) {
@@ -156,7 +156,7 @@ class OrderController extends Controller
 
         return $this->redirect(['order/view','id'=>$id]);
     }
-    public function actionStartRewind($id)
+    public function actionStartRewind(int $id)
     {
         $order=Order::findOne($id);
 
@@ -182,7 +182,7 @@ class OrderController extends Controller
 
         return $this->redirect(['order/view','id'=>$id]);
     }
-    public function actionStartPack($id)
+    public function actionStartPack(int $id)
     {
         $order = Order::findOne($id);
         if ($order->status_id!=6) {
@@ -197,7 +197,7 @@ class OrderController extends Controller
                 Yii::$app->session->setFlash('error', 'Заказ не нарезан и не перемотан');
         return $this->redirect(['order/view','id'=>$id]);
     }
-    public function actionPausePrint($id)
+    public function actionPausePrint(int $id)
     {
         $order=Order::findOne($id);
         if ($order->status_id!=2) {
@@ -218,7 +218,7 @@ class OrderController extends Controller
 
         return $this->redirect(['order/view','id'=>$id]);
     }
-    public function actionContinuePrint($id)
+    public function actionContinuePrint(int $id)
     {
         $order=Order::findOne($id);
         if ($order->status_id!=3) {
@@ -240,7 +240,7 @@ class OrderController extends Controller
         return $this->redirect(['order/view','id'=>$id]);
     }
 
-    public function actionPrintLabelPackage($id)
+    public function actionPrintLabelPackage(int $id)
     {
         $order=Order::findOne($id);
         $finished_products=FinishedProductsWarehouse::find()->where(['order_id'=>$order->id])->indexBy('id')->all();
@@ -256,7 +256,7 @@ class OrderController extends Controller
     }
 
     //завершить печать и ввести получившиеся ролики
-    public function actionFinishPrint($id)
+    public function actionFinishPrint(int $id)
     {
         $order=OrderPrintEndForm::findOne($id);
         if ($order->status_id<2 OR $order->status_id>2) {
@@ -283,7 +283,7 @@ class OrderController extends Controller
         return $this->render('finish-print', compact('order'));
     }
 
-    public function actionFinishPrintVariable($id)
+    public function actionFinishPrintVariable(int $id)
     {
         $order=Order::findOne($id);
         $label=Label::findOne($order->label_id);
@@ -296,7 +296,7 @@ class OrderController extends Controller
         }
         return $this->render('finish-print-variable', compact('label','order'));
     }
-    public function actionFinishRewind($id)
+    public function actionFinishRewind(int $id)
     {
         $order=Order::findOne($id);
         if ($order->status_id!=5 ) {
@@ -307,7 +307,7 @@ class OrderController extends Controller
         $order->save();
         return $this->redirect(['order/view','id'=>$id]);
     }
-    public function actionRewind($id)
+    public function actionRewind(int $id)
     {
         $order=Order::findOne($id);
         if ($order->status_id!=5 ) {
@@ -330,7 +330,7 @@ class OrderController extends Controller
         }
         return $this->render('rewind', compact('order','order_roll','new_roll'));
     }
-    public function actionPack($id)
+    public function actionPack(int $id)
     {
         $order=Order::findOne($id);
         if ($order->status_id !=7 ) {
@@ -350,7 +350,7 @@ class OrderController extends Controller
         return $this->render('pack', compact('order','order_roll'));
     }
 
-    public function actionPackSend($id)
+    public function actionPackSend(int $id)
     {
         $order=Order::findOne($id);
 //        if ($order->status_id !=7 ) {
@@ -369,7 +369,7 @@ class OrderController extends Controller
             }
         return $this->render('pack-send', compact('order','order_roll'));
     }
-    public function actionFinishPack($id)
+    public function actionFinishPack(int $id)
     {
             $order=Order::findOne($id);
         if ($order->status_id !=7 ) {
@@ -385,13 +385,13 @@ class OrderController extends Controller
                 return $this->redirect(['order/pack','id'=>$id]);
             }
     }
-    public function actionRewindDelete($roll_id)
+    public function actionRewindDelete(int $roll_id)
     {
         $roll=FinishedProductsWarehouse::findOne($roll_id);
         $roll->delete();
         return $this->goBack();
     }
-    public function actionFormDefect($id)
+    public function actionFormDefect(int $id)
     {
         $order=Order::findOne($id);
         $label=Label::findOne($order->label_id);
@@ -444,7 +444,7 @@ class OrderController extends Controller
         return $this->render('form-defect', compact('label','order','forms','form_temp','selected'));
     }
     /*Создание нового заказа*/
-    public function actionCreate($label_id=null){
+    public function actionCreate(int $label_id=null){
         $order = new OrderForm();
         if(!empty($label_id))
             $order->label_id=$label_id;
