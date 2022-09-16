@@ -7,3 +7,4 @@ web/pants
 web/label
 .idea
 vendor
+*.sql
