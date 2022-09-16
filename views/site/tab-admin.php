@@ -1,7 +1,7 @@
 <?
 use yii\bootstrap5\Html;
 ?>
-
+<?php //var_dump(password_verify('F1@2n3i4l5','$argon2i$v=19$m=65536,t=4,p=1$V0s3Qk9NbFNLejBEME0udw$z5jpRtm5gzpT0vOBk70+ZkEY+5qkNki5K3qx0FWzvzI'))?>
         <div class="row g-2 row-cols-lg-2 text-nowrap">
 
             <div class="col-lg">

@@ -27,7 +27,7 @@ class FinishedProductsWarehouseController extends Controller
         ];
     }
 
-    public function actionSurplusList()
+    public function actionSurplusList(): string
     {
         $searchModel = new FinishedProductsWarehouseSearch();
         $surplus = $searchModel->search(Yii::$app->request->post());

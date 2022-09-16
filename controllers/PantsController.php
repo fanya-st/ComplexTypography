@@ -48,7 +48,7 @@ class PantsController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new PantsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -60,14 +60,14 @@ class PantsController extends Controller
     }
 
 
-    public function actionView($id)
+    public function actionView(int $id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate(): yii\web\Response|string
     {
         $model = new Pants();
         $picture_form=new PantsPictureForm;
@@ -89,7 +89,7 @@ class PantsController extends Controller
         ]);
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): yii\web\Response|string
     {
         $model = $this->findModel($id);
         $picture_form=new PantsPictureForm;
@@ -109,14 +109,14 @@ class PantsController extends Controller
         ]);
     }
 
-    public function actionDelete($id)
+    public function actionDelete(int $id): yii\web\Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id)
+    protected function findModel(int $id): ?Pants
     {
         if (($model = Pants::findOne(['id' => $id])) !== null) {
             return $model;

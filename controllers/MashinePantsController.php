@@ -40,7 +40,7 @@ class MashinePantsController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new MashinePantsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -51,7 +51,7 @@ class MashinePantsController extends Controller
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate(): yii\web\Response|string
     {
         $model = new MashinePants();
 
@@ -68,7 +68,7 @@ class MashinePantsController extends Controller
         ]);
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): yii\web\Response|string
     {
         $model = $this->findModel($id);
 
@@ -81,14 +81,14 @@ class MashinePantsController extends Controller
         ]);
     }
 
-    public function actionDelete($id)
+    public function actionDelete(int $id): yii\web\Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id)
+    protected function findModel(int $id): ?MashinePants
     {
         if (($model = MashinePants::findOne(['id' => $id])) !== null) {
             return $model;

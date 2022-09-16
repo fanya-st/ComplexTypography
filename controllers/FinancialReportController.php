@@ -28,7 +28,7 @@ class FinancialReportController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new FinancialReportSearch();
         $orders = $searchModel->search($this->request->post());

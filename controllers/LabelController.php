@@ -61,13 +61,13 @@ class LabelController extends Controller
             ],
         ];
     }
-    public function actionList()
+    public function actionList(): string
     {
         $searchModel = new LabelSearch();
         $labels = $searchModel->search($this->request->post());
         return $this->render('list',compact('labels','searchModel'));
     }
-    public function actionView($id)
+    public function actionView(int $id): string
     {
         $label=Label::findOne($id);
         foreach (Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()) as $key=>$value){
@@ -105,7 +105,7 @@ class LabelController extends Controller
 
         return $this->render('view',compact('label','nav_items'));
     }
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): Response|string
     {
         $label=Label::findOne($id);
         if (!\Yii::$app->user->can('updateLabel', ['item' => $label->customer])) {
@@ -125,7 +125,7 @@ class LabelController extends Controller
     }
 
     /*Создание этикетки*/
-    public function actionCreate()
+    public function actionCreate(): Response|string
     {
             $model=new LabelForm();
             if($model->load(Yii::$app->request->post()) && $model->validate(Yii::$app->request->post())){
@@ -141,7 +141,7 @@ class LabelController extends Controller
     }
 
     /*Создатб подобную этикетку*/
-    public function actionCreateSame($id)
+    public function actionCreateSame(int $id): Response|string
     {
             $model=LabelForm::findOne($id);
             if($model->load(Yii::$app->request->post())){
@@ -156,7 +156,7 @@ class LabelController extends Controller
             return $this->render('create', compact('model'));
 
     }
-    public function actionCreateDesign($id)
+    public function actionCreateDesign(int $id): Response
     {
         $label=Label::findOne($id);
         if ($label->status_id != 1 AND ($label->designer_id != null OR $label->designer_id!=Yii::$app->user->identity->getId()) ) {
@@ -169,7 +169,7 @@ class LabelController extends Controller
         }
         return $this->redirect(['label/view','id'=>$id]);
     }
-    public function actionCreatePrepress($id)
+    public function actionCreatePrepress(int $id): Response
     {
         $label=Label::findOne($id);
         if ($label->status_id != 4 OR $label->status_id!=5) {
@@ -182,7 +182,7 @@ class LabelController extends Controller
                 }
         return $this->redirect(['label/view','id'=>$id]);
     }
-    public function actionApproveDesign($id)
+    public function actionApproveDesign(int $id): Response
     {
 
         $label=Label::findOne($id);
@@ -198,7 +198,7 @@ class LabelController extends Controller
                 }
         return $this->redirect(['label/view','id'=>$id]);
     }
-    public function actionCreateFlexform($id)
+    public function actionCreateFlexform(int $id): Response
     {
         $label = Label::findOne($id);
         if ($label->status_id != 7 OR $label->status_id != 8) {
@@ -226,7 +226,7 @@ class LabelController extends Controller
     }
 
 
-    public function actionFlexformReady($id)
+    public function actionFlexformReady(int $id): Response|string
     {
 
         $cur_label=Label::findOne($id);
@@ -287,7 +287,7 @@ class LabelController extends Controller
     }
 
 
-    public function actionDesignReady($id,$change_image=null)
+    public function actionDesignReady(int $id,$change_image=null): Response|string
     {
         $design_file=DesignFileForm::findOne($id);
         $label = LabelForm::findOne($id);
@@ -321,7 +321,7 @@ class LabelController extends Controller
     }
 
 
-    public function actionPrepressReady($id)
+    public function actionPrepressReady(int $id): Response|string
     {
         $label=Label::findOne($id);
         if ($label->status_id != 6) {
@@ -370,7 +370,7 @@ class LabelController extends Controller
     }
 
     /*Совмещение этикетки*/
-    public function actionCombinateLabel($id)
+    public function actionCombinateLabel(int $id): Response|string
     {
 
         $label=Label::findOne($id);
@@ -385,7 +385,7 @@ class LabelController extends Controller
     }
 
     /*Отменить совмещение*/
-    public function actionDecombinateLabel($id)
+    public function actionDecombinateLabel(int $id): Response
     {
         $label=Label::findOne($id);
         $label->decombinateLabel();
@@ -393,7 +393,7 @@ class LabelController extends Controller
     }
 
     /*Удаление форм во время препресса*/
-    public function actionPrepressDeleteForm($form_id)
+    public function actionPrepressDeleteForm(int $form_id): Response
     {
         $form=Form::findOne($form_id);
         $form->delete();
@@ -401,7 +401,7 @@ class LabelController extends Controller
         return $this->goBack();
     }
 
-    public function actionRePrepress($id)
+    public function actionRePrepress(int $id): Response|string
     {
         $prepress_file=PrepressFileForm::findOne($id);
         $cur_label=Label::findOne($id);
@@ -437,7 +437,7 @@ class LabelController extends Controller
         return $this->render('re-prepress', compact('cur_label','forms','prepress_file'));
     }
 
-    public function actionReFlexformReady($id)
+    public function actionReFlexformReady(int $id): Response|string
     {
 
         $cur_label=Label::findOne($id);
@@ -483,7 +483,8 @@ class LabelController extends Controller
         return $this->render('re-flexform_ready', compact('cur_label','forms'));
     }
 
-    public function actionSubdpi() {
+    public function actionSubdpi(): array
+    {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $out = [];
         if (isset($_POST['depdrop_parents'])) {

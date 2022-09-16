@@ -12,7 +12,7 @@ use yii;
 
 class TimeTrackerController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -34,7 +34,7 @@ class TimeTrackerController extends Controller
         ];
     }
 
-    public function actionKiosk()
+    public function actionKiosk(): yii\web\Response|string
     {
         $this->layout='main_without_navbar';
         $time_tracker=new TimeTracker();
@@ -47,7 +47,7 @@ class TimeTrackerController extends Controller
         }
         return $this->render('kiosk',compact('time_tracker'));
     }
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new TimeTrackerSearch();
         $dataProvider = $searchModel->search($this->request->post());

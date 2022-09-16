@@ -35,7 +35,7 @@ class PantoneWarehouseController extends Controller
     }
 
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new PantoneWarehouseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -48,7 +48,7 @@ class PantoneWarehouseController extends Controller
 
 
 
-    public function actionCreate()
+    public function actionCreate(): yii\web\Response|string
     {
         $model = new PantoneWarehouse();
 
@@ -66,7 +66,7 @@ class PantoneWarehouseController extends Controller
     }
 
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): yii\web\Response|string
     {
         $model = $this->findModel($id);
 
@@ -80,14 +80,14 @@ class PantoneWarehouseController extends Controller
     }
 
 
-    public function actionDelete($id)
+    public function actionDelete(int $id): yii\web\Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id)
+    protected function findModel(int $id): ?PantoneWarehouse
     {
         if (($model = PantoneWarehouse::findOne(['id' => $id])) !== null) {
             return $model;
@@ -96,12 +96,14 @@ class PantoneWarehouseController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionBarcodePrint($id){
+    public function actionBarcodePrint(int $id): string
+    {
         $pantone_warehouse=$this->findModel($id);
         return $this->renderAjax('barcode_print',compact('pantone_warehouse'));
     }
 
-    public function actionMovePantone(){
+    public function actionMovePantone(): yii\web\Response|string
+    {
         $pantone=new PantoneWarehouse();
         if ($this->request->isPost && $pantone->load($this->request->post()) && $pantone->validate($this->request->post())) {
             if(!empty($pantone->shelf_id)){

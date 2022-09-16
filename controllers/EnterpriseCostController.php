@@ -35,7 +35,7 @@ class EnterpriseCostController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new EnterpriseCostSearch();
         $dataProvider = $searchModel->search($this->request->post());
@@ -47,7 +47,7 @@ class EnterpriseCostController extends Controller
     }
 
 
-    public function actionCreate()
+    public function actionCreate(): yii\web\Response|string
     {
         $model = new EnterpriseCost();
 
@@ -64,7 +64,7 @@ class EnterpriseCostController extends Controller
         ]);
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): yii\web\Response|string
     {
         $model = $this->findModel($id);
 
@@ -78,7 +78,7 @@ class EnterpriseCostController extends Controller
     }
 
 
-    public function actionDelete($id)
+    public function actionDelete(int $id): yii\web\Response
     {
         $this->findModel($id)->delete();
 
@@ -86,7 +86,7 @@ class EnterpriseCostController extends Controller
     }
 
 
-    protected function findModel($id)
+    protected function findModel(int $id): ?EnterpriseCost
     {
         if (($model = EnterpriseCost::findOne(['id' => $id])) !== null) {
             return $model;

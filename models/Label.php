@@ -7,28 +7,33 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 class Label extends ActiveRecord{
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'label';
     }
 
-    public function getOrder(){
+    public function getOrder(): \yii\db\ActiveQuery
+    {
 		return $this->hasMany(Order::class,['label_id'=>'id']);
 	}
-	public function getForm(){
+	public function getForm(): \yii\db\ActiveQuery
+    {
 	    if (!empty($this->combination))
             return $this->hasMany(Form::class,['label_id'=>'id'])->via('combination');
 		return $this->hasMany(Form::class,['label_id'=>'id']);
 	}
-    public function getFormCount(){
+    public function getFormCount(): int
+    {
 	    if (count($this->form)==0) return count($this->combinatedForm);
 	    else
 	    return count($this->form);
     }
-	public function getPantone(){
+	public function getPantone(): \yii\db\ActiveQuery
+    {
 		return $this->hasMany(Pantone::class,['id'=>'pantone_id'])->via('form');
 	}
-	public function getPantoneCombinated(){
+	public function getPantoneCombinated(): \yii\db\ActiveQuery
+    {
 		return $this->hasMany(Pantone::class,['id'=>'pantone_id'])->via('combinatedForm');
 	}
 
@@ -39,43 +44,45 @@ class Label extends ActiveRecord{
             return $this->pantone;
     }
 
-	public function getCombinatedForm(){
+	public function getCombinatedForm(): \yii\db\ActiveQuery
+    {
 		return $this->hasMany(Form::class,['combination_id'=>'combination_id'])->via('combination');
 	}
-	public function getCombination(){
+	public function getCombination(): \yii\db\ActiveQuery
+    {
 		return $this->hasOne(CombinationForm::class,['label_id'=>'id']);
 	}
-	public function getCombinatedLabel(){
+	public function getCombinatedLabel(): array
+    {
 	    return ArrayHelper::map(CombinationForm::find()->where(['combination_id'=>$this->combination->combination_id])->all(),'label_id','label_id');
 	}
-    public function getVarnishStatus(){
+    public function getVarnishStatus(): \yii\db\ActiveQuery
+    {
         return $this->hasOne(VarnishStatus::class,['id'=>'varnish_id']);
     }
-    public function getBackgroundLabel(){
+    public function getBackgroundLabel(): \yii\db\ActiveQuery
+    {
         return $this->hasOne(BackgroundLabel::class,['id'=>'background_id']);
     }
-    public function getOutputLabel(){
+    public function getOutputLabel(): \yii\db\ActiveQuery
+    {
         return $this->hasOne(OutputLabel::class,['id'=>'output_label_id']);
     }
-    public function getFoil(){
+    public function getFoil(): \yii\db\ActiveQuery
+    {
         return $this->hasOne(Foil::class,['id'=>'foil_id']);
     }
-    public function getCustomer(){
+    public function getCustomer(): \yii\db\ActiveQuery
+    {
         return $this->hasOne(Customer::class,['id'=>'customer_id']);
     }
-    public function getLabelStatus(){
+    public function getLabelStatus(): string
+    {
         return LabelStatus::$label_status[$this->status_id];
     }
-    public function getPants(){
+    public function getPants(): \yii\db\ActiveQuery
+    {
         return $this->hasOne(Pants::class,['id'=>'pants_id']);
-    }
-    public function getFullCMYK(){
-	    if($this->c==1) $c=$this->getAttributeLabel('c');
-	    if($this->m==1) $m=$this->getAttributeLabel('m');
-	    if($this->y==1) $y=$this->getAttributeLabel('y');
-	    if($this->k==1) $k=$this->getAttributeLabel('k');
-        return $c.$m.$y.$k;
-
     }
 
     public function getLaminateName(){
@@ -95,11 +102,12 @@ class Label extends ActiveRecord{
     public function getPrintOnGlueName(){
         if($this->print_on_glue==0) return 'Нет'; else return 'Да';
     }
-    public function getNameSplitId(){
+    public function getNameSplitId(): string
+    {
         return "[$this->id] $this->name";
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id'=>'ID',
@@ -150,7 +158,8 @@ class Label extends ActiveRecord{
             'variable_paint_count'=>'Краска переменной печати, мл',
         ];
     }
-    public function rules(){
+    public function rules(): array
+    {
         return[
             [['name','image','image_crop','image_extended','design_file','prepress_design_file'],'string','max'=>100],
             [['manager_note','prepress_note','designer_note','laboratory_note','name','image','image_crop','image_extended','design_file','prepress_design_file'],'trim'],
@@ -203,9 +212,10 @@ class Label extends ActiveRecord{
         }
     }
 
-    public $combinated_label_list;
+    public object $combinated_label_list;
 
-    public function combinateLabel() {
+    public function combinateLabel(): bool
+    {
         $new_combination= new Combination();
         if($new_combination->save()){
             if(!empty($this->combinated_label_list)){

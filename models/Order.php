@@ -7,72 +7,91 @@ use yii;
 
 class Order extends ActiveRecord{
 
-	public function getLabel(){
+
+    public function getLabel(): yii\db\ActiveQuery
+    {
 		return $this->hasOne(Label::class,['id'=>'label_id']);
 	}
-	public function getShipmentOrder(){
+	public function getShipmentOrder(): yii\db\ActiveQuery
+    {
 		return $this->hasOne(ShipmentOrder::class,['order_id'=>'id']);
 	}
 
-	public function getShipment(){
+	public function getShipment(): yii\db\ActiveQuery
+    {
 		return $this->hasOne(Shipment::class,['id'=>'shipment_id'])->via('shipmentOrder');
 	}
 
 
-	public function getSleeve(){
+	public function getSleeve(): yii\db\ActiveQuery
+    {
 		return $this->hasOne(Sleeve::class,['id'=>'sleeve_id']);
 	}
-	public function getWinding(){
+	public function getWinding(): yii\db\ActiveQuery
+    {
 		return $this->hasOne(Winding::class,['id'=>'winding_id']);
 	}
-	public function getCustomer(){
+	public function getCustomer(): yii\db\ActiveQuery
+    {
 		return $this->hasOne(Customer::class,['id'=>'customer_id'])->via('label');
 	}
-    public function getLabelNameSplitOrderId(){
+    public function getLabelNameSplitOrderId(): string
+    {
         return '['.$this->id.']'.$this->label->name;
     }
 
-	public function getFinishedProductsWarehouse(){
+	public function getFinishedProductsWarehouse(): yii\db\ActiveQuery
+    {
         return $this->hasMany(FinishedProductsWarehouse::class,['order_id'=>'id']);
 	}
-	public function getOrderMaterialList(){
+	public function getOrderMaterialList(): yii\db\ActiveQuery
+    {
         return $this->hasMany(OrderMaterial::class,['order_id'=>'id']);
 	}
 
-	public function getFormOrderHistory(){
+	public function getFormOrderHistory(): yii\db\ActiveQuery
+    {
         return $this->hasMany(FormOrderHistory::class,['order_id'=>'id']);
 	}
 
-	public function getCombinatedPrintOrder(){
+	public function getCombinatedPrintOrder(): array
+    {
         return Order::find()->where(['label_id'=>$this->label->combinatedLabel])->all();
 	}
 
-    public function getOrderStatus(){
+    public function getOrderStatus(): string
+    {
         return OrderStatus::$order_status[$this->status_id];
     }
 
-    public function getMashine(){
+    public function getMashine(): yii\db\ActiveQuery
+    {
         return $this->hasOne(Mashine::class,['id'=>'mashine_id']);
     }
-    public function getMaterial(){
+    public function getMaterial(): yii\db\ActiveQuery
+    {
         return $this->hasOne(Material::class,['id'=>'material_id']);
     }
 
-    public function getPants(){
+    public function getPants(): yii\db\ActiveQuery
+    {
         return $this->hasOne(Pants::class,['id'=>'pants_id'])->via('label');
     }
 
-    public function getShaft(){
+    public function getShaft(): yii\db\ActiveQuery
+    {
         return $this->hasOne(Shaft::class,['id'=>'shaft_id'])->via('pants');
     }
 
-    public function getCirculationCountSend(){
+    public function getCirculationCountSend(): float|int
+    {
 	    foreach($this->finishedProductsWarehouse as $roll)
 	        $count+=$roll->sended_roll_count*$roll->label_in_roll;
         return $count;
     }
 
-    public function getActualCirculation(){
+    public function getActualCirculation(): float|int
+    {
         foreach(FinishedProductsWarehouse::find()->select(['label_in_roll','roll_count'])->where(['order_id'=>$this->id])->all() as $roll){
             $actual_circulation+=$roll->label_in_roll*$roll->roll_count;
         }
@@ -81,7 +100,7 @@ class Order extends ActiveRecord{
 
 
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id'=>'ID Заказа',
@@ -119,7 +138,8 @@ class Order extends ActiveRecord{
             'cut_edge'=>'Обрезать кромки',
         ];
     }
-    public function rules(){
+    public function rules(): array
+    {
         return[
             [['status_id','label_id','stretch','cut_edge','label_on_roll','winding_id',
                 'sleeve_id','sending','material_id','mashine_id','printed_circulation','packer_id','rewinder_id','printer_id'],'integer'],
@@ -132,7 +152,7 @@ class Order extends ActiveRecord{
         ];
     }
 
-    public function beforeDelete()
+    public function beforeDelete(): bool
     {
         if (!empty($this->orderMaterialList)) {
             Yii::$app->session->setFlash('error','Заказ не может быть удален, на нем есть расход материала');

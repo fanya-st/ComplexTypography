@@ -49,7 +49,8 @@ class MaterialController extends Controller
             ],
         ];
     }
-    public function actionPaperConsumption($id){
+    public function actionPaperConsumption(int $id): yii\web\Response|string
+    {
             $order = Order::findOne($id);
             $new_used_paper=new OrderMaterial();
             $used_paper=OrderMaterial::find()->where(['order_id'=>$id])->all();
@@ -72,20 +73,21 @@ class MaterialController extends Controller
             return $this->render('paper-consumption',compact('order','new_used_paper','used_paper'));
     }
 
-    public function actionList(){
+    public function actionList(): string
+    {
         $searchModel = new MaterialSearch();
         $material = $searchModel->search(Yii::$app->request->post());
             return $this->render('list',compact('material','searchModel'));
     }
 
-    public function actionView($id)
+    public function actionView(int $id): string
     {
         $material=Material::findOne($id);
         $material_warehouse=PaperWarehouse::find()->select(['material_id','width',new Expression('SUM(length) as length')])->where(['>','length',0])->andWhere(['material_id'=>$id])->groupBy(['width','material_id'])->all();
         return $this->render('view',compact('material','material_warehouse'));
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): yii\web\Response|string
     {
         $material=MaterialForm::findOne($id);
         if($material->load(Yii::$app->request->post()) && $material->validate(Yii::$app->request->post())){
@@ -100,7 +102,7 @@ class MaterialController extends Controller
         return $this->render('update',compact('material'));
     }
 
-    public function actionInactive($id)
+    public function actionInactive(int $id): yii\web\Response
     {
         $material=Material::findOne($id);
         $material->status=0;
@@ -108,7 +110,7 @@ class MaterialController extends Controller
         return $this->redirect(['material/list']);
     }
 
-    public function actionActive($id)
+    public function actionActive(int $id): yii\web\Response
     {
         $material=Material::findOne($id);
         $material->status=1;
@@ -116,7 +118,7 @@ class MaterialController extends Controller
         return $this->redirect(['material/list']);
     }
 
-    public function actionCreate()
+    public function actionCreate(): yii\web\Response|string
     {
         $material=new MaterialForm;
         if($material->load(Yii::$app->request->post()) && $material->validate(Yii::$app->request->post())){
@@ -129,13 +131,15 @@ class MaterialController extends Controller
         return $this->render('update',compact('material'));
     }
 
-    public function actionStockOnHandPaper(){
+    public function actionStockOnHandPaper(): string
+    {
         $searchModel = new StockOnHandPaper();
         $items = $searchModel->search(Yii::$app->request->post());
         return $this->render('stock-on-hand-paper',compact('items','searchModel'));
     }
 
-    public function actionMaterialMovement(){
+    public function actionMaterialMovement(): string
+    {
         $searchModel = new MaterialMovement();
         $items = $searchModel->search(Yii::$app->request->post());
         return $this->render('material-movement',compact('items','searchModel'));

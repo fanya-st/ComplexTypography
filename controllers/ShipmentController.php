@@ -57,7 +57,7 @@ class ShipmentController extends Controller
         return $this->render('list',compact('shipments','searchModel','new_shipment'));
     }
 
-    public function actionView($id)
+    public function actionView(int $id): string
     {
         $shipment = Shipment::findOne($id);
         $orders = new ActiveDataProvider([
@@ -81,7 +81,12 @@ class ShipmentController extends Controller
         return $this->render('view',compact('shipment','orders','roll','route_customers'));
     }
 
-    public function actionDelete($id)
+    /**
+     * @throws \Throwable
+     * @throws yii\db\StaleObjectException
+     * @throws ForbiddenHttpException
+     */
+    public function actionDelete(int $id): yii\web\Response
     {
         $shipmentorder = ShipmentOrder::findOne(['order_id'=>$id]);
         $shipment=Shipment::findOne($shipmentorder->shipment_id);
@@ -94,7 +99,7 @@ class ShipmentController extends Controller
         return $this->goBack();
     }
 
-    public function actionEditTransport($id)
+    public function actionEditTransport(int $id): yii\web\Response|string
     {
         $shipment = Shipment::findOne($id);
         if($this->request->isPost){
@@ -106,7 +111,7 @@ class ShipmentController extends Controller
         return $this->render('edit-transport',compact('shipment'));
     }
 
-    public function actionMarkDefectRoll($id)
+    public function actionMarkDefectRoll(int $id): yii\web\Response|string
     {
         $shipment = Shipment::findOne($id);
         $shipment_roll=FinishedProductsWarehouse::find()->where(['order_id'=>ShipmentOrder::find()
@@ -127,7 +132,7 @@ class ShipmentController extends Controller
         return $this->render('mark-defect',compact('shipment_roll','shipment'));
     }
 
-    public function actionOrderAdd($id)
+    public function actionOrderAdd(int $id): yii\web\Response|string
     {
         $shipment = Shipment::findOne($id);
         if (!\Yii::$app->user->can('updateShipment', ['item' => $shipment])) {
@@ -155,7 +160,7 @@ class ShipmentController extends Controller
         return $this->render('_order_add_tab',compact('add_order','searchModel','shipment'));
     }
 
-    public function actionCreate($new_shipment)
+    public function actionCreate(Shipment $new_shipment): yii\web\Response
     {
             $new_shipment->manager_id=Yii::$app->user->identity->getId();
             if($new_shipment->save()){
@@ -165,7 +170,7 @@ class ShipmentController extends Controller
         return $this->redirect(['shipment/list']);
     }
 
-    public function actionSendShipment($id)
+    public function actionSendShipment(int $id): yii\web\Response
     {
         $shipment = Shipment::findOne($id);
         if ($shipment->status_id!=0) {
@@ -197,7 +202,7 @@ class ShipmentController extends Controller
         return $this->redirect(['shipment/view','id'=>$id]);
     }
 
-    public function actionCloseShipment($id)
+    public function actionCloseShipment(int $id): yii\web\Response
     {
         $shipment = Shipment::findOne($id);
         if ($shipment->status_id!=1) {

@@ -40,7 +40,7 @@ class CustomerController extends Controller
         ];
     }
 
-    public function actionCreate()
+    public function actionCreate(): Response|string
     {
         $customer = new CustomerForm();
         $customer->status_id=1;
@@ -56,7 +56,7 @@ class CustomerController extends Controller
         return $this->render('create',compact('customer'));
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): Response|string
     {
         $customer = CustomerForm::findOne($id);
         if (!\Yii::$app->user->can('updateCustomer',['item'=>$customer])) {
@@ -72,13 +72,14 @@ class CustomerController extends Controller
         }
         return $this->render('update',compact('customer'));
     }
-    public function actionView($id)
+    public function actionView(int $id): string
     {
         $customer = Customer::findOne($id);
         return $this->render('view',compact('customer'));
     }
 
-    public function actionRegion() {
+    public function actionRegion(): array
+    {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
@@ -92,7 +93,8 @@ class CustomerController extends Controller
         }
         return ['output'=>'', 'selected'=>''];
     }
-    public function actionTown() {
+    public function actionTown(): array
+    {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
@@ -106,7 +108,8 @@ class CustomerController extends Controller
         }
         return ['output'=>'', 'selected'=>''];
     }
-    public function actionStreet() {
+    public function actionStreet(): array
+    {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
@@ -121,7 +124,7 @@ class CustomerController extends Controller
         return ['output'=>'', 'selected'=>''];
     }
 
-    public function actionList()
+    public function actionList(): string
     {
         $searchModel = new CustomerSearch();
         $customers = $searchModel->search($this->request->post());

@@ -32,7 +32,7 @@ class PantoneController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new PantoneSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
@@ -43,7 +43,7 @@ class PantoneController extends Controller
         ]);
     }
 
-    public function actionView($id)
+    public function actionView(int $id): string
     {
         $model=$this->findModel($id);
         return $this->render('view', [
@@ -51,7 +51,7 @@ class PantoneController extends Controller
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate(): yii\web\Response|string
     {
         $model = new Pantone();
 
@@ -70,7 +70,7 @@ class PantoneController extends Controller
         ]);
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): yii\web\Response|string
     {
         $model = $this->findModel($id);
         if($model->pantone_kind_id==2){
@@ -95,14 +95,14 @@ class PantoneController extends Controller
         ]);
     }
 
-    public function actionDelete($id)
+    public function actionDelete(int $id): yii\web\Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id)
+    protected function findModel(int $id): ?Pantone
     {
         if (($model = Pantone::findOne(['id' => $id])) !== null) {
             return $model;

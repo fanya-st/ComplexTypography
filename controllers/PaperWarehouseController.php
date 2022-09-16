@@ -40,13 +40,15 @@ class PaperWarehouseController extends Controller
         ];
     }
 
-    public function actionList(){
+    public function actionList(): string
+    {
         $searchModel = new PaperWarehouseSearch();
         $paper_warehouse = $searchModel->search(Yii::$app->request->post());
         return $this->render('list',compact('paper_warehouse','searchModel'));
     }
 
-    public function actionUploadPaper(){
+    public function actionUploadPaper(): yii\web\Response|string
+    {
         $upload_paper_form=new UploadPaperForm();
         if ($upload_paper_form->load(Yii::$app->request->post())) {
             $upload_paper_form->csv=UploadedFile::getInstance($upload_paper_form, 'csv');
@@ -58,12 +60,14 @@ class PaperWarehouseController extends Controller
         return $this->render('upload_paper_from_provider',compact('upload_paper_form'));
     }
 
-    public function actionBarcodePrint($id){
+    public function actionBarcodePrint(int $id): string
+    {
         $paper_warehouse=PaperWarehouse::findOne($id);
         return $this->renderAjax('barcode_print',compact('paper_warehouse'));
     }
 
-    public function actionRollCut(){
+    public function actionRollCut(): string
+    {
         $paper_warehouse=new PaperWarehouseRollCut();
         if ($paper_warehouse->load(Yii::$app->request->post())) {
             if ($paper_warehouse->rollcut()){
@@ -74,7 +78,8 @@ class PaperWarehouseController extends Controller
         return $this->render('roll-cut',compact('paper_warehouse','roll1','roll2'));
     }
 
-    public function actionUploadPaperToWarehouse(){
+    public function actionUploadPaperToWarehouse(): yii\web\Response|string
+    {
         $paper = new ActiveDataProvider([
             'query' => UploadPaper::find()
         ]);
@@ -97,7 +102,8 @@ class PaperWarehouseController extends Controller
         return $this->render('upload_paper_to_warehouse',compact('paper','upload_paper_form','upload_paper_list'));
     }
 
-    public function actionMoveRoll(){
+    public function actionMoveRoll(): yii\web\Response|string
+    {
         $roll=new PaperWarehouse();
         if ($this->request->isPost && $roll->load($this->request->post()) && $roll->validate($this->request->post())) {
                 if(!empty($roll->shelf_id)){

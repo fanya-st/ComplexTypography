@@ -4,7 +4,6 @@
 namespace app\controllers;
 
 
-use app\models\Envelope;
 use app\models\Shelf;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -13,7 +12,7 @@ use app\models\Rack;
 
 class WarehouseController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -30,14 +29,14 @@ class WarehouseController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $data = Warehouse::find()->all();
 
         return $this->render('index', compact('data'));
     }
 
-    public function actionRackList($id)
+    public function actionRackList(int $id): string
     {
         $rack=Rack::findOne($id);
 
@@ -46,7 +45,7 @@ class WarehouseController extends Controller
         return $this->render('_rack', compact('shelfs','rack'));
     }
 
-    public function actionShelfList($id)
+    public function actionShelfList(int $id): string
     {
         $shelf=Shelf::findOne($id);
 
@@ -55,13 +54,13 @@ class WarehouseController extends Controller
         return $this->render('_shelf', compact('shelf','rack'));
     }
 
-    public function actionQrPrintRack($id)
+    public function actionQrPrintRack(int $id): string
     {
         $rack=Rack::findOne($id);
         return $this->renderAjax('qr-rack', compact('rack'));
     }
 
-    public function actionQrPrintShelf($id)
+    public function actionQrPrintShelf(int $id): string
     {
         $shelf=Shelf::findOne($id);
         return $this->renderAjax('qr-shelf', compact('shelf'));

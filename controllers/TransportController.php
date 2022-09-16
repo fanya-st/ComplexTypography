@@ -30,20 +30,10 @@ class TransportController extends Controller
     }
 
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Transport::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
         ]);
 
         return $this->render('index', [
@@ -51,7 +41,7 @@ class TransportController extends Controller
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate(): \yii\web\Response|string
     {
         $model = new Transport();
 
@@ -68,7 +58,7 @@ class TransportController extends Controller
         ]);
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate($id): \yii\web\Response|string
     {
         $model = $this->findModel($id);
 
@@ -81,14 +71,14 @@ class TransportController extends Controller
         ]);
     }
 
-    public function actionDelete($id)
+    public function actionDelete($id): \yii\web\Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id)
+    protected function findModel($id): ?Transport
     {
         if (($model = Transport::findOne(['id' => $id])) !== null) {
             return $model;
