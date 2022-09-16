@@ -6,4 +6,4 @@ themes/classic/views/
 web/pants
 web/label
 .idea
-/vendor
+vendor
