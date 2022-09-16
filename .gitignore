@@ -5,3 +5,5 @@ protected/data/*.db
 themes/classic/views/
 web/pants
 web/label
+.idea
+/vendor
