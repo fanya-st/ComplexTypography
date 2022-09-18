@@ -1,0 +1,49 @@
+services:
+  nginx:
+    build:
+      context: docker/development/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/app
+      - ./docker/development/nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - php-fpm
+      - postgres
+    restart: always
+  php-fpm:
+    build:
+      context: docker/development/php-fpm
+    volumes:
+      - ./:/app
+      - ./docker/development/php-fpm/:/usr/local/etc/php
+    ports:
+      - "9000:9000"
+    cap_add:
+      - SYS_NICE
+      - DAC_READ_SEARCH
+    restart: always
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: 1
+#    command: sh -c "composer install"
+  postgres:
+    build:
+      context: docker/development/postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    restart: always
+    volumes:
+      - ./docker/development/postgresql/data:/var/lib/postgresql/data
+#  composer:
+#    build:
+#      context: docker/development/composer
+#    volumes:
+#      - ./:/app
+#    depends_on:
+#      - php-fpm
+#      - nginx
+

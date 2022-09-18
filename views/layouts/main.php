@@ -21,9 +21,10 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-	<?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/web/favicon.ico']); ?>
+	<?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => 'favicon.ico']); ?>
 </head>
 <body class="d-flex flex-column h-100">
+<?php //phpinfo()?>
 <?php $this->beginBody() ?>
 
 <header>

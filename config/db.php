@@ -2,10 +2,12 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=pet_db',
-    'username' => 'root',
-    'password' => '',
-    'charset' => 'utf8',
+    'dsn' => 'postgresql:host=localhost;port=5432;dbname=complex-app',
+//    'username' => 'complex-app',
+    'username' => getenv('POSTGRES_USER'),
+//    'password' => 'F1@2n3i4l5',
+    'password' => getenv('POSTGRES_PASSWORD'),
+    'charset' => 'utf8'
 //    'enableSchemaCache' => true,
 //    'schemaCacheDuration' => 3600,
 //    'schemaCache' => 'cache',
