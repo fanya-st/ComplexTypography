@@ -1,5 +1,6 @@
 !assets/.gitignore
 protected/runtime/*
+docker/development/postgresql/data
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
