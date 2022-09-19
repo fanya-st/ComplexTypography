@@ -68,6 +68,8 @@ class TimeTracker extends ActiveRecord
         }
         unset($record1);
 //        var_dump($data1);
-        return $timesheet;
+        if (isset($timesheet)) {
+            return $timesheet;
+        }
     }
 }

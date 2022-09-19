@@ -35,11 +35,11 @@ use yii\widgets\Pjax;
         <div class="border p-3 rounded">
             <h6 class="p-1 rounded">Материалы</h6>
             <div class="d-lg-flex flex-wrap">
-                <div class="p-1"><?= Html::a('Разрезать ролик', ['paper-warehouse/roll-cut'], ['class' => 'm-1 btn btn-primary']) ?></div>
-                <div class="p-1"><?= Html::a('Штанцы', ['pants/index'], ['class' => 'm-1 btn btn-primary']) ?></div>
-                <div class="p-1"><?= Html::a('Склад красок, лаков и химии', ['pantone-warehouse/index'], ['class' => 'm-1 btn btn-primary']) ?></div>
-                <div class="p-1"><?= Html::a('Склад бумаги, фольги, ламинации', ['paper-warehouse/list'], ['class' => ' m-1 btn btn-primary']) ?></div>
-                <div class="p-1"><?= Html::a('Наличные складские запасы бумаги', ['material/stock-on-hand-paper'], ['class' => ' m-1 btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Разрезать ролик', ['paper-warehouse/roll-cut'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Штанцы', ['pants/index'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Склад красок, лаков и химии', ['pantone-warehouse/index'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Склад бумаги, фольги, ламинации', ['paper-warehouse/list'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Наличные складские запасы бумаги', ['material/stock-on-hand-paper'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@ use yii\widgets\Pjax;
         <div class="border p-3 rounded">
             <h6 class="p-1 rounded">Статистика</h6>
             <div class="d-lg-flex flex-wrap">
-                <div class="p-1"><?= Html::a('Отчет по печатникам', ['/'], ['class' => 'm-1 btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Отчет по печатникам', ['/'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>

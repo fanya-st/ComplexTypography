@@ -307,7 +307,7 @@ class CmsController extends Controller
             return $this->redirect(['street-index']);
         }
 
-        return $this->render('street\update', [
+        return $this->render('street/update', [
             'model' => $model,
         ]);
     }
@@ -319,7 +319,7 @@ class CmsController extends Controller
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
-        return $this->render('customer\index', [
+        return $this->render('customer/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -334,7 +334,7 @@ class CmsController extends Controller
             return $this->redirect(['customer-index']);
         }
 
-        return $this->render('customer\update', [
+        return $this->render('customer/update', [
             'model' => $model,
         ]);
     }
@@ -346,7 +346,7 @@ class CmsController extends Controller
         $searchModel = new LabelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
-        return $this->render('label\index', [
+        return $this->render('label/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -360,7 +360,7 @@ class CmsController extends Controller
             return $this->redirect(['label-index']);
         }
 
-        return $this->render('label\update', [
+        return $this->render('label/update', [
             'model' => $model,
         ]);
     }
@@ -374,7 +374,7 @@ class CmsController extends Controller
             'query' => CalcCommonParam::find(),
         ]);
 
-        return $this->render('calc-common-params\index', [
+        return $this->render('calc-common-params/index', [
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -394,7 +394,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('calc-common-params\create', [
+        return $this->render('calc-common-params/create', [
             'model' => $model,
         ]);
     }
@@ -410,7 +410,7 @@ class CmsController extends Controller
             }
         }
 
-        return $this->render('calc-common-params\update', [
+        return $this->render('calc-common-params/update', [
             'model' => $model,
         ]);
     }
@@ -423,7 +423,7 @@ class CmsController extends Controller
         $searchModel = new CalcMashineParamValueSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
-        return $this->render('calc-mashine-param-price\index', [
+        return $this->render('calc-mashine-param-price/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -431,7 +431,7 @@ class CmsController extends Controller
 
     public function actionCalcMashineParamPriceView(int $id): string
     {
-        return $this->render('calc-mashine-param-price\view', [
+        return $this->render('calc-mashine-param-price/view', [
             'model' => CalcMashineParamValue::findOne($id),
         ]);
     }
@@ -448,7 +448,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('calc-mashine-param-price\create', [
+        return $this->render('calc-mashine-param-price/create', [
             'model' => $model,
         ]);
     }
@@ -462,7 +462,7 @@ class CmsController extends Controller
             return $this->redirect(['calc-mashine-param-price-view', 'id' => $model->id]);
         }
 
-        return $this->render('calc-mashine-param-price\update', [
+        return $this->render('calc-mashine-param-price/update', [
             'model' => $model,
         ]);
     }
@@ -476,7 +476,7 @@ class CmsController extends Controller
             'query' => Warehouse::find(),
         ]);
 
-        return $this->render('warehouse\index', [
+        return $this->render('warehouse/index', [
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -494,7 +494,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('warehouse\create', [
+        return $this->render('warehouse/create', [
             'model' => $model,
         ]);
     }
@@ -507,7 +507,7 @@ class CmsController extends Controller
             return $this->redirect(['warehouse-index']);
         }
 
-        return $this->render('warehouse\update', [
+        return $this->render('warehouse/update', [
             'model' => $model,
         ]);
     }
@@ -521,7 +521,7 @@ class CmsController extends Controller
         $searchModel = new RackSearch();
         $dataProvider = $searchModel->search($this->request->post());
 
-        return $this->render('rack\index', [
+        return $this->render('rack/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -541,7 +541,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('rack\create', [
+        return $this->render('rack/create', [
             'model' => $model,
         ]);
     }
@@ -555,7 +555,7 @@ class CmsController extends Controller
             return $this->redirect(['rack-index']);
         }
 
-        return $this->render('rack\update', [
+        return $this->render('rack/update', [
             'model' => $model,
         ]);
     }
@@ -568,7 +568,7 @@ class CmsController extends Controller
         $searchModel = new ShelfSearch();
         $dataProvider = $searchModel->search($this->request->post());
 
-        return $this->render('shelf\index', [
+        return $this->render('shelf/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -587,7 +587,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('shelf\create', [
+        return $this->render('shelf/create', [
             'model' => $model,
         ]);
     }
@@ -600,7 +600,7 @@ class CmsController extends Controller
             return $this->redirect(['shelf-index']);
         }
 
-        return $this->render('shelf\update', [
+        return $this->render('shelf/update', [
             'model' => $model,
         ]);
     }
@@ -614,7 +614,7 @@ class CmsController extends Controller
         $searchModel = new AuthAssignmentSearch();
         $dataProvider = $searchModel->search($this->request->post());
 
-        return $this->render('auth-assignment\index', [
+        return $this->render('auth-assignment/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -632,7 +632,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('auth-assignment\create', [
+        return $this->render('auth-assignment/create', [
             'model' => $model,
         ]);
     }
@@ -648,7 +648,7 @@ class CmsController extends Controller
             return $this->redirect(['auth-assign-index']);
         }
 
-        return $this->render('auth-assignment\update', [
+        return $this->render('auth-assignment/update', [
             'model' => $model,
         ]);
     }
@@ -674,7 +674,7 @@ class CmsController extends Controller
         $searchModel = new AuthItemSearch();
         $dataProvider = $searchModel->search($this->request->post());
 
-        return $this->render('auth-item\index', [
+        return $this->render('auth-item/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -683,7 +683,7 @@ class CmsController extends Controller
 
     public function actionAuthItemView(string $name): string
     {
-        return $this->render('auth-item\view', [
+        return $this->render('auth-item/view', [
             'model' => $this->findModelAuthItem($name),
         ]);
     }
@@ -701,7 +701,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('auth-item\create', [
+        return $this->render('auth-item/create', [
             'model' => $model,
         ]);
     }
@@ -717,7 +717,7 @@ class CmsController extends Controller
             return $this->redirect(['auth-item-view', 'name' => $model->name]);
         }
 
-        return $this->render('auth-item\update', [
+        return $this->render('auth-item/update', [
             'model' => $model,
         ]);
     }

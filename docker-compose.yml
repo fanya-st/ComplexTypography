@@ -50,15 +50,14 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     restart: always
     volumes:
       - ./docker/development/mysql/data:/var/lib/mysql
       - ./docker/development/mysql/mysql_db_config.sql:/docker-entrypoint-initdb.d/complex-app.sql
-#    command:
-#      docker exec -it mysql_container mysql -u root -p database_name < /docker-entrypoint-initdb.d/schema.sql
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    restart: always
+#    ports:
+#      - 8080:8080
 

@@ -21,8 +21,8 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
     </tr>
     </thead>
     <tbody>
-    <?if(!empty($timesheet))foreach($timesheet as $row):?>
-    <?if(empty($row['hours'])):?>
+    <?php if(!empty($timesheet))foreach($timesheet as $row):?>
+    <?php if(empty($row['hours'])):?>
     <tr class="table-danger">
         <th><?=User::getFullNameById($row['employee_id'])?></th>
         <td>Не идентифицирован</td>

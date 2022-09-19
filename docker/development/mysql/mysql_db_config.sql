@@ -38,7 +38,7 @@ CREATE TABLE `auth_assignment` (
 
 LOCK TABLES `auth_assignment` WRITE;
 /*!40000 ALTER TABLE `auth_assignment` DISABLE KEYS */;
-INSERT INTO `auth_assignment` VALUES ('accountant','14',1661928026),('admin','1',1661928026),('designer','17',NULL),('designer','19',NULL),('designer','6',1661928026),('designer','7',1661928026),('designer_admin','8',1661928026),('driver','15',1661928026),('laboratory','9',1661928026),('logistician','12',1661928026),('manager','20',NULL),('manager','4',1661928026),('manager','5',1661928026),('manager_admin','3',1661928026),('packer','11',1661928026),('packer','12',1661928026),('prepress','2',1661928026),('printer','10',1661928026),('rewinder','11',1661928026),('technolog','16',1661928026),('warehouse_manager','13',1661928026);
+INSERT INTO `auth_assignment` VALUES ('admin','1',1661928026);
 /*!40000 ALTER TABLE `auth_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1189,7 +1189,7 @@ CREATE TABLE `output_label` (
 
 LOCK TABLES `output_label` WRITE;
 /*!40000 ALTER TABLE `output_label` DISABLE KEYS */;
-INSERT INTO `output_label` VALUES (1,'Выход1','/web/output_label/s1.jpg'),(2,'Выход2','/web/output_label/s2.jpg'),(3,'Выход3','/web/output_label/s3.jpg'),(4,'Выход4','/web/output_label/s4.jpg');
+INSERT INTO `output_label` VALUES (1,'Выход1','output_label/s1.jpg'),(2,'Выход2','output_label/s2.jpg'),(3,'Выход3','output_label/s3.jpg'),(4,'Выход4','output_label/s4.jpg');
 /*!40000 ALTER TABLE `output_label` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1965,7 +1965,7 @@ CREATE TABLE `winding` (
 
 LOCK TABLES `winding` WRITE;
 /*!40000 ALTER TABLE `winding` DISABLE KEYS */;
-INSERT INTO `winding` VALUES (1,'Намотка 1','/web/winding_order/s1.jpg'),(2,'Намотка2','/web/winding_order/s2.jpg'),(3,'Намотка3','/web/winding_order/s3.jpg'),(4,'Намотка4','/web/winding_order/s4.jpg'),(5,'Намотка5','/web/winding_order/s5.jpg'),(6,'Намотка6','/web/winding_order/s6.jpg'),(7,'Намотка7','/web/winding_order/s7.jpg'),(8,'Намотка8','/web/winding_order/s8.jpg');
+INSERT INTO `winding` VALUES (1,'Намотка 1','winding_order/s1.jpg'),(2,'Намотка2','winding_order/s2.jpg'),(3,'Намотка3','winding_order/s3.jpg'),(4,'Намотка4','winding_order/s4.jpg'),(5,'Намотка5','winding_order/s5.jpg'),(6,'Намотка6','winding_order/s6.jpg'),(7,'Намотка7','winding_order/s7.jpg'),(8,'Намотка8','winding_order/s8.jpg');
 /*!40000 ALTER TABLE `winding` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
