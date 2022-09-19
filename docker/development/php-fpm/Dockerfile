@@ -24,8 +24,8 @@ RUN export COMPOSER_ALLOW_SUPERUSER=1;
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-#RUN composer install --prefer-source --no-interaction
+#RUN composer install --prefer-source
 
 WORKDIR /app
 
-#RUN composer update
+#RUN composer update --no-interaction
