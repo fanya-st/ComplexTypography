@@ -7,12 +7,12 @@ use yii\helpers\ArrayHelper;
 class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
-    public static function tableName(): string
+    public static function tableName()
     {
         return 'user';
     }
 
-    public function attributeLabels(): array
+    public function attributeLabels()
     {
         return [
             'id'=>'ID',
@@ -25,7 +25,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'rememberMe'=>'Запомнить меня',
         ];
     }
-    public function rules(): array
+    public function rules()
     {
         return[
             [['F','I','O','password'],'string','max'=>100],
@@ -68,7 +68,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return null;
     }
 
-    public static function findUsersByGroup(string $group): array
+    public static function findUsersByGroup(string $group)
     {
         foreach(self::find()->all() as $user){
             if($user->status_id==0){
@@ -82,7 +82,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
-    public static function findUsersIdDropdown(): array
+    public static function findUsersIdDropdown()
     {
         foreach(self::find()->all() as $user){
             if($user->status_id==0){
@@ -94,7 +94,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
-    public static function getFullNameById(int $id): string
+    public static function getFullNameById(int $id)
     {
         foreach(self::find()->all() as $user){
             if($user->id == $id)
@@ -121,7 +121,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $user_list;
     }
 
-    public static function findByUsername(string $username): null|static
+    public static function findByUsername(string $username)
     {
         foreach (self::find()->all() as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
@@ -133,7 +133,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
 
-    public function getId(): int|string
+    public function getId()
     {
         return $this->id;
     }
@@ -143,12 +143,12 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->authKey;
     }
 
-    public function validateAuthKey($authKey): bool
+    public function validateAuthKey($authKey)
     {
         return $this->authKey === $authKey;
     }
 
-    public function validatePassword($password): bool
+    public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password);
     }

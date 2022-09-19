@@ -10,7 +10,8 @@ services:
       - ./docker/development/nginx/conf.d:/etc/nginx/conf.d:ro
     depends_on:
       - php-fpm
-      - postgres
+#      - postgres
+      - mysql
     restart: always
   php-fpm:
     build:
@@ -26,24 +27,38 @@ services:
     restart: always
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
-#    command: sh -c "composer install"
-  postgres:
-    build:
-      context: docker/development/postgresql
+#  postgres:
+#    image: postgres:latest
+#    ports:
+#      - "5432:5432"
+#    env_file:
+#      - .env
+#    environment:
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#      POSTGRES_DB: ${POSTGRES_DB}
+#    restart: always
+#    volumes:
+#      - ./docker/development/postgresql/data:/var/lib/postgresql/data
+  mysql:
+    image: mysql:latest
     ports:
-      - "5432:5432"
+      - "3306:3306"
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     restart: always
     volumes:
-      - ./docker/development/postgresql/data:/var/lib/postgresql/data
-#  composer:
-#    build:
-#      context: docker/development/composer
-#    volumes:
-#      - ./:/app
-#    depends_on:
-#      - php-fpm
-#      - nginx
+      - ./docker/development/mysql/data:/var/lib/mysql
+      - ./docker/development/mysql/mysql_db_config.sql:/docker-entrypoint-initdb.d/complex-app.sql
+#    command:
+#      docker exec -it mysql_container mysql -u root -p database_name < /docker-entrypoint-initdb.d/schema.sql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 

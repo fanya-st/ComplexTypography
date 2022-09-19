@@ -1,6 +1,7 @@
 !assets/.gitignore
 protected/runtime/*
 docker/development/postgresql/data
+docker/development/mysql/data
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
@@ -9,4 +10,4 @@ web/label
 .idea
 vendor
 runtime
-*.sql
+#*.sql

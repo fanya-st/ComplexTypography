@@ -63,13 +63,13 @@ class CmsController extends Controller
     {
         $searchModel = new OrderSearch();
         $orders = $searchModel->search(Yii::$app->request->post());
-        return $this->render('order\list',compact('orders','searchModel'));
+        return $this->render('order/list',compact('orders','searchModel'));
     }
 
     public function actionOrderView(int $id): string
     {
         $order = Order::findOne($id);
-        return $this->render('order\view',compact('order'));
+        return $this->render('order/view',compact('order'));
     }
 
     public function actionOrderUpdate(int $id): yii\web\Response|string
@@ -78,7 +78,7 @@ class CmsController extends Controller
         if($order->load(Yii::$app->request->post()) && $order->validate(Yii::$app->request->post())){
             if($order->save()) return $this->refresh();
         }
-        return $this->render('order\update',compact('order'));
+        return $this->render('order/update',compact('order'));
     }
 
     /**
@@ -118,7 +118,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('sleeve\create', [
+        return $this->render('sleeve/create', [
             'model' => $model,
         ]);
     }
@@ -131,7 +131,7 @@ class CmsController extends Controller
             return $this->redirect(['sleeve-index']);
         }
 
-        return $this->render('sleeve\update', [
+        return $this->render('sleeve/update', [
             'model' => $model,
         ]);
     }
@@ -144,7 +144,7 @@ class CmsController extends Controller
             'query' => Subject::find(),
         ]);
 
-        return $this->render('subject\index', [
+        return $this->render('subject/index', [
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -161,7 +161,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('subject\create', [
+        return $this->render('subject/create', [
             'model' => $model,
         ]);
     }
@@ -174,7 +174,7 @@ class CmsController extends Controller
             return $this->redirect(['subject-index']);
         }
 
-        return $this->render('subject\update', [
+        return $this->render('subject/update', [
             'model' => $model,
         ]);
     }
@@ -186,7 +186,7 @@ class CmsController extends Controller
         $searchModel = new RegionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
-        return $this->render('region\index', [
+        return $this->render('region/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -204,7 +204,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('region\create', [
+        return $this->render('region/create', [
             'model' => $model,
         ]);
     }
@@ -217,7 +217,7 @@ class CmsController extends Controller
             return $this->redirect(['region-index']);
         }
 
-        return $this->render('region\update', [
+        return $this->render('region/update', [
             'model' => $model,
         ]);
     }
@@ -230,7 +230,7 @@ class CmsController extends Controller
         $searchModel = new TownSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
-        return $this->render('town\index', [
+        return $this->render('town/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -249,7 +249,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('town\create', [
+        return $this->render('town/create', [
             'model' => $model,
         ]);
     }
@@ -263,7 +263,7 @@ class CmsController extends Controller
             return $this->redirect(['town-index']);
         }
 
-        return $this->render('town\update', [
+        return $this->render('town/update', [
             'model' => $model,
         ]);
     }
@@ -276,7 +276,7 @@ class CmsController extends Controller
         $searchModel = new StreetSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
-        return $this->render('street\index', [
+        return $this->render('street/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -294,7 +294,7 @@ class CmsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('street\create', [
+        return $this->render('street/create', [
             'model' => $model,
         ]);
     }

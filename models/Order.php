@@ -35,7 +35,7 @@ class Order extends ActiveRecord{
     {
 		return $this->hasOne(Customer::class,['id'=>'customer_id'])->via('label');
 	}
-    public function getLabelNameSplitOrderId(): string
+    public function getLabelNameSplitOrderId()
     {
         return '['.$this->id.']'.$this->label->name;
     }
@@ -54,12 +54,12 @@ class Order extends ActiveRecord{
         return $this->hasMany(FormOrderHistory::class,['order_id'=>'id']);
 	}
 
-	public function getCombinatedPrintOrder(): array
+	public function getCombinatedPrintOrder()
     {
         return Order::find()->where(['label_id'=>$this->label->combinatedLabel])->all();
 	}
 
-    public function getOrderStatus(): string
+    public function getOrderStatus()
     {
         return OrderStatus::$order_status[$this->status_id];
     }
@@ -83,14 +83,14 @@ class Order extends ActiveRecord{
         return $this->hasOne(Shaft::class,['id'=>'shaft_id'])->via('pants');
     }
 
-    public function getCirculationCountSend(): float|int
+    public function getCirculationCountSend()
     {
 	    foreach($this->finishedProductsWarehouse as $roll)
 	        $count+=$roll->sended_roll_count*$roll->label_in_roll;
         return $count;
     }
 
-    public function getActualCirculation(): float|int
+    public function getActualCirculation()
     {
         foreach(FinishedProductsWarehouse::find()->select(['label_in_roll','roll_count'])->where(['order_id'=>$this->id])->all() as $roll){
             $actual_circulation+=$roll->label_in_roll*$roll->roll_count;
@@ -100,7 +100,7 @@ class Order extends ActiveRecord{
 
 
 
-    public function attributeLabels(): array
+    public function attributeLabels()
     {
         return [
             'id'=>'ID Заказа',
@@ -138,7 +138,7 @@ class Order extends ActiveRecord{
             'cut_edge'=>'Обрезать кромки',
         ];
     }
-    public function rules(): array
+    public function rules()
     {
         return[
             [['status_id','label_id','stretch','cut_edge','label_on_roll','winding_id',
@@ -152,7 +152,7 @@ class Order extends ActiveRecord{
         ];
     }
 
-    public function beforeDelete(): bool
+    public function beforeDelete()
     {
         if (!empty($this->orderMaterialList)) {
             Yii::$app->session->setFlash('error','Заказ не может быть удален, на нем есть расход материала');

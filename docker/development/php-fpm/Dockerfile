@@ -12,7 +12,7 @@ RUN apt-get install -y libpq-dev
 RUN apt-get install -y libmcrypt-dev
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 RUN docker-php-ext-install -j$(nproc) gd
-RUN docker-php-ext-install pgsql pdo_pgsql
+RUN docker-php-ext-install pgsql pdo_pgsql pdo_mysql mysqli
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install calendar
 RUN docker-php-source delete

@@ -7,7 +7,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 class Label extends ActiveRecord{
-    public static function tableName(): string
+    public static function tableName()
     {
         return 'label';
     }
@@ -107,7 +107,7 @@ class Label extends ActiveRecord{
         return "[$this->id] $this->name";
     }
 
-    public function attributeLabels(): array
+    public function attributeLabels()
     {
         return [
             'id'=>'ID',
@@ -158,7 +158,7 @@ class Label extends ActiveRecord{
             'variable_paint_count'=>'Краска переменной печати, мл',
         ];
     }
-    public function rules(): array
+    public function rules()
     {
         return[
             [['name','image','image_crop','image_extended','design_file','prepress_design_file'],'string','max'=>100],
