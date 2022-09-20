@@ -33,9 +33,6 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'mobileDetect' => [
-            'class' => '\skeeks\yii2\mobiledetect\MobileDetect'
-        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,

@@ -16,7 +16,6 @@
     "require": {
         "php": ">=5.6.0",
         "yiisoft/yii2": "~2.0.14",
-        "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "kartik-v/yii2-date-range": "dev-master",
         "kartik-v/yii2-widget-sidenav": "dev-master",
         "yiisoft/yii2-imagine": "^2.3",
@@ -38,14 +37,12 @@
         "2amigos/qrcode-library": "*",
         "kartik-v/yii2-checkbox-x": "dev-master",
         "kartik-v/yii2-widget-datetimepicker": "dev-master",
-        "skeeks/yii2-mobile-detect": "^1.0",
         "phpoffice/phpspreadsheet": "^1.24",
         "kartik-v/yii2-password": "dev-master",
         "kartik-v/yii2-grid": "dev-master",
         "kartik-v/yii2-bootstrap5-dropdown": "@dev",
         "symfony/mailer": "^5.4",
         "et-soft/yii2-widget-select-year": "*",
-        "kartik-v/yii2-ipinfo": "dev-master",
         "ext-calendar": "*"
     },
     "require-dev": {

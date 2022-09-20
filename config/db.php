@@ -6,9 +6,9 @@ return [
     'username' => 'complex-app',
     'password' => 'F1@2n3i4l5',
 
-//    'dsn' => getenv('POSTGRES_ENGINE').':host=localhost;port='.getenv('POSTGRES_PORT').';dbname='.getenv('POSTGRES_DB'),
-//    'username' => getenv('POSTGRES_USER'),
-//    'password' => getenv('POSTGRES_PASSWORD'),
+//    'dsn' => 'pgsql:host=postgres;port=5432;dbname=complex-db',
+//    'username' => 'complex-app',
+//    'password' => 'F1@2n3i4l5',
 
     'charset' => 'utf8'
 //    'enableSchemaCache' => true,

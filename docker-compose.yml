@@ -10,7 +10,7 @@ services:
       - ./docker/development/nginx/conf.d:/etc/nginx/conf.d:ro
     depends_on:
       - php-fpm
-      - postgres
+#      - postgres
       - mysql
     restart: always
   php-fpm:
@@ -30,21 +30,24 @@ services:
 #    command: sh -c "composer update --no-interaction"
 
 
-  postgres:
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-    env_file:
-      - .env
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    restart: always
-    volumes:
-      - ./docker/development/postgresql/data:/var/lib/postgresql/data
+#  postgres:
+#    image: postgres:latest
+#    ports:
+#      - "5432:5432"
+#    env_file:
+#      - .env
+#    environment:
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#      POSTGRES_DB: ${POSTGRES_DB}
+#      POSTGRES_HOST_AUTH_METHOD: trust
+#    restart: always
+#    volumes:
+#      - ./docker/development/postgresql/data:/var/lib/postgresql/data
+
   mysql:
-    image: mysql:latest
+    build:
+      context: docker/development/mysql
     ports:
       - "3306:3306"
     env_file:
@@ -58,22 +61,28 @@ services:
     volumes:
       - ./docker/development/mysql/data:/var/lib/mysql
       - ./docker/development/mysql/mysql_db_config.sql:/docker-entrypoint-initdb.d/complex-app.sql
-      -
+
 #  pgadmin:
-#    image: dpage/pgadmin4
+#    build:
+#      context: docker/development/pgadmin
 #    ports:
 #      - 5555:80
 #    environment:
 #      PGADMIN_DEFAULT_EMAIL: tech@alprint.org
 #      PGADMIN_DEFAULT_PASSWORD: F1@2n3i4l5
 #    restart: always
+#    volumes:
+#      - ./docker/development/pgadmin/data:/var/lib/pgadmin
 #    depends_on:
 #      - postgres
-#  phpmyadmin:
-#    image: phpmyadmin:latest
-#    restart: always
-#    ports:
-#      - 8080:80
-#    environment:
-#      - PMA_ARBITRARY=1
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
 
