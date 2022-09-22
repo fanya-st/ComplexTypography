@@ -5,19 +5,19 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes_from:
+      - php-fpm:ro
     volumes:
-      - ./:/app
-      - ./docker/development/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./docker/development/nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - php-fpm
-#      - postgres
       - mysql
     restart: always
   php-fpm:
     build:
       context: docker/development/php-fpm
     volumes:
-      - ./:/app
+      - ./:/var/www/html:rw
       - ./docker/development/php-fpm/:/usr/local/etc/php
     ports:
       - "9000:9000"
@@ -28,22 +28,6 @@ services:
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
 #    command: sh -c "composer update --no-interaction"
-
-
-#  postgres:
-#    image: postgres:latest
-#    ports:
-#      - "5432:5432"
-#    env_file:
-#      - .env
-#    environment:
-#      POSTGRES_USER: ${POSTGRES_USER}
-#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-#      POSTGRES_DB: ${POSTGRES_DB}
-#      POSTGRES_HOST_AUTH_METHOD: trust
-#    restart: always
-#    volumes:
-#      - ./docker/development/postgresql/data:/var/lib/postgresql/data
 
   mysql:
     build:
@@ -61,20 +45,6 @@ services:
     volumes:
       - ./docker/development/mysql/data:/var/lib/mysql
       - ./docker/development/mysql/mysql_db_config.sql:/docker-entrypoint-initdb.d/complex-app.sql
-
-#  pgadmin:
-#    build:
-#      context: docker/development/pgadmin
-#    ports:
-#      - 5555:80
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: tech@alprint.org
-#      PGADMIN_DEFAULT_PASSWORD: F1@2n3i4l5
-#    restart: always
-#    volumes:
-#      - ./docker/development/pgadmin/data:/var/lib/pgadmin
-#    depends_on:
-#      - postgres
 
   phpmyadmin:
     image: phpmyadmin:latest
