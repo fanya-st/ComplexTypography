@@ -1,6 +1,9 @@
 FROM php:8.1-fpm
 
+ENV TZ=Europe/Moscow
+
 RUN apt-get update
+RUN apt-get install -y tzdata
 RUN apt-get install -y libfreetype6-dev
 RUN apt-get install -y libjpeg62-turbo-dev
 RUN apt-get install -y libpng-dev
@@ -8,6 +11,9 @@ RUN apt-get install -y libzip-dev
 RUN apt-get install -y zip
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y libmcrypt-dev
+
+RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 #RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 RUN docker-php-ext-install -j$(nproc) gd

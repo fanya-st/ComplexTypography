@@ -1,6 +1,10 @@
-#FROM nginx:latest
-FROM nginx:1.22-alpine
+FROM nginx:latest
 
-#COPY ./conf.d /etc/nginx/conf.d
+ENV TZ=Europe/Moscow
+
+RUN apt-get update
+RUN apt-get install -y tzdata
+
+RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /app

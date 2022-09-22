@@ -37,6 +37,7 @@ services:
     env_file:
       - .env
     environment:
+      TZ: "Europe/Moscow"
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
