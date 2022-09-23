@@ -34,7 +34,6 @@
         "kartik-v/yii2-detail-view": "dev-master",
         "kartik-v/yii2-field-range": "dev-master",
         "ruskid/yii2-csv-importer": "dev-master",
-        "2amigos/qrcode-library": "*",
         "kartik-v/yii2-checkbox-x": "dev-master",
         "kartik-v/yii2-widget-datetimepicker": "dev-master",
         "phpoffice/phpspreadsheet": "^1.24",
@@ -44,7 +43,9 @@
         "yiisoft/yii2-symfonymailer": "*",
         "et-soft/yii2-widget-select-year": "*",
         "ext-calendar": "*",
-        "yiithings/yii2-dotenv": "dev-master"
+        "yiithings/yii2-dotenv": "dev-master",
+        "thamtech/yii2-uuid": "dev-master",
+        "chillerlan/php-qrcode": "dev-main"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -896,7 +896,7 @@ CREATE TABLE `mashine_pants` (
   KEY `mashine_pants_pants_id_fka` (`pants_id`),
   CONSTRAINT `mashine_pants_mashine_id_fka` FOREIGN KEY (`mashine_id`) REFERENCES `mashine` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `mashine_pants_pants_id_fka` FOREIGN KEY (`pants_id`) REFERENCES `pants` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1360,7 +1360,7 @@ CREATE TABLE `pants` (
   CONSTRAINT `pants_material_group_id_fk` FOREIGN KEY (`material_group_id`) REFERENCES `material_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `pants_pants_kind_id_fk` FOREIGN KEY (`pants_kind_id`) REFERENCES `pants_kind` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `pants_shaft_id_fk` FOREIGN KEY (`shaft_id`) REFERENCES `shaft` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=2858 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

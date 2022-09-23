@@ -28,12 +28,9 @@ use app\models\User;
             </div>
         </div>
     </div>
-<!--    <div class="row g-2 row-cols-lg-2">-->
-<!--        <div class="col-lg">-->
     <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-info p-1 rounded">Параметры печати</h6>
-<!--            --><?//if ($order->status_id==3) echo Html::tag('h6','Печать приостановлена',['class'=>'bg-warning p-1 rounded'])?>
             <h6>Совместная печать: </h6>
                 <? echo Html::tag('h6','Печатник: ' .Html::encode(User::getFullNameById($order->printer_id)));
                 echo Html::tag('h6','Дата начала печати: ' .Html::encode($order->date_of_print_begin));
@@ -103,8 +100,7 @@ use app\models\User;
                 }
                 echo Html::encode($packed_circulation);
                 ?>
-            На отправку, шт: <?=Html::encode($sended_circulation)?>
-<!--            Излишки, шт: --><?//=Html::encode($rewinded_circulation-$packed_circulation)?>
+            На отправку, шт: <?=Html::encode(!empty($sended_circulation) ? $sended_circulation:0)?>
             </h6>
             <h6>
                 <?
@@ -123,7 +119,7 @@ use app\models\User;
                     $packed_box += $packed_roll->packed_box_count;
                     $packed_bale += $packed_roll->packed_bale_count;
                 }
-                echo 'Коробки:'.Html::encode($packed_box).' Тюки:'.Html::encode($packed_bale);
+                echo 'Коробки:'.Html::encode(!empty($packed_box) ? $packed_box:0).' Тюки:'.Html::encode(!empty($packed_bale) ? $packed_bale:0);
                 Modal::end()
                 ?>
 
@@ -143,7 +139,7 @@ use app\models\User;
                     $sended_box += $sended_roll->sended_box_count;
                     $sended_bale += $sended_roll->sended_bale_count;
                 }
-                echo 'Коробки:'.Html::encode($sended_box).' Тюки:'.Html::encode($sended_bale);
+                echo 'Коробки:'.Html::encode(!empty($sended_box) ? $sended_box:0).' Тюки:'.Html::encode(!empty($sended_bale) ? $sended_bale:0);
                 Modal::end()
                 ?></h6>
         </div>

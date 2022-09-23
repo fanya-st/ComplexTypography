@@ -18,13 +18,12 @@ function printDiv(){
     View::POS_HEAD,
     'barcode-print'
 );
-$qrCode = (new QrCode($paper_warehouse->id))
-    ->setSize(300);
+$qrCode = (new \chillerlan\QRCode\QRCode())->render($paper_warehouse->id);
 
                 echo html::beginTag('div',['id'=>'print']);
                 echo Html::tag('p', Html::encode($paper_warehouse->material->name.' Ширина: '.$paper_warehouse->width.
                     'мм Длина: '.$paper_warehouse->length.' м'),['style'=>'font-size:10px;text-align:center;']);
-                echo Html::tag('div',Html::img($qrCode->writeDataUri(), ['alt' => 'qrcode','width'=>70,'height'=>70]),
+                echo Html::tag('div',Html::img($qrCode, ['alt' => 'qrcode','width'=>70,'height'=>70]),
                     ['style'=>'text-align:center;']);
                 echo Html::tag('p', Html::encode($paper_warehouse->id),['style'=>'font-size:10px;text-align:center;']);
                 echo html::endTag('div');

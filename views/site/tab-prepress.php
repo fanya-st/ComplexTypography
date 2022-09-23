@@ -38,6 +38,7 @@ use yii\widgets\Pjax;
             <div class="d-lg-flex flex-wrap">
                 <div class="p-1"><?= Html::a('Краски, лаки и химия', ['pantone/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Штанцы', ['pants/index'], ['class' => 'btn btn-primary']) ?></div>
+                <div class="p-1"><?= Html::a('Валы', ['shaft/index'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?= Html::a('Добавить штанец', ['pants/create'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>

@@ -51,7 +51,7 @@ class PantsController extends Controller
     public function actionIndex(): string
     {
         $searchModel = new PantsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->post());
+        $dataProvider = $searchModel->search($this->request->post());
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -60,6 +60,9 @@ class PantsController extends Controller
     }
 
 
+    /**
+     * @throws NotFoundHttpException
+     */
     public function actionView(int $id): string
     {
         return $this->render('view', [
@@ -116,7 +119,10 @@ class PantsController extends Controller
         return $this->redirect(['index']);
     }
 
-    protected function findModel(int $id): ?Pants
+    /**
+     * @throws NotFoundHttpException
+     */
+    protected function findModel(int $id)
     {
         if (($model = Pants::findOne(['id' => $id])) !== null) {
             return $model;

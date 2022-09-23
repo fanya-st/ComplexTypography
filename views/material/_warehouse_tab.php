@@ -15,7 +15,7 @@ use yii\bootstrap5\Html;
         </tr>
         </thead>
         <tbody>
-        <?foreach ($material_warehouse as $material):?>
+        <?php foreach ($material_warehouse as $material):?>
             <tr>
                 <td><?=Html::encode($material->material->name)?></td>
                 <td><?=Html::encode($material->width)?></td>
@@ -27,7 +27,7 @@ use yii\bootstrap5\Html;
             <td></td>
             <td></td>
             <td></td>
-            <td>Итого: <?=$summary?> м<sup>2</sup></td>
+            <td>Итого: <?= !empty($summary) ? $summary:0 ?> м<sup>2</sup></td>
         </tr>
         </tbody>
     </table>

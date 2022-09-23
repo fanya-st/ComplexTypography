@@ -1,8 +1,8 @@
 <?php
 
 use yii\bootstrap5\Html;
-//use yii\widgets\DetailView;
-use kartik\detail\DetailView;
+use yii\widgets\DetailView;
+//use kartik\detail\DetailView;
 
 
 $this->title = 'Штанец №'.$model->id;
@@ -22,8 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-<!--    <pre>--><?//print_r($model)?><!--</pre>-->
-    <?= DetailView::widget([
+    <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -42,14 +41,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'height_label',
             [
                     'label'=>'Совместимость',
-                'displayOnly'=>true,
-                    'value'=>call_user_func(function($model){
-                        foreach($model->mashinePants as $mashine){
-                            $mashine_list.= $mashine->mashine->name.', ';
-                        }
-                        return $mashine_list;
 
-                    },$model),
+                'value'=>function($model){
+                    $mashine_list='';
+                    foreach($model->mashinePants as $mashine)
+                    {
+                        $mashine_list.= $mashine->mashine->name.', ';
+                    }
+                    return $mashine_list;
+                },
             ],
             [
                 'attribute'=>'knife_kind_id',

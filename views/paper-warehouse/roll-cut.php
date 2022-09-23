@@ -1,8 +1,6 @@
 <?php
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
-use kartik\icons\Icon;
-Icon::map($this, Icon::FA);
 
 $this->title = Html::encode('Разрезать ролик');
 $this->params['breadcrumbs'][] = ['label' => 'Склад', 'url' => ['paper-warehouse/list']];
@@ -10,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h2><?= Html::encode($this->title) ?></h2>
 
-<?if(isset($roll1) && isset($roll2)):?>
+<?php if(isset($roll1) && isset($roll2)):?>
     <table class="table small">
         <thead>
         <tr>

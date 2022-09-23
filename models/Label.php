@@ -12,27 +12,27 @@ class Label extends ActiveRecord{
         return 'label';
     }
 
-    public function getOrder(): \yii\db\ActiveQuery
+    public function getOrder()
     {
 		return $this->hasMany(Order::class,['label_id'=>'id']);
 	}
-	public function getForm(): \yii\db\ActiveQuery
+	public function getForm()
     {
 	    if (!empty($this->combination))
             return $this->hasMany(Form::class,['label_id'=>'id'])->via('combination');
 		return $this->hasMany(Form::class,['label_id'=>'id']);
 	}
-    public function getFormCount(): int
+    public function getFormCount()
     {
 	    if (count($this->form)==0) return count($this->combinatedForm);
 	    else
 	    return count($this->form);
     }
-	public function getPantone(): \yii\db\ActiveQuery
+	public function getPantone()
     {
 		return $this->hasMany(Pantone::class,['id'=>'pantone_id'])->via('form');
 	}
-	public function getPantoneCombinated(): \yii\db\ActiveQuery
+	public function getPantoneCombinated()
     {
 		return $this->hasMany(Pantone::class,['id'=>'pantone_id'])->via('combinatedForm');
 	}
@@ -44,43 +44,45 @@ class Label extends ActiveRecord{
             return $this->pantone;
     }
 
-	public function getCombinatedForm(): \yii\db\ActiveQuery
+	public function getCombinatedForm()
     {
 		return $this->hasMany(Form::class,['combination_id'=>'combination_id'])->via('combination');
 	}
-	public function getCombination(): \yii\db\ActiveQuery
+	public function getCombination()
     {
 		return $this->hasOne(CombinationForm::class,['label_id'=>'id']);
 	}
-	public function getCombinatedLabel(): array
+	public function getCombinatedLabel()
     {
-	    return ArrayHelper::map(CombinationForm::find()->where(['combination_id'=>$this->combination->combination_id])->all(),'label_id','label_id');
+        if (!empty($this->combination)) {
+            return ArrayHelper::map(CombinationForm::find()->where(['combination_id'=>$this->combination->combination_id])->all(),'label_id','label_id');
+        }
 	}
-    public function getVarnishStatus(): \yii\db\ActiveQuery
+    public function getVarnishStatus()
     {
         return $this->hasOne(VarnishStatus::class,['id'=>'varnish_id']);
     }
-    public function getBackgroundLabel(): \yii\db\ActiveQuery
+    public function getBackgroundLabel()
     {
         return $this->hasOne(BackgroundLabel::class,['id'=>'background_id']);
     }
-    public function getOutputLabel(): \yii\db\ActiveQuery
+    public function getOutputLabel()
     {
         return $this->hasOne(OutputLabel::class,['id'=>'output_label_id']);
     }
-    public function getFoil(): \yii\db\ActiveQuery
+    public function getFoil()
     {
         return $this->hasOne(Foil::class,['id'=>'foil_id']);
     }
-    public function getCustomer(): \yii\db\ActiveQuery
+    public function getCustomer()
     {
         return $this->hasOne(Customer::class,['id'=>'customer_id']);
     }
-    public function getLabelStatus(): string
+    public function getLabelStatus()
     {
         return LabelStatus::$label_status[$this->status_id];
     }
-    public function getPants(): \yii\db\ActiveQuery
+    public function getPants()
     {
         return $this->hasOne(Pants::class,['id'=>'pants_id']);
     }

@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?=$this->render('_search', ['model' => $searchModel])?>
 <div class="d-lg-flex flex-wrap">
     <div class="p-2"><?= Html::a('Создать штанец', ['create'], ['class' => 'btn btn-success']) ?></div>
+    <div class="p-2"><?= Html::a('Создать вал', ['shaft/create'], ['class' => 'btn btn-success']) ?></div>
     <div class="p-2"><?=Html::a('Совместимость штанцев со станками', ['mashine-pants/index'], ['class' => 'btn btn-success'])?></div>
 </div>
 

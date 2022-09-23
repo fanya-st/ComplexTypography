@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use app\models\Pants;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use app\models\Calculator;
 use yii\web\Response;
@@ -17,6 +18,12 @@ class CalculatorController extends Controller
     public function behaviors(): array
     {
         return [
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'get-pants-param' => ['GET'],
+                ],
+                ],
             'access' => [
                 'class' => AccessControl::class,
                 'rules' => [

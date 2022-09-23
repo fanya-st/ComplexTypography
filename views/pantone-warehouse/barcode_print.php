@@ -20,13 +20,12 @@ function printDiv(){
     View::POS_HEAD,
     'barcode-print'
 );
-$qrCode = (new QrCode($pantone_warehouse->id))
-    ->setSize(300);
+$qrCode = (new \chillerlan\QRCode\QRCode())->render($pantone_warehouse->id);
 
                 echo html::beginTag('div',['id'=>'print']);
                 echo Html::tag('p', Html::encode($pantone_warehouse->pantone->name.' Вес: '.$pantone_warehouse->weight.' кг'),
                     ['style'=>'font-size:10px;text-align:center;']);
-                echo Html::tag('div',Html::img($qrCode->writeDataUri(), ['alt' => 'qrcode','width'=>70,'height'=>70]),
+                echo Html::tag('div',Html::img($qrCode, ['alt' => 'qrcode','width'=>70,'height'=>70]),
                     ['style'=>'text-align:center;']);
                 echo Html::tag('p', Html::encode($pantone_warehouse->id),['style'=>'font-size:10px;text-align:center;']);
                 echo html::endTag('div');

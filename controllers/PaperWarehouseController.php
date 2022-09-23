@@ -43,7 +43,7 @@ class PaperWarehouseController extends Controller
     public function actionList(): string
     {
         $searchModel = new PaperWarehouseSearch();
-        $paper_warehouse = $searchModel->search(Yii::$app->request->post());
+        $paper_warehouse = $searchModel->search($this->request->post());
         return $this->render('list',compact('paper_warehouse','searchModel'));
     }
 
@@ -69,17 +69,21 @@ class PaperWarehouseController extends Controller
     public function actionRollCut(): string
     {
         $paper_warehouse=new PaperWarehouseRollCut();
-        if ($paper_warehouse->load(Yii::$app->request->post())) {
+        if ($this->request->isPost) {
+        if ($paper_warehouse->load($this->request->post())) {
             if ($paper_warehouse->rollcut()){
-                $roll1=PaperWarehouse::findOne($paper_warehouse->id1);
-                $roll2=PaperWarehouse::findOne($paper_warehouse->id2);
+                $rollone=PaperWarehouse::findOne($paper_warehouse->id1);
+                $rolltwo=PaperWarehouse::findOne($paper_warehouse->id2);
             }
+            return $this->render('roll-cut',compact('paper_warehouse', 'rollone', 'rolltwo'));
         }
-        return $this->render('roll-cut',compact('paper_warehouse','roll1','roll2'));
+        }
+        return $this->render('roll-cut',compact('paper_warehouse'));
     }
 
     public function actionUploadPaperToWarehouse(): yii\web\Response|string
     {
+        $upload_paper_list = null;
         $paper = new ActiveDataProvider([
             'query' => UploadPaper::find()
         ]);

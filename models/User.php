@@ -94,7 +94,7 @@ class User extends yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
-    public static function getFullNameById(int $id)
+    public static function getFullNameById(int|null $id )
     {
         foreach(self::find()->all() as $user){
             if($user->id == $id)

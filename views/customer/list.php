@@ -1,19 +1,16 @@
 <?php
-
-
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use app\models\User;
+use kartik\icons\Icon;
 
 $this->title = 'Работа с заказчиками';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
-<?echo $this->render('_search', ['model' => $searchModel])?>
-<div class="d-lg-flex flex-wrap">
-    <div class="p-2"><?= Html::a('Добавить заказчика', ['/customer/create'], ['class'=>'btn btn-primary']) ?></div>
-</div>
-<? echo GridView::widget([
+<?php echo $this->render('_search', ['model' => $searchModel])?>
+<div class="table-responsive">
+<?php echo GridView::widget([
     'dataProvider' => $customers,
     'id'=>'order-list',
     'columns' => [
@@ -29,8 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'email',
         'number',
         ['class' => 'yii\grid\ActionColumn',
-            'template' => '{view} {update}'
+            'template' => '{update} {view}',
+            'buttons' => [
+                'update' => function($url, $model, $key) {     // render your custom button
+                    return Html::a(Html::button( Icon::show('edit', ['class'=>'fa-0.1x'], Icon::FA),
+                        ['class' => 'btn btn-outline-primary']), ['customer/update', 'id' => $model->id]);
+                },
+                'view' => function($url, $model, $key) {     // render your custom button
+                    return Html::a(Html::button( Icon::show('eye', ['class'=>'fa-0.1x'], Icon::FA),
+                        ['class' => 'btn btn-outline-success']), ['customer/view', 'id' => $model->id]);
+                }
+            ]
         ],
     ],
 ]);
 ?>
+</div>

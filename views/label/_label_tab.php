@@ -90,7 +90,9 @@ use app\models\User;
                         .Html::encode($f->pantoneName.'-'.$f->formDefect->name)
                         .'</small>';
                 ?>
-                    <h6>Совмещение (ID этикеток): <?foreach ($label->combinatedLabel as $label_id) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($label_id).'</span>'?> </h6>
+                    <h6>Совмещение (ID этикеток): <?php if (isset($label->combinatedLabel)) {
+                            foreach ($label->combinatedLabel as $label_id) echo '<span class="badge rounded-pill bg-primary">'.Html::encode($label_id).'</span>';
+                        } ?> </h6>
                 <blockquote class="blockquote">
                     <p class="small"><?=Html::encode($label->prepress_note)?></p>
                     <footer class="blockquote-footer">Примечание Prepress</footer>
@@ -100,19 +102,23 @@ use app\models\User;
         <div class="row border p-2 rounded-lg">
             <div class="col">
                 <h6>Параметры Лаборатория:</h6>
-                <h6>Конверт: <? if (!empty($label->combination->combination_id)):?>
-                        <? echo '<span class="badge rounded-pill bg-secondary">'.Form::find()->where(['combination_id'=>$label->combination])
-                                ->one()->envelope->idWithColor.'</span>'?>
-                    <? else: ?>
-                        <? echo '<span class="badge rounded-pill bg-secondary">'.Form::find()->where(['label_id'=>$label->id])->one()->envelope->idWithColor.'</span>'?>
-
-                    <? endif; ?>
-                </h6>
+                <?php if (!empty($label->combination->combination_id)){
+                    $form=Form::find()->where(['combination_id'=>$label->combination])
+                            ->one();
+                }else{
+                    $form=Form::find()->where(['label_id'=>$label->id])->one();
+                }
+                if (!empty($form->envelope)) {
+                    $envelope=$form->envelope->idWithColor;
+                }else{
+                    $envelope='';
+                }
+                ?>
+                <h6>Конверт: <span class="badge rounded-pill bg-secondary"><?php echo $envelope?></span></h6>
                 <blockquote class="blockquote">
                     <p class="small"><?=Html::encode($label->laboratory_note)?></p>
                     <footer class="blockquote-footer">Примечание Лаборатория</footer>
                 </blockquote>
-<!--                <pre>--><?//print_r($label->combination->combination_id)?><!--</pre>-->
             </div>
         </div>
     </div>

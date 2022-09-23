@@ -11,7 +11,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
 <?=$this->render('_search', ['model' => $searchModel])?>
-<div class="p-1"><?=Html::a('Создать материал', ['material/create'], ['class'=>'btn btn-primary'])?></div>
+<div class="d-lg-flex flex-wrap">
+    <div class="p-2"><?=Html::a('Создать материал', ['material/create'], ['class'=>'btn btn-primary'])?></div>
+    <div class="p-2"><?=Html::a('Добавить тип материала', ['material-group/create'], ['class'=>'btn btn-primary'])?></div>
+</div>
 <? $form=ActiveForm::begin(['method' => 'post'])?>
 <div class="table-responsive">
 <?= GridView::widget([

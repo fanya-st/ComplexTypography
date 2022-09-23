@@ -15,7 +15,10 @@ echo DetailView::widget([
         'id',
         'name',
         'user_id',
-        'customerStatus.name',
+        [
+                'attribute'=>'status_id',
+                'value'=>\app\models\CustomerStatus::$customer_status[$customer->status_id]
+        ],
         'date_of_agreement',
         'customerAddress',
         'contact',

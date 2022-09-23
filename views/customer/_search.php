@@ -40,7 +40,10 @@ use app\models\CustomerStatus;
                     ],
                 ])->label(false)?></div>
         </div>
-        <div class="p-1"><?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
+        <div class="d-lg-flex flex-wrap">
+        <div class="p-2"><?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
+        <div class="p-2"><?= Html::a('Добавить заказчика', ['customer/create'], ['class'=>'btn btn-primary']) ?></div>
+        </div>
     </div>
 </div>
 <?php ActiveForm::end() ?>

@@ -62,8 +62,9 @@ function printDiv(divName){
                         <td><?=Html::encode($paper->paperWarehouse->material->name)?></td>
                         <td><?=Html::encode($paper->length)?></td>
                         <td>
-                            <?$qrCode = (new QrCode($paper->paperWarehouse->id))
-                                ->setSize(300);?>
+                            <?
+                            $qrCode = (new \chillerlan\QRCode\QRCode())->render($paper->paperWarehouse->id);
+                            ?>
                             <?
                             Modal::begin([
                                 'title'=>'<h4>QR-код</h4>',
@@ -74,7 +75,7 @@ function printDiv(divName){
                             echo "<div id='modalContent-".$paper->paperWarehouse->id."'>";
                             echo Html::tag('p', Html::encode($paper->paperWarehouse->material->name.' Ширина: '.$paper->paperWarehouse->width.
                                 'мм Длина: '.$paper->paperWarehouse->length.' м'),['class'=>'small text-center','style'=>'font-size:10px']);
-                            echo Html::tag('div',Html::img($qrCode->writeDataUri(), ['alt' => 'qrcode','width'=>70,'height'=>70]),
+                            echo Html::tag('div',Html::img($qrCode, ['alt' => 'qrcode','width'=>70,'height'=>70]),
                                 ['style'=>'text-align:center;']);
                             echo Html::tag('p', Html::encode($paper->paperWarehouse->id),['class'=>'small text-center']);
                             echo "</div>";

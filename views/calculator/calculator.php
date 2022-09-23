@@ -5,6 +5,7 @@ use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Pants;
 use app\models\Shaft;
+use yii\helpers\Url;
 use yii\web\View;
 use app\models\Mashine;
 use app\models\Material;
@@ -12,14 +13,16 @@ use kartik\select2\Select2;
 
 $this->title = Html::encode('Калькулятор');
 $this->params['breadcrumbs'][] = $this->title;
+$url=Url::toRoute(['calculator/get-pants-param','pants_id'=>'']);
+$csrfToken = Yii::$app->request->csrfToken;
 $this->registerJs(
     "
     function getPantsParam() {
     var pants_id=document.getElementById('calculator-pants_id').value;
      $.ajax({
-        url: 'index.php?r=calculator/get-pants-param&pants_id='+pants_id,
-        date: { pants_id:pants_id,_csrf:'".Yii::$app->request->csrfToken."'},
-        method: 'POST',
+        url: '".$url."'+pants_id,
+        date: {_csrf: '".$csrfToken."'},
+        method: 'GET',
         dataType: 'json',
         success: function (date) {
             document.getElementById('pants-width_label').value=date.message.width_label;
@@ -41,7 +44,7 @@ $this->registerJs(
 ?>
 <h3><?= Html::encode($this->title)?></h3>
 <?$form=ActiveForm::begin(['method'=>'post'])?>
-<?if($calculator->calculated_label_price):?>
+<?php if($calculator->calculated_label_price):?>
     <div class="border p-3 rounded">
         <h6 class="bg-light p-1 rounded">Результаты расчета</h6>
         <div class="p-1 row">
@@ -213,9 +216,9 @@ $this->registerJs(
         </div>
     </div>
 </div>
-<?ACtiveForm::end()?>
+<?php ActiveForm::end()?>
 
-<pre><?print_r($calculator)?></pre>
+<!--<pre>--><?//print_r($calculator)?><!--</pre>-->
 <!--<pre>--><?//print_r($pants)?><!--</pre>-->
 <!--<pre>--><?//print_r(CalcMashineParamValue::getMashineParam(1))?><!--</pre>-->
 <!--<pre>--><?//print_r(CalcMashineParamValue::find()->joinWith('calcMashineParam')->where(['mashine_id'=>1])->all())?><!--</pre>-->
