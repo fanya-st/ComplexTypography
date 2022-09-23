@@ -100,7 +100,7 @@ class CmsController extends Controller
             'query' => Sleeve::find(),
         ]);
 
-        return $this->render('sleeve\index', [
+        return $this->render('sleeve/index', [
             'dataProvider' => $dataProvider,
         ]);
     }
