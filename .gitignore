@@ -4,8 +4,6 @@ docker/common/mysql/data
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
-web/pants/*
-web/label/*
 .idea
 vendor
 #*.sql
