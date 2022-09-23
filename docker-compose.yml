@@ -1,29 +1,26 @@
 services:
   nginx:
     build:
-      context: docker/development/nginx
+      context: docker/production/nginx
     ports:
       - "80:80"
       - "443:443"
     volumes_from:
       - php-fpm:ro
     volumes:
-      - ./docker/development/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/production/nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - php-fpm
       - mysql
     restart: always
   php-fpm:
     build:
-      context: docker/development/php-fpm
+      context: docker/production/php-fpm
     volumes:
       - ./:/var/www/html:rw
-      - ./docker/development/php-fpm/:/usr/local/etc/php
+      - ./docker/production/php-fpm/php/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "9000:9000"
-    cap_add:
-      - SYS_NICE
-      - DAC_READ_SEARCH
     restart: always
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
@@ -31,7 +28,7 @@ services:
 
   mysql:
     build:
-      context: docker/development/mysql
+      context: docker/common/mysql
     ports:
       - "3306:3306"
     env_file:
@@ -44,8 +41,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     restart: always
     volumes:
-      - ./docker/development/mysql/data:/var/lib/mysql
-      - ./docker/development/mysql/mysql_db_config.sql:/docker-entrypoint-initdb.d/complex-app.sql
+      - ./docker/common/mysql/data:/var/lib/mysql
+      - ./docker/common/mysql/mysql_db_config.sql:/docker-entrypoint-initdb.d/complex-app.sql
 
   phpmyadmin:
     image: phpmyadmin:latest

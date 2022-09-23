@@ -21,7 +21,6 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '_gaylA8L4sBKm1FAz1aL7JXZyF22RRyE',
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
@@ -45,33 +44,24 @@ $config = [
 //            'class' => 'yii\web\CacheSession',
 //        ],
         'mailer' => [
-            'class' => 'yii\symfony\Mailer',
+            'class' => \yii\symfonymailer\Mailer::class,
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+            'viewPath' => '@app/mail',
             'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.yandex.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
-                'username' => 'admin@alprint.org',
-                'password' => 'password',
-                'port' => '465', // Port 25 is a very common port too
-                'encryption' => 'ssl', // It is often used, check your provider or mail server specs
+                'dsn' => 'smtp://tech@alprint.org:pass@smtp.yandex.com:465',
             ],
         ],
         'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'traceLevel' => 0,
             'targets' => [
                 'file'=>[
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error','info','warning'],
                     'logVars' => ['_GET', '_POST'],
                 ],
-//                'db'=>[
-//                    'class' => 'yii\log\DbTarget',
-//                    'levels' => ['info'],
-//                    'logVars' => ['_GET', '_POST'],
-//                ],
             ],
         ],
         'db' => $db,
@@ -93,22 +83,12 @@ $config = [
     'params' => $params,
 ];
 
-if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
-        'allowedIPs' => ['*'],
-    ];
-
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
-    ];
-}
+//$config['bootstrap'][] = 'debug';
+//$config['modules']['debug'] = [
+//    'class' => 'yii\debug\Module',
+//    // uncomment the following to add your IP if you are not connecting from localhost.
+//    //'allowedIPs' => ['127.0.0.1', '::1'],
+//    'allowedIPs' => ['*'],
+//];
 
 return $config;

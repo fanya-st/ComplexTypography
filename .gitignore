@@ -1,7 +1,6 @@
 !assets/.gitignore
 protected/runtime/*
-docker/development/postgresql/data
-docker/development/mysql/data
+docker/common/mysql/data
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
