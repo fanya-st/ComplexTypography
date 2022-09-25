@@ -14,20 +14,20 @@ $this->params['breadcrumbs'][] = ['label' => 'Работа с этикеткам
 $this->params['breadcrumbs'][] = ['label' => 'ID['.$cur_label->id.'] '.$cur_label->name, 'url' => ['label/view','id'=>$cur_label->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?$form = ActiveForm::begin()?>
-    <h3><?= Html::encode($this->title)?></h3>
-    <h6>Флексоформы выполнил: <?=User::getFullNameById($cur_label->laboratory_id)?></h6>
-    <h6>Штанец №: <?=Pants::findOne($cur_label->pants_id)->name?></h6>
-    <h6>Совмещение (ID этикеток): <?foreach ($cur_label->combinatedLabel as $label_id) echo '<span class=" badge rounded-pill bg-primary">'.$label_id.'</span>'?> </h6>
+<?php $form = ActiveForm::begin()?>
+    <h3><?php echo  Html::encode($this->title)?></h3>
+    <h6>Флексоформы выполнил: <?php echo User::getFullNameById($cur_label->laboratory_id)?></h6>
+    <h6>Штанец №: <?php echo Pants::findOne($cur_label->pants_id)->name?></h6>
+    <h6>Совмещение (ID этикеток): <?php foreach ($cur_label->combinatedLabel as $label_id) echo '<span class=" badge rounded-pill bg-primary">'.$label_id.'</span>'?> </h6>
     <div class="row">
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <?=$form->field($flexform,'polymer_id')->dropDownList(ArrayHelper::map(Polymer::find()->all(), 'id',
+                    <?php echo $form->field($flexform,'polymer_id')->dropDownList(ArrayHelper::map(Polymer::find()->all(), 'id',
                         'name'))?>
                 </div>
                 <div class="col">
-                    <?=$form->field($flexform,'envelope_id')->widget(Select2::class, [
+                    <?php echo $form->field($flexform,'envelope_id')->widget(Select2::class, [
                         'data' => ArrayHelper::map(Envelope::find()->all(), 'id', 'id'),
                         'options' => ['placeholder' => 'Выберите конверт...'],
                         'pluginOptions' => [
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col">
         </div>
         <h6>Список форм:</h6>
-        <?echo GridView::widget([
+        <?phpecho GridView::widget([
             'dataProvider' => $forms,
             'columns' => [
                 'id',
@@ -53,8 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'photoOutput.name',
             ]
         ])?>
-        <?=$form->field($cur_label,'laboratory_note')->textarea()?>
+        <?php echo $form->field($cur_label,'laboratory_note')->textarea()?>
     </div>
-<?=Html::submitButton('Сохранить',['class'=>'btn btn-success'])?>
-<?ActiveForm::end()?>
+<?php echo Html::submitButton('Сохранить',['class'=>'btn btn-success'])?>
+<?php ActiveForm::end()?>
 

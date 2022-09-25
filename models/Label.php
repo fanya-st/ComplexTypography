@@ -86,23 +86,10 @@ class Label extends ActiveRecord{
     {
         return $this->hasOne(Pants::class,['id'=>'pants_id']);
     }
-
-    public function getLaminateName(){
-        if($this->laminate==0) return 'Нет'; else return 'Да';
-    }
-    public function getVariableName(){
-        if($this->variable==0) return 'Нет'; else return 'Да';
-    }
     public function getOrientationName(){
         if($this->orientation==0) return 'Не указана';
         elseif($this->orientation==1) return 'Альбомная';
         else return 'Книжная';
-    }
-    public function getStencilName(){
-        if($this->stencil==0) return 'Нет'; else return 'Да';
-    }
-    public function getPrintOnGlueName(){
-        if($this->print_on_glue==0) return 'Нет'; else return 'Да';
     }
     public function getNameSplitId(): string
     {

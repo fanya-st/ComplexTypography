@@ -11,12 +11,12 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput() ?>
+    <?php echo  $form->field($model, 'name')->textInput() ?>
 
-    <?= $form->field($model, 'polymer_kind_id')->dropDownList(ArrayHelper::map(PolymerKind::find()->asArray()->all(),'id','name')) ?>
+    <?php echo  $form->field($model, 'polymer_kind_id')->dropDownList(ArrayHelper::map(PolymerKind::find()->asArray()->all(),'id','name')) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

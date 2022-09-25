@@ -35,8 +35,8 @@ function changeSummary(){
 <div class="row g-2 row-cols-3">
         <?php $form = ActiveForm::begin()?>
         <div id='box-label' class="col p-1 rounded">
-            <?=html::tag('p',Yii::$app->params['company_full_name'].' т/ф '.Yii::$app->params['company_number'],['class'=>'fw-bold'])?>
-            <?=html::tag('p','Заказчик: '.$order->label->customer->name,['class'=>'fw-bold'])?>
+            <?php echo html::tag('p',Yii::$app->params['company_full_name'].' т/ф '.Yii::$app->params['company_number'],['class'=>'fw-bold'])?>
+            <?php echo html::tag('p','Заказчик: '.$order->label->customer->name,['class'=>'fw-bold'])?>
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -46,23 +46,23 @@ function changeSummary(){
                 </tr>
                 </thead>
                 <tbody>
-                <?foreach ($finished_products as $index =>$finished_product):?>
+                <?php foreach ($finished_products as $index =>$finished_product):?>
                 <tr>
-                    <td><?=$order->label->name?></td>
-                    <td><?=$form->field($finished_product, "[$index]packed_roll_count")->textInput(['id'=>'count_roll','onchange'=>'changeSummary()','value'=>$finished_product->packed_roll_count])->label(false)?></td>
-                    <td><?=$form->field($finished_product, "[$index]label_in_roll")->textInput(['id'=>'label_in_roll','value'=>$finished_product->label_in_roll])->label(false)?></td>
+                    <td><?php echo $order->label->name?></td>
+                    <td><?php echo $form->field($finished_product, "[$index]packed_roll_count")->textInput(['id'=>'count_roll','onchange'=>'changeSummary()','value'=>$finished_product->packed_roll_count])->label(false)?></td>
+                    <td><?php echo $form->field($finished_product, "[$index]label_in_roll")->textInput(['id'=>'label_in_roll','value'=>$finished_product->label_in_roll])->label(false)?></td>
                 </tr>
-                <?endforeach;?>
+                <?php endforeach;?>
                 </tbody>
             </table>
-            <?=$form->field($order, 'packer_id')->dropDownList(User::findUsersByGroup('packer'),[
+            <?php echo $form->field($order, 'packer_id')->dropDownList(User::findUsersByGroup('packer'),[
                     'prompt' => 'Все',
                 'onchange'=>'changeSummary()',
                 'disabled'=>true
                 ])->label('Упаковщик:')?>
         </div>
         <div class="col p-2">
-            <?=Html::submitButton('Печать ярлыка',['name'=>'print_box_label','class'=>'btn btn-success'])?>
+            <?php echo Html::submitButton('Печать ярлыка',['name'=>'print_box_label','class'=>'btn btn-success'])?>
         </div>
     </div>
     <?php ActiveForm::end()?>

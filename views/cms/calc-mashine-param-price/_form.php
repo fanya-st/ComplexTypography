@@ -13,14 +13,14 @@ use app\models\CalcMashineParam;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->AsArray()->all(),'id','name')) ?>
+    <?php echo  $form->field($model, 'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->AsArray()->all(),'id','name')) ?>
 
-    <?= $form->field($model, 'calc_mashine_param_id')->dropDownList(ArrayHelper::map(CalcMashineParam::find()->AsArray()->all(),'id','subscribe')) ?>
+    <?php echo  $form->field($model, 'calc_mashine_param_id')->dropDownList(ArrayHelper::map(CalcMashineParam::find()->AsArray()->all(),'id','subscribe')) ?>
 
-    <?= $form->field($model, 'value')->textInput() ?>
+    <?php echo  $form->field($model, 'value')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -35,8 +35,8 @@ $this->registerJs(
 );
 ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-	<?$form = ActiveForm::begin()?>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
+	<?php $form = ActiveForm::begin()?>
     <div class="media border p-3 rounded">
             <div class="media-body">
                 <div class="alert alert-info">
@@ -45,15 +45,15 @@ $this->registerJs(
                 <h5 class="mt-0">Параметры этикетки</h5>
                 <div class="row">
                     <div class="col">
-                        <?=$form->field($label,'name')->textInput()?>
-                        <?=$form->field($label,'orientation')->dropDownList([
+                        <?php echo $form->field($label,'name')->textInput()?>
+                        <?php echo $form->field($label,'orientation')->dropDownList([
                             '0' => 'Не указана',
                             '1' => 'Альбомная',
                             '2'=>'Книжная'
                         ])?>
                     </div>
                     <div class="col">
-                        <?=$form->field($label,'customer_id')->widget(Select2::class, [
+                        <?php echo $form->field($label,'customer_id')->widget(Select2::class, [
                             'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','user_id'=>Yii::$app->user->identity->getId()])->all(), 'id', 'name'),
                             'options' => ['placeholder' => 'Выбрать заказчика ...'],
                             'pluginOptions' => [
@@ -62,7 +62,7 @@ $this->registerJs(
                         ])?>
                         <div class="row">
                             <div class="col">
-                                <?=$form->field($label,'pants_id')->widget(Select2::class, [
+                                <?php echo $form->field($label,'pants_id')->widget(Select2::class, [
                                     'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
                                     'options' => ['placeholder' => 'Выбрать штанец ...'],
                                     'pluginOptions' => [
@@ -85,28 +85,28 @@ $this->registerJs(
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <?=$form->field($order,'plan_circulation')->textInput(['onchange'=>'changeSending()'])?>
-                            <?=$form->field($order,'label_price')->textInput(['onchange'=>'changeLabelPriceTax()'])?>
-                            <?=$form->field($order,'label_price_with_tax')->textInput()?>
-                            <?=$form->field($order,'cut_edge')->dropDownList(Enum::boolList())?>
-                            <?=$form->field($order,'label_on_roll')?>
+                            <?php echo $form->field($order,'plan_circulation')->textInput(['onchange'=>'changeSending()'])?>
+                            <?php echo $form->field($order,'label_price')->textInput(['onchange'=>'changeLabelPriceTax()'])?>
+                            <?php echo $form->field($order,'label_price_with_tax')->textInput()?>
+                            <?php echo $form->field($order,'cut_edge')->dropDownList(Enum::boolList())?>
+                            <?php echo $form->field($order,'label_on_roll')?>
                         </div>
                         <div class="col">
-                            <?=$form->field($order,'sending')?>
-                            <?=$form->field($order,'sleeve_id')->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'))?>
-                            <?=$form->field($order,'stretch')->dropDownList(Enum::boolList())?>
+                            <?php echo $form->field($order,'sending')?>
+                            <?php echo $form->field($order,'sleeve_id')->dropDownList(ArrayHelper::map(Sleeve::find()->all(), 'id', 'name'))?>
+                            <?php echo $form->field($order,'stretch')->dropDownList(Enum::boolList())?>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <?=$form->field($order,'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>0])->asArray()->all(), 'id', 'name'), [
+                            <?php echo $form->field($order,'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>0])->asArray()->all(), 'id', 'name'), [
                                 'prompt' => 'Выберите...'
                             ])?>
                         </div>
                         <div class="col">
-                            <?=$form->field($order,'date_of_sale')->widget(DatePicker::class, [
+                            <?php echo $form->field($order,'date_of_sale')->widget(DatePicker::class, [
                                 'options' => ['placeholder' => 'Введите дату сдачи ...'],
                                 'pluginOptions' => [
                                     'allowClear' => true,
@@ -117,23 +117,23 @@ $this->registerJs(
                             ])?>
                         </div>
                     </div>
-                    <?=$form->field($order,'material_id')->widget(Select2::class, [
+                    <?php echo $form->field($order,'material_id')->widget(Select2::class, [
                         'data' => ArrayHelper::map(Material::find()->all(), 'id', 'name'),
                         'options' => ['placeholder' => 'Выбрать материал ...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
                     ])?>
-                    <?=$form->field($order,'winding_id')->radioList(ArrayHelper::map(Winding::find()->all(),'id', 'name'),[
+                    <?php echo $form->field($order,'winding_id')->radioList(ArrayHelper::map(Winding::find()->all(),'id', 'name'),[
                         'item' => function ($index, $label, $name, $checked, $value) {
                             return '<label class="radio-inline">' . Html::radio($name, $checked, ['value'  => $value]) ." $value ". Html::img(Winding::findOne($value)->image, ['width'=>'90px']) . '</label>';
                         }
                     ])?>
-                    <?=$form->field($order,'manager_note')->textarea()?>
+                    <?php echo $form->field($order,'manager_note')->textarea()?>
                 </div>
             </div>
-            <?=Html::submitButton('Создать заказ',['class'=>'btn btn-success'])?>
+            <?php echo Html::submitButton('Создать заказ',['class'=>'btn btn-success'])?>
         </div>
     </div>
-	<?ActiveForm::end()?>
-<pre><?print_r($label)?></pre>
+	<?php ActiveForm::end()?>
+<!--<pre>--><?php //print_r($label)?><!--</pre>-->

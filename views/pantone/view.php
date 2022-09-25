@@ -11,11 +11,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pantone-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+        <?php echo  Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo  Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php echo  DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
     ]) ?>
-    <?if(!empty($model->mixedPantone)):?>
+    <?php if(!empty($model->mixedPantone)):?>
     <div class="row">
         <div class="col">
             <table class="table table-bordered rounded table-sm caption-top">
@@ -60,20 +60,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 </thead>
                 <tbody>
-                <?foreach($model->mixedPantone as $mixed_pantone):?>
-                    <?if(!empty($mixed_pantone->component_pantone_id)):?>
+                <?php foreach($model->mixedPantone as $mixed_pantone):?>
+                    <?php if(!empty($mixed_pantone->component_pantone_id)):?>
                         <tr class="text-center">
-                            <th><?=$mixed_pantone->pantone->name?></th>
-                            <td><?=$mixed_pantone->weight?></td>
+                            <th><?php echo $mixed_pantone->pantone->name?></th>
+                            <td><?php echo $mixed_pantone->weight?></td>
                         </tr>
-                    <?endif;?>
-                <?endforeach;?>
+                    <?php endif;?>
+                <?php endforeach;?>
                 </tbody>
             </table>
         </div>
         <div class="col"></div>
     </div>
 
-    <?endif;?>
+    <?php endif;?>
 
 </div>

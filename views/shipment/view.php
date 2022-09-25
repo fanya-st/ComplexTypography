@@ -7,9 +7,9 @@ $this->title = Html::encode("Отгрузка ID [$shipment->id]");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3><?= Html::encode($this->title)?></h3>
+<h3><?php echo  Html::encode($this->title)?></h3>
 <div class="row">
-    <?
+    <?php
     echo TabsX::widget([
         'position' => TabsX::POS_ABOVE,
         'align' => TabsX::ALIGN_LEFT,

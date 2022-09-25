@@ -5,9 +5,9 @@ use app\models\User;
 $this->title = 'Электронный табель';
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
 ?>
-<?=$this->render('_search', ['model' => $searchModel])?>
+<?php echo $this->render('_search', ['model' => $searchModel])?>
 <div class="d-lg-flex flex-wrap">
-<!--    <div class="p-2">--><?//= Html::a('Добавить поступление', ['create'], ['class' => 'btn btn-success']) ?><!--</div>-->
+<!--    <div class="p-2">--><?php //= Html::a('Добавить поступление', ['create'], ['class' => 'btn btn-success']) ?><!--</div>-->
 </div>
 <div class="table-responsive">
     <table class="table table-bordered caption-top">
@@ -24,20 +24,20 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
     <?php if(!empty($timesheet))foreach($timesheet as $row):?>
     <?php if(empty($row['hours'])):?>
     <tr class="table-danger">
-        <th><?=User::getFullNameById($row['employee_id'])?></th>
+        <th><?php echo User::getFullNameById($row['employee_id'])?></th>
         <td>Не идентифицирован</td>
-        <td><?=$row['start'].' - '.$row['end']?></td>
-        <td><?=round($row['hours'],2)?></td>
+        <td><?php echo $row['start'].' - '.$row['end']?></td>
+        <td><?php echo round($row['hours'],2)?></td>
     </tr>
-    <?else:?>
+    <?php else:?>
     <tr>
-        <th><?=User::getFullNameById($row['employee_id'])?></th>
-        <td><?=$row['date']?></td>
-        <td><?=$row['start'].' - '.$row['end']?></td>
-        <td><?=round($row['hours'],2)?></td>
+        <th><?php echo User::getFullNameById($row['employee_id'])?></th>
+        <td><?php echo $row['date']?></td>
+        <td><?php echo $row['start'].' - '.$row['end']?></td>
+        <td><?php echo round($row['hours'],2)?></td>
     </tr>
-    <?endif;?>
-    <?endforeach;?>
+    <?php endif;?>
+    <?php endforeach;?>
     </tbody>
     </table>
 <!--    <pre>--><?php //print_r(date_format(date_create('2022-09-07'),"Y-m-d H:i:s"))?><!--</pre>-->

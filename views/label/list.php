@@ -7,10 +7,10 @@ use app\models\User;
 $this->title = 'Работа с этикетками';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-        <?=$this->render('_search', ['model' => $searchModel])?>
+<h1><?php echo  Html::encode($this->title) ?></h1>
+        <?php echo $this->render('_search', ['model' => $searchModel])?>
 <div class="table-responsive">
-        <?=GridView::widget([
+        <?php echo GridView::widget([
             'dataProvider' => $labels,
 //            'filterModel' => $searchModel,
             'columns' => [

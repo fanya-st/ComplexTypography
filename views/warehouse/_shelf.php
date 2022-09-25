@@ -8,32 +8,32 @@ $this->params['breadcrumbs'][] = ['label' => $rack->name, 'url' => ['warehouse/r
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<h1><?= Html::encode($this->title)?> <?= Html::a('QR-код', ['warehouse/qr-print-rack','id'=>$rack->id], ['class' => 'btn btn-primary btn-sm','target'=>'_blank']) ?></h1>
+<h1><?php echo  Html::encode($this->title)?> <?php echo  Html::a('QR-код', ['warehouse/qr-print-rack','id'=>$rack->id], ['class' => 'btn btn-primary btn-sm','target'=>'_blank']) ?></h1>
 <!--<div class="row g-2 row-cols-lg-4 text-nowrap">-->
-<!--    --><?//foreach ($shelfs as $shelf):?>
+<!--    --><?php //foreach ($shelfs as $shelf):?>
 <!--        <div class="col-lg">-->
 <!--            <div class="border p-3 rounded">-->
-<!--                <h6 class="p-1 rounded text-wrap">Полка --><?//=$shelf->id?><!-- --><?//= Html::a('QR-код', ['warehouse/qr-print-shelf','id'=>$shelf->id], ['class' => 'btn btn-primary btn-sm','target'=>'_blank']) ?><!--</h6>-->
+<!--                <h6 class="p-1 rounded text-wrap">Полка --><?php //=$shelf->id?><!-- --><?php //= Html::a('QR-код', ['warehouse/qr-print-shelf','id'=>$shelf->id], ['class' => 'btn btn-primary btn-sm','target'=>'_blank']) ?><!--</h6>-->
 <!--                <div class="d-lg-flex flex-wrap">-->
 <!--                    <ul class="list-group text-wrap">-->
 <!---->
-<!--                        --><?//if(!empty($shelf->paperWarehouse)) foreach($shelf->paperWarehouse as $paper):?>
-<!--                            <li class="list-group-item">--><?//=$paper->material->name.' '.$paper->width.'мм '.$paper->length.'м'?><!--</li>-->
-<!--                        --><?//endforeach;?>
+<!--                        --><?php //if(!empty($shelf->paperWarehouse)) foreach($shelf->paperWarehouse as $paper):?>
+<!--                            <li class="list-group-item">--><?php //=$paper->material->name.' '.$paper->width.'мм '.$paper->length.'м'?><!--</li>-->
+<!--                        --><?php //endforeach;?>
 <!---->
-<!--                        --><?// if(!empty($shelf->envelope)) foreach($shelf->envelope as $envelope):?>
-<!--                            <li class="list-group-item">Конверт --><?//=$envelope->idWithColor?><!--</li>-->
-<!--                        --><?//endforeach;?>
+<!--                        --><?php // if(!empty($shelf->envelope)) foreach($shelf->envelope as $envelope):?>
+<!--                            <li class="list-group-item">Конверт --><?php //=$envelope->idWithColor?><!--</li>-->
+<!--                        --><?php //endforeach;?>
 <!---->
-<!--                        --><?// if(!empty($shelf->pantoneWarehouse)) foreach($shelf->pantoneWarehouse as $pantone):?>
-<!--                            <li class="list-group-item">ЛКМ --><?//=$pantone->pantone->name.' '.$pantone->weight.'кг'?><!--</li>-->
-<!--                        --><?//endforeach;?>
+<!--                        --><?php // if(!empty($shelf->pantoneWarehouse)) foreach($shelf->pantoneWarehouse as $pantone):?>
+<!--                            <li class="list-group-item">ЛКМ --><?php //=$pantone->pantone->name.' '.$pantone->weight.'кг'?><!--</li>-->
+<!--                        --><?php //endforeach;?>
 <!--                    </ul>-->
 <!---->
 <!--                </div>-->
 <!--            </div>-->
 <!--        </div>-->
-<!--    --><?//endforeach;?>
+<!--    --><?php //endforeach;?>
 <!--</div>-->
 
 <table class="table table-responsive">
@@ -46,32 +46,32 @@ $this->params['breadcrumbs'][] = $this->title;
     </tr>
     </thead>
     <tbody>
-    <?if(!empty($shelf->paperWarehouse)) foreach($shelf->paperWarehouse as $paper):?>
+    <?php if(!empty($shelf->paperWarehouse)) foreach($shelf->paperWarehouse as $paper):?>
         <tr>
-            <th><?=$paper->id?></th>
-            <td><?=$paper->material->name?></td>
-            <td><?=$paper->length?></td>
-            <td><?=$paper->width?></td>
+            <th><?php echo $paper->id?></th>
+            <td><?php echo $paper->material->name?></td>
+            <td><?php echo $paper->length?></td>
+            <td><?php echo $paper->width?></td>
         </tr>
-    <?endforeach;?>
+    <?php endforeach;?>
 
-    <? if(!empty($shelf->envelope)) foreach($shelf->envelope as $envelope):?>
+    <?php if(!empty($shelf->envelope)) foreach($shelf->envelope as $envelope):?>
         <tr>
-            <th><?=$envelope->id?></th>
-            <td><?=$envelope->idWithColor?></td>
+            <th><?php echo $envelope->id?></th>
+            <td><?php echo $envelope->idWithColor?></td>
             <td>-</td>
             <td>-</td>
         </tr>
-    <?endforeach;?>
+    <?php endforeach;?>
 
-    <? if(!empty($shelf->pantoneWarehouse)) foreach($shelf->pantoneWarehouse as $pantone):?>
+    <?php if(!empty($shelf->pantoneWarehouse)) foreach($shelf->pantoneWarehouse as $pantone):?>
         <tr>
-            <th><?=$pantone->id?></th>
-            <td><?=$pantone->pantone->name?></td>
-            <td><?=$pantone->weight?></td>
+            <th><?php echo $pantone->id?></th>
+            <td><?php echo $pantone->pantone->name?></td>
+            <td><?php echo $pantone->weight?></td>
             <td>-</td>
         </tr>
-    <?endforeach;?>
+    <?php endforeach;?>
 
     </tbody>
 </table>

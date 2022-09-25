@@ -11,12 +11,12 @@ use app\models\Warehouse;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?php echo  $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'warehouse_id')->dropDownList(ArrayHelper::map(Warehouse::find()->asArray()->all(),'id','name')) ?>
+    <?php echo  $form->field($model, 'warehouse_id')->dropDownList(ArrayHelper::map(Warehouse::find()->asArray()->all(),'id','name')) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

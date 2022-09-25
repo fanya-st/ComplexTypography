@@ -5,7 +5,7 @@ $db = require __DIR__ . '/db-dev.php';
 
 $config = [
     'id' => 'basic',
-    'name' => 'Комплекс Типография',
+    'name' => 'TypographyService-Dev',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'timeZone' => 'Europe/Moscow',

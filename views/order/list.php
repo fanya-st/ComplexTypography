@@ -1,6 +1,4 @@
 <?php
-
-
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
@@ -12,11 +10,11 @@ use kartik\icons\Icon;
 $this->title = 'Работа с заказами';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-    <?echo $this->render('_search', ['model' => $searchModel])?>
+<h1><?php echo  Html::encode($this->title) ?></h1>
+    <?php echo $this->render('_search', ['model' => $searchModel])?>
 <div class="table-responsive">
-    <? $form = ActiveForm::begin()?>
-    <? echo GridView::widget([
+    <?php $form = ActiveForm::begin()?>
+    <?php echo  GridView::widget([
         'dataProvider' => $orders,
         'columns' => [
             [

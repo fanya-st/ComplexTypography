@@ -13,13 +13,13 @@ use yii\bootstrap5\Html;
         </tr>
         </thead>
         <tbody>
-        <?foreach ($material->materialPriceArchive as $materialPriceArchive):?>
+        <?php foreach ($material->materialPriceArchive as $materialPriceArchive):?>
             <tr>
-                <td><?=Html::encode($material->name)?></td>
-                <td><?=Html::encode($materialPriceArchive->date_of_change)?></td>
-                <td><?=Html::encode($materialPriceArchive->old_value)?></td>
+                <td><?php echo  Html::encode($material->name)?></td>
+                <td><?php echo  Html::encode($materialPriceArchive->date_of_change)?></td>
+                <td><?php echo  Html::encode($materialPriceArchive->old_value)?></td>
             </tr>
-        <?endforeach;?>
+        <?php endforeach;?>
         </tbody>
     </table>
     </div>

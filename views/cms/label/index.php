@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?$form=ActiveForm::begin(['method'=>'post'])?>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
+    <?php $form=ActiveForm::begin(['method'=>'post'])?>
 
 <div class="table-responsive">
-    <?= GridView::widget([
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 </div>
-    <?ActiveForm::end()?>
+    <?php ActiveForm::end()?>
 
 
 

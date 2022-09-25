@@ -8,8 +8,8 @@ $this->title = Html::encode("Загрузка пришедшей бумаги");
 $this->params['breadcrumbs'][] = ['label' => 'Склад', 'url' => ['paper-warehouse/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h2><?= Html::encode($this->title) ?></h2>
-<!--<pre>--><?//print_r(Yii::$app->request->post())?><!--</pre>-->
+<h2><?php echo  Html::encode($this->title) ?></h2>
+<!--<pre>--><?php //print_r(Yii::$app->request->post())?><!--</pre>-->
 <?php $form = ActiveForm::begin()?>
 <div class="alert alert-info">
     <strong>Внимание!</strong> Загрузка файлов производится в формате CSV!
@@ -23,6 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <img src='pic/example.jpg' class="img-fluid" alt="Responsive image">
 </div>
 
-<?=$form->field($upload_paper_form,'csv')->fileInput()?>
-<?=Html::submitButton('Загрузить',['class'=>'btn btn-success'])?>
+<?php echo $form->field($upload_paper_form,'csv')->fileInput()?>
+<?php echo Html::submitButton('Загрузить',['class'=>'btn btn-success'])?>
 <?php ActiveForm::end() ?>

@@ -13,9 +13,9 @@ use kartik\icons\Icon;
 $this->title = 'Заказы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-<? $form = ActiveForm::begin()?>
-<? echo GridView::widget([
+<h1><?php echo  Html::encode($this->title) ?></h1>
+<?php $form = ActiveForm::begin()?>
+<?php echo  GridView::widget([
     'dataProvider' => $orders,
     'filterModel' => $searchModel,
     'id'=>'order-list',

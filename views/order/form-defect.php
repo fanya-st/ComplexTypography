@@ -11,10 +11,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами',
 $this->params['breadcrumbs'][] = ['label' => 'ID['.$order->id.'] '.$order->label->name, 'url' => ['order/view','id'=>$order->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-<!--<pre>--><?//print_r($order->combinatedPrintOrder)?><!--</pre>-->
-<!--<pre>--><?//print_r($form_temp)?><!--</pre>-->
-<?
+<h1><?php echo  Html::encode($this->title) ?></h1>
+<!--<pre>--><?php //print_r($order->combinatedPrintOrder)?><!--</pre>-->
+<!--<pre>--><?php //print_r($form_temp)?><!--</pre>-->
+<?php
 $form=ActiveForm::begin();
 echo GridView::widget([
     'dataProvider' => $forms,

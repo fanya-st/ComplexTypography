@@ -13,15 +13,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить вал', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::a('Добавить вал', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <? ActiveForm::begin(['method'=>'post'])?>
+    <?php ActiveForm::begin(['method'=>'post'])?>
 <div class="table-responsive">
-    <?= GridView::widget([
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 </div>
-    <?ActiveForm::end()?>
+    <?php ActiveForm::end()?>
 
 
 

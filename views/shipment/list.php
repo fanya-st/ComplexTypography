@@ -10,13 +10,13 @@ use app\models\User;
 $this->title = 'Работа с отгрузками';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?php echo  Html::encode($this->title) ?></h1>
 
 <div class="border p-3 row g-2 row-cols-lg-2 text-nowrap">
     <div class="col-lg">
             <div class="d-lg-flex flex-wrap">
-                <?$form=ActiveForm::begin([])?>
-                <div class="p-1 flex-fill"><?=$form->field($new_shipment,'date_of_send')->widget(DatePicker::class, [
+                <?php $form=ActiveForm::begin([])?>
+                <div class="p-1 flex-fill"><?php echo $form->field($new_shipment,'date_of_send')->widget(DatePicker::class, [
                         'options' => ['placeholder' => 'Введите дату отправки ...'],
                         'pluginOptions' => [
                             'allowClear' => true,
@@ -24,21 +24,21 @@ $this->params['breadcrumbs'][] = $this->title;
                             'format' => 'yyyy-mm-dd',
                         ]
                     ])->label(false)?></div>
-                <div class="p-1"><?=Html::submitButton('Создать',['class'=>'btn btn-success'])?></div>
-                <?ActiveForm::end()?>
+                <div class="p-1"><?php echo Html::submitButton('Создать',['class'=>'btn btn-success'])?></div>
+                <?php ActiveForm::end()?>
             </div>
     </div>
     <div class="col-lg">
         <div class="d-lg-flex flex-wrap">
-            <?=$this->render('_search', ['model' => $searchModel])?>
+            <?php echo $this->render('_search', ['model' => $searchModel])?>
         </div>
     </div>
 </div>
 
 
-<? $form=ActiveForm::begin(['method' => 'post'])?>
+<?php $form=ActiveForm::begin(['method' => 'post'])?>
 <div class="table-responsive">
-<?=GridView::widget([
+<?php echo GridView::widget([
     'dataProvider' => $shipments,
     'columns' => [
         [
@@ -82,4 +82,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ])?>
 </div>
-<?ActiveForm::end()?>
+<?php ActiveForm::end()?>

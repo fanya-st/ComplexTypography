@@ -8,9 +8,9 @@ $this->title = Html::encode("ID [$order->id] $label->name");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с заказами', 'url' => ['order/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3><?= Html::encode($this->title)?></h3>
+<h3><?php echo  Html::encode($this->title)?></h3>
 <div class="row">
-<?
+<?php
 echo TabsX::widget([
     'position' => TabsX::POS_ABOVE,
     'align' => TabsX::ALIGN_LEFT,
@@ -51,4 +51,4 @@ echo TabsX::widget([
 ]);
 ?>
 </div>
-<!--<pre>--><?//print_r($order)?><!--</pre>-->
+<!--<pre>--><?php //print_r($order)?><!--</pre>-->

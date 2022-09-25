@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузкам
 $this->params['breadcrumbs'][] = ['label' => 'Отгрузка', 'url' => ['shipment/view','id'=>$shipment->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3><?= Html::encode($this->title)?></h3>
+<h3><?php echo  Html::encode($this->title)?></h3>
 <?php $form = ActiveForm::begin(['method'=>'post'])?>
 <div class="d-flex col">
         <table class="table border rounded">
@@ -23,26 +23,26 @@ $this->params['breadcrumbs'][] = $this->title;
             </tr>
             </thead>
             <tbody>
-            <?foreach ($shipment_roll as $id => $roll):?>
-                <tr <? if ($roll->defect_roll_count>0)echo 'class="table-danger"'?>>
-                    <td><?=Html::encode($roll->order_id)?></td>
-                    <td><?=Html::encode($roll->label->name)?></td>
-                    <td><?=Html::encode($roll->label_in_roll)?></td>
-                    <td><?=Html::encode($roll->sended_roll_count)?></td>
+            <?php foreach ($shipment_roll as $id => $roll):?>
+                <tr <?php if ($roll->defect_roll_count>0)echo 'class="table-danger"'?>>
+                    <td><?php echo Html::encode($roll->order_id)?></td>
+                    <td><?php echo Html::encode($roll->label->name)?></td>
+                    <td><?php echo Html::encode($roll->label_in_roll)?></td>
+                    <td><?php echo Html::encode($roll->sended_roll_count)?></td>
                     <td>
-                        <?
+                        <?php
                         echo $form->field($roll,"[$id]defect_roll_count")->label(false);
                         ?>
                     </td>
                     <td>
-                        <?
+                        <?php
                         echo $form->field($roll,"[$id]defect_note")->label(false);
                         ?>
                     </td>
                 </tr>
-            <?endforeach;?>
+            <?php endforeach;?>
             </tbody>
         </table>
     </div>
-<?=Html::submitButton('Пометить брак', ['name'=>'mark-defect-roll','class'=>'btn btn-primary'])?>
-<? ActiveForm::end()?>
+<?php echo Html::submitButton('Пометить брак', ['name'=>'mark-defect-roll','class'=>'btn btn-primary'])?>
+<?php ActiveForm::end()?>

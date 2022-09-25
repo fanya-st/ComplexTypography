@@ -15,12 +15,12 @@ $this->title = 'Создание этикетки';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с этикетками', 'url' => ['label/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-<?$form = ActiveForm::begin()?>
+<h1><?php echo  Html::encode($this->title) ?></h1>
+<?php $form = ActiveForm::begin()?>
 <div class="row">
     <div class="col">
-        <?=$form->field($model,'name')?>
-        <?=$form->field($model,'customer_id')->widget(Select2::class, [
+        <?php echo $form->field($model,'name')?>
+        <?php echo $form->field($model,'customer_id')->widget(Select2::class, [
             'data' => ArrayHelper::map(Customer::find()->where(['status_id' => '1','user_id'=>Yii::$app->user->identity->getId()])->all(), 'id', 'name'),
             'options' => ['placeholder' => 'Выбрать заказчика ...'],
             'pluginOptions' => [
@@ -29,66 +29,66 @@ $this->params['breadcrumbs'][] = $this->title;
         ])?>
         <div class="row">
             <div class="col">
-                <?=$form->field($model,'pants_id')->widget(Select2::class, [
+                <?php echo $form->field($model,'pants_id')->widget(Select2::class, [
                     'data' => ArrayHelper::map(Pants::find()->all(), 'id', 'id'),
                     'options' => ['placeholder' => 'Выбрать штанец ...'],
                 ])?>
             </div>
             <div class="col">
-                <?=$form->field($model,'orientation')->dropDownList([
+                <?php echo $form->field($model,'orientation')->dropDownList([
                     '0' => 'Не указана',
                     '1' => 'Альбомная',
                     '2'=>'Книжная'
                 ])?>
             </div>
         </div>
-        <?=$form->field($model,'output_label_id')->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'),[
+        <?php echo $form->field($model,'output_label_id')->radioList(ArrayHelper::map(OutputLabel::find()->all(),'id', 'name'),[
             'item' => function ($index, $label, $name, $checked, $value) {
                 return '<label class="radio-inline">' . Html::radio($name, $checked, ['value'  => $value])." $value ".Html::img(OutputLabel::findOne($value)->image, ['width'=>'100px']) . '</label>';
             }
         ])?>
-        <?=$form->field($model,'manager_note')->textarea()?>
+        <?php echo $form->field($model,'manager_note')->textarea()?>
 
-        <?=Html::submitButton('Создать этикетку',['class'=>'btn btn-success'])?>
+        <?php echo Html::submitButton('Создать этикетку',['class'=>'btn btn-success'])?>
     </div>
     <div class="col">
         <div class="row">
             <div class="col">
-                <?=$form->field($model,'laminate')->dropDownList([
+                <?php echo $form->field($model,'laminate')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
                 ])?>
 
-                <?=$form->field($model,'takeoff_flash')->dropDownList([
+                <?php echo $form->field($model,'takeoff_flash')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
                 ])?>
-                <?=$form->field($model,'print_on_glue')->dropDownList([
+                <?php echo $form->field($model,'print_on_glue')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
                 ])?>
-                <?=$form->field($model,'stencil')->dropDownList([
+                <?php echo $form->field($model,'stencil')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
                 ])?>
 
-                <?=$form->field($model,'foil_id')->dropDownList(
+                <?php echo $form->field($model,'foil_id')->dropDownList(
                     ArrayHelper::map(Foil::find()->all(), 'id',
                         'name'))?>
             </div>
             <div class="col">
-                <?=$form->field($model,'variable')->dropDownList([
+                <?php echo $form->field($model,'variable')->dropDownList([
                     '0' => 'Нет',
                     '1' => 'Да',
                 ])?>
-                <?=$form->field($model,'varnish_id')->dropDownList(ArrayHelper::map(VarnishStatus::find()->all(), 'id',
+                <?php echo $form->field($model,'varnish_id')->dropDownList(ArrayHelper::map(VarnishStatus::find()->all(), 'id',
                     'name'))?>
-                <?=$form->field($model,'background_id')->dropDownList(ArrayHelper::map(BackgroundLabel::find()->all(), 'id',
+                <?php echo $form->field($model,'background_id')->dropDownList(ArrayHelper::map(BackgroundLabel::find()->all(), 'id',
                     'name'))?>
 
-                <?=$form->field($model,'color_count')?>
+                <?php echo $form->field($model,'color_count')?>
             </div>
         </div>
     </div>
 </div>
-<?ActiveForm::end()?>
+<?php ActiveForm::end()?>

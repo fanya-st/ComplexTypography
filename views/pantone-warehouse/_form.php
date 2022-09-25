@@ -1,10 +1,8 @@
 <?php
-
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Pantone;
-
 
 ?>
 
@@ -12,12 +10,12 @@ use app\models\Pantone;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'pantone_id')->dropDownList(ArrayHelper::map(Pantone::find()->asArray()->all(),'id','name')) ?>
+    <?php echo  $form->field($model, 'pantone_id')->dropDownList(ArrayHelper::map(Pantone::find()->asArray()->all(),'id','name')) ?>
 
-    <?= $form->field($model, 'weight')->textInput() ?>
+    <?php echo  $form->field($model, 'weight')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

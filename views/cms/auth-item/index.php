@@ -14,15 +14,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Auth Item', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::a('Create Auth Item', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [

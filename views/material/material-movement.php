@@ -12,9 +12,9 @@ $this->title = Html::encode('Оборотная ведомость по мате
 $this->params['breadcrumbs'][] = ['label' => 'Склад', 'url' => ['paper-warehouse/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h2><?= Html::encode($this->title) ?></h2>
-<?$form=ActiveForm::begin()?>
-<?=$form->field($searchModel,'period_start')->widget(DateTimePicker::classname(), [
+<h2><?php echo  Html::encode($this->title) ?></h2>
+<?php $form=ActiveForm::begin()?>
+<?php echo $form->field($searchModel,'period_start')->widget(DateTimePicker::classname(), [
     'options' => ['placeholder' => 'Введите дату ...'],
     'pluginOptions' => [
         'todayBtn' => true,
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]
 ])?>
 
-<?=$form->field($searchModel,'period_end')->widget(DateTimePicker::classname(), [
+<?php echo $form->field($searchModel,'period_end')->widget(DateTimePicker::classname(), [
     'options' => ['placeholder' => 'Введите дату ...'],
     'pluginOptions' => [
         'todayBtn' => true,
@@ -30,11 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ]
 ])?>
 
-<?=$form->field($searchModel,'search_material_id')->dropDownList(ArrayHelper::map(Material::find()->joinWith('materialGroup')->asArray()->all(), 'id', 'name','materialGroup.name'),['prompt'=>''])?>
-<?=$form->field($searchModel,'search_material_group_id')->dropDownList(ArrayHelper::map(MaterialGroup::find()->asArray()->all(),'id','name'),['prompt'=>''])?>
+<?php echo $form->field($searchModel,'search_material_id')->dropDownList(ArrayHelper::map(Material::find()->joinWith('materialGroup')->asArray()->all(), 'id', 'name','materialGroup.name'),['prompt'=>''])?>
+<?php echo $form->field($searchModel,'search_material_group_id')->dropDownList(ArrayHelper::map(MaterialGroup::find()->asArray()->all(),'id','name'),['prompt'=>''])?>
 
-<?=html::submitButton('Показать',['class'=>'btn btn-success'])?>
-<?ActiveForm::end()?>
+<?php echo html::submitButton('Показать',['class'=>'btn btn-success'])?>
+<?php ActiveForm::end()?>
 <div class="table-responsive">
 <table class="table text-center table-bordered">
     <thead>
@@ -44,40 +44,40 @@ $this->params['breadcrumbs'][] = $this->title;
         <th scope="col">Ширина, мм</th>
         <th scope="col">Приход, м</th>
         <th scope="col">Расход, м</th>
-        <th scope="col">Сальдо на <?=$searchModel->period_end?>, м</th>
+        <th scope="col">Сальдо на <?php echo $searchModel->period_end?>, м</th>
     </tr>
     </thead>
     <tbody>
-    <?if(!empty($items))foreach($items as $item):?>
-    <?if(!empty($item->result)):?>
-    <?foreach($item->result as $key=>$value):?>
-                <?if($key!='summary'):?>
+    <?php if(!empty($items))foreach($items as $item):?>
+    <?php if(!empty($item->result)):?>
+    <?php foreach($item->result as $key=>$value):?>
+                <?php if($key!='summary'):?>
                     <tr>
-                        <td><?=$item->name?></td>
-                        <td><?=MaterialGroup::findOne($item->material_group_id)->name?></td>
-                        <td><?=$key?></td>
-                        <td><?=$value['incoming']?></td>
-                        <td><?=$value['usage']?></td>
-                        <td><?=$value['saldo']?></td>
+                        <td><?php echo $item->name?></td>
+                        <td><?php echo MaterialGroup::findOne($item->material_group_id)->name?></td>
+                        <td><?php echo $key?></td>
+                        <td><?php echo $value['incoming']?></td>
+                        <td><?php echo $value['usage']?></td>
+                        <td><?php echo $value['saldo']?></td>
                     </tr>
-                <?else:?>
+                <?php else:?>
                     <tr class="table-success">
-                        <td colspan="3" >Итого по <?=$item->name?></td>
-                        <td><?=$value['incoming']?></td>
-                        <td><?=$value['usage']?></td>
-                        <td><?=$value['saldo']?></td>
+                        <td colspan="3" >Итого по <?php echo $item->name?></td>
+                        <td><?php echo $value['incoming']?></td>
+                        <td><?php echo $value['usage']?></td>
+                        <td><?php echo $value['saldo']?></td>
                     </tr>
-                <?endif;?>
-    <?endforeach;?>
-    <?endif;?>
-    <?endforeach;?>
+                <?php endif;?>
+    <?php endforeach;?>
+    <?php endif;?>
+    <?php endforeach;?>
     </tbody>
 </table>
 </div>
-<!--<pre>--><?//
+<!--<pre>--><?php //
 //    $saldo=StockOnHandPaper::findOne(1);
 //    $saldo->date='22.08.2022';
 //    $saldo->stockOnHand();
 //    print_r($saldo)
 //    ?><!--</pre>-->
-<pre><?print_r($items)?></pre>
+<!--<pre>--><?php //print_r($items)?><!--</pre>-->

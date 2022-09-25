@@ -7,8 +7,8 @@ $this->title = 'Добавить город';
 $this->params['breadcrumbs'][] = ['label' => 'Города', 'url' => ['town-index']];
 ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?php echo  $this->render('_form', [
         'model' => $model,
     ]) ?>

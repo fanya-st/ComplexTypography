@@ -10,14 +10,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transport-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить транспорт', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::a('Добавить транспорт', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
-    <?= GridView::widget([
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             [

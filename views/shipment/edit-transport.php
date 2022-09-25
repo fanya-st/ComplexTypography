@@ -10,9 +10,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузкам
 $this->params['breadcrumbs'][] = ['label' => 'Отгрузка', 'url' => ['shipment/view','id'=>$shipment->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<? $form = ActiveForm::begin(['method'=>'post'])?>
-<?=$form->field($shipment,'transport_id')->dropDownList(ArrayHelper::map(Transport::find()->asArray()->all(),'id','name'))?>
-<?=$form->field($shipment,'gasoline_cost')->textInput()?>
-<?=$form->field($shipment,'cost')->textInput()?>
-<?=Html::submitButton('Сохранить', ['class'=>'btn btn-primary'])?>
-<? ActiveForm::end()?>
+<?php $form = ActiveForm::begin(['method'=>'post'])?>
+<?php echo $form->field($shipment,'transport_id')->dropDownList(ArrayHelper::map(Transport::find()->asArray()->all(),'id','name'))?>
+<?php echo $form->field($shipment,'gasoline_cost')->textInput()?>
+<?php echo $form->field($shipment,'cost')->textInput()?>
+<?php echo Html::submitButton('Сохранить', ['class'=>'btn btn-primary'])?>
+<?php ActiveForm::end()?>

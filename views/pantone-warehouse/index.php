@@ -9,19 +9,19 @@ use kartik\icons\Icon;
 $this->title = 'Склад ЛКМ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?php echo  Html::encode($this->title) ?></h1>
 
-<?=$this->render('_search', ['model' => $searchModel])?>
+<?php echo $this->render('_search', ['model' => $searchModel])?>
 
 <div class="d-lg-flex flex-wrap p-2">
-    <div class="p-1"><?= Html::a('Добавить ЛКМ', ['create'], ['class' => 'btn btn-success']) ?></div>
-    <div class="p-1"><?=Html::a('Перемещение ЛКМ', ['pantone-warehouse/move-pantone'], ['class'=>'btn btn-success'])?></div>
+    <div class="p-1"><?php echo  Html::a('Добавить ЛКМ', ['create'], ['class' => 'btn btn-success']) ?></div>
+    <div class="p-1"><?php echo Html::a('Перемещение ЛКМ', ['pantone-warehouse/move-pantone'], ['class'=>'btn btn-success'])?></div>
 </div>
 
 
-<?ActiveForm::begin(['method'=>'post'])?>
+<?php ActiveForm::begin(['method'=>'post'])?>
     <div class="table-responsive">
-    <?= GridView::widget([
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             [
@@ -70,4 +70,4 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ])?>
     </div>
-    <?ActiveForm::end()?>
+    <?php ActiveForm::end()?>

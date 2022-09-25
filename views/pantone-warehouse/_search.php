@@ -13,24 +13,24 @@ use app\models\Pantone;
 <div class="text-nowrap">
     <div class="border p-3 rounded">
         <div class="d-lg-flex flex-wrap">
-            <div class="p-1"><?=$form->field($model,'id')->widget(LabelInPlace::class,[
+            <div class="p-1"><?php echo $form->field($model,'id')->widget(LabelInPlace::class,[
                     'type' => LabelInPlace::TYPE_HTML5,
                     'options' => ['type' => 'text']
                 ])?></div>
-            <div class="p-1"><?=$form->field($model,'pantone_id')->widget(Select2::class, [
+            <div class="p-1"><?php echo $form->field($model,'pantone_id')->widget(Select2::class, [
                     'data' => ArrayHelper::map(Pantone::find()->asArray()->all(),'id','name'),
                     'options' => ['placeholder' => 'Выбрать краску'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
                 ])->label(false)?></div>
-            <div class="p-1"><?=$form->field($model,'weight')->widget(LabelInPlace::class,[
+            <div class="p-1"><?php echo $form->field($model,'weight')->widget(LabelInPlace::class,[
                     'type' => LabelInPlace::TYPE_HTML5,
                     'options' => ['type' => 'text']
                 ])->label(false) ?>
             </div>
         </div>
-        <div class="p-1"><?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
+        <div class="p-1"><?php echo  Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
     </div>
 </div>
 

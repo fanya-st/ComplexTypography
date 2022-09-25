@@ -11,11 +11,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="calc-mashine-param-price-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['calc-mashine-param-price-update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['calc-mashine-param-price-delete', 'id' => $model->id], [
+        <?php echo  Html::a('Update', ['calc-mashine-param-price-update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo  Html::a('Delete', ['calc-mashine-param-price-delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php echo  DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',

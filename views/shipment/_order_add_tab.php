@@ -10,13 +10,13 @@ $this->title = 'Добавление заказов';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];
 $this->params['breadcrumbs'][] = ['label' => 'Отгрузка ID['.$shipment->id.'] ', 'url' => ['shipment/view','id'=>$shipment->id]];
 ?>
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 <?php
 $form=ActiveForm::begin(['method'=>'post']);
 echo Html::submitButton('Добавить',['class'=>'btn btn-primary']);
 ?>
 <div class="table-responsive">
-<? echo GridView::widget([
+<?php echo  GridView::widget([
     'dataProvider' => $add_order,
     'filterModel' => $searchModel,
     'columns' => [

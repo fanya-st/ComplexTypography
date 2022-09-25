@@ -10,8 +10,8 @@ $this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="pantone-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?= $this->render('_form', [
+    <h1><?php echo  Html::encode($this->title) ?></h1>
+    <?php echo  $this->render('_form', [
         'model' => $model,
         'mixed_pantones' => $mixed_pantones,
     ]) ?>

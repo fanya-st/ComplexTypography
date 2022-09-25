@@ -30,6 +30,8 @@ class OrderSearch extends Order
 
     public function attributeLabels(){
         return[
+            'id'=>'ID',
+            'label_id'=>'Этикетка ID',
             'manager_id'=>'Менеджер',
             'label_status_id'=>'Статус этикетки',
             'labelName'=>'Наименование',

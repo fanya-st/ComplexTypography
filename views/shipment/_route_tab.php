@@ -67,9 +67,9 @@ echo GridView::widget([
     ],
 ]);
 ?>
-<!--<pre>--><?//print_r(Customer::findOne(1)->getCustomerShipmentOrder(($shipment->id)))?><!--</pre>-->
+<!--<pre>--><?php //print_r(Customer::findOne(1)->getCustomerShipmentOrder(($shipment->id)))?><!--</pre>-->
 <!--<table class="table">-->
-<!--    <caption>Маршрутная карта (--><?//=Html::encode($shipment->managerFullName.' Дата '.$shipment->date_of_send)?><!--)</caption>-->
+<!--    <caption>Маршрутная карта (--><?php //=Html::encode($shipment->managerFullName.' Дата '.$shipment->date_of_send)?><!--)</caption>-->
 <!--    <thead>-->
 <!--    <tr>-->
 <!--        <th scope="col">Заказчик</th>-->
@@ -80,15 +80,15 @@ echo GridView::widget([
 <!--    </tr>-->
 <!--    </thead>-->
 <!--    <tbody>-->
-<!--    --><?//
+<!--    --><?php //
 //    if(!empty($shipment->customerOrderList))
 //        foreach ($shipment->customerOrderList as $key=>$customer_order):
 //    ?>
 <!--    <tr>-->
-<!--        --><?//$customer=Customer::findOne($key)?>
-<!--        <td>--><?//=Html::encode($customer->name)?><!--</td>-->
-<!--        <td>--><?//=Html::encode($customer->customerAddress)?><!--</td>-->
-<!--        <td>--><?//
+<!--        --><?php //$customer=Customer::findOne($key)?>
+<!--        <td>--><?php //=Html::encode($customer->name)?><!--</td>-->
+<!--        <td>--><?php //=Html::encode($customer->customerAddress)?><!--</td>-->
+<!--        <td>--><?php //
 //            foreach ($customer_order as $order){
 //                $o=Order::findOne($order);
 //            foreach ($o->finishedProductsWarehouse as $roll){
@@ -101,10 +101,10 @@ echo GridView::widget([
 //            unset($sended_bale_count);
 //            ?>
 <!--        </td>-->
-<!--        <td>--><?//=Html::encode($customer->contact.' телефон:'.$customer->number)?><!--</td>-->
-<!--        <td>--><?//=Html::encode('прием продукции происходит с '.$customer->time_to_delivery_from.' до '.$customer->time_to_delivery_to)?><!--</td>-->
+<!--        <td>--><?php //=Html::encode($customer->contact.' телефон:'.$customer->number)?><!--</td>-->
+<!--        <td>--><?php //=Html::encode('прием продукции происходит с '.$customer->time_to_delivery_from.' до '.$customer->time_to_delivery_to)?><!--</td>-->
 <!--    </tr>-->
-<!--    --><?//endforeach;?>
+<!--    --><?php //endforeach;?>
 <!--    </tbody>-->
 <!--</table>-->
 

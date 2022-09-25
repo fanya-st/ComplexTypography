@@ -14,7 +14,7 @@ use kartik\date\DatePicker;
     <?php $form = ActiveForm::begin(); ?>
 
 
-    <?= $form->field($model, 'customer_id')->widget(Select2::classname(), [
+    <?php echo  $form->field($model, 'customer_id')->widget(Select2::classname(), [
         'data' => ArrayHelper::map(Customer::find()->all(), 'id', 'name'),
         'options' => ['placeholder' => 'Выбрать заказчика ...'],
         'pluginOptions' => [
@@ -22,7 +22,7 @@ use kartik\date\DatePicker;
         ],
     ])?>
 
-    <?= $form->field($model, 'date')->widget(
+    <?php echo  $form->field($model, 'date')->widget(
             DatePicker::className(),[
             'options' => ['placeholder' => 'Введите дату ...'],
             'pluginOptions' => [
@@ -33,10 +33,10 @@ use kartik\date\DatePicker;
         ]
     ) ?>
 
-    <?= $form->field($model, 'sum')->textInput() ?>
+    <?php echo  $form->field($model, 'sum')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

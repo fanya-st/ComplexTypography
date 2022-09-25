@@ -11,14 +11,14 @@ $this->title = 'Банк';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-<?=$this->render('_search', ['model' => $searchModel])?>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
+<?php echo $this->render('_search', ['model' => $searchModel])?>
 <div class="d-lg-flex flex-wrap">
-    <div class="p-2"><?= Html::a('Добавить поступление', ['create'], ['class' => 'btn btn-success']) ?></div>
+    <div class="p-2"><?php echo  Html::a('Добавить поступление', ['create'], ['class' => 'btn btn-success']) ?></div>
 </div>
-    <?ActiveForm::begin(['method'=>'post'])?>
+    <?php ActiveForm::begin(['method'=>'post'])?>
 <div class="table-responsive">
-    <?= GridView::widget([
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
 //        'filterModel' => $searchModel,
         'showFooter' => true,
@@ -70,6 +70,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-        <?ActiveForm::end()?>
+        <?php ActiveForm::end()?>
 
 </div>

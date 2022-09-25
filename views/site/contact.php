@@ -7,8 +7,8 @@ $this->title = 'Обратная связь';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
-<!--    <pre>--><?//print_r($model)?><!--</pre>-->
+    <h1><?php echo  Html::encode($this->title) ?></h1>
+<!--    <pre>--><?php //print_r($model)?><!--</pre>-->
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
         <div class="alert alert-success">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <p>
             <?php if (Yii::$app->mailer->useFileTransport): ?>
                 Because the application is in development mode, the email is not sent but saved as
-                a file under <code><?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
+                a file under <code><?php echo  Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
                 Please configure the <code>useFileTransport</code> property of the <code>mail</code>
                 application component to be false to enable email sending.
             <?php endif; ?>
@@ -35,17 +35,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
-                    <?= $form->field($model, 'name')
+                    <?php echo  $form->field($model, 'name')
                         ->hiddenInput(['value'=>Yii::$app->user->identity->F.' '.Yii::$app->user->identity->I])->label(false)
 
                     ?>
 
-                    <?= $form->field($model, 'subject') ?>
+                    <?php echo  $form->field($model, 'subject') ?>
 
-                    <?= $form->field($model, 'body')->textarea(['autofocus' => true,'rows' => 6]) ?>
+                    <?php echo  $form->field($model, 'body')->textarea(['autofocus' => true,'rows' => 6]) ?>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Отправить письмо', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?php echo  Html::submitButton('Отправить письмо', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>
 
                 <?php ActiveForm::end(); ?>

@@ -10,7 +10,7 @@ use app\models\User;
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <div class="row">
                 <div class="col">
-                    <? echo Html::tag('h6','Статус заказа: ' .Html::tag('small',Html::encode($order->orderStatus), ['class' => 'badge bg-primary']));
+                    <?php echo  Html::tag('h6','Статус заказа: ' .Html::tag('small',Html::encode($order->orderStatus), ['class' => 'badge bg-primary']));
                     echo Html::tag('h6','Машина: ' .Html::encode($order->mashine->name));
                     echo Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameById($order->customer->user_id)));
                     echo Html::tag('h6','Заказчик: ' .Html::encode('ID ['.$order->label->customer->id.
@@ -19,7 +19,7 @@ use app\models\User;
                     if (isset($order->date_of_sale))echo Html::tag('h6','Дата сдачи: ' . Yii::$app->formatter->asDate(Html::encode($order->date_of_sale), 'yyyy-MM-dd'));?>
                 </div>
                 <div class="col">
-                    <?
+                    <?php
                     echo Html::tag('h6','Материал: ' .Html::encode($order->material->name));
                     echo Html::tag('h6','План. тираж, шт: ' .Html::encode($order->plan_circulation));
                     echo Html::tag('h6','Отправка, шт: ' .Html::encode($order->sending));
@@ -32,12 +32,12 @@ use app\models\User;
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-info p-1 rounded">Параметры печати</h6>
             <h6>Совместная печать: </h6>
-                <? echo Html::tag('h6','Печатник: ' .Html::encode(User::getFullNameById($order->printer_id)));
+                <?php echo  Html::tag('h6','Печатник: ' .Html::encode(User::getFullNameById($order->printer_id)));
                 echo Html::tag('h6','Дата начала печати: ' .Html::encode($order->date_of_print_begin));
                 echo Html::tag('h6','Дата конца печати: ' .Html::encode($order->date_of_print_end));?>
-                <h6>Тираж по печати, шт: <?=Html::encode($order->printed_circulation)?>
+                <h6>Тираж по печати, шт: <?php echo Html::encode($order->printed_circulation)?>
                     <h6>
-                    <?
+                    <?php
                     Modal::begin([
                         'title' => 'Расход материала',
                         'toggleButton' => ['label' => 'Расход материала', 'class' => 'btn btn-info'],
@@ -56,12 +56,12 @@ use app\models\User;
     <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-success p-1 rounded">Параметры нарезки и перемотки</h6>
-            <? echo Html::tag('h6','Перемотчик: ' .Html::encode(User::getFullNameById($order->rewinder_id)));
+            <?php echo  Html::tag('h6','Перемотчик: ' .Html::encode(User::getFullNameById($order->rewinder_id)));
             echo Html::tag('h6','Дата начала перемотки: ' .Html::encode($order->date_of_rewind_begin));
             echo Html::tag('h6','Дата конца перемотки: ' .Html::encode($order->date_of_rewind_end));?>
             </h6>
             <h6>Перемотанный тираж, шт:
-                <? $rewinded_circulation=null;
+                <?php $rewinded_circulation=null;
 //                if (!empty($order->finishedProductsWarehouse))
                 foreach ($order->finishedProductsWarehouse as $rewinded_roll)
                     $rewinded_circulation+=$rewinded_roll->label_in_roll*$rewinded_roll->roll_count;
@@ -69,7 +69,7 @@ use app\models\User;
                 ?>
             </h6>
             <h6>
-                <?
+                <?php
                 Modal::begin([
                     'title' => 'Перемотанные ролики',
                     'toggleButton' => ['label' => 'Перемотанные ролики', 'class' => 'btn btn-success'],
@@ -88,22 +88,22 @@ use app\models\User;
     <div class="col-lg">
         <div class="border p-3 rounded" style="background-color:#dee2e6;">
             <h6 class="bg-warning p-1 rounded">Параметры упаковки</h6>
-            <? echo Html::tag('h6','Упаковчик: ' .Html::encode(User::getFullNameById($order->packer_id)));
+            <?php echo  Html::tag('h6','Упаковчик: ' .Html::encode(User::getFullNameById($order->packer_id)));
             echo Html::tag('h6','Дата начала упаковки: ' .Html::encode($order->date_of_packing_begin));
             echo Html::tag('h6','Дата конца упаковки: ' .Html::encode($order->date_of_packing_end));?>
             </h6>
             <h6> Упакованный тираж, шт:
-                <? $packed_circulation=null;
+                <?php $packed_circulation=null;
                 foreach ($order->finishedProductsWarehouse as $packed_roll){
                     $packed_circulation+=$packed_roll->label_in_roll*$packed_roll->packed_roll_count;
                     $sended_circulation+=$packed_roll->label_in_roll*$packed_roll->sended_roll_count;
                 }
                 echo Html::encode($packed_circulation);
                 ?>
-            На отправку, шт: <?=Html::encode(!empty($sended_circulation) ? $sended_circulation:0)?>
+            На отправку, шт: <?php echo Html::encode(!empty($sended_circulation) ? $sended_circulation:0)?>
             </h6>
             <h6>
-                <?
+                <?php
                 Modal::begin([
                     'title' => 'Упакованные ролики',
                     'toggleButton' => ['label' => 'Упакованные ролики', 'class' => 'btn btn-warning'],
@@ -123,7 +123,7 @@ use app\models\User;
                 Modal::end()
                 ?>
 
-                <?
+                <?php
                 Modal::begin([
                     'title' => 'Упакованные ролики на отправку',
                     'toggleButton' => ['label' => 'Упакованные ролики на отправку', 'class' => 'btn btn-warning'],

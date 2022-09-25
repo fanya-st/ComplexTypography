@@ -12,12 +12,12 @@ use app\models\User;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'item_name')->dropDownList(ArrayHelper::map(AuthItem::find()->where(['type'=>1])->asArray()->all(),'name','description')) ?>
+    <?php echo  $form->field($model, 'item_name')->dropDownList(ArrayHelper::map(AuthItem::find()->where(['type'=>1])->asArray()->all(),'name','description')) ?>
 
-    <?= $form->field($model, 'user_id')->dropDownList(User::findUsersIdDropdown()) ?>
+    <?php echo  $form->field($model, 'user_id')->dropDownList(User::findUsersIdDropdown()) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

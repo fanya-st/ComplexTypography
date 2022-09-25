@@ -42,33 +42,33 @@ $this->registerJs(
     'getPantsParam'
 );
 ?>
-<h3><?= Html::encode($this->title)?></h3>
-<?$form=ActiveForm::begin(['method'=>'post'])?>
+<h3><?php echo  Html::encode($this->title)?></h3>
+<?php $form=ActiveForm::begin(['method'=>'post'])?>
 <?php if($calculator->calculated_label_price):?>
     <div class="border p-3 rounded">
         <h6 class="bg-light p-1 rounded">Результаты расчета</h6>
         <div class="p-1 row">
             <div class="col">
-                <?=Html::tag('h6','Общая стоимость материалов: ' .round($calculator->calculated_material_price, 3).' руб.')?>
-                <?=Html::tag('h6','Стоимость работы: ' .round($calculator->calculated_job_price, 3).' руб.')?>
-                <?=Html::tag('h6','Стоимость бумаги: ' .round($calculator->calculated_paper_price, 3).' руб.')?>
-                <?=Html::tag('h6','Стоимость фольги: ' .round($calculator->calculated_foil_price, 3).' руб.')?>
-                <?=Html::tag('h6','Стоимость гол.фольги: ' .round($calculator->calculated_foil_holo_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Общая стоимость материалов: ' .round($calculator->calculated_material_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость работы: ' .round($calculator->calculated_job_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость бумаги: ' .round($calculator->calculated_paper_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость фольги: ' .round($calculator->calculated_foil_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость гол.фольги: ' .round($calculator->calculated_foil_holo_price, 3).' руб.')?>
             </div>
             <div class="col">
-                <?=Html::tag('h6','Стоимость форм: ' .round($calculator->calculated_form_price, 3).' руб.')?>
-                <?=Html::tag('h6','Стоимость глянцевого лака: ' .round($calculator->calculated_matte_varnish_price, 3).' руб.')?>
-                <?=Html::tag('h6','Стоимость матового лака: ' .round($calculator->calculated_glossy_varnish_price, 3).' руб.')?>
-                <?=Html::tag('h6','Стоимость красок: ' .round($calculator->calculated_paint_price, 3).' руб.')?>
-                <?=Html::tag('h6','Стоимость красок для переменной печати: ' .round($calculator->calculated_variable_paint_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость форм: ' .round($calculator->calculated_form_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость глянцевого лака: ' .round($calculator->calculated_matte_varnish_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость матового лака: ' .round($calculator->calculated_glossy_varnish_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость красок: ' .round($calculator->calculated_paint_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Стоимость красок для переменной печати: ' .round($calculator->calculated_variable_paint_price, 3).' руб.')?>
             </div>
             <div class="col">
-                <?=Html::tag('h6','Стоимость скотча: ' .round($calculator->calculated_scotch_price, 3).' руб.')?>
-                <?=Html::tag('h6','Площадь бумаги общая: ' .round($calculator->calculated_square_paper_common, 3).' м2.')?>
-                <?=Html::tag('h6','Длина бумаги общая: ' .round($calculator->calculated_paper_length_common, 3).' м.')?>
-                <?=Html::tag('h6','Общее время: ' .round($calculator->calculated_time_common, 3).' ч')?>
-                <?=Html::tag('h6','Время на настройку: ' .round($calculator->calculated_time_adjust, 3).' ч')?>
-                <?=Html::tag('h6','Время печати: ' .round($calculator->calculated_time_print, 3).' ч')?>
+                <?php echo Html::tag('h6','Стоимость скотча: ' .round($calculator->calculated_scotch_price, 3).' руб.')?>
+                <?php echo Html::tag('h6','Площадь бумаги общая: ' .round($calculator->calculated_square_paper_common, 3).' м2.')?>
+                <?php echo Html::tag('h6','Длина бумаги общая: ' .round($calculator->calculated_paper_length_common, 3).' м.')?>
+                <?php echo Html::tag('h6','Общее время: ' .round($calculator->calculated_time_common, 3).' ч')?>
+                <?php echo Html::tag('h6','Время на настройку: ' .round($calculator->calculated_time_adjust, 3).' ч')?>
+                <?php echo Html::tag('h6','Время печати: ' .round($calculator->calculated_time_print, 3).' ч')?>
             </div>
         </div>
         <div class="table-responsive">
@@ -84,46 +84,46 @@ $this->registerJs(
             </thead>
             <tbody>
             <tr>
-                <th><?=round($calculator->calculated_label_price, 3)?></th>
-                <th><?=round($calculator->calculated_label_price_tax, 3)?></th>
-                <th><?=round($calculator->calculated_circulation_price, 3)?></th>
-                <th><?=round($calculator->calculated_circulation_price_tax, 3)?></th>
-                <th><?=$calculator->circulation?></th>
+                <th><?php echo round($calculator->calculated_label_price, 3)?></th>
+                <th><?php echo round($calculator->calculated_label_price_tax, 3)?></th>
+                <th><?php echo round($calculator->calculated_circulation_price, 3)?></th>
+                <th><?php echo round($calculator->calculated_circulation_price_tax, 3)?></th>
+                <th><?php echo $calculator->circulation?></th>
             </tr>
             </tbody>
         </table>
         </div>
     </div>
-<?endif;?>
+<?php endif;?>
 <div class="row g-2 row-cols-lg-2">
     <div class="col-lg">
         <div class="border p-3 rounded">
             <h6 class="bg-success p-1 rounded">Параметры штанца</h6>
             <div class="row">
                 <div class="col">
-                    <?= $form->field($calculator, 'pants_id')
+                    <?php echo  $form->field($calculator, 'pants_id')
                         ->widget(Select2::class, [
                         'data' => ArrayHelper::map(Pants::find()->asArray()->all(), 'id', 'id'),
                         'options' => ['placeholder' => 'Выбрать штанец ...'],
                     ]) ?>
 
-                    <?= Html::button('Получить параметры штанца', ['class' => 'btn btn-success m-2','onclick'=>'getPantsParam()']) ?>
+                    <?php echo  Html::button('Получить параметры штанца', ['class' => 'btn btn-success m-2','onclick'=>'getPantsParam()']) ?>
 
-                    <?= $form->field($pants, 'width_label')->textInput() ?>
+                    <?php echo  $form->field($pants, 'width_label')->textInput() ?>
 
-                    <?= $form->field($pants, 'paper_width')->textInput() ?>
+                    <?php echo  $form->field($pants, 'paper_width')->textInput() ?>
 
                 </div>
                 <div class="col">
-                    <?= $form->field($pants, 'shaft_id')->dropDownList(ArrayHelper::map(Shaft::find()->asArray()->all(),'id','name')) ?>
+                    <?php echo  $form->field($pants, 'shaft_id')->dropDownList(ArrayHelper::map(Shaft::find()->asArray()->all(),'id','name')) ?>
 
-                    <?= $form->field($pants, 'height_label')->textInput() ?>
+                    <?php echo  $form->field($pants, 'height_label')->textInput() ?>
 
-                    <?= $form->field($pants, 'cuts')->textInput() ?>
+                    <?php echo  $form->field($pants, 'cuts')->textInput() ?>
 
                 </div>
             </div>
-            <?= Html::submitButton('Расчитать', ['class' => 'btn btn-success m-2']) ?>
+            <?php echo  Html::submitButton('Расчитать', ['class' => 'btn btn-success m-2']) ?>
         </div>
     </div>
 
@@ -132,24 +132,24 @@ $this->registerJs(
             <h6 class="bg-primary p-1 rounded">Параметры бумаги и расходных материалов</h6>
             <div class="row">
                 <div class="col">
-                    <?= $form->field($calculator, 'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>0])->asArray()->all(),'id','name')) ?>
+                    <?php echo  $form->field($calculator, 'mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>0])->asArray()->all(),'id','name')) ?>
 
-                    <?= $form->field($calculator, 'material_id')->dropDownList(ArrayHelper::map(Material::find()->joinWith('materialGroup')->asArray()->all(),
+                    <?php echo  $form->field($calculator, 'material_id')->dropDownList(ArrayHelper::map(Material::find()->joinWith('materialGroup')->asArray()->all(),
                         'id', 'name','materialGroup.name')) ?>
 
-                    <?= $form->field($calculator, 'circulation')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'circulation')->textInput() ?>
 
-                    <?= $form->field($calculator, 'other_cost')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'other_cost')->textInput() ?>
                 </div>
                 <div class="col">
 
-                    <?= $form->field($calculator, 'variable_mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>2])->asArray()->all(),'id','name')) ?>
+                    <?php echo  $form->field($calculator, 'variable_mashine_id')->dropDownList(ArrayHelper::map(Mashine::find()->where(['mashine_type'=>2])->asArray()->all(),'id','name')) ?>
 
-                    <?= $form->field($calculator, 'price_increase')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'price_increase')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'layout')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'layout')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'form_price')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'form_price')->checkbox() ?>
 
                 </div>
             </div>
@@ -161,22 +161,22 @@ $this->registerJs(
             <h6 class="bg-info p-1 rounded">Параметры красок</h6>
             <div class="row">
                 <div class="col">
-                    <?= $form->field($calculator, 'cmyk_count')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'cmyk_count')->textInput() ?>
 
-                    <?= $form->field($calculator, 'pantone_count')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'pantone_count')->textInput() ?>
 
-                    <?= $form->field($calculator, 'mixed_pantone_count')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'mixed_pantone_count')->textInput() ?>
 
-                    <?= $form->field($calculator, 'variable_paint_count')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'variable_paint_count')->textInput() ?>
                 </div>
                 <div class="col">
-                    <?= $form->field($calculator, 'variable')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'variable')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'original_paint_selection')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'original_paint_selection')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'combinated_label')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'combinated_label')->textInput() ?>
 
-                    <?= $form->field($calculator, 'exchangeable_form_count')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'exchangeable_form_count')->textInput() ?>
 
 
                 </div>
@@ -189,28 +189,28 @@ $this->registerJs(
             <h6 class="bg-danger p-1 rounded">Параметры отделки</h6>
             <div class="row">
                 <div class="col">
-                    <?= $form->field($calculator, 'stencil_mesh_filling')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'stencil_mesh_filling')->textInput() ?>
 
-                    <?= $form->field($calculator, 'foil_width')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'foil_width')->textInput() ?>
 
-                    <?= $form->field($calculator, 'holo_foil_width')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'holo_foil_width')->textInput() ?>
 
-                    <?= $form->field($calculator, 'laminate_width')->textInput() ?>
+                    <?php echo  $form->field($calculator, 'laminate_width')->textInput() ?>
                 </div>
                 <div class="col">
-                    <?= $form->field($calculator, 'matte_varnish')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'matte_varnish')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'glossy_varnish')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'glossy_varnish')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'print_on_glue')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'print_on_glue')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'book')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'book')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'stamping')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'stamping')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'stencil')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'stencil')->checkbox() ?>
 
-                    <?= $form->field($calculator, 'stencil_mesh')->checkbox() ?>
+                    <?php echo  $form->field($calculator, 'stencil_mesh')->checkbox() ?>
                 </div>
             </div>
         </div>
@@ -218,9 +218,9 @@ $this->registerJs(
 </div>
 <?php ActiveForm::end()?>
 
-<!--<pre>--><?//print_r($calculator)?><!--</pre>-->
-<!--<pre>--><?//print_r($pants)?><!--</pre>-->
-<!--<pre>--><?//print_r(CalcMashineParamValue::getMashineParam(1))?><!--</pre>-->
-<!--<pre>--><?//print_r(CalcMashineParamValue::find()->joinWith('calcMashineParam')->where(['mashine_id'=>1])->all())?><!--</pre>-->
-<!--<pre>--><?//print_r(CalcCommonParam::getCommonParam())?><!--</pre>-->
-<!--<pre>--><?//print_r(Material::find()->select('price_euro')->where(['material_group_id'=>6])->orderBy(['price_euro'=>SORT_DESC])->one()->price_euro)?><!--</pre>-->
+<!--<pre>--><?php //print_r($calculator)?><!--</pre>-->
+<!--<pre>--><?php //print_r($pants)?><!--</pre>-->
+<!--<pre>--><?php //print_r(CalcMashineParamValue::getMashineParam(1))?><!--</pre>-->
+<!--<pre>--><?php //print_r(CalcMashineParamValue::find()->joinWith('calcMashineParam')->where(['mashine_id'=>1])->all())?><!--</pre>-->
+<!--<pre>--><?php //print_r(CalcCommonParam::getCommonParam())?><!--</pre>-->
+<!--<pre>--><?php //print_r(Material::find()->select('price_euro')->where(['material_group_id'=>6])->orderBy(['price_euro'=>SORT_DESC])->one()->price_euro)?><!--</pre>-->

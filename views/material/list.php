@@ -9,15 +9,15 @@ use kartik\icons\Icon;
 $this->title = 'Работа с материалами';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-<?=$this->render('_search', ['model' => $searchModel])?>
+<h1><?php echo  Html::encode($this->title) ?></h1>
+<?php echo $this->render('_search', ['model' => $searchModel])?>
 <div class="d-lg-flex flex-wrap">
-    <div class="p-2"><?=Html::a('Создать материал', ['material/create'], ['class'=>'btn btn-primary'])?></div>
-    <div class="p-2"><?=Html::a('Добавить тип материала', ['material-group/create'], ['class'=>'btn btn-primary'])?></div>
+    <div class="p-2"><?php echo Html::a('Создать материал', ['material/create'], ['class'=>'btn btn-primary'])?></div>
+    <div class="p-2"><?php echo Html::a('Добавить тип материала', ['material-group/create'], ['class'=>'btn btn-primary'])?></div>
 </div>
-<? $form=ActiveForm::begin(['method' => 'post'])?>
+<?php $form=ActiveForm::begin(['method' => 'post'])?>
 <div class="table-responsive">
-<?= GridView::widget([
+<?php echo  GridView::widget([
     'dataProvider' => $material,
        'rowOptions'=>function($model){
             if($model->status==0){
@@ -89,4 +89,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ])?>
 </div>
-<?ActiveForm::end()?>
+<?php ActiveForm::end()?>

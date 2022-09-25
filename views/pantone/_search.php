@@ -11,15 +11,15 @@ use yii\helpers\ArrayHelper;
 <div class="text-nowrap">
     <div class="border p-3 rounded">
         <div class="d-lg-flex flex-wrap">
-            <div class="p-1"><?=$form->field($model,'id')->widget(LabelInPlace::class,[
+            <div class="p-1"><?php echo $form->field($model,'id')->widget(LabelInPlace::class,[
                     'type' => LabelInPlace::TYPE_HTML5,
                     'options' => ['type' => 'text']
                 ])?></div>
-            <div class="p-1"><?=$form->field($model,'name')->widget(LabelInPlace::class,[
+            <div class="p-1"><?php echo $form->field($model,'name')->widget(LabelInPlace::class,[
                     'type' => LabelInPlace::TYPE_HTML5,
                     'options' => ['type' => 'text']
                 ])?></div>
-            <div class="p-1"><?=$form->field($model,'pantone_kind_id')->widget(Select2::class, [
+            <div class="p-1"><?php echo $form->field($model,'pantone_kind_id')->widget(Select2::class, [
                     'data' => ArrayHelper::map(PantoneKind::find()->asArray()->all(),'id','name'),
                     'options' => ['placeholder' => 'Выбрать тип'],
                     'pluginOptions' => [
@@ -27,7 +27,7 @@ use yii\helpers\ArrayHelper;
                     ],
                 ])->label(false)?></div>
         </div>
-        <div class="p-1"><?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
+        <div class="p-1"><?php echo  Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
     </div>
 </div>
 

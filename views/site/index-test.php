@@ -4,7 +4,7 @@ use app\models\CustomIndex;
 
 $this->title = Yii::$app->name;
 ?>
-<?
+<?php
 
 
 echo TabsX::widget([

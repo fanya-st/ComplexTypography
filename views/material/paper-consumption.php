@@ -26,22 +26,22 @@ function printDiv(divName){
     'barcode-print'
 );
 ?>
-<h3><?= Html::encode($this->title)?></h3>
+<h3><?php echo  Html::encode($this->title)?></h3>
 <?php $form = ActiveForm::begin()?>
     <div class="alert alert-info">
         <strong>Внимание!</strong> Не забудьте распечатать и наклеить новый QR-код на использованный ролик</a>.
     </div>
     <div class="alert alert-info">
-        <strong>Внимание!</strong> Материал <?=Html::encode($order->material->name)?>
+        <strong>Внимание!</strong> Материал <?php echo Html::encode($order->material->name)?>
     </div>
 <div class="row">
     <div class="col">
-        <?=$form->field($new_used_paper, 'order_id')->hiddenInput(['value' => $order->id])->label(false);?>
-        <?=$form->field($new_used_paper,'paper_warehouse_id',['inputOptions' =>
+        <?php echo $form->field($new_used_paper, 'order_id')->hiddenInput(['value' => $order->id])->label(false);?>
+        <?php echo $form->field($new_used_paper,'paper_warehouse_id',['inputOptions' =>
             ['autofocus' => 'autofocus']
         ])->textInput()->label('Штрихкод ролика:')?>
-        <?=$form->field($new_used_paper,'length')->label('Длина потраченной бумаги, м:')?>
-        <?=Html::submitButton('Ввод',['class'=>'btn btn-success'])?>
+        <?php echo $form->field($new_used_paper,'length')->label('Длина потраченной бумаги, м:')?>
+        <?php echo Html::submitButton('Ввод',['class'=>'btn btn-success'])?>
     </div>
     <div class="col">
         <div class="border p-2 rounded">
@@ -56,16 +56,16 @@ function printDiv(divName){
                 </tr>
                 </thead>
                 <tbody>
-                <?foreach ($used_paper as $paper):?>
+                <?php foreach ($used_paper as $paper):?>
                     <tr>
-                        <td><?=Html::encode($paper->paperWarehouse->id)?></td>
-                        <td><?=Html::encode($paper->paperWarehouse->material->name)?></td>
-                        <td><?=Html::encode($paper->length)?></td>
+                        <td><?php echo Html::encode($paper->paperWarehouse->id)?></td>
+                        <td><?php echo Html::encode($paper->paperWarehouse->material->name)?></td>
+                        <td><?php echo Html::encode($paper->length)?></td>
                         <td>
-                            <?
+                            <?php
                             $qrCode = (new \chillerlan\QRCode\QRCode())->render($paper->paperWarehouse->id);
                             ?>
-                            <?
+                            <?php
                             Modal::begin([
                                 'title'=>'<h4>QR-код</h4>',
                                 'toggleButton' => ['label' => 'QR-код', 'class' => 'btn btn-primary'],
@@ -83,11 +83,11 @@ function printDiv(divName){
                             ?>
                             </td>
                         <td>
-                            <?= Html::button( Icon::show('print', ['class'=>'fa-1.5x'], Icon::FA),
+                            <?php echo  Html::button( Icon::show('print', ['class'=>'fa-1.5x'], Icon::FA),
                                 ['class' => 'btn btn-outline-primary','onclick'=>'printDiv("modalContent-'.$paper->paperWarehouse->id.'")']) ?>
                         </td>
                     </tr>
-                <?endforeach;?>
+                <?php endforeach;?>
                 </tbody>
             </table>
         </div>

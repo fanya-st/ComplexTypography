@@ -4,5 +4,5 @@ services:
       - ./docker/development/nginx/conf.d:/etc/nginx/conf.d
   php-fpm:
     volumes:
-      - ./docker/development/php-fpm/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/development/php-fpm/php/conf.d/php-dev.ini:/usr/local/etc/php/conf.d/php-dev.ini
 

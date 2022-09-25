@@ -14,21 +14,21 @@ use app\models\AuthItem;
 <div class="text-nowrap">
     <div class="border p-3 rounded">
         <div class="d-lg-flex flex-wrap">
-            <div class="p-1 flex-fill"><?=$form->field($model,'employee_id')->widget(Select2::class, [
+            <div class="p-1 flex-fill"><?php echo $form->field($model,'employee_id')->widget(Select2::class, [
                     'data' => User::findUsersIdDropdown(),
                     'options' => ['placeholder' => 'Сотрудник'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
                 ])->label(false)?></div>
-            <div class="p-1 flex-fill"><?=$form->field($model,'role')->widget(Select2::class, [
+            <div class="p-1 flex-fill"><?php echo $form->field($model,'role')->widget(Select2::class, [
                     'data' => ArrayHelper::map(AuthItem::find()->where(['type'=>1])->asArray()->all(),'name','description'),
                     'options' => ['placeholder' => 'Группа'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
                 ])->label(false)?></div>
-            <div class="p-1 flex-lg-fill"><?=$form->field($model,'date_of_action')->widget(DateRangePicker::class, [
+            <div class="p-1 flex-lg-fill"><?php echo $form->field($model,'date_of_action')->widget(DateRangePicker::class, [
                     'attribute' => 'date',
                     'presetDropdown'=>true,
                     'convertFormat'=>true,
@@ -36,7 +36,7 @@ use app\models\AuthItem;
                     'options' => ['placeholder' => 'Период...']
                 ])->label(false)?></div>
         </div>
-        <div class="p-1"><?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
+        <div class="p-1"><?php echo  Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
     </div>
 </div>
 

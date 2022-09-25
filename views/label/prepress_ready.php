@@ -17,13 +17,13 @@ $this->params['breadcrumbs'][] = ['label' => 'Работа с этикеткам
 $this->params['breadcrumbs'][] = ['label' => $label->name, 'url' => ['label/view','id'=>$label->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3><?= Html::encode($this->title)?></h3>
+<h3><?php echo  Html::encode($this->title)?></h3>
 <div class="alert alert-info">
     <strong>Внимание!</strong> Если этикетка совмещена, то новые формы будут общие для всех этикеток в совмещении</a>.
 </div>
-<h6>Prepress выполнил: <?=User::getFullNameById($label->prepress_id)?></h6>
-<h6>Штанец №: <?=Pants::findOne($label->pants_id)->name?></h6>
-<h6>Пантоны: <? foreach ($label->pantone as $pantone) {
+<h6>Prepress выполнил: <?php echo User::getFullNameById($label->prepress_id)?></h6>
+<h6>Штанец №: <?php echo Pants::findOne($label->pants_id)->name?></h6>
+<h6>Пантоны: <?php foreach ($label->pantone as $pantone) {
         switch($pantone->name){
             case 'cyan':
                 echo '<span class="badge rounded-pill bg-info">'.Html::encode($pantone->name).'</span>';
@@ -44,9 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     }
     ?></h6>
-<h6>Фольга: <?=$label->foil->name?></h6>
-<h6>Лак: <?=$label->varnishStatus->name?></h6>
-<h6>Трафарет: <?
+<h6>Фольга: <?php echo $label->foil->name?></h6>
+<h6>Лак: <?php echo $label->varnishStatus->name?></h6>
+<h6>Трафарет: <?php
     switch($label->stencil){
         case 1: echo 'Да';
         break;
@@ -54,33 +54,33 @@ $this->params['breadcrumbs'][] = $this->title;
         break;
     }
     ?></h6>
-<?
+<?php
 $form = ActiveForm::begin();
 ?>
 <div class="row g-2 row-cols-1">
     <div class="col">
         <div class="row">
             <div class="col">
-                <?=$form->field($new_form,'pantone_id')->widget(Select2::classname(), [
+                <?php echo $form->field($new_form,'pantone_id')->widget(Select2::classname(), [
                     'data' => ArrayHelper::map(Pantone::find()->all(), 'id', 'name'),
                     'options'=>[
                         'placeholder' => 'Выберите CMYK и пантоны ...',
                     ]
                 ])?>
-                <?=$form->field($new_form,'width')?>
-                <?=$form->field($new_form,'height')?>
-                <?$photo_output_list=ArrayHelper::map(PhotoOutput::find()->all(), 'id', 'name')?>
-                <?=$form->field($new_form,'photo_output_id')
+                <?php echo $form->field($new_form,'width')?>
+                <?php echo $form->field($new_form,'height')?>
+                <?php $photo_output_list=ArrayHelper::map(PhotoOutput::find()->all(), 'id', 'name')?>
+                <?php echo $form->field($new_form,'photo_output_id')
                     ->dropDownList($photo_output_list,['id'=>'dpi-id','prompt' => 'Выберите...'])
                 ?>
-                <?=Html::submitButton('Добавить новую форму',['name'=>'add','class'=>'btn btn-success'])?>
+                <?php echo Html::submitButton('Добавить новую форму',['name'=>'add','class'=>'btn btn-success'])?>
             </div>
             <div class="col">
-                <?=$form->field($new_form,'lpi')->input('integer')?>
-                <?=$form->field($new_form,'set_form_count')?>
-<!--                --><?//=$form->field($new_form,'foil_stencil_varnish',['inline'=>true])->radioList(['pantone'=>'Пантон','varnish_form'=>'Лаковая форма',
+                <?php echo $form->field($new_form,'lpi')->input('integer')?>
+                <?php echo $form->field($new_form,'set_form_count')?>
+<!--                --><?php //=$form->field($new_form,'foil_stencil_varnish',['inline'=>true])->radioList(['pantone'=>'Пантон','varnish_form'=>'Лаковая форма',
 //                    'foil_form'=>'Фольга','stencil_form'=>'Трафарет'])->label('Фольга, трафарет или лак?')?>
-                <?=$form->field($new_form,'dpi')->widget(DepDrop::classname(), [
+                <?php echo $form->field($new_form,'dpi')->widget(DepDrop::classname(), [
                     'type' => DepDrop::TYPE_SELECT2,
                     'pluginOptions'=>[
                         'allowClear' => true,
@@ -93,7 +93,7 @@ $form = ActiveForm::begin();
         </div>
     </div>
     <div class="col">
-        <?echo GridView::widget([
+        <?phpecho GridView::widget([
             'dataProvider' => $forms,
             'columns' => [
                 'id',
@@ -120,14 +120,14 @@ $form = ActiveForm::begin();
         ])?>
     </div>
 </div>
-<? ActiveForm::end()?>
-<? $form=ActiveForm::begin()?>
+<?php ActiveForm::end()?>
+<?php $form=ActiveForm::begin()?>
 <div class="row">
-    <?=$form->field($prepress_file,'prepress_design_file_file')->FileInput()?>
-    <?=$form->field($label,'prepress_note')->textarea()?>
-    <?=Html::submitButton('Завершить Препресс',['name'=>'finish_prepress','class'=>'btn btn-success'])?>
+    <?php echo $form->field($prepress_file,'prepress_design_file_file')->FileInput()?>
+    <?php echo $form->field($label,'prepress_note')->textarea()?>
+    <?php echo Html::submitButton('Завершить Препресс',['name'=>'finish_prepress','class'=>'btn btn-success'])?>
 </div>
-<? ActiveForm::end()?>
+<?php ActiveForm::end()?>
 <div class="row">
 
 </div>

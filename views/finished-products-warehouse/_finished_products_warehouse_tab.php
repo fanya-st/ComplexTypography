@@ -6,8 +6,8 @@ use yii\bootstrap5\ActiveForm;
 use app\models\User;
 ?>
 <?php $form=ActiveForm::begin(['method' => 'post'])?>
-<?=Html::submitButton('Добавить в заказ',['name'=>'add_from_fpwarehouse','value'=>'start','class'=>'btn btn-primary'])?>
-<?
+<?php echo Html::submitButton('Добавить в заказ',['name'=>'add_from_fpwarehouse','value'=>'start','class'=>'btn btn-primary'])?>
+<?php
 echo GridView::widget([
     'dataProvider' => $surplus,
     'columns' => [

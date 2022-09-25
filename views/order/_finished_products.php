@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 ?>
 <?php $form=ActiveForm::begin(['method' => 'post'])?>
-<?
+<?php
 echo GridView::widget([
     'dataProvider' => $roll,
     'columns' => [

@@ -287,7 +287,11 @@ class LabelController extends Controller
     }
 
 
-    public function actionDesignReady(int $id,$change_image=null): Response|string
+    /**
+     * @throws ForbiddenHttpException
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionDesignReady(int $id, $change_image=null): Response|string
     {
         $design_file=DesignFileForm::findOne($id);
         $label = LabelForm::findOne($id);
@@ -298,7 +302,7 @@ class LabelController extends Controller
         if ($label->status_id != 2) {
             throw new ForbiddenHttpException('Доступ запрещен');
         }
-        if ($label->load(Yii::$app->request->post())&&$design_file->load(Yii::$app->request->post())) {
+        if ($label->load($this->request->post())&&$design_file->load($this->request->post())) {
             $design_file->image_file=UploadedFile::getInstance($design_file, 'image_file');
             $design_file->image_crop_file=UploadedFile::getInstance($design_file, 'image_crop_file');
             $design_file->image_extended_file=UploadedFile::getInstance($design_file, 'image_extended_file');

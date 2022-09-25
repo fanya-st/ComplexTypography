@@ -11,14 +11,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Работа с этикеткам
 $this->params['breadcrumbs'][] = ['label' => $label->name, 'url' => ['label/view','id'=>$label->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h3><?= Html::encode($this->title)?></h3>
+<h3><?php echo  Html::encode($this->title)?></h3>
 <div class="alert alert-info">
     <strong>Внимание!</strong> Будет произведено совмещение</a>.
 </div>
-<?$form = ActiveForm::begin()?>
+<?php $form = ActiveForm::begin()?>
 <div class="row">
     <div class="col">
-        <?=$form->field($label,'combinated_label_list')->widget(Select2::class, [
+        <?php echo $form->field($label,'combinated_label_list')->widget(Select2::class, [
             'data' => ArrayHelper::map(Label::find()
                 ->joinWith('combination')
                 ->where(['status_id'=>6,'prepress_id'=>Yii::$app->user->identity->getId()])
@@ -37,5 +37,5 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-<?=Html::submitButton('Сохранить',['class'=>'btn btn-success'])?>
-<?ActiveForm::end()?>
+<?php echo Html::submitButton('Сохранить',['class'=>'btn btn-success'])?>
+<?php ActiveForm::end()?>

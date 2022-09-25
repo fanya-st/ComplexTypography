@@ -9,16 +9,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?php echo  $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'car_number')->textInput(['maxlength' => true]) ?>
+    <?php echo  $form->field($model, 'car_number')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'load_capacity')->textInput() ?>
+    <?php echo  $form->field($model, 'load_capacity')->textInput() ?>
 
-    <?= $form->field($model, 'subscribe')->textarea(['rows' => 6]) ?>
+    <?php echo  $form->field($model, 'subscribe')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

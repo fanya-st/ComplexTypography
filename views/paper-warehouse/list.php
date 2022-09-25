@@ -6,17 +6,17 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'Склад';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-<?=$this->render('_search', ['model' => $searchModel])?>
+<h1><?php echo  Html::encode($this->title) ?></h1>
+<?php echo $this->render('_search', ['model' => $searchModel])?>
 <div class="d-lg-flex flex-wrap">
-    <div class="p-1"><?=Html::a('Загрузить пришедший материал', ['paper-warehouse/upload-paper'], ['class'=>'btn btn-primary'])?></div>
-    <div class="p-1"><?=Html::a('Загрузить пришедную бумагу на склад', ['paper-warehouse/upload-paper-to-warehouse'], ['class'=>'btn btn-primary'])?></div>
-    <div class="p-1"><?=Html::a('Перемещение роликов', ['paper-warehouse/move-roll'], ['class'=>'btn btn-primary'])?></div>
+    <div class="p-1"><?php echo Html::a('Загрузить пришедший материал', ['paper-warehouse/upload-paper'], ['class'=>'btn btn-primary'])?></div>
+    <div class="p-1"><?php echo Html::a('Загрузить пришедную бумагу на склад', ['paper-warehouse/upload-paper-to-warehouse'], ['class'=>'btn btn-primary'])?></div>
+    <div class="p-1"><?php echo Html::a('Перемещение роликов', ['paper-warehouse/move-roll'], ['class'=>'btn btn-primary'])?></div>
 </div>
 
-<? $form=ActiveForm::begin(['method' => 'post'])?>
+<?php $form=ActiveForm::begin(['method' => 'post'])?>
 <div class="table-responsive">
-<? echo GridView::widget([
+<?php echo  GridView::widget([
     'dataProvider' => $paper_warehouse,
     'id'=>'order-list',
     'columns' => [
@@ -71,4 +71,4 @@ $this->params['breadcrumbs'][] = $this->title;
 ]);
 ?>
 </div>
-<? ActiveForm::end()?>
+<?php ActiveForm::end()?>

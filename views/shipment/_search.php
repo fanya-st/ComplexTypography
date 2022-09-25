@@ -13,18 +13,18 @@ use kartik\daterange\DateRangePicker;
 <div class="text-nowrap">
     <div class="border p-3 rounded">
         <div class="d-lg-flex flex-wrap">
-            <div class="p-1"><?=$form->field($model,'id')->widget(LabelInPlace::class,[
+            <div class="p-1"><?php echo $form->field($model,'id')->widget(LabelInPlace::class,[
                     'type' => LabelInPlace::TYPE_HTML5,
                     'options' => ['type' => 'text']
                 ])?></div>
-            <div class="p-1 flex-fill"><?=$form->field($model,'manager_id')->widget(Select2::class, [
+            <div class="p-1 flex-fill"><?php echo $form->field($model,'manager_id')->widget(Select2::class, [
                     'data' => (User::findUsersByGroup('manager')),
                     'options' => ['placeholder' => 'Выбрать менеджера'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
                 ])->label(false)?></div>
-            <div class="p-1 flex-fill"><?=$form->field($model,'date_of_create')->widget(DateRangePicker::class,[
+            <div class="p-1 flex-fill"><?php echo $form->field($model,'date_of_create')->widget(DateRangePicker::class,[
                 'convertFormat' => true,
                 'presetDropdown'=>true,
                 'options'=>['placeholder' => 'Дата создания'],
@@ -36,7 +36,7 @@ use kartik\daterange\DateRangePicker;
                         ],
                     ],
                     ])->label(false)?></div>
-            <div class="p-1 flex-fill"><?=$form->field($model,'date_of_send')->widget(DateRangePicker::class,[
+            <div class="p-1 flex-fill"><?php echo $form->field($model,'date_of_send')->widget(DateRangePicker::class,[
                 'convertFormat' => true,
                 'presetDropdown'=>true,
                 'options'=>['placeholder' => 'Дата отправки'],
@@ -49,7 +49,7 @@ use kartik\daterange\DateRangePicker;
                     ],
                     ])->label(false)?></div>
             </div>
-        <div class="p-1"><?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
+        <div class="p-1"><?php echo  Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?></div>
     </div>
 </div>
 

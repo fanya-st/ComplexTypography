@@ -13,9 +13,9 @@ $this->title = Html::encode('Наличные складские запасы б
 $this->params['breadcrumbs'][] = ['label' => 'Склад', 'url' => ['paper-warehouse/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h2><?= Html::encode($this->title) ?></h2>
-<?$form=ActiveForm::begin()?>
-<?=$form->field($searchModel,'date')->widget(DateTimePicker::classname(), [
+<h2><?php echo  Html::encode($this->title) ?></h2>
+<?php $form=ActiveForm::begin()?>
+<?php echo $form->field($searchModel,'date')->widget(DateTimePicker::classname(), [
     'options' => ['placeholder' => 'Введите дату ...'],
     'pluginOptions' => [
         'todayBtn' => true,
@@ -23,10 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ]
 ])?>
 
-<?=$form->field($searchModel,'search_material_id')->dropDownList(ArrayHelper::map(Material::find()->joinWith('materialGroup')->asArray()->all(), 'id', 'name','materialGroup.name'),['prompt'=>''])?>
-<?=$form->field($searchModel,'search_material_group_id')->dropDownList(ArrayHelper::map(MaterialGroup::find()->asArray()->all(),'id','name'),['prompt'=>''])?>
-<?=html::submitButton('Показать',['class'=>'btn btn-success'])?>
-<?ActiveForm::end()?>
+<?php echo $form->field($searchModel,'search_material_id')->dropDownList(ArrayHelper::map(Material::find()->joinWith('materialGroup')->asArray()->all(), 'id', 'name','materialGroup.name'),['prompt'=>''])?>
+<?php echo $form->field($searchModel,'search_material_group_id')->dropDownList(ArrayHelper::map(MaterialGroup::find()->asArray()->all(),'id','name'),['prompt'=>''])?>
+<?php echo html::submitButton('Показать',['class'=>'btn btn-success'])?>
+<?php ActiveForm::end()?>
 <div class="table-responsive">
 <table class="table">
     <thead>
@@ -37,10 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </tr>
     </thead>
     <tbody>
-    <?if(!empty($items))foreach($items as $item):?>
+    <?php if(!empty($items))foreach($items as $item):?>
     <tr>
-        <td><?=$item->name?></td>
-        <td><?=MaterialGroup::findOne($item->material_group_id)->name?></td>
+        <td><?php echo $item->name?></td>
+        <td><?php echo MaterialGroup::findOne($item->material_group_id)->name?></td>
         <td>
             <table class="table text-center table-bordered">
                 <thead>
@@ -51,31 +51,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 </thead>
                 <tbody>
-                <?if(!empty($item->result)):?>
-                <?foreach($item->result as $key=>$value):?>
-                    <?if($value['on_date']!=0):?>
+                <?php if(!empty($item->result)):?>
+                <?php foreach($item->result as $key=>$value):?>
+                    <?php if($value['on_date']!=0):?>
                 <tr>
-                    <td><?=$key?></td>
-                    <td><?=$value['on_date']?></td>
-                    <td><?=$value['square']?></td>
+                    <td><?php echo $key?></td>
+                    <td><?php echo $value['on_date']?></td>
+                    <td><?php echo $value['square']?></td>
                 </tr>
-                        <?endif;?>
-                <?endforeach;?>
+                        <?php endif;?>
+                <?php endforeach;?>
                     <tr class="table-success">
                         <td colspan="2" class="text-center">Итого, м2</td>
-                        <td><?=$item->result['square']?></td>
+                        <td><?php echo $item->result['square']?></td>
                     </tr>
-                <?endif;?>
+                <?php endif;?>
                 </tbody>
             </table>
         </td>
     </tr>
-    <?endforeach;?>
+    <?php endforeach;?>
     </tbody>
 </table>
 </div>
-<!--<pre>--><?//print_r($items)?><!--</pre>-->
-<?//=GridView::widget([
+<!--<pre>--><?php //print_r($items)?><!--</pre>-->
+<?php //=GridView::widget([
 //    'dataProvider' => $dataProvider,
 //    'showFooter'=>true,
 //    'columns' => [

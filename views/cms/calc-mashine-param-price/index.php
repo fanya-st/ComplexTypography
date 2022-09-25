@@ -8,16 +8,16 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'Параметры машин';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить параметр станка', ['calc-mashine-param-price-create'], ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::a('Добавить параметр станка', ['calc-mashine-param-price-create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?=$this->render('_search', compact('searchModel'))?>
+    <?php echo $this->render('_search', compact('searchModel'))?>
 <div class="table-responsive">
-    <?ActiveForm::begin(['method'=>'post'])?>
-    <?= GridView::widget([
+    <?php ActiveForm::begin(['method'=>'post'])?>
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             'id',
@@ -48,5 +48,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-    <?Activeform::end()?>
+    <?php Activeform::end()?>
     </div>

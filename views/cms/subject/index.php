@@ -10,14 +10,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить субъект РФ', ['subject-create'], ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::a('Добавить субъект РФ', ['subject-create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 <div class="table-responsive">
-    <?= GridView::widget([
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             'id',

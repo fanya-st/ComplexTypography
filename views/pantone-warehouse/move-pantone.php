@@ -6,16 +6,16 @@ $this->title = Html::encode('Перемещение ЛКМ');
 $this->params['breadcrumbs'][] = ['label' => 'Склад ЛКМ', 'url' => ['pantone-warehouse/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h2><?= Html::encode($this->title) ?></h2>
-<?$form=ActiveForm::begin()?>
-<?if(empty($pantone->id)):?>
-<?=$form->field($pantone,'id',['inputOptions' =>
+<h2><?php echo  Html::encode($this->title) ?></h2>
+<?php $form=ActiveForm::begin()?>
+<?php if(empty($pantone->id)):?>
+<?php echo $form->field($pantone,'id',['inputOptions' =>
     ['autofocus' => 'autofocus']])->textInput()->label('Просканируйте штрихкод ЛКМ')?>
-<?else:?>
-    <?=$form->field($pantone,'id')->hiddenInput()->label(false)?>
-    <?=$form->field($pantone,'shelf_id',['inputOptions' =>
+<?php else:?>
+    <?php echo $form->field($pantone,'id')->hiddenInput()->label(false)?>
+    <?php echo $form->field($pantone,'shelf_id',['inputOptions' =>
         ['autofocus' => 'autofocus']])->textInput()->label('Просканируйте штрихкод полки')?>
-<?endif;?>
+<?php endif;?>
 
 
-<?ActiveForm::end()?>
+<?php ActiveForm::end()?>

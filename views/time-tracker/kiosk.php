@@ -37,21 +37,21 @@ $this->registerJs(
 ?>
 <meta http-equiv="refresh" content="60" />
 <body onload="clockTimer();">
-<!--<pre>--><?//print_r(date_diff(date_create('2022-06-05 08:02:33'),date_create()))?><!--</pre>-->
+<!--<pre>--><?php //print_r(date_diff(date_create('2022-06-05 08:02:33'),date_create()))?><!--</pre>-->
 <div class="d-flex justify-content-center">
     <div class="flex-column">
         <div class="flex-row p-1 justify-content-center"><h1 id="clock" class="display-1"></h1></div>
         <div class="flex-row p-1 text-center"><h1 id="dayOfWeek"></h1></div>
     </div>
 </div>
-<div class="flex-row p-4 text-center"><?= Alert::widget(['closeButton'=>false,'options'=>['class'=>'p-2 display-4']]) ?></div>
+<div class="flex-row p-4 text-center"><?php echo  Alert::widget(['closeButton'=>false,'options'=>['class'=>'p-2 display-4']]) ?></div>
 <div class="flex-row p-4 text-center h2">Отсканируйте QR-код</div>
-<div class="flex-row p-4 text-center"><?=Icon::show('arrow-down', ['class'=>'fa-3x'], Icon::FA)?></div>
+<div class="flex-row p-4 text-center"><?php echo Icon::show('arrow-down', ['class'=>'fa-3x'], Icon::FA)?></div>
 <div class="flex-row p-4 text-center">
-    <?$form=ActiveForm::begin()?>
-    <?=$form->field($time_tracker,'employee_id',['inputOptions' =>
+    <?php $form=ActiveForm::begin()?>
+    <?php echo $form->field($time_tracker,'employee_id',['inputOptions' =>
         ['autofocus' => 'autofocus']])->label(false)?>
-    <?ActiveForm::end()?>
+    <?php ActiveForm::end()?>
 </div>
 
 </body>

@@ -12,11 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-view">
 
-<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
+<!--    <h1>--><?php //= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
-        <?= Html::a('Редактировать', ['cms/order-update', 'id' => $order->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['cms/order-delete', 'id' => $order->id], [
+        <?php echo  Html::a('Редактировать', ['cms/order-update', 'id' => $order->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo  Html::a('Удалить', ['cms/order-delete', 'id' => $order->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Вы уверены что хотите удалить данный заказ?',
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php echo  DetailView::widget([
         'model' => $order,
         'attributes' => [
             'id',

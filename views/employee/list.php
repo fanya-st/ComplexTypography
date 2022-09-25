@@ -7,16 +7,16 @@ use kartik\icons\Icon;
 $this->title = 'Сотрудники';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?php echo  Html::encode($this->title) ?></h1>
 
 <div class="d-lg-inline-flex">
-    <?=Html::tag('div',Html::a('Добавить сотрудника', ['employee/create'], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
-    <?=Html::tag('div',Html::a('Привязка сотрудника к группам', ['cms/auth-assign-index'], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
+    <?php echo Html::tag('div',Html::a('Добавить сотрудника', ['employee/create'], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
+    <?php echo Html::tag('div',Html::a('Привязка сотрудника к группам', ['cms/auth-assign-index'], ['class'=>'btn btn-primary']),['class'=>'p-1']);?>
 </div>
 
-<?ActiveForm::begin(['method'=>'post'])?>
+<?php ActiveForm::begin(['method'=>'post'])?>
 <div class="table-responsive">
-<?= GridView::widget([
+<?php echo  GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => [
@@ -84,4 +84,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ])?>
 </div>
-<?ActiveForm::end()?>
+<?php ActiveForm::end()?>

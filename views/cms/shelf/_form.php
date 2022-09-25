@@ -11,10 +11,10 @@ use app\models\Rack;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'rack_id')->dropDownList(ArrayHelper::map(Rack::find()->asArray()->all(),'id','name')) ?>
+    <?php echo  $form->field($model, 'rack_id')->dropDownList(ArrayHelper::map(Rack::find()->asArray()->all(),'id','name')) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Обновить', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Обновить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

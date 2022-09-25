@@ -1,15 +1,13 @@
 <?php
 use yii\bootstrap5\Html;
 use kartik\tabs\TabsX;
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
 
 $this->title = Html::encode("Просмотр ID [$material->id] $material->name ");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с материалами', 'url' => ['material/list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h2><?= Html::encode($this->title) ?></h2>
-<?
+<h2><?php echo  Html::encode($this->title) ?></h2>
+<?php
 echo TabsX::widget([
     'position' => TabsX::POS_ABOVE,
     'align' => TabsX::ALIGN_LEFT,

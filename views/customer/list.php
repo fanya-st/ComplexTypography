@@ -7,10 +7,10 @@ use kartik\icons\Icon;
 $this->title = 'Работа с заказчиками';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
-<?php echo $this->render('_search', ['model' => $searchModel])?>
+<h1><?php echo  Html::encode($this->title) ?></h1>
+<?php echo  $this->render('_search', ['model' => $searchModel])?>
 <div class="table-responsive">
-<?php echo GridView::widget([
+<?php echo  GridView::widget([
     'dataProvider' => $customers,
     'id'=>'order-list',
     'columns' => [

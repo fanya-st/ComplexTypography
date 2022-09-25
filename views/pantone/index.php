@@ -11,16 +11,16 @@ $this->title = 'Пантоны';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-<?=$this->render('_search', ['model' => $searchModel])?>
+    <h1><?php echo  Html::encode($this->title) ?></h1>
+<?php echo $this->render('_search', ['model' => $searchModel])?>
     <div class="d-inline-flex">
         <div class="p-2">
-            <?= Html::a('Добавить PANTONE', ['create'], ['class' => 'btn btn-success']) ?>
+            <?php echo  Html::a('Добавить PANTONE', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
     </div>
-    <? ActiveForm::begin(['method'=>'post'])?>
+    <?php ActiveForm::begin(['method'=>'post'])?>
 <div class="table-responsive">
-    <?= GridView::widget([
+    <?php echo  GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             [
@@ -84,5 +84,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ])?>
 </div>
-<?ActiveForm::end()?>
+<?php ActiveForm::end()?>
 

@@ -13,27 +13,27 @@ use app\models\Mashine;
     <?php $form = ActiveForm::begin() ?>
     <div class="row">
         <div class="col">
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            <?php echo  $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'price_euro')->textInput(['maxlength' => true]) ?>
+            <?php echo  $form->field($model, 'price_euro')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col">
-            <?= $form->field($model, 'pantone_kind_id')->dropDownList(ArrayHelper::map(PantoneKind::find()->asArray()->all(),'id','name')) ?>
+            <?php echo  $form->field($model, 'pantone_kind_id')->dropDownList(ArrayHelper::map(PantoneKind::find()->asArray()->all(),'id','name')) ?>
 
         </div>
         <div class="col">
-            <?=$form->field($model, 'mashine_list')->checkboxList(ArrayHelper::map(Mashine::find()->all(),'id','name'));?>
+            <?php echo $form->field($model, 'mashine_list')->checkboxList(ArrayHelper::map(Mashine::find()->all(),'id','name'));?>
         </div>
 
     </div>
 
-    <?= $form->field($model, 'subscribe')->textarea([]) ?>
+    <?php echo  $form->field($model, 'subscribe')->textarea([]) ?>
 
-    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success','name'=>'update_pantone_param']) ?>
-    <?ActiveForm::end()?>
+    <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success','name'=>'update_pantone_param']) ?>
+    <?php ActiveForm::end()?>
 
     <?php $form = ActiveForm::begin([]) ?>
-    <?if(!empty($mixed_pantones)):?>
+    <?php if(!empty($mixed_pantones)):?>
         <div>
             <table class="table table-sm table-bordered rounded caption-top">
                 <caption>Состав смешанного PANTONE</caption>
@@ -44,10 +44,10 @@ use app\models\Mashine;
                 </tr>
                 </thead>
                 <tbody>
-                <?foreach ($mixed_pantones as $id => $mixed_pantone):?>
+                <?php foreach ($mixed_pantones as $id => $mixed_pantone):?>
                     <tr>
                         <td>
-                            <?
+                            <?php
                             echo $form->field($mixed_pantone,"[$id]component_pantone_id")
                                 ->dropDownList(ArrayHelper::map(Pantone::find()->asArray()->all(),'id','name'), [
                                     'prompt' => 'Выберите...'
@@ -56,18 +56,18 @@ use app\models\Mashine;
                             ?>
                         </td>
                         <td>
-                            <?
+                            <?php
                             echo $form->field($mixed_pantone,"[$id]weight")->label(false);
                             ?>
                         </td>
                     </tr>
-                <?endforeach;?>
+                <?php endforeach;?>
                 </tbody>
             </table>
         </div>
-        <?= Html::submitButton('Сохранить состав', ['class' => 'btn btn-success','name'=>'update_mixed_param']) ?>
-    <?endif;?>
-    <?ActiveForm::end()?>
+        <?php echo  Html::submitButton('Сохранить состав', ['class' => 'btn btn-success','name'=>'update_mixed_param']) ?>
+    <?php endif;?>
+    <?php ActiveForm::end()?>
 
 </div>
 

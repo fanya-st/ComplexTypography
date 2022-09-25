@@ -1,7 +1,6 @@
 <?php
 use yii\bootstrap5\Html;
 ?>
-<!--<pre>--><?//print_r($material_warehouse)?><!--</pre>-->
 
 <div class="border p-2 rounded">
     <div class="table-responsive">
@@ -17,17 +16,17 @@ use yii\bootstrap5\Html;
         <tbody>
         <?php foreach ($material_warehouse as $material):?>
             <tr>
-                <td><?=Html::encode($material->material->name)?></td>
-                <td><?=Html::encode($material->width)?></td>
-                <td><?=Html::encode($material->length)?></td>
-                <td><?=Html::encode($material->length*$material->width/1000);$summary+=$material->length*$material->width/1000;?></td>
+                <td><?php echo  Html::encode($material->material->name)?></td>
+                <td><?php echo  Html::encode($material->width)?></td>
+                <td><?php echo  Html::encode($material->length)?></td>
+                <td><?php echo  Html::encode($material->length*$material->width/1000);$summary+=$material->length*$material->width/1000;?></td>
             </tr>
-        <?endforeach;?>
+        <?php endforeach;?>
         <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td>Итого: <?= !empty($summary) ? $summary:0 ?> м<sup>2</sup></td>
+            <td>Итого: <?php echo !empty($summary) ? $summary:0 ?> м<sup>2</sup></td>
         </tr>
         </tbody>
     </table>

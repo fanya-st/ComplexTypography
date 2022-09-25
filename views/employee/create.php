@@ -12,11 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php $form=ActiveForm::begin()?>
-<?=$form->field($user,'username')->textInput()?>
-<?=$form->field($user, 'password')->widget(PasswordInput::class, [])?>
-<?=$form->field($user,'F')->textInput()?>
-<?=$form->field($user,'I')->textInput()?>
-<?=$form->field($user,'O')->textInput()?>
-<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+<?php echo $form->field($user,'username')->textInput()?>
+<?php echo $form->field($user, 'password')->widget(PasswordInput::class, [])?>
+<?php echo $form->field($user,'F')->textInput()?>
+<?php echo $form->field($user,'I')->textInput()?>
+<?php echo $form->field($user,'O')->textInput()?>
+<?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 
 <?php ActiveForm::end()?>
