@@ -7,6 +7,7 @@ use app\models\User;
 ?>
 <?php $form=ActiveForm::begin(['method' => 'post'])?>
 <?php echo Html::submitButton('Добавить в заказ',['name'=>'add_from_fpwarehouse','value'=>'start','class'=>'btn btn-primary'])?>
+<div class="table-responsive">
 <?php
 echo GridView::widget([
     'dataProvider' => $surplus,
@@ -57,4 +58,5 @@ echo GridView::widget([
     ],
 ]);
 ?>
+</div>
 <?php ActiveForm::end()?>

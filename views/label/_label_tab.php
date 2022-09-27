@@ -8,7 +8,7 @@ use app\models\User;
 <div class="row">
     <div class="col">
         <div class="row">
-            <?php echo  Html::a(Html::img($label->image_crop, ['alt' => $this->title,'width'=>'400px','onerror'=>'label/alt.jpg']),$label->image,['target'=>'_blank'])?>
+            <?php echo  Html::a(Html::img($label->image_crop, ['alt' => $this->title,'width'=>'300px','onerror'=>'label/alt.jpg']),$label->image,['target'=>'_blank'])?>
         </div>
         <?php echo  Html::a('Доп.файл',$label->image_extended,['target'=>'_blank','class'=>'btn btn-success m-2'])?>
         <?php echo  Html::a('Файл дизайна',$label->design_file,['target'=>'_blank','class'=>'btn btn-success m-2'])?>

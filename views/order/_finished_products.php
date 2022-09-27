@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 ?>
 <?php $form=ActiveForm::begin(['method' => 'post'])?>
+<div class="table-responsive">
 <?php
 echo GridView::widget([
     'dataProvider' => $roll,
@@ -43,4 +44,5 @@ echo GridView::widget([
     ],
 ]);
 ?>
+</div>
 <?php ActiveForm::end()?>

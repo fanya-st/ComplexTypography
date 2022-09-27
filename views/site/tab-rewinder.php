@@ -35,7 +35,7 @@ use yii\widgets\Pjax;
         <div class="border p-3 rounded">
             <h6 class="p-1 rounded">Статистика</h6>
             <div class="d-lg-flex flex-wrap">
-                <div class="p-1"><?php echo  Html::a('Отчет по перемотчикам', ['/'], ['class' => 'm-1 btn btn-primary']) ?></div>
+                <div class="p-1"><?php echo  Html::a('Отчет по перемотчикам', ['/'], ['class' => 'btn btn-primary']) ?></div>
                 <div class="p-1"><?php echo  Html::a('Электронный табель', ['time-tracker/index'], ['class' => 'btn btn-primary']) ?></div>
             </div>
         </div>

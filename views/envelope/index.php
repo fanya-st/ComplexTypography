@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'=>Select2::widget([
                         'model'=>$searchModel,
                         'attribute'=>'shelf_id',
-                        'data'=> ArrayHelper::map(Shelf::find()->joinWith('rack.warehouse')->where(['warehouse.id'=>6])->asArray()->all(),'id','id'),
+                        'data'=> ArrayHelper::map(Shelf::find()->asArray()->all(),'id','id'),
                     'options' => ['prompt'=>'Выберите полку...'],
                     'pluginOptions' => [
                         'allowClear' => true,

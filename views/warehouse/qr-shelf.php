@@ -1,7 +1,6 @@
 <?php
 use yii\web\View;
 use yii\bootstrap5\Html;
-use Da\QrCode\QrCode;
 
 
 $this->registerJs(
@@ -18,11 +17,11 @@ function printDiv(){
     View::POS_HEAD,
     'barcode-print'
 );
-$qrCode = (new QrCode($shelf->id))
-    ->setSize(300);
+$qrCode = (new \chillerlan\QRCode\QRCode())->render($shelf->id);
 
 echo html::beginTag('div',['id'=>'print']);
-echo Html::tag('div',Html::img($qrCode->writeDataUri(), ['alt' => 'qrcode','width'=>70,'height'=>70]),
+echo Html::tag('p', Html::encode($shelf->rack->name),['style'=>'font-size:10px;text-align:center;']);
+echo Html::tag('div',Html::img($qrCode, ['alt' => 'qrcode','width'=>70,'height'=>70]),
     ['style'=>'text-align:center;']);
 echo Html::tag('p', Html::encode('Полка №'.$shelf->id),['style'=>'font-size:10px;text-align:center;']);
 echo html::endTag('div');

@@ -17,7 +17,7 @@ use kartik\label\LabelInPlace;
 <div class="text-nowrap">
     <div class="border p-3 rounded">
         <div class="d-lg-flex flex-wrap">
-            <div class="p-1"><?php echo $form->field($model,'name',[])->widget(LabelInPlace::class,[
+            <div class="p-1"><?php echo $form->field($model,'name')->widget(LabelInPlace::class,[
             'type' => LabelInPlace::TYPE_HTML5,
             'options' => ['type' => 'text']
                 ])?></div>

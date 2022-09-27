@@ -106,7 +106,7 @@ use app\models\User;
                 <?php
                 Modal::begin([
                     'title' => 'Упакованные ролики',
-                    'toggleButton' => ['label' => 'Упакованные ролики', 'class' => 'btn btn-warning'],
+                    'toggleButton' => ['label' => 'Упакованные ролики', 'class' => 'm-1 btn btn-warning'],
                     'centerVertical'=>true,
                 ]);
                 echo Html::ul($order->finishedProductsWarehouse, ['item' => function ($item, $index) {
@@ -126,7 +126,7 @@ use app\models\User;
                 <?php
                 Modal::begin([
                     'title' => 'Упакованные ролики на отправку',
-                    'toggleButton' => ['label' => 'Упакованные ролики на отправку', 'class' => 'btn btn-warning'],
+                    'toggleButton' => ['label' => 'Упакованные ролики на отправку', 'class' => 'm-1 btn btn-warning'],
                     'centerVertical'=>true,
                 ]);
                 echo Html::ul($order->finishedProductsWarehouse, ['item' => function ($item, $index) {
