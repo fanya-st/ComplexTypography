@@ -30,7 +30,9 @@ $config = [
             'class' => 'yii\rbac\DbManager',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+//            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\ApcCache',
+            'useApcu' => true,
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -40,14 +42,10 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'session' => [
-//            'class' => 'yii\web\DbSession',
             'class' => 'yii\web\CacheSession',
         ],
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure transport
-            // for the mailer to send real emails.
             'useFileTransport' => true,
             'viewPath' => '@app/mail',
             'transport' => [

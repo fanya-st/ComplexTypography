@@ -14,6 +14,7 @@ RUN apt-get install -y libzip-dev
 RUN apt-get install -y zip
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y libmcrypt-dev
+RUN pecl install apcu
 
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -22,6 +23,7 @@ RUN docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install pdo_mysql mysqli
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install calendar
+RUN docker-php-ext-enable apcu
 RUN docker-php-source delete
 
 

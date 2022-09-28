@@ -26,28 +26,25 @@ $config = [
             'enableCsrfValidation' => true,
         ],
 		'authManager' => [
-//		    'class' => 'yii\rbac\PhpManager',
             'class' => 'yii\rbac\DbManager',
     ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\ApcCache',
+//            'class' => 'yii\caching\FileCache',
+            'useApcu' => true,
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
         'session' => [
-//            'class' => 'yii\web\DbSession',
             'class' => 'yii\web\CacheSession',
         ],
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure transport
-            // for the mailer to send real emails.
             'useFileTransport' => true,
             'viewPath' => '@app/mail',
             'transport' => [
