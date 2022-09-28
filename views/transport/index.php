@@ -4,6 +4,7 @@ use yii\bootstrap5\Html;
 use kartik\icons\Icon;
 use yii\grid\GridView;
 
+/** @var \yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Транспорт';
 $this->params['breadcrumbs'][] = $this->title;

@@ -3,8 +3,8 @@ use yii\bootstrap5\Html;
 use kartik\grid\GridView;
 use kartik\export\ExportMenu;
 
-?>
-<?php
+/** @var \app\models\Order $orders */
+/** @var \app\models\Shipment $shipment */
 
 $gridColumns = [
     'customer.name',
@@ -28,6 +28,7 @@ $gridColumns = [
     ],
 ];
 
+
 echo ExportMenu::widget([
     'dataProvider' => $orders,
     'columns' => $gridColumns,
@@ -50,5 +51,4 @@ echo GridView::widget([
         'type' => 'primary',
     ],
 ]);
-?>
 

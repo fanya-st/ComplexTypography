@@ -38,7 +38,7 @@ class Customer extends ActiveRecord
         return $this->hasMany(ShipmentOrder::class,['order_id'=>'id'])->via('order');
     }
 
-    public function getCustomerShipmentOrder($shipment_id){
+    public function getCustomerShipmentOrder(int $shipment_id){
         return Order::find()->joinWith(['shipmentOrder','label'])->where(['shipment_order.shipment_id'=>$shipment_id,'label.customer_id'=>$this->id])->column();
     }
 

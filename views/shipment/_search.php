@@ -7,6 +7,8 @@ use app\models\User;
 use kartik\label\LabelInPlace;
 use kartik\daterange\DateRangePicker;
 
+/** @var \app\models\ShipmentSearch $model */
+
 ?>
 <?php $form = ActiveForm::begin(['action' => ['shipment/list'], 'method' => 'post',])?>
 

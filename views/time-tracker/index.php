@@ -1,13 +1,13 @@
 <?php
 use app\models\User;
 
+/** @var \app\models\TimeTrackerSearch $searchModel */
 
 $this->title = 'Электронный табель';
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
 ?>
 <?php echo $this->render('_search', ['model' => $searchModel])?>
 <div class="d-lg-flex flex-wrap">
-<!--    <div class="p-2">--><?php //= Html::a('Добавить поступление', ['create'], ['class' => 'btn btn-success']) ?><!--</div>-->
 </div>
 <div class="table-responsive">
     <table class="table table-bordered caption-top">
@@ -40,7 +40,5 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
     <?php endforeach;?>
     </tbody>
     </table>
-<!--    <pre>--><?php //print_r(date_format(date_create('2022-09-07'),"Y-m-d H:i:s"))?><!--</pre>-->
-    <pre><?php print_r($timesheet)?></pre>
 </div>
 

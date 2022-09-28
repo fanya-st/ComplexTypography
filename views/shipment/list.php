@@ -1,11 +1,16 @@
 <?php
-
-
 use yii\bootstrap5\Html;
 use yii\grid\GridView;
 use yii\bootstrap5\ActiveForm;
 use kartik\date\DatePicker;
 use app\models\User;
+
+/** @var \app\models\Shipment $new_shipment */
+/** @var \yii\data\ActiveDataProvider $shipments */
+/** @var \app\models\ShipmentSearch $searchModel */
+
+
+
 
 $this->title = 'Работа с отгрузками';
 $this->params['breadcrumbs'][] = $this->title;
@@ -38,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php $form=ActiveForm::begin(['method' => 'post'])?>
 <div class="table-responsive">
-<?php echo GridView::widget([
+    <?php echo GridView::widget([
     'dataProvider' => $shipments,
     'columns' => [
         [
@@ -64,8 +69,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'label' => 'Города',
             'value' => function($model){
                 if(!empty($model->townList))
-                foreach ($model->townList as $town) $list.=$town.', ';
-                return $list;
+                foreach ($model->townList as $town)
+                    $list.=$town.', ';
+                return !empty($list) ? $list: null;
             },
         ],
         [

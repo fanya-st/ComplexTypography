@@ -1,5 +1,7 @@
 <?php
 use yii\bootstrap5\Html;
+
+/** @var \app\models\FinishedProductsWarehouse $roll */
 ?>
 <div class="d-flex col">
         <div class="table-responsive">

@@ -1,11 +1,15 @@
 <?php
-
 use yii\bootstrap5\Html;
+use yii\web\YiiAsset;
+YiiAsset::register($this);
+
+/** @var \app\models\Rack $rack */
+/** @var \app\models\Shelf $shelfs */
 
 $this->title = $rack->name;
 $this->params['breadcrumbs'][] = ['label' => 'Склады', 'url' => ['warehouse/index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+
 ?>
 <h1><?php echo  Html::encode($this->title)?> <?php echo  Html::a('QR-код', ['warehouse/qr-print-rack','id'=>$rack->id], ['class' => 'btn btn-primary btn-sm','target'=>'_blank']) ?></h1>
 

@@ -39,10 +39,10 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-//        'session' => [
-////            'class' => 'yii\web\DbSession',
-//            'class' => 'yii\web\CacheSession',
-//        ],
+        'session' => [
+//            'class' => 'yii\web\DbSession',
+            'class' => 'yii\web\CacheSession',
+        ],
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
             // send all mails to a file by default. You have to set

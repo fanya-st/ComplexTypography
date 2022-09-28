@@ -3,6 +3,7 @@
 use yii\bootstrap5\Html;
 use kartik\tabs\TabsX;
 
+/** @var \app\models\Shipment $shipment */
 $this->title = Html::encode("Отгрузка ID [$shipment->id]");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];
 $this->params['breadcrumbs'][] = $this->title;

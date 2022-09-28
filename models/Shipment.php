@@ -63,7 +63,9 @@ class Shipment extends ActiveRecord
             $weight+=$f->sended_roll_count*$f->label_in_roll*$common_param['one_label_weight'];
             $weight+=$f->sended_box_count*$common_param['one_box_weight'];
         }
-        return $weight;
+        if (!empty($weight)) {
+            return $weight;
+        }
     }
 
     public function getBoxBaleCount(){

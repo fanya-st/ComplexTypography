@@ -2,39 +2,17 @@
 
 use yii\bootstrap5\Html;
 
+/** @var \app\models\Shelf $shelf */
+/** @var \app\models\Rack $rack */
+
 $this->title = 'Полка №'.$shelf->id;
 $this->params['breadcrumbs'][] = ['label' => 'Склады', 'url' => ['warehouse/index']];
+
 $this->params['breadcrumbs'][] = ['label' => $rack->name, 'url' => ['warehouse/rack-list','id'=>$rack->id]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <h1><?php echo  Html::encode($this->title)?> <?php echo  Html::a('QR-код', ['warehouse/qr-print-rack','id'=>$rack->id], ['class' => 'btn btn-primary btn-sm','target'=>'_blank']) ?></h1>
-<!--<div class="row g-2 row-cols-lg-4 text-nowrap">-->
-<!--    --><?php //foreach ($shelfs as $shelf):?>
-<!--        <div class="col-lg">-->
-<!--            <div class="border p-3 rounded">-->
-<!--                <h6 class="p-1 rounded text-wrap">Полка --><?php //=$shelf->id?><!-- --><?php //= Html::a('QR-код', ['warehouse/qr-print-shelf','id'=>$shelf->id], ['class' => 'btn btn-primary btn-sm','target'=>'_blank']) ?><!--</h6>-->
-<!--                <div class="d-lg-flex flex-wrap">-->
-<!--                    <ul class="list-group text-wrap">-->
-<!---->
-<!--                        --><?php //if(!empty($shelf->paperWarehouse)) foreach($shelf->paperWarehouse as $paper):?>
-<!--                            <li class="list-group-item">--><?php //=$paper->material->name.' '.$paper->width.'мм '.$paper->length.'м'?><!--</li>-->
-<!--                        --><?php //endforeach;?>
-<!---->
-<!--                        --><?php // if(!empty($shelf->envelope)) foreach($shelf->envelope as $envelope):?>
-<!--                            <li class="list-group-item">Конверт --><?php //=$envelope->idWithColor?><!--</li>-->
-<!--                        --><?php //endforeach;?>
-<!---->
-<!--                        --><?php // if(!empty($shelf->pantoneWarehouse)) foreach($shelf->pantoneWarehouse as $pantone):?>
-<!--                            <li class="list-group-item">ЛКМ --><?php //=$pantone->pantone->name.' '.$pantone->weight.'кг'?><!--</li>-->
-<!--                        --><?php //endforeach;?>
-<!--                    </ul>-->
-<!---->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    --><?php //endforeach;?>
-<!--</div>-->
 
 <table class="table table-responsive">
     <thead>

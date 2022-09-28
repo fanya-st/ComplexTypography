@@ -2,6 +2,9 @@
 
 use yii\bootstrap5\Html;
 
+/** @var string $name */
+/** @var string $message */
+
 $this->title = $name;
 ?>
 <div class="site-error">

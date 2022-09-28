@@ -1,13 +1,15 @@
 <?php
-
 use yii\bootstrap5\Html;
 use app\models\User;
 use yii\grid\GridView;
+
+/** @var \app\models\Shipment $shipment */
+/** @var \yii\data\ActiveDataProvider $orders */
 ?>
 <div class="row g-2 row-cols-2">
     <div class="col">
         <?php echo Html::tag('h6','Менеджер: ' .Html::encode(User::getFullNameById($shipment->manager_id)))?>
-        <?phpswitch ($shipment->status_id){
+        <?php switch ($shipment->status_id){
             case 0:
                 echo Html::tag('h6','Статус: Новая отгрузка');
                 break;
@@ -21,7 +23,7 @@ use yii\grid\GridView;
         <?php echo Html::tag('h6','Дата отправки: ' .Html::encode($shipment->date_of_send))?>
         <?php echo Html::tag('h6','Вес, кг: ' .Html::encode($shipment->shipmentWeight))?>
         <div class="text-nowrap d-lg-inline-flex">
-        <?phpswitch ($shipment->status_id){
+        <?php switch ($shipment->status_id){
             case 0:
                 echo Html::tag('div',Html::a('Добавить заказы', ['shipment/order-add', 'id' => $shipment->id], ['class' => 'btn btn-primary']),['class'=>'p-1']);
                 echo Html::tag('div',Html::a('Отправить', ['shipment/send-shipment','id'=>$shipment->id], ['class'=>'btn btn-primary']),['class'=>'p-1']);

@@ -5,9 +5,8 @@ use kartik\grid\GridView;
 use kartik\export\ExportMenu;
 use app\models\Customer;
 
-?>
-<?php
-
+/** @var \yii\data\ActiveDataProvider $route_customers */
+/** @var \app\models\Shipment $shipment */
 
 $gridColumns = [
     'name',
@@ -15,9 +14,9 @@ $gridColumns = [
         'attribute'=>'customerAddress',
     ],
     ['label'=>'Коробки и тюки',
-        'value'=>function($model){
-            $orders=Customer::findOne($model->id)->getCustomerShipmentOrder(Yii::$app->request->get('id'));
-//            print_r($request->get('id'));
+        'value'=>function($model, $shipment){
+//            $orders=Customer::findOne($model->id)->getCustomerShipmentOrder(Yii::$app->request->get('id'));
+            $orders=Customer::findOne($model->id)->getCustomerShipmentOrder($shipment->id);
             if (isset($orders))
                 foreach($orders as $order){
                     $rolls=Order::findOne($order)->finishedProductsWarehouse;
@@ -43,6 +42,7 @@ $gridColumns = [
         },
     ],
 ];
+
 
 echo ExportMenu::widget([
     'dataProvider' => $route_customers,

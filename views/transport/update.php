@@ -1,7 +1,7 @@
 <?php
-
 use yii\bootstrap5\Html;
 
+/** @var \app\models\Transport $model */
 
 $this->title = 'Обновить транспорт: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Транспорт', 'url' => ['index']];

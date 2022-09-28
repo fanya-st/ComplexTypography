@@ -6,8 +6,13 @@ use app\models\User;
 use app\models\Customer;
 use yii\helpers\ArrayHelper;
 
+/** @var \app\models\Shipment $shipment */
+/** @var \yii\data\ActiveDataProvider $add_order */
+/** @var \app\models\OrderSearch $searchModel */
+
 $this->title = 'Добавление заказов';
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];
+
 $this->params['breadcrumbs'][] = ['label' => 'Отгрузка ID['.$shipment->id.'] ', 'url' => ['shipment/view','id'=>$shipment->id]];
 ?>
     <h1><?php echo  Html::encode($this->title) ?></h1>
@@ -16,7 +21,7 @@ $form=ActiveForm::begin(['method'=>'post']);
 echo Html::submitButton('Добавить',['class'=>'btn btn-primary']);
 ?>
 <div class="table-responsive">
-<?php echo  GridView::widget([
+    <?php echo  GridView::widget([
     'dataProvider' => $add_order,
     'filterModel' => $searchModel,
     'columns' => [

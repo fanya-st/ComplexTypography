@@ -5,6 +5,8 @@ use yii\bootstrap5\ActiveForm;
 use app\widgets\Alert;
 use kartik\icons\Icon;
 
+/** @var \app\models\TimeTracker $time_tracker */
+
 $this->title = 'Учет рабочего времени';
 
 $this->registerJs(
@@ -37,7 +39,6 @@ $this->registerJs(
 ?>
 <meta http-equiv="refresh" content="60" />
 <body onload="clockTimer();">
-<!--<pre>--><?php //print_r(date_diff(date_create('2022-06-05 08:02:33'),date_create()))?><!--</pre>-->
 <div class="d-flex justify-content-center">
     <div class="flex-column">
         <div class="flex-row p-1 justify-content-center"><h1 id="clock" class="display-1"></h1></div>

@@ -2,6 +2,7 @@
 use yii\web\View;
 use yii\bootstrap5\Html;
 
+/** @var \app\models\Rack $rack */
 
 $this->registerJs(
     "
@@ -17,6 +18,7 @@ function printDiv(){
     View::POS_HEAD,
     'barcode-print'
 );
+
 $qrCode = (new \chillerlan\QRCode\QRCode())->render($rack->id);
 
 echo html::beginTag('div',['id'=>'print']);

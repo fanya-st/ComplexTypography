@@ -4,9 +4,11 @@ use yii\bootstrap5\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Transport;
 
+/** @var \app\models\Shipment $shipment */
 
-$this->title = Html::encode("Данные поездки");
+$this->title = "Данные поездки";
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];
+
 $this->params['breadcrumbs'][] = ['label' => 'Отгрузка', 'url' => ['shipment/view','id'=>$shipment->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

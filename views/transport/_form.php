@@ -1,7 +1,8 @@
 <?php
-
 use yii\bootstrap5\Html;
 use yii\widgets\ActiveForm;
+
+/** @var \app\models\Transport $model */
 
 ?>
 

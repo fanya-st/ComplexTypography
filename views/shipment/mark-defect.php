@@ -2,6 +2,8 @@
 use yii\bootstrap5\Html;
 use kartik\form\ActiveForm;
 
+/** @var \app\models\Shipment $shipment */
+/** @var \app\models\FinishedProductsWarehouse $shipment_roll */
 
 $this->title = Html::encode("Пометить брак");
 $this->params['breadcrumbs'][] = ['label' => 'Работа с отгрузками', 'url' => ['shipment/list']];

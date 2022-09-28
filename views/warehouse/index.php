@@ -1,8 +1,7 @@
 <?php
-
 use yii\bootstrap5\Html;
-use yii\bootstrap5\ActiveForm;
-use app\models\User;
+
+/** @var \app\models\Warehouse $data */
 
 $this->title = 'Склады';
 $this->params['breadcrumbs'][] = $this->title;
