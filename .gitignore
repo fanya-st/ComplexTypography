@@ -4,6 +4,7 @@ docker/common/mysql/data
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
+.composer.lock
 .idea
 vendor
 #*.sql
