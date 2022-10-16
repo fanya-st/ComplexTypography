@@ -8,6 +8,9 @@ use app\models\User;
 use app\models\AuthItem;
 use yii\helpers\ArrayHelper;
 
+/** @var \yii\data\ActiveDataProvider $dataProvider */
+/** @var \app\models\AuthItemSearch $searchModel */
+
 
 $this->title = 'Привязка сотрудников к группам';
 $this->params['breadcrumbs'][] = ['label' => 'Сотрудники', 'url' => ['employee/list']];
@@ -33,14 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                     'attribute'=>'item_name',
-                    'filter'=>ArrayHelper::map(AuthItem::find()->asArray()->all(),'name','description'),
+                    'filter'=>ArrayHelper::map(AuthItem::find()->where(['type'=>1])->asArray()->all(),'name','description'),
                     'value'=>function($model){
                         return AuthItem::findOne($model->item_name)->description;
                     },
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-                'template' => ' {delete} {view}',
+                'template' => ' {delete}',
                 'buttons' => [
                     'update' => function($url, $model, $key) {     // render your custom button
                         return Html::a(Html::button( Icon::show('edit'),

@@ -17,7 +17,7 @@ use app\models\Mashine;
     <?php echo  $form->field($model, 'pants_id')->dropDownList(ArrayHelper::map(Pants::find()->asArray()->all(),'id','id')) ?>
 
     <div class="form-group">
-        <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?php echo  Html::submitButton('Сохранить', ['class' => 'btn btn-success mcompc-1']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
